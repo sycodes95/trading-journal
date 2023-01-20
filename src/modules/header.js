@@ -6,7 +6,10 @@ function Header () {
   const [userLoggedIn, setUserLoggedIn] = useState(false)
   
   useEffect(()=>{
-    
+    const token = JSON.parse(localStorage.getItem('token'))
+    if(token){
+      setUserLoggedIn(true)
+    }
   }, [])
 
   return(
@@ -14,19 +17,37 @@ function Header () {
 
       <div className="header-logo text-4xl text-white ">Trade Journal</div>
 
-      <div className="header-nav text-white grid grid-cols-2">
+      {
+        !userLoggedIn ? 
 
-        <Link to='/login'>
-          <span className="hover:cursor-pointer">Log in</span>
-        </Link>
-          
-        <Link to='/signup'>
-          <span className="hover:cursor-pointer">Sign up</span>
-        </Link>
+        <div className="header-nav text-white grid grid-cols-2">
+          <Link to='/login'>
+            <span className="hover:cursor-pointer">Log in</span>
+          </Link>
+          <Link to='/signup'>
+            <span className="hover:cursor-pointer">Sign up</span>
+          </Link> 
+        </div>
 
-      </div>
+        :
 
-    </div>
+        <div className="header-nav text-white grid grid-cols-3 gap-x-2 ">
+          <Link to='/trades'>
+            <span className="hover:cursor-pointer">Trades</span>
+          </Link>
+          <Link to='/profile'>
+            <span className="hover:cursor-pointer">Profile</span>
+          </Link> 
+          <Link to='/logout'>
+            <span className="hover:cursor-pointer">Log out</span>
+          </Link> 
+        </div>
+        
+      }
+
+  </div>
+
+  
   )
 }
 

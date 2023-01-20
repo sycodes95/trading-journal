@@ -1,13 +1,16 @@
 import '../src/styles/App.css';
 
 //--------------------------------------------------------------------------------------
+import { HashRouter, BrowserRouter, Routes, Switch, Route } from "react-router-dom";
+//--------------------------------------------------------------------------------------
 
 import Header from './modules/header';
 import Footer from './modules/footer';
 import Login from './modules/login';
 import Signup from './modules/signup';
-
-import { HashRouter, BrowserRouter, Routes, Switch, Route } from "react-router-dom";
+import Home from './modules/home';
+import Trades from './modules/trades';
+import Profile from './modules/profile';
 
 function App() {
   return (
@@ -16,10 +19,11 @@ function App() {
         <Header/>
 
           <Routes>
-
-            <Route path="/login" exact element={<Login/>}/>
+            <Route path="/" exact element={<Home/>}/>
+            <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
-            
+            <Route path="/trades" element={<Trades/>}/>
+            <Route path="/profile" element={<Profile/>}/>
           </Routes>
        
       </div>

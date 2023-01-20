@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 
 
 function Login () {
@@ -26,6 +26,8 @@ function Login () {
         
         if(data.token){
           setLogInSuccess(true)
+          localStorage.setItem('token', JSON.stringify(data.token))
+          window.location.href = '/'
         } else {
           setInfoIncorrect(true)
         }
@@ -41,6 +43,10 @@ function Login () {
     setFormData({ ...formData, [name]: value });
   };
 
+  useEffect(()=>{
+    
+    //window.location.reload()
+  },[logInSuccess])
 
   useEffect(()=>{
     //show error message if username or pw is incorrect, hide error message other wise.

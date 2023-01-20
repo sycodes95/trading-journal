@@ -32,22 +32,9 @@ function Signup () {
      .then((data) => {
         console.log(data);
         
-        
-        /*
-        if(data.errors.code == 11000){
-          setUserNameTaken(true)
-        } else {
-          setUserNameTaken(false)
-        }
-        if(data.errors[0].param === 'confirm_password'){
-          setPasswordNotMatch(true)
-          console.log('pw');
-        } else {
-          setPasswordNotMatch(false)
-        }
-        */
         if(data.user){
           setSignUpSuccess(true)
+          window.location.href = '/'
         } else {
           if(data.errors.code == 11000){
             setUserNameTaken(true)
@@ -61,8 +48,6 @@ function Signup () {
             setPasswordNotMatch(false)
           }
         }
-        
-      
         //setSignUpSuccess(true)
      
      })

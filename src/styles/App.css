@@ -1,0 +1,42 @@
+input:focus, select:focus{
+  outline: none;
+  border-left: solid 1px rgb(255, 0, 0);
+}
+
+input, select{
+  box-sizing: border-box;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 4px;
+}
+
+.no-highlight{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+}
+
+
+
+.toggle-button {
+  position: absolute;
+  top: 0px;
+  
+  left: 0px;
+  width: 16px;
+  height: 4px;
+  border-radius: 21px;
+  background-color: white;
+  transition: 0.2s;
+}
+
+.on {
+  left: calc(100% - 12px);
+  background-color: green;
+}
+
+.off {
+  right: 0%;
+  background-color: black;
+}

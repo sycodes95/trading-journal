@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import NewTrade from "./newTrade";
+import TradingRules from "./tradingRules";
 
 
 function Trades () {
@@ -27,21 +28,15 @@ function Trades () {
       }
   }, [])
   return(
-    <div className="h-screen w-full flex flex-col  items-center">
+    <div className="h-screen w-full  pt-8">
       {
         userInfo ? 
-        <div>
-          <div className="text-gray-400 text-2xl font-bold">{`${userInfo.username}'s trades`}</div>
+        <div className=" grid grid-col-2 grid-row-0  ">
           <NewTrade userInfo={userInfo}/>
         </div>
-        
         :
         null
       }
-      
-      
-      
-      
     </div>
   )
 }

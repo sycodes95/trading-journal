@@ -32,7 +32,7 @@ input, select{
 }
 
 .on {
-  left: calc(100% - 12px);
+  left: calc(100% - 16px);
   background-color: green;
 }
 

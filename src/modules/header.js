@@ -13,14 +13,14 @@ function Header () {
   }, [])
 
   return(
-    <div className="header max-h-12 h-12 w-full pl-8 pr-8 bg-slate-400 flex items-center justify-between">
+    <div className="header  max-h-12 h-12 w-full pl-8 pr-8 bg-white flex items-center justify-between border-b border-black border-dashed">
 
-      <div className="header-logo text-4xl text-white ">Trade Journal</div>
+      <div className="header-logo text-4xl text-black font-bold">T J</div>
 
       {
         !userLoggedIn ? 
 
-        <div className="header-nav text-white grid grid-cols-2">
+        <div className="header-nav text-black grid grid-cols-2 font-thin">
           <Link to='/login'>
             <span className="hover:cursor-pointer">Log in</span>
           </Link>
@@ -31,10 +31,8 @@ function Header () {
 
         :
 
-        <div className="header-nav text-white grid grid-cols-3 gap-x-2 ">
-          <Link to='/trades'>
-            <span className="hover:cursor-pointer">Trades</span>
-          </Link>
+        <div className="header-nav text-black grid grid-cols-2 gap-x-2 font-thin">
+          
           <Link to='/profile'>
             <span className="hover:cursor-pointer">Profile</span>
           </Link> 

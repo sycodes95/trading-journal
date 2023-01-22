@@ -51,7 +51,7 @@ function CurrentSetups (props) {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data)
+      getSetups()
     })
     .catch(error => {
       console.log(error);
@@ -76,38 +76,43 @@ function CurrentSetups (props) {
   
   
   return(
-    <div className=" m-4 h-96 border border-black overflow-y-auto">
-      <div className="buttons grid grid-cols-10 border-b border-black">
-        <button className=" border-r border-gray-500 min-w-fit">#</button>
-        <button className=" border-r border-gray-500 min-w-fit">Active</button>
-        <button className="col-start-3 col-end-11 min-w-fit">Name</button>
-      </div>
+    <div className=" w-full border border-black overflow-y-auto">
 
-      {
-        setups ? 
-        setups.map((s, i) =>(
-          <div className="buttons grid grid-cols-10  border-gray-300 border-b">
-            <div className="flex justify-self-center items-center text-xs">{i+1}</div>
-            <div className="flex justify-center items-center">
-              <input className="h-4" type='checkbox' name="active" defaultChecked onClick={()=>handleSetupEditActive(s._id)}/>
-            </div>
+    
+      <table className=" w-full ">
+        <thead>
+            <tr className="border-b border-black">
+                <th colSpan="1" className="border-r border-gray-500  w-16">#</th>
+                <th colSpan="1" className="border-r border-gray-500  w-16">Active</th>
+                <th className="">Name</th>
+            </tr>
+        </thead>
+        <tbody>
+          {setups ? 
+            setups.map((s, i) =>(
+              <tr className="border-gray-300 border-b h-4">
+                <td colSpan="1" className=" text-center " >{i+1}</td>
+                <td colSpan="1" className=" text-center " >
+                    <input className="" type='checkbox' name="active" checked={s.active} onClick={()=>handleSetupEditActive(s._id)}/>
+                </td>
+                <td colSpan='8' className="flex justify-between pl-4 pr-4 " >
+                    <span>{s.setup}</span>
+                    <button onClick={()=>handleSetupDelete(s._id)} className="text-red-700 text-md font-bold hover:text-black transition-colors delay-100">x</button>
+                </td>
+              </tr>
+          ))
+          :
+          null
+          }
+        </tbody>
 
-            
-            <div className="flex justify-between items-center col-start-3 col-end-11 pl-4 pr-4">
-              <span>{s.setup}</span>
-              <button onClick={()=>handleSetupDelete(s._id)} className="text-red-700 text-md font-bold hover:text-black
-               transition-colors delay-100">x</button>
-            </div>
-          </div>
-        ))
-        :
-        null
-        
-      }
-      
-      
-      
+      </table> 
+
     </div>
+      
+      
+      
+   
   )
 }
 export default CurrentSetups;

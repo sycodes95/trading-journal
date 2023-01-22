@@ -1,9 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext} from "react";
 import { Link } from "react-router-dom";
 
 
 function CurrentSetups (props) {
+  //PROPS contains:  {userInfo}, {newSetupSubmitted}, {userMaxSetupsContext}
 
+  const {userMaxSetups, setUserMaxSetups} = props.userMaxSetupsContext;
+  //CONTEXT of parent component's userMaxSetups STATE
   const [setups, setSetups] = useState(null)
 
   function getSetups () {
@@ -17,6 +20,7 @@ function CurrentSetups (props) {
   }
 
   const handleSetupDelete = (id) =>{
+    setSetups(setups.filter(s => s._id !== id))
     fetch('http://localhost:5000/setups', {
       method: 'DELETE' ,
       headers:{
@@ -31,8 +35,9 @@ function CurrentSetups (props) {
         return response.json();
       })
       .then(data =>{
-        console.log(data);
-        getSetups()
+        
+        
+        //UPDATES setups after a set up is finished deleting
       })
       .catch(error =>{
         console.error('Error:', error);
@@ -41,7 +46,7 @@ function CurrentSetups (props) {
   }
 
   const handleSetupEditActive = (id) =>{
-    console.log(id);
+    
     fetch(`http://localhost:5000/setups`, {
       method: 'PATCH',
       body: JSON.stringify({id}),
@@ -52,52 +57,54 @@ function CurrentSetups (props) {
     .then(response => response.json())
     .then(data => {
       getSetups()
+      //UPDATES setups after a set up is finished updating
     })
     .catch(error => {
       console.log(error);
     })
     
   }
-  
-  useEffect(()=>{
-    //GET All setups and set state as array of all setups from this user
-    getSetups()
-    
-  },[props])
-
-  
 
   useEffect(()=>{
     console.log(setups);
   },[setups])
+  
+  useEffect(()=>{
+    getSetups()
+    //UPDATES setups after PROPS are passed down from parent component
+  },[props])
+
+  
+
+  
   
 
   
   
   
   return(
-    <div className=" w-full border border-black overflow-y-auto">
+    <div className="current-setup-con w-full border-2 border-green-500 overflow-y-auto rounded-lg">
 
     
       <table className=" w-full ">
         <thead>
-            <tr className="border-b border-black">
-                <th colSpan="1" className="border-r border-gray-500  w-16">#</th>
-                <th colSpan="1" className="border-r border-gray-500  w-16">Active</th>
-                <th className="">Name</th>
+            <tr className="bg-green-500 text-white text-sm font-bold">
+                <th colSpan="1" className="border-r border-gray-300  w-16 font-thin">#</th>
+                <th colSpan="1" className="border-r border-gray-300  w-16 font-thin">Active</th>
+                <th className="font-thin">Name</th>
             </tr>
         </thead>
         <tbody>
           {setups ? 
             setups.map((s, i) =>(
-              <tr className="border-gray-300 border-b h-4">
-                <td colSpan="1" className=" text-center " >{i+1}</td>
+              <tr className="border-gray-300  h-4 ">
+                <td colSpan="1" className=" text-center text-xs" >{i+1}</td>
                 <td colSpan="1" className=" text-center " >
                     <input className="" type='checkbox' name="active" checked={s.active} onClick={()=>handleSetupEditActive(s._id)}/>
                 </td>
-                <td colSpan='8' className="flex justify-between pl-4 pr-4 " >
-                    <span>{s.setup}</span>
-                    <button onClick={()=>handleSetupDelete(s._id)} className="text-red-700 text-md font-bold hover:text-black transition-colors delay-100">x</button>
+                <td colSpan='8' className="flex justify-between pl-4 pr-4 gap-x-12 " >
+                    <span className="text-sm">{s.setup}</span>
+                    <button onClick={()=>handleSetupDelete(s._id)} className=" text-red-700 text-md font-bold hover:text-black transition-colors delay-100">x</button>
                 </td>
               </tr>
           ))

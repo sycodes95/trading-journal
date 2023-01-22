@@ -17,10 +17,24 @@ input, select{
 
 }
 
+th, td{
+  min-width: 64px;
+}
+
+table  tr:nth-of-type(even){
+  background-color: rgb(193, 255, 192);
+}
+
+
 .app{
   display: grid;
   grid-template-columns: 200px 1fr;
 }
+
+.current-setup-con{
+  height: 546px;
+}
+
 
 
 .toggle-button {

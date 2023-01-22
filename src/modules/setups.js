@@ -8,9 +8,12 @@ function Setups () {
   
   const [userInfo, setUserInfo] = useState(null)
   const [newSetupSubmitted, setNewSetupSubmitted] = useState(0)
-  const [setupUnderTwenty, setSetupUnderTwenty] = useState(false)
+  
   const [userMaxSetups, setUserMaxSetups] = useState(false)
+  const userMaxSetupsContext = {userMaxSetups, setUserMaxSetups};
   const [duplicateSetupError, setDuplicateSetupError] = useState(false)
+
+  const userMaxSetupsRef = useRef(null)
 
   const [formData, setFormData] = useState({
     username: userInfo,
@@ -27,13 +30,12 @@ function Setups () {
     })
     .then(response => response.json())
     .then((data) => {
-      console.log(data);
       if(data.error ){
         if(data.error === 'User reached maximum setups'){
           setUserMaxSetups(true)
         }
         if(data.error.code  === 11000){
-          console.log('hi');
+          
           setDuplicateSetupError(true)
         }
       } else {
@@ -53,12 +55,6 @@ function Setups () {
     setFormData({ ...formData, [name]: value });
   };
 
-
-  useEffect(()=>{
-    console.log(setupUnderTwenty);
-    if(setupUnderTwenty){
-    } 
-  },[setupUnderTwenty])
   useEffect(()=>{
     //Once token is verified and user info is fetched, set username of form data.
     if(userInfo){
@@ -66,7 +62,7 @@ function Setups () {
     }
     
   },[userInfo])
-  
+
   useEffect(()=>{
     //Token
     const token = JSON.parse(localStorage.getItem('token'))
@@ -87,10 +83,10 @@ function Setups () {
   }, [])
   return(
     <div className="setup-container w-full p-12">
-      <div className="text-3xl font-bold">
+      <div className="text-3xl font-bold pb-8">
         <span>Setups</span>
       </div>
-      <div className="text-sm">
+      <div className="text-sm h-12">
         <span>
           Add and manage trading strategy types. 
           Active strategies are available as a parameter for new trade entries.
@@ -102,10 +98,14 @@ function Setups () {
         </span>
       </div>
       <div className="">
-        <div className="flex item-center ">
-          <input className="text-xs" type='text' name='setup' value={formData.setup} placeholder="setup name" onChange={handleInputChange}/>
+        <div className="flex justify-center items-center bg-green-500 h-16 w-96 rounded-lg">
+          <div className="text-white text-sm font-bold">
+            <span>Create a new setup : </span>
+          </div>
+          
+          <input className="text-xs ml-4 h-6" type='text' name='setup' value={formData.setup} placeholder="setup name" onChange={handleInputChange}/>
           <button className='text-xs h-6 pl-2' onClick={handleSubmit}>
-            <ReactSVG className='h-6 w-6 text-gray-400 fill-current hover:text-green-400
+            <ReactSVG className='h-6 w-6 text-white fill-current hover:text-green-400
              transition-colors delay-100' src={plusButton}/>
           </button>
 
@@ -113,7 +113,7 @@ function Setups () {
         <div className="h-6">
         {
           userMaxSetups ?
-          <div>
+          <div className="flex items-center" ref={userMaxSetupsRef} >
             <span className="text-red-500 text-xs">Maximum setups reached, please delete some before
             adding more, no good trader made serious money trading 20 strategies like a cunt.</span>   
           </div>
@@ -143,7 +143,8 @@ function Setups () {
         }
       </div>
 
-      <CurrentSetups userInfo={userInfo} newSetupSubmitted={newSetupSubmitted}/>
+      <CurrentSetups userInfo={userInfo} newSetupSubmitted={newSetupSubmitted}
+      userMaxSetupsContext={userMaxSetupsContext}/>
     </div>
   )
 }

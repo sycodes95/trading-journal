@@ -1,12 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import CurrentSetups from "./currentSetups";
-
+import { ReactSVG } from "react-svg";
+import plusButton from "../icons/plus-circle-outline.svg"
 
 function Setups () {
   
   const [userInfo, setUserInfo] = useState(null)
   const [newSetupSubmitted, setNewSetupSubmitted] = useState(0)
+  const [setupUnderTwenty, setSetupUnderTwenty] = useState(false)
+  const [userMaxSetups, setUserMaxSetups] = useState(false)
+  const [duplicateSetupError, setDuplicateSetupError] = useState(false)
 
   const [formData, setFormData] = useState({
     username: userInfo,
@@ -15,23 +19,46 @@ function Setups () {
   })
 
   const handleSubmit = () =>{
-    console.log('submit');
     
     fetch('http://localhost:5000/newsetup', {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: { 'Content-Type': 'application/json'}
     })
-     .then(response => response.json())
-     .then((data) => {
-        setNewSetupSubmitted(newSetupSubmitted + 1)
-     })
-
+    .then(response => response.json())
+    .then((data) => {
+      console.log(data);
+      if(data.error ){
+        if(data.error === 'User reached maximum setups'){
+          setUserMaxSetups(true)
+        }
+        if(data.error.code  === 11000){
+          console.log('hi');
+          setDuplicateSetupError(true)
+        }
+      } else {
+        setUserMaxSetups(false)
+        setDuplicateSetupError(false)
+      }
+      setNewSetupSubmitted(newSetupSubmitted + 1)
+      //just updating by 1 so that currentSetup child component gets new props and re renders
+    })
+        
   }
+
+
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+
+  useEffect(()=>{
+    console.log(setupUnderTwenty);
+    if(setupUnderTwenty){
+    } 
+  },[setupUnderTwenty])
   useEffect(()=>{
     //Once token is verified and user info is fetched, set username of form data.
     if(userInfo){
@@ -59,9 +86,11 @@ function Setups () {
       }
   }, [])
   return(
-    <div className="setup-container">
-      <div><span>Setups</span></div>
-      <div>
+    <div className="setup-container w-full p-12">
+      <div className="text-3xl font-bold">
+        <span>Setups</span>
+      </div>
+      <div className="text-sm">
         <span>
           Add and manage trading strategy types. 
           Active strategies are available as a parameter for new trade entries.
@@ -69,13 +98,42 @@ function Setups () {
       </div>
       <div>
         <span>
-          Create a new setup
+          Create a new setup :
         </span>
       </div>
-      <div>
-        <input type='text' name='setup' value={formData.setup} placeholder="setup name" onChange={handleInputChange}/>
-        <button onClick={handleSubmit}>Add</button>
-        
+      <div className="">
+        <div className="flex item-center ">
+          <input className="text-xs" type='text' name='setup' value={formData.setup} placeholder="setup name" onChange={handleInputChange}/>
+          <button className='text-xs h-6 pl-2' onClick={handleSubmit}>
+            <ReactSVG className='h-6 w-6 text-gray-400 fill-current hover:text-green-400
+             transition-colors delay-100' src={plusButton}/>
+          </button>
+
+        </div>
+        <div className="h-6">
+        {
+          userMaxSetups ?
+          <div>
+            <span className="text-red-500 text-xs">Maximum setups reached, please delete some before
+            adding more, no good trader made serious money trading 20 strategies like a cunt.</span>   
+          </div>
+          
+          :
+          null 
+        }
+
+        {
+          duplicateSetupError ?
+          <div>
+            <span className="text-red-500 text-xs">Setup already exists.</span>   
+          </div>
+          
+          :
+          null 
+
+        }
+        </div>
+            
       </div>
       <div>
         { userInfo ? 

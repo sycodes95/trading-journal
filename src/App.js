@@ -17,14 +17,14 @@ import Setups from './modules/setups';
 function App() {
   return (
     <BrowserRouter>
-      <div className='app grid grid-cols-5'>
-        <div className='cols-start-1 col-span-5 cols-end-5 rows-start-1 rows-end-2'>
+      <div className='app '>
+        <div className='cols-start-1 col-span-2 cols-end-3 rows-start-1 rows-end-2'>
           <Header/>
         </div>
         <div className='cols-start-1 col-span-1 cols-end-2 rows-start-2 rows-end-3'>
           <Sidebar/>
         </div>
-        <div className='cols-start-2 col-span-4 cols-end-5 rows-start-2 rows-end-3'>
+        <div className='cols-start-2 col-span-1 cols-end-3 rows-start-2 rows-end-3'>
           <Routes>
             <Route path="/" exact element={<Home/>}/>
             <Route path="/login" element={<Login/>}/>

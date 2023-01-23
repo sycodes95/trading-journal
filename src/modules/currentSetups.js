@@ -66,11 +66,11 @@ function CurrentSetups (props) {
   }
 
   useEffect(()=>{
-    console.log(setups);
+    
   },[setups])
   
   useEffect(()=>{
-    console.log(props);
+    
     getSetups()
     //UPDATES setups after PROPS are passed down from parent component and
     // new setup is submitted

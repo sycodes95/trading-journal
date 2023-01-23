@@ -14,6 +14,7 @@ import Profile from './modules/profile';
 import Sidebar from './modules/sidebar';
 import Setups from './modules/setups';
 import Instruments from './modules/instruments';
+import Variables from './modules/variables';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
             <Route path="/profile" element={<Profile/>}/>
             <Route path="/setups" element={<Setups/>}/>
             <Route path='/instruments' element={<Instruments/>}/>
+            <Route path='/variables' element={<Variables/>}/>
           </Routes>
        </div>
       </div>

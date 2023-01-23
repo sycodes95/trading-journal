@@ -13,18 +13,20 @@ import Trades from './modules/trades';
 import Profile from './modules/profile';
 import Sidebar from './modules/sidebar';
 import Setups from './modules/setups';
+import Instruments from './modules/instruments';
+
 
 function App() {
   return (
     <BrowserRouter>
-      <div className='app '>
+      <div className='app bg-white'>
         <div className='cols-start-1 col-span-2 cols-end-3 rows-start-1 rows-end-2'>
           <Header/>
         </div>
         <div className='cols-start-1 col-span-1 cols-end-2 rows-start-2 rows-end-3'>
           <Sidebar/>
         </div>
-        <div className='cols-start-2 col-span-1 cols-end-3 rows-start-2 rows-end-3'>
+        <div className='cols-start-2 col-span-1 cols-end-3 rows-start-2 rows-end-3 '>
           <Routes>
             <Route path="/" exact element={<Home/>}/>
             <Route path="/login" element={<Login/>}/>
@@ -32,6 +34,7 @@ function App() {
             <Route path="/trades" element={<Trades/>}/>
             <Route path="/profile" element={<Profile/>}/>
             <Route path="/setups" element={<Setups/>}/>
+            <Route path='/instruments' element={<Instruments/>}/>
           </Routes>
        </div>
       </div>

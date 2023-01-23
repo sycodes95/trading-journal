@@ -1,3 +1,15 @@
+:root{
+  
+  --macaroni: hsl(24, 95%, 74%);
+  --macaroni-shadow: hsl(24, 100%, 84%);
+  --steel-blue: hsl(205, 55%, 46%);
+  --celadon: hsl(138, 54%, 78%);
+  --winter-green : hsl(153, 14%, 45%);
+  --orange-web : hsl(37, 98%, 53%);
+  --aquamarine : hsl(154, 69%, 55%);
+
+}
+
 input:focus, select:focus{
   outline: none;
   border-left: solid 1px rgb(255, 0, 0);
@@ -14,7 +26,7 @@ input, select{
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-
+  
 }
 
 th, td{
@@ -22,14 +34,44 @@ th, td{
 }
 
 table  tr:nth-of-type(even){
-  background-color: rgb(193, 255, 192);
+  background-color: #DEE2D6;
 }
 
 
 .app{
   display: grid;
   grid-template-columns: 200px 1fr;
+  
 }
+
+
+
+
+
+.header{
+  position: relative;
+  
+  z-index: 2;
+  
+  
+}
+
+
+.sidebar{
+  position: relative;
+  box-shadow: 6px 0 10px -4px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.setup-container{
+  z-index: 0;
+}
+
+.skew20 {
+  transform: skew(20deg);
+  
+}
+
 
 .current-setup-con{
   height: 546px;

@@ -13,14 +13,16 @@ function Header () {
   }, [])
 
   return(
-    <div className="header  max-h-12 h-12 w-full pl-8 pr-8 bg-white flex items-center justify-between border-b border-black border-dashed">
+    <div className="header  max-h-12 h-12 w-full pl-8 pr-8 flex items-center justify-between
+    text-black border-b border-red-700" > 
+    
 
-      <div className="header-logo text-4xl text-black font-bold">T J</div>
+      <div className="header-logo text-4xl font-bold">T J</div>
 
       {
         !userLoggedIn ? 
 
-        <div className="header-nav text-black grid grid-cols-2 font-thin">
+        <div className="header-nav grid grid-cols-2 font-thin ">
           <Link to='/login'>
             <span className="hover:cursor-pointer">Log in</span>
           </Link>
@@ -31,13 +33,13 @@ function Header () {
 
         :
 
-        <div className="header-nav text-black grid grid-cols-2 gap-x-2 font-thin">
+        <div className="header-nav grid grid-cols-2 gap-x-2 font-thin ">
           
-          <Link to='/profile'>
-            <span className="hover:cursor-pointer">Profile</span>
+          <Link to='/profile' className="">
+            <span className="polygon-child hover:cursor-pointer">Profile</span>
           </Link> 
-          <Link to='/logout'>
-            <span className="hover:cursor-pointer">Log out</span>
+          <Link to='/logout' className="">
+            <span className="polygon-child hover:cursor-pointer">Log out</span>
           </Link> 
         </div>
         

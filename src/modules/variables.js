@@ -67,6 +67,10 @@ function Variables (){
       }
   }, [])
 
+  useEffect(()=>{
+    console.log(variablesList);
+  },[variablesList])
+
   return(
     <div className="variables-container w-full p-12 grid ">
       <div className="text-3xl text-black font-bold pb-8 ">
@@ -86,7 +90,7 @@ function Variables (){
           variablesList ?
           variablesList.map((list, index) =>(
             <div className="card col-span-1 ">
-              <VariablesCards userInfo={userInfo} index={index} 
+              <VariablesCards username={userInfo.username} index={index} 
                variablesList={variablesList}/>
               
             </div>

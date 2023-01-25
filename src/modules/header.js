@@ -13,7 +13,7 @@ function Header () {
   }, [])
 
   return(
-    <div className="header  max-h-12 h-12 w-full pl-8 pr-8 flex items-center justify-between
+    <div className="header relative z-10 max-h-12 h-12 w-full pl-8 pr-8 flex items-center justify-between
     text-black border-b border-red-700" > 
     
 

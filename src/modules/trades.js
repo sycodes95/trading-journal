@@ -2,18 +2,37 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import NewTrade from "./newTrade";
 import TradingRules from "./tradingRules";
+import * as Dialog from '@radix-ui/react-dialog';
+
+import Modal from 'react-modal'
 
 
 function Trades () {
+  const body = document.querySelector('body')
+
   const [userInfo, setUserInfo] = useState(null)
 
   const [addTradeClicked, setAddTradeClicked] = useState(false)
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const overlayRef = useRef(null)
+  
+
   const newTradeRef = useRef(null)
 
-  const handleAddTrade = () => {
-    setAddTradeClicked(true)
+  const openModal = () => {
+    setModalIsOpen(true);
   }
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  }
+
+  useEffect(()=>{
+    modalIsOpen ? document.body.classList.add('overflowHidden') : document.body.classList.remove('overflowHidden')
+  },[modalIsOpen])
+ 
 
   useEffect(()=>{
     //Token
@@ -36,23 +55,32 @@ function Trades () {
       }
   }, [])
   return(
-    <div className="h-screen w-full  pt-8 p-12 ">
-      <div className="text-3xl text-black font-bold pb-8 ">
-        <span>Journal</span>
+    <Dialog.Root>
+      <div className="relative  h-screen w-full  pt-8 p-12 " >
+        <div className="text-3xl relative z-10 text-black font-bold pb-8 " >
+          <span>Journal</span>
+        </div>
+        <div className="text-sm h-12 relative z-10">
+          <Dialog.Trigger asChild>
+           <button className="h-16 w-32 border border-black" onClick={()=> setModalIsOpen(true)}>New Trade</button>
+          </Dialog.Trigger>
+        </div>
+        <Dialog.Portal>
+          <Dialog.Overlay className="DialogOverlay"/>
+          <Dialog.Content className="DialogContent flex justify-center items-center">
+            <NewTrade />
+          </Dialog.Content>
+          <Dialog.Overlay/>
+        </Dialog.Portal>
+          
+        
+        
+
+        
+      
+        
       </div>
-      <div className="text-sm h-12">
-        <button className="h-16 w-32 border border-black" onClick={handleAddTrade}>New Trade</button>
-      </div>
-      <div>
-        {
-          addTradeClicked && 
-          <div className="new-trade grid grid-col-2 grid-row-0 h-full w-96 border
-          border-black pt-8 pb-8 " ref={newTradeRef} >
-            <NewTrade userInfo={userInfo} addTradeClickedContext={{addTradeClicked, setAddTradeClicked}}/>
-          </div>
-        }
-      </div>
-    </div>
+    </Dialog.Root>
   )
 }
 

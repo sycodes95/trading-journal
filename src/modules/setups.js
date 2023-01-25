@@ -77,7 +77,7 @@ function Setups () {
         }
       })
       .catch(error => console.error(error))
-      }
+    }
   }, [])
   return(
     <div className="setup-container w-full p-12 ">

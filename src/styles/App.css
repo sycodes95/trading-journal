@@ -1,3 +1,4 @@
+
 :root{
   
   --macaroni: hsl(24, 95%, 74%);
@@ -25,6 +26,10 @@ input, select{
   
 }
 
+.new-trade-container{
+  height: 500px;
+}
+
 @media (max-width: 800px) {
   .variables-cards-container{
     grid-template-columns: 1fr;
@@ -36,7 +41,6 @@ input, select{
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  
 }
 
 th, td{
@@ -51,19 +55,6 @@ table  tr:nth-of-type(even){
 .app{
   display: grid;
   grid-template-columns: 200px 1fr;
-  
-}
-
-
-
-
-
-.header{
-  position: relative;
-  
-  z-index: 2;
-  
-  
 }
 
 .top-left-round{
@@ -80,43 +71,36 @@ table  tr:nth-of-type(even){
 .sidebar{
   position: relative;
   box-shadow: 6px 0 10px -4px rgba(0, 0, 0, 0.3);
-  z-index: 2;
+  z-index: 10;
 }
 
 .setup-container{
   z-index: 0;
 }
 
-.skew20 {
-  transform: skew(20deg);
-  
-}
-
-
 .current-setup-con{
   height: 546px;
 }
 
+.DialogOverlay {
+  background-color: rgb(255, 211, 211);
+  position: fixed;
+  inset: 0;
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-
-.toggle-button {
-  position: absolute;
-  top: 0px;
-  
-  left: 0px;
-  width: 16px;
-  height: 4px;
-  border-radius: 21px;
+.DialogContent {
   background-color: white;
-  transition: 0.2s;
-}
-
-.on {
-  left: calc(100% - 16px);
-  background-color: green;
-}
-
-.off {
-  right: 0%;
-  background-color: black;
+  border-radius: 6px;
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 450px;
+  max-height: 85vh;
+  padding: 25px;
+  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 30;
 }

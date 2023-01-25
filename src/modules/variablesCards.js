@@ -10,7 +10,9 @@ function VariablesCards (props){
   const usernameProps = props.username
   const indexProps = props.index
   
-  const [titleEmpty, setTitleEmpty] = useState(null)
+  const [onlyTitleEmpty, setOnlyTitleEmpty] = useState(null)
+
+  const [bothTitleVariablesEmpty, setBothTitleVariablesEmpty] = useState(null)
 
   const [titleDuplicate, setTitleDuplicate] = useState(null)
 
@@ -43,20 +45,36 @@ function VariablesCards (props){
       } else {
         setTitleDuplicate(false)
       }
-      
-      
     })
   }
 
+  const fetchDelete = () =>{
+    fetch('http://localhost:5000/delete-variables-list', {
+      method: 'DELETE',
+      body: JSON.stringify(formData),
+      headers: { 'Content-Type': 'application/json'}
+    })
+    .then(response => response.json())
+    .then((data) => {
+      console.log(data);
+      
+    })
+
+  }
 
   const handleAddVariable = () =>{
-    
     setFormData({ ...formData, variables: [...formData.variables, '']})
-    
   }
 
   const handleInputBlurSubmit = () =>{
-    fetchPost()
+    if(bothTitleVariablesEmpty) {
+      fetchDelete()
+    } else if (onlyTitleEmpty){
+      return
+    } else {
+      fetchPost()
+    }
+    
   }
 
   const handleVariableDelete = (e, index) => {
@@ -69,7 +87,7 @@ function VariablesCards (props){
   }
 
   const handleInputChange = (e,index ) => {
-    formData.title === '' ? setTitleEmpty(true) : setTitleEmpty(false);
+    
     const { name, value } = e.target;
     
     if(name == 'variables'){
@@ -77,8 +95,6 @@ function VariablesCards (props){
       const variables = [...formData.variables];
       variables[index] = value;
       setFormData({ ...formData, variables });
-      
-      
     } else {
       //if handling title input change
       setFormData({ ...formData, [name]: value });
@@ -89,11 +105,11 @@ function VariablesCards (props){
   const handleKeyDownSubmit = (e) =>{
     if(e.key === 'Enter' && formData.title === ''){
 
-      return setTitleEmpty(true)
+      return setOnlyTitleEmpty(true)
     }
     if(e.key === 'Enter' && formData.title !== ''){
 
-      setTitleEmpty(false)
+      setOnlyTitleEmpty(false)
 
       if(titleRef.current) titleRef.current.blur()
 
@@ -103,7 +119,7 @@ function VariablesCards (props){
   }
 
   function handleOnDragEnd (result){
-    console.log(result);
+    
     if (!result.destination) return;
 
     const items = formData.variables;
@@ -113,14 +129,26 @@ function VariablesCards (props){
     setFormData({...formData, variables: items});
     fetchPost()
   }
-  
+
+  useEffect(()=>{
+    if(formData.title === '' && formData.variables[0] !== '' ){
+      setOnlyTitleEmpty(true)
+    } else {
+      setOnlyTitleEmpty(false);
+    }  
+
+    if(formData.title === '' && (formData.variables[0] === '' || formData.variables.length < 1)){
+      setBothTitleVariablesEmpty(true)
+    } else {
+      setBothTitleVariablesEmpty(false);
+    }  
+  },[formData])
   
   useEffect(()=>{
     // once variablesList from parent component is passed down and it exists for this card, 
     // use variablesList as formData instead of default 
     if(props.variablesList[indexProps] !== null){
       let data = props.variablesList[indexProps]
-      console.log(data);
       setFormData({
         username: data.username,
         title: data.title,
@@ -128,83 +156,67 @@ function VariablesCards (props){
         listIndex: data.listIndex 
       }) 
     }
-
-    formData.variables.forEach((v, index)=>{
-      console.log(v);
-    })
-    
   }, [props.variablesList]) 
   
   return(
-
     
-      <div className="variables-card w-64 h-auto text-sm ">
-        <div className="input-errors h-6">
-          {
-            titleEmpty &&
-            <span className="text-red-700 text-xs">title required *</span>
-          }
-          {
-            titleDuplicate &&
-            <span className="text-red-700 text-xs">duplicate title *</span>
-          }
-
-        </div>
+    <div className="variables-card w-64 h-auto text-sm ">
+      <div className="input-errors h-6">
+        { onlyTitleEmpty && <span className="text-red-700 text-xs">title required *</span> }
         
-        <div className="flex items-center justify-between border-b h-6">
-          <div className="top-left-round bg-red-700 w-full h-full text-white text-xs font-thin  pl-1 pr-1
-          flex items-center">
-            <input className="top-left-round bg-red-700 focus2 border-steel-blue focus:bg-white focus:text-black 
-            w-full" type='text' name="title" value={formData.title} ref={titleRef}
-            onChange={(e)=>handleInputChange(e)} onKeyDown={handleKeyDownSubmit} 
-            onBlur={handleInputBlurSubmit} placeholder='Custom Variable Title...' />
-          </div>
-          
+        { titleDuplicate && <span className="text-red-700 text-xs">duplicate title *</span>}
 
-          <button className="bottom-right-round bg-steel-blue h-full text-white text-xs  w-24" 
-          onClick={handleAddVariable}>Add Variable</button>
-        </div>
-        {
-          formData && 
-          <DragDropContext onDragEnd={handleOnDragEnd}>
-            <Droppable droppableId="droppable">
-              {(provided, snapshot) => (
-                <div className="droppable variables-list" {...provided.droppableProps} ref={provided.innerRef}>
-                  {formData.variables.map((v, index) =>{
-                    console.log(v);
-                    return(
-                      <Draggable key={index} draggableId={`${index}`} index={index}>
-                        {(provided, snapshot) => (
-                          <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
-                          className="bottom-right-round variable flex items-center justify-between
-                          border-r-gray-300 border border-b-gray-300 pl-2">
-                          
-                            <div className="svg-container h-6 w-6 flex items-center ">
-                              <ReactSVG className="text-gray-500 fill-current h-5 w-5" src={dragIcon}/>
-                            </div>
-                          
-                            <input className=" w-full h-full  text-sm font-thin rounded-none pl-2 "
-                            type='text' name="variables" value={formData.variables[index]} ref={variableRef} 
-                            onChange={(e)=>handleInputChange(e,index)} onKeyDown={handleKeyDownSubmit}
-                            onBlur={handleInputBlurSubmit} placeholder='Variable...' />
-                            
-                            <button className=" text-red-700 text-xs p-2 w-8 font-bold 
-                            hover:text-black" onClick={(e)=>handleVariableDelete(e, index)}>x</button>
-                          </div>
-                        )}
-                      </Draggable>
-                    )
-                  })}
-                  {provided.placeholder}
-                </div>
-                
-              )}
-            </Droppable>
-          </DragDropContext>
-        }
-        
       </div>
-    
+      
+      <div className="flex items-center justify-between border-b h-6">
+        <div className="top-left-round bg-red-700 w-full h-full text-white text-xs font-thin  pl-1 pr-1
+        flex items-center">
+          <input className="top-left-round bg-red-700 focus2 border-steel-blue focus:bg-white focus:text-black 
+          w-full" type='text' name="title" value={formData.title} ref={titleRef}
+          onChange={(e)=>handleInputChange(e)} onKeyDown={handleKeyDownSubmit} 
+          onBlur={handleInputBlurSubmit} placeholder='Custom Variable Title...' />
+        </div>
+
+        <button className="bottom-right-round bg-steel-blue h-full text-white text-xs  w-24" 
+        onClick={handleAddVariable}>Add Variable</button>
+      </div>
+      {
+        formData && 
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="droppable">
+            {(provided, snapshot) => (
+              <div className="droppable variables-list" {...provided.droppableProps} ref={provided.innerRef}>
+                {formData.variables.map((v, index) =>{
+                  return(
+                    <Draggable key={index} draggableId={`${index}`} index={index}>
+                      {(provided, snapshot) => (
+                        <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
+                        className="bottom-right-round variable flex items-center justify-between
+                        border-r-gray-300 border border-b-gray-300 pl-2">
+                        
+                          <div className="svg-container h-6 w-6 flex items-center ">
+                            <ReactSVG className="text-gray-500 fill-current h-5 w-5" src={dragIcon}/>
+                          </div>
+                        
+                          <input className=" w-full h-full  text-sm font-thin rounded-none pl-2 "
+                          type='text' name="variables" value={formData.variables[index]} ref={variableRef} 
+                          onChange={(e)=>handleInputChange(e,index)} onKeyDown={handleKeyDownSubmit}
+                          onBlur={handleInputBlurSubmit} placeholder='Variable...' />
+                          
+                          <button className=" text-red-700 text-xs p-2 w-8 font-bold 
+                          hover:text-black" onClick={(e)=>handleVariableDelete(e, index)}>x</button>
+                        </div>
+                      )}
+                    </Draggable>
+                  )
+                })}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      }
+    </div>
   )
 }
 

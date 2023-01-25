@@ -42,7 +42,6 @@ function CurrentSetups (props) {
       .catch(error =>{
         console.error('Error:', error);
       })
-    
   }
 
   const handleSetupEditActive = (id) =>{
@@ -62,7 +61,6 @@ function CurrentSetups (props) {
     .catch(error => {
       console.log(error);
     })
-    
   }
 
   useEffect(()=>{
@@ -75,14 +73,6 @@ function CurrentSetups (props) {
     //UPDATES setups after PROPS are passed down from parent component and
     // new setup is submitted
   },[props])
-
-  
-
-  
-  
-
-  
-  
   
   return(
     <div className="current-setup-con w-full  overflow-y-auto ">
@@ -119,9 +109,6 @@ function CurrentSetups (props) {
 
     </div>
       
-      
-      
-   
   )
 }
 export default CurrentSetups;

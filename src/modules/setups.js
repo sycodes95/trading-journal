@@ -45,10 +45,7 @@ function Setups () {
       setNewSetupSubmitted(newSetupSubmitted + 1)
       //just updating by 1 so that currentSetup child component gets new props and re renders
     })
-        
   }
-
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

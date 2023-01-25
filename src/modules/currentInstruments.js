@@ -56,14 +56,6 @@ function CurrentInstruments (props) {
     //UPDATES instruments after PROPS are passed down from parent component and
     // new setup is submitted
   },[props])
-
-  
-
-  
-  
-
-  
-  
   
   return(
     <div className="current-setup-con w-full  overflow-y-auto ">
@@ -95,9 +87,6 @@ function CurrentInstruments (props) {
       </table> 
 
     </div>
-      
-      
-      
    
   )
 }

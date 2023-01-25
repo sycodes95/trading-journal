@@ -8,18 +8,8 @@ import Modal from 'react-modal'
 
 
 function Trades () {
-  const body = document.querySelector('body')
-
   const [userInfo, setUserInfo] = useState(null)
-
-  const [addTradeClicked, setAddTradeClicked] = useState(false)
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const overlayRef = useRef(null)
-  
-
-  const newTradeRef = useRef(null)
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -37,7 +27,7 @@ function Trades () {
   useEffect(()=>{
     //Token
     const token = JSON.parse(localStorage.getItem('token'))
-    console.log(token);
+    
     if(token) {
       fetch('http://localhost:5000/verifytoken', {
         method: 'GET',
@@ -48,12 +38,15 @@ function Trades () {
         
         if(data.user.user){
           setUserInfo(data.user.user)
-          console.log(userInfo)
         }
       })
       .catch(error => console.error(error))
       }
   }, [])
+
+  useEffect(()=>{
+    console.log(userInfo);
+  },[userInfo])
   return(
     <Dialog.Root>
       <div className="relative  h-screen w-full  pt-8 p-12 " >
@@ -68,21 +61,13 @@ function Trades () {
         <Dialog.Portal>
           <Dialog.Overlay className="DialogOverlay"/>
           <Dialog.Content className="DialogContent flex justify-center items-center">
-            <NewTrade />
+            {userInfo && <NewTrade username={userInfo.username}/>}
           </Dialog.Content>
           <Dialog.Overlay/>
         </Dialog.Portal>
-          
-        
-        
-
-        
-      
-        
       </div>
     </Dialog.Root>
   )
 }
-
 
 export default Trades;

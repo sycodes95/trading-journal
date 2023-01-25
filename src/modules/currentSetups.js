@@ -12,10 +12,10 @@ function CurrentSetups (props) {
   function getSetups () {
     if(props.userInfo){
       fetch(`http://localhost:5000/getsetups?username=${props.userInfo.username}`)
-     .then(response => response.json())
-     .then((data) => {
+      .then(response => response.json())
+      .then((data) => {
         setSetups(data.setups)
-     })
+      })
     }
   }
 
@@ -59,7 +59,6 @@ function CurrentSetups (props) {
       //UPDATES setups after a set up is finished updating
     })
     .catch(error => {
-      console.log(error);
     })
   }
 

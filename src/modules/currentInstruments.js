@@ -12,11 +12,11 @@ function CurrentInstruments (props) {
   function getInstruments () {
     if(props.userInfo){
       fetch(`http://localhost:5000/getinstruments?username=${props.userInfo.username}`)
-     .then(response => response.json())
-     .then((data) => {
-        console.log(data);
+      .then(response => response.json())
+      .then((data) => {
+          
         setInstruments(data.instruments)
-     })
+      })
     }
   }
 
@@ -47,11 +47,11 @@ function CurrentInstruments (props) {
   }
 
   useEffect(()=>{
-    console.log(instruments);
+   
   },[instruments])
   
   useEffect(()=>{
-    console.log(props);
+    
     getInstruments()
     //UPDATES instruments after PROPS are passed down from parent component and
     // new setup is submitted

@@ -44,6 +44,10 @@ function NewTradeGeneral (props){
   },[instruments,setups])
 
   useEffect(()=>{
+    console.log(formData);
+  },[formData])
+
+  useEffect(()=>{
     getInstruments()
     getSetups()
   },[])
@@ -57,10 +61,10 @@ function NewTradeGeneral (props){
           <label>Entry Date & Time</label>
           <input className="w-fit border border-gray-300" type='datetime-local'/>
         </div>
-        <div className=" pl-4 pr-4 grid grid-cols-1 pt-4">
+        <div className="instrument-container pl-4 pr-4 grid grid-cols-1 pt-4">
           <label>Instrument</label>
           <div className="flex">
-            <select className="w-4" name="instruments" onClick={handleInputChange}>
+            <select className="w-4" name="instrument" onClick={handleInputChange}>
               <option value='' hidden></option>
               {
                 instruments && instruments.map((el, index) =>(
@@ -68,14 +72,14 @@ function NewTradeGeneral (props){
                 ))
               }
             </select>
-            <input className="w-fit border border-gray-300" type='text' name="instruments" 
-            value={formData.instruments} onChange={handleInputChange}/>
+            <input className="w-fit border border-gray-300" type='text' name="instrument" 
+            value={formData.instrument} onChange={handleInputChange}/>
           </div>
         </div>
-        <div className=" pl-4 pr-4 grid grid-cols-1 pt-4">
+        <div className="setup-container pl-4 pr-4 grid grid-cols-1 pt-4">
           <label>Setup</label>
           <div className="flex">
-            <select className="w-4 h-4 overflow-scroll" name="setups" onClick={handleInputChange} size="1">
+            <select className="w-4 h-4 overflow-scroll" name="setup" onClick={handleInputChange} size="1">
               <option value='' hidden></option>
               {
                 setups && setups.map((el, index) =>(
@@ -83,7 +87,7 @@ function NewTradeGeneral (props){
                 ))
               }
             </select>
-            <input className="w-fit border border-gray-300" type='text' name="setups" 
+            <input className="w-fit border border-gray-300" type='text' name="setup" 
             value={formData.setup} onChange={handleInputChange}/>
           </div>
         </div>

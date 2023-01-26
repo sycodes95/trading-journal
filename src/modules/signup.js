@@ -30,7 +30,7 @@ function Signup () {
     })
      .then(response => response.json())
      .then((data) => {
-        console.log(data);
+        
         
         if(data.user){
           setSignUpSuccess(true)
@@ -43,7 +43,7 @@ function Signup () {
           }
           if(data.errors[0].param === 'confirm_password'){
             setPasswordNotMatch(true)
-            console.log('pw');
+            
           } else {
             setPasswordNotMatch(false)
           }

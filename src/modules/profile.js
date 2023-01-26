@@ -15,10 +15,7 @@ function Profile () {
       })
       .then(response => response.json())
       .then((data) => {
-          console.log(data);
-          if(data.user.user){
-            console.log(data.user.user.firstname);
-          }
+          
       })
       .catch(error => console.error(error))
       }

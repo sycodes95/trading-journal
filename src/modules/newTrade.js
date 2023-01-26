@@ -47,7 +47,9 @@ function NewTrade (props) {
     public: false,
   })
 
-  
+  useEffect(()=>{
+    console.log(formData);
+  },[formData])
 
   useEffect(()=>{
     if(generalTab){
@@ -97,6 +99,8 @@ function NewTrade (props) {
         variablesTab &&
         <NewTradeVariables formDataContext={{formData, setFormData}}/>
       }
+
+      
 
     </div>
   )

@@ -61,7 +61,7 @@ function Setups () {
   },[userInfo])
 
   useEffect(()=>{
-    console.log('test');
+    
     //Token
     const token = JSON.parse(localStorage.getItem('token'))
     

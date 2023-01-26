@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 function NewTradeVariables (props){
 
   return(
-    <div>var</div>
+    <div className="w-full">var</div>
   )
 }
 

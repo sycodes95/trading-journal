@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import NewTrade from "./newTrade";
-import TradingRules from "./tradingRules";
+import NewTrade from "./newTrade/newTrade";
+
 import * as Dialog from '@radix-ui/react-dialog';
 
 import Modal from 'react-modal'
@@ -59,11 +59,17 @@ function Trades () {
           </Dialog.Trigger>
         </div>
         <Dialog.Portal>
+          
           <Dialog.Overlay className="DialogOverlay"/>
-          <Dialog.Content className="DialogContent flex justify-center items-center">
-            {userInfo && <NewTrade username={userInfo.username}/>}
+          <Dialog.Content className="DialogContent ">
+            {
+            userInfo && <NewTrade username={userInfo.username}/>
+            }
           </Dialog.Content>
           <Dialog.Overlay/>
+
+          
+          
         </Dialog.Portal>
       </div>
     </Dialog.Root>

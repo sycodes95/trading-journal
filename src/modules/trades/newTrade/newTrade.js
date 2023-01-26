@@ -10,9 +10,36 @@ function NewTrade (props) {
   const userName = props.username
   const [generalTab, setGeneralTab] = useState(true)
   const [variablesTab, setVariablesTab] = useState(false)
+  const [formDataCopy, setFormDataCopy] = useState(null)
+  
+
+  const [formData, setFormData] = useState({
+    username: userName,
+    open: '',
+    entrydate: '',
+    instrument: '',
+    setup: '',
+    position: '',
+    plannedentry: '',
+    entry: '',
+    tp: '',
+    sl: '',
+    exitdate: '',
+    exit: '',
+    mfe: '',
+    mae: '',
+    fgl: '',
+    fees: '',
+    comments: '',
+    tv: '',
+    variables: [],
+    public: false,
+  })
 
   const generalTabRef = useRef(null)
   const variablesTabRef = useRef(null)
+  
+
 
   const handleGeneralTabClick = () => {
     setGeneralTab(true)
@@ -23,29 +50,25 @@ function NewTrade (props) {
     setVariablesTab(true)
   }
 
+  const handleFormSubmit = () =>{
+    fetch(`http://localhost:5000/new-trade-post`, {
+      method: 'POST',
+      body: JSON.stringify(formData),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      !data.error && setFormData(formDataCopy) 
+      //UPDATES setups after a set up is finished updating
+    })
+    .catch(error => {
+    })
+  }
+
   
-  const [formData, setFormData] = useState({
-    username: userName,
-    open: true,
-    entrydate: null,
-    instrument: '',
-    setup: '',
-    position: '',
-    plannedentry: null,
-    entry: null,
-    tp: null,
-    sl: null,
-    exitdate: '',
-    exitprice: null,
-    mfe: null,
-    mae: null,
-    fgl: null,
-    fees: null,
-    comments: '',
-    tv: '',
-    variables: [],
-    public: false,
-  })
 
   useEffect(()=>{
     console.log(formData);
@@ -69,12 +92,16 @@ function NewTrade (props) {
       generalTabRef.current.classList.remove('text-white')
     }
   },[generalTab, variablesTab])
+
+ 
+
+  
   useEffect(()=>{
-    console.log(props);
+    setFormDataCopy(formData)
   },[])
   
   return(
-    <div className="new-trade-container w-full ">
+    <div className="new-trade-container ">
       <div className="flex justify-between ">
         <div className="grid grid-cols-2 h-6 ">
           <button className="cols-span-1  h-6 pl-4 pr-4 text-xs 
@@ -86,10 +113,10 @@ function NewTrade (props) {
         </div>
         
         <Dialog.Close asChild>
-          <button className="h-6 text-lg justify-self-center">x</button>
+          <button className="h-6 text-md pl-4 pr-4 bg-red-700 text-white text-center
+          font-bold top-right-round">x</button>
         </Dialog.Close>
       </div>
-
       {
         generalTab &&
         <NewTradeGeneral formDataContext={{formData, setFormData}}/>
@@ -100,8 +127,19 @@ function NewTrade (props) {
         <NewTradeVariables formDataContext={{formData, setFormData}}/>
       }
 
-      
+      <div className="grid grid-cols-2 items-center h-12">
+        
 
+        <div className="flex justify-center items-center text-sm">
+          <button className="" onClick={handleFormSubmit}>Save</button>
+        </div>
+        <Dialog.Close asChild>
+          <div className="flex justify-center items-center text-sm">
+            <button className="">Cancel</button>
+          </div>
+        </Dialog.Close>
+      </div>
+      <div>{`${formData.open}`}</div>
     </div>
   )
 }

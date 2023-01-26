@@ -9,7 +9,7 @@ import Footer from './modules/footer';
 import Login from './modules/login';
 import Signup from './modules/signup';
 import Home from './modules/home';
-import Trades from './modules/trades';
+import Trades from './modules/trades/trades';
 import Profile from './modules/profile';
 import Sidebar from './modules/sidebar';
 import Setups from './modules/setups';
@@ -24,10 +24,10 @@ function App() {
         <div className='cols-start-1 col-span-2 cols-end-3 rows-start-1 rows-end-2'>
           <Header/>
         </div>
-        <div className='cols-start-1 col-span-1 cols-end-2 rows-start-2 rows-end-3'>
+        <div className='side cols-start-1 col-span-1 cols-end-2 rows-start-2 rows-end-3'>
           <Sidebar/>
         </div>
-        <div className='cols-start-2 col-span-1 cols-end-3 rows-start-2 rows-end-3 '>
+        <div className='content cols-start-2 col-span-1 cols-end-3 rows-start-2 rows-end-3 '>
           <Routes>
             <Route path="/" exact element={<Home/>}/>
             <Route path="/login" element={<Login/>}/>

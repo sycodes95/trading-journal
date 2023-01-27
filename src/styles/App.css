@@ -101,6 +101,7 @@ table  tr:nth-of-type(even){
   animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 50;
   max-width: 450px;
+  min-width: 322px;
   
 }
 
@@ -182,4 +183,8 @@ table  tr:nth-of-type(even){
 .off {
   right: 0%;
   background-color: black;
+}
+
+.h-128{
+  height: 512px;
 }

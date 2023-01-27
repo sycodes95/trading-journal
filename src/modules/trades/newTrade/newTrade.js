@@ -62,6 +62,11 @@ function NewTrade (props) {
     .then(data => {
       console.log(data);
       !data.error && setFormData(formDataCopy) 
+      if(data.error && data.error.name === 'ValidationError'){
+        setGeneralTab(true)
+        setVariablesTab(false)
+      }
+      
       //UPDATES setups after a set up is finished updating
     })
     .catch(error => {
@@ -101,15 +106,15 @@ function NewTrade (props) {
   },[])
   
   return(
-    <div className="new-trade-container ">
+    <div className="new-trade-container">
       <div className="flex justify-between ">
         <div className="grid grid-cols-2 h-6 ">
           <button className="cols-span-1  h-6 pl-4 pr-4 text-xs 
           transition-all top-left-round top-right-round "
-          onClick={handleGeneralTabClick} ref={generalTabRef}>General Details</button>
+          onClick={handleGeneralTabClick} ref={generalTabRef}>General</button>
           <button className="cols-span-1  h-6 pl-4 pr-4 text-xs
           transition-all top-left-round top-right-round"
-          onClick={handleVariablesTabClick} ref={variablesTabRef}>Variable Details</button>
+          onClick={handleVariablesTabClick} ref={variablesTabRef}>Variables</button>
         </div>
         
         <Dialog.Close asChild>
@@ -127,7 +132,7 @@ function NewTrade (props) {
         <NewTradeVariables formDataContext={{formData, setFormData}}/>
       }
 
-      <div className="grid grid-cols-2 items-center h-12">
+      <div className="grid grid-cols-2 items-center h-12 justify-end">
         
 
         <div className="flex justify-center items-center text-sm">
@@ -139,7 +144,7 @@ function NewTrade (props) {
           </div>
         </Dialog.Close>
       </div>
-      <div>{`${formData.open}`}</div>
+      
     </div>
   )
 }

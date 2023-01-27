@@ -34,11 +34,14 @@ function NtgOpen(props){
   }, [tradeStatus])
 
   useEffect(()=>{
-    if(formData.open === ''){
+    if(formData.open === '' || formData.open === true){
       setTradeOpen(true)
       setTradeStatus('open')
+    } else {
+      setTradeOpen(false)
+      setTradeStatus('closed')
     }
-  },[formData.open])
+  },[])
 
   return(
     <div className="pt-4 pl-4 pr-4 grid grid-cols-1 pt-4 ">

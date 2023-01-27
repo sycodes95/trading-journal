@@ -11,11 +11,12 @@ function NewTrade (props) {
   const [generalTab, setGeneralTab] = useState(true)
   const [variablesTab, setVariablesTab] = useState(false)
   const [formDataCopy, setFormDataCopy] = useState(null)
-  
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState(false)
 
   const [formData, setFormData] = useState({
     username: userName,
-    open: '',
+    open: true,
     entrydate: '',
     instrument: '',
     setup: '',
@@ -38,8 +39,6 @@ function NewTrade (props) {
 
   const generalTabRef = useRef(null)
   const variablesTabRef = useRef(null)
-  
-
 
   const handleGeneralTabClick = () => {
     setGeneralTab(true)
@@ -61,10 +60,16 @@ function NewTrade (props) {
     .then(response => response.json())
     .then(data => {
       console.log(data);
-      !data.error && setFormData(formDataCopy) 
+      if(!data.error){
+        setFormData(formDataCopy)
+        setSubmitSuccess(true)
+      }
+      
       if(data.error && data.error.name === 'ValidationError'){
         setGeneralTab(true)
         setVariablesTab(false)
+        setSubmitSuccess(false)
+        setSubmitError(true)
       }
       
       //UPDATES setups after a set up is finished updating
@@ -72,12 +77,19 @@ function NewTrade (props) {
     .catch(error => {
     })
   }
+  
+  useEffect(()=>{
+    setTimeout(()=>{
+      setSubmitSuccess(false)
+      
+
+    }, 5000)
+    console.log(formData);
+    
+  },[formData])
+ 
 
   
-
-  useEffect(()=>{
-    console.log(formData);
-  },[formData])
 
   useEffect(()=>{
     if(generalTab){
@@ -97,9 +109,6 @@ function NewTrade (props) {
       generalTabRef.current.classList.remove('text-white')
     }
   },[generalTab, variablesTab])
-
- 
-
   
   useEffect(()=>{
     setFormDataCopy(formData)
@@ -108,13 +117,14 @@ function NewTrade (props) {
   return(
     <div className="new-trade-container">
       <div className="flex justify-between ">
-        <div className="grid grid-cols-2 h-6 ">
+        <div className="grid grid-cols-3 h-6 ">
           <button className="cols-span-1  h-6 pl-4 pr-4 text-xs 
           transition-all top-left-round top-right-round "
           onClick={handleGeneralTabClick} ref={generalTabRef}>General</button>
           <button className="cols-span-1  h-6 pl-4 pr-4 text-xs
           transition-all top-left-round top-right-round"
           onClick={handleVariablesTabClick} ref={variablesTabRef}>Variables</button>
+          
         </div>
         
         <Dialog.Close asChild>
@@ -124,7 +134,8 @@ function NewTrade (props) {
       </div>
       {
         generalTab &&
-        <NewTradeGeneral formDataContext={{formData, setFormData}}/>
+        <NewTradeGeneral formDataContext={{formData, setFormData}} submitSuccess={submitSuccess}
+        submitError={submitError}/>
       }
 
       {
@@ -133,8 +144,6 @@ function NewTrade (props) {
       }
 
       <div className="grid grid-cols-2 items-center h-12 justify-end">
-        
-
         <div className="flex justify-center items-center text-sm">
           <button className="" onClick={handleFormSubmit}>Save</button>
         </div>
@@ -144,10 +153,8 @@ function NewTrade (props) {
           </div>
         </Dialog.Close>
       </div>
-      
     </div>
   )
 }
-
 
 export default NewTrade;

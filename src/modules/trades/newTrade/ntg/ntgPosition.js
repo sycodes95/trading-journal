@@ -44,7 +44,7 @@ function NtgPosition(props){
   },[formData.position])
 
   return(
-    <div className=" pl-4 pr-4 grid grid-cols-2 pt-4 ">
+    <div className=" pl-4 pr-4 grid grid-cols-2 pt-4 w-40 ">
       <div className="col-span-2 flex justify-between">
         <label>Position</label>  
         {

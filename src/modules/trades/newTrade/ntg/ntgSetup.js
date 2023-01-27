@@ -30,7 +30,7 @@ function NtgSetup (props) {
   
 
   return(
-    <div className="setup-container pl-4 pr-4 grid grid-cols-1 pt-4">
+    <div className="setup-container pl-4 pr-4 grid grid-cols-1 pt-4 w-40">
       <div className="flex justify-between">
         <label>Setup</label>
         {

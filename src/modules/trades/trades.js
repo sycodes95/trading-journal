@@ -5,6 +5,7 @@ import NewTrade from "./newTrade/newTrade";
 import * as Dialog from '@radix-ui/react-dialog';
 
 import Modal from 'react-modal'
+import TradesList from "./tradesList/tradesList";
 
 
 function Trades () {
@@ -55,7 +56,8 @@ function Trades () {
         </div>
         <div className="text-sm h-12 relative z-10">
           <Dialog.Trigger asChild>
-           <button className="h-16 w-32 border border-black" onClick={()=> setModalIsOpen(true)}>New Trade</button>
+           <button className="h-12 w-36 border bg-green-700 top-left-round
+           bottom-right-round" onClick={()=> setModalIsOpen(true)}>New Trade</button>
           </Dialog.Trigger>
         </div>
         <Dialog.Portal>
@@ -67,11 +69,10 @@ function Trades () {
             }
           </Dialog.Content>
           <Dialog.Overlay/>
-
-          
-          
         </Dialog.Portal>
+        <TradesList userInfo={userInfo}/>
       </div>
+
     </Dialog.Root>
   )
 }

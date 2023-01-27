@@ -35,7 +35,7 @@ function NtvVariables (props){
       {
         props.variableList &&
         <div className="grid grid-rows-2 justify-center">
-          <label className="flex items-center">{`${props.variableList.title}`}</label>
+          <label className="flex items-center text-green-700">{`${props.variableList.title}`}</label>
           <div className="flex ">
             <select className="w-4" name="variables" onClick={handleInputChange}>
               <option value='' hidden></option>

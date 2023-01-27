@@ -57,6 +57,19 @@ function NewTradeGeneral (props){
             <NtgExit formDataContext={{formData, setFormData}}/>
             <NtgGainLoss formDataContext={{formData, setFormData}}/>
             <NtgFees formDataContext={{formData, setFormData}}/>
+            {
+              props.submitSuccess && 
+              <div className="flex justify-center items-center h-6">
+                <span className="text-xs justify-self-center text-green-700">trade submitted!</span>
+              </div>
+              
+            }
+            {
+              props.submitError && 
+              <div className="flex justify-center items-center h-6">
+                <span className="text-xs justify-self-center text-red-700">check required fields (*)</span>
+              </div>
+            }
             
           </div>
 
@@ -64,7 +77,9 @@ function NewTradeGeneral (props){
             <NtgMFE formDataContext={{formData, setFormData}}/>
             <NtgMAE formDataContext={{formData, setFormData}}/>
             <NtgOpen formDataContext={{formData, setFormData}}/>
+            
           </div>
+          
           
         </div>
         

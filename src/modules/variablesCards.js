@@ -177,7 +177,7 @@ function VariablesCards (props){
           onBlur={handleInputBlurSubmit} placeholder='Custom Variable Title...' />
         </div>
 
-        <button className="bottom-right-round bg-green-700 h-full text-white text-xs  w-24" 
+        <button className="bottom-right-round bg-gray-400 h-full text-white text-xs  w-24" 
         onClick={handleAddVariable}>Add Variable</button>
       </div>
       {

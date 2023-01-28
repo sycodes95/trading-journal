@@ -56,8 +56,8 @@ function Trades () {
         </div>
         <div className="text-sm h-12 relative z-10">
           <Dialog.Trigger asChild>
-           <button className="h-12 w-36 border bg-green-700 top-left-round
-           bottom-right-round" onClick={()=> setModalIsOpen(true)}>New Trade</button>
+           <button className="slant-left-right h-12 w-36 border bg-black top-left-round
+           bottom-right-round text-white" onClick={()=> setModalIsOpen(true)}>New Trade</button>
           </Dialog.Trigger>
         </div>
         <Dialog.Portal>

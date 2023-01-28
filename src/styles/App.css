@@ -26,8 +26,6 @@ input, select{
   
 }
 
-
-
 .no-highlight{
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -37,16 +35,85 @@ input, select{
 
 th, td{
   min-width: 64px;
+  
+  
 }
 
-table  tr:nth-of-type(even){
-  background-color: #DEE2D6;
+table tr:nth-of-type(even){
+  /*
+  background-color: #cdcdcd;
+  */
+  
+  background: linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.8)), url(../images/grey-mesh.jpg);
+  
+  
 }
+
+table tr:nth-of-type(even) > span{
+  /*
+  background-color: #cdcdcd;
+  */
+  
+  opacity: 1;
+}
+table tr:nth-of-type(even)::after{
+  /*
+  background-color: #cdcdcd;
+  */
+  
+  
+  
+}
+
+
+
+.th-wrapper{
+  
+  filter: drop-shadow(0px 1px 0px rgb(24, 24, 24)) drop-shadow(1px 0px 0px rgb(24, 24, 24))
+  drop-shadow(0px 0px 0px rgb(24, 24, 24)) drop-shadow(0px -1px 0px rgb(24, 24, 24));
+  
+}
+
+.th-wrapper-start{
+  
+  filter: drop-shadow(0px 1px 0px rgb(67, 67, 67)) drop-shadow(1px 0px 0px rgb(67, 67, 67)) 
+  drop-shadow(-1px 0px 0px rgb(67, 67, 67)) drop-shadow(0px -1px 0px rgb(67, 67, 67));
+}
+
+.slant-left-right{
+  
+  clip-path: polygon(25% 0%,100% 0,100% 50%,75% 100%,0 100%, 0% 50%);
+  border-radius: 5px;
+}
+
+.slant-right{
+  clip-path: polygon(10px 0%,100% 0,100% 50px,100% 100%,0 100%, 0% 10px);
+  border-radius: 2.5px;
+}
+
+.slant-start{
+  /*
+  clip-path: polygon(0% 0%,100% 0,100% 50%,75% 100%,0 100%, 0% 50%);
+  */
+  background: white;
+  
+  
+}
+
+.bg-striped{
+  background: url(../images/tarkov-stripes.webp);
+  background-position: center;
+  background-size: 115px;
+}
+
+
+
 
 
 .app{
   display: grid;
   grid-template-columns: 200px 1fr;
+  
 }
 
 .top-left-round{
@@ -67,7 +134,12 @@ table  tr:nth-of-type(even){
 
 .sidebar{
   position: relative;
+  /*
   box-shadow: 6px 0 10px -4px rgba(0, 0, 0, 0.3);
+  */
+  border-style: solid;
+  border-width: 1px;
+  border-right-color: rgb(198, 198, 198);
   z-index: 10;
 }
 

@@ -5,7 +5,7 @@ function TradesList(props){
   const userInfo = props.userInfo
   const [trades, setTrades] = useState(null)
 
-  let dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+  
   console.log(userInfo);
   useEffect(()=>{
     if(userInfo && userInfo.username){
@@ -20,29 +20,69 @@ function TradesList(props){
     
   },[userInfo])
   return(
-    <div className="w-full  overflow-y-auto">
+    <div className="w-full  overflow-auto">
       <table className=" w-full ">
         <thead>
-            <tr className="bg-red-700 text-black text-xs font-bold">
-                <th colSpan="1" className="border-r border-white  w-2 font-thin">#</th>
-                <th colSpan="1" className="border-r border-white  w-fit font-thin">Entry Date</th>
-                <th colSpan="1" className="border-r border-white  w-fit font-thin">Status</th>
-                <th colSpan="1" className="border-r border-white  w-fit font-thin">Instrument</th>
-                <th colSpan="1" className="border-r border-white  w-fit font-thin">Setup</th>
-                <th colSpan="1" className="border-r border-white  w-fit font-thin">Position</th>
-                <th colSpan="1" className="border-r border-white  w-fit font-thin">Planned Entry</th>
-                <th colSpan="1" className="border-r border-white  w-fit font-thin">Entry</th>
-                <th colSpan="1" className="border-r border-white  w-fit font-thin">TP</th>
-                <th colSpan="1" className="border-r border-white  w-fit font-thin">SL</th>
-                <th colSpan="1" className="border-r border-white  w-fit font-thin">Exit Date</th>
-                <th colSpan="1" className="border-r border-white  w-fit font-thin">Exit</th>
-                <th colSpan="1" className="border-r border-white  w-fit font-thin">MFE</th>
-                <th colSpan="1" className="border-r border-white  w-fit font-thin">MAE</th>
-                <th colSpan="1" className="border-r border-white  w-fit font-thin">Gain / Loss</th>
-                <th colSpan="1" className="border-r border-white  w-fit font-thin">Fees</th>
-                <th colSpan="1" className="border-r border-white  w-fit font-thin">Variables</th>
-                <th colSpan="1" className="border-r border-white  w-fit font-thin">Comments</th>
-                <th colSpan="1" className="border-r border-white  w-fit font-thin">Picture Links</th>
+            <tr className=" text-white text-xs font-bold ">
+                <th colSpan="1" className=" th-wrapper-start">
+                  <div className="h-4 slant-start pl-4 pr-4 bg-striped">#</div>
+                </th>
+                <th colSpan="1" className="th-wrapper ">
+                  <div className="h-4 slant-right pl-4 pr-4 bg-striped ">ENTRY DATE</div> 
+                </th>
+                <th colSpan="1" className="th-wrapper">
+                  <div className="h-4 slant-right pl-4 pr-4 bg-striped">STATUS</div> 
+                </th>
+                
+                <th colSpan="1" className="th-wrapper ">
+                  <div className="h-4 slant-right pl-4 pr-4 bg-striped">INSTRUMENT</div> 
+                </th>
+                <th colSpan="1" className="th-wrapper ">
+                  <div className="h-4 slant-right pl-4 pr-4 bg-striped">SETUP</div> 
+                </th>
+                <th colSpan="1" className="th-wrapper ">
+                  <div className="h-4 slant-right pl-4 pr-4 bg-striped">POSITION</div> 
+                </th>
+                <th colSpan="1" className="th-wrapper ">
+                  <div className="h-4 slant-right pl-4 pr-4 bg-striped">P ENTRY</div> 
+                </th>
+                <th colSpan="1" className="th-wrapper ">
+                  <div className="h-4 slant-right pl-4 pr-4 bg-striped">ENTRY</div> 
+                </th>
+                <th colSpan="1" className="th-wrapper ">
+                  <div className="h-4 slant-right pl-4 pr-4 bg-striped">TP</div> 
+                </th>
+                <th colSpan="1" className="th-wrapper ">
+                  <div className="h-4 font-thin slant-right pl-4 pr-4">SL</div> 
+                </th>
+                <th colSpan="1" className="th-wrapper ">
+                  <div className="h-4 font-thin slant-right pl-4 pr-4">EXIT/DATE</div> 
+                </th>
+                <th colSpan="1" className="th-wrapper ">
+                  <div className="h-4 font-thin slant-right pl-4 pr-4">EXIT</div> 
+                </th>
+                <th colSpan="1" className="th-wrapper ">
+                  <div className="h-4 font-thin slant-right pl-4 pr-4">MFE</div> 
+                </th>
+                
+                <th colSpan="1" className="th-wrapper ">
+                  <div className="h-4 font-thin slant-right pl-4 pr-4">MAE</div> 
+                </th>
+                <th colSpan="1" className="th-wrapper ">
+                  <div className="h-4 font-thin slant-right pl-4 pr-4">GAIN/LOSS</div> 
+                </th>
+                <th colSpan="1" className="th-wrapper ">
+                  <div className="h-4 font-thin slant-right pl-4 pr-4">FEES</div> 
+                </th>
+                <th colSpan="1" className="th-wrapper ">
+                  <div className="h-4 font-thin slant-right pl-4 pr-4">VARIABLES</div> 
+                </th>
+                <th colSpan="1" className="th-wrapper ">
+                  <div className="h-4 font-thin slant-right pl-4 pr-4">COMMENTS</div> 
+                </th>
+                <th colSpan="1" className="th-wrapper ">
+                  <div className="h-4 font-thin slant-right pl-4 pr-4">LINKS</div> 
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -60,9 +100,9 @@ function TradesList(props){
                 <td colSpan="1" className=" text-center text-xs" >
                 {t.setup}</td>
                 <td colSpan="1" className=" text-center text-xs" >
-                {t.position}</td>
+                <span className="text-black opacity-100">{t.position}</span></td>
                 <td colSpan="1" className=" text-center text-xs" >
-                {t.plannedentry}</td>
+                <span>{t.plannedentry}</span></td>
                 <td colSpan="1" className=" text-center text-xs" >
                 {t.entry}</td>
                 <td colSpan="1" className=" text-center text-xs" >
@@ -92,8 +132,6 @@ function TradesList(props){
                 {t.comments}</td>
                 <td colSpan="1" className=" text-center text-xs" >
                 {t.tv}</td>
-               
-                
                 
               </tr>
           ))

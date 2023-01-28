@@ -13,6 +13,7 @@ function NewTrade (props) {
   const [formDataCopy, setFormDataCopy] = useState(null)
   const [submitSuccess, setSubmitSuccess] = useState(false)
   const [submitError, setSubmitError] = useState(false)
+  const [edit, setEdit] = useState(false)
 
   const [formData, setFormData] = useState({
     username: userName,
@@ -40,6 +41,8 @@ function NewTrade (props) {
   const generalTabRef = useRef(null)
   const variablesTabRef = useRef(null)
 
+  const editTrade = props.editTrade
+
   const handleGeneralTabClick = () => {
     setGeneralTab(true)
     setVariablesTab(false)
@@ -50,32 +53,64 @@ function NewTrade (props) {
   }
 
   const handleFormSubmit = () =>{
-    fetch(`http://localhost:5000/new-trade-post`, {
+    if(!edit){
+      fetch(`http://localhost:5000/new-trade-post`, {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: {
         'Content-Type': 'application/json'
       }
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      if(!data.error){
-        setFormData(formDataCopy)
-        setSubmitSuccess(true)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        if(!data.error){
+          setFormData(formDataCopy)
+          setSubmitSuccess(true)
+        }
+        
+        if(data.error && data.error.name === 'ValidationError'){
+          setGeneralTab(true)
+          setVariablesTab(false)
+          setSubmitSuccess(false)
+          setSubmitError(true)
+        }
+        
+        //UPDATES setups after a set up is finished updating
+      })
+      .catch(error => {
+      })
+
+    }
+    if(edit){
+      fetch(`http://localhost:5000/trade-post`, {
+      method: 'POST',
+      body: JSON.stringify(formData),
+      headers: {
+        'Content-Type': 'application/json'
       }
-      
-      if(data.error && data.error.name === 'ValidationError'){
-        setGeneralTab(true)
-        setVariablesTab(false)
-        setSubmitSuccess(false)
-        setSubmitError(true)
-      }
-      
-      //UPDATES setups after a set up is finished updating
-    })
-    .catch(error => {
-    })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        if(!data.error){
+          setFormData(formDataCopy)
+          setSubmitSuccess(true)
+        }
+        
+        if(data.error && data.error.name === 'ValidationError'){
+          setGeneralTab(true)
+          setVariablesTab(false)
+          setSubmitSuccess(false)
+          setSubmitError(true)
+        }
+        
+        //UPDATES setups after a set up is finished updating
+      })
+      .catch(error => {
+      })
+    }
+    
   }
   
   useEffect(()=>{
@@ -113,6 +148,16 @@ function NewTrade (props) {
   useEffect(()=>{
     setFormDataCopy(formData)
   },[])
+
+  useEffect(()=>{
+    //if this route is triggered from edit button
+    if(editTrade){
+      setEdit(true)
+      setFormData(editTrade)
+    }
+
+    console.log(editTrade);
+  },[editTrade])
   
   return(
     <div className="new-trade-container">

@@ -80,7 +80,7 @@ function Setups () {
     }
   }, [])
   return(
-    <div className="setup-container w-full p-12 ">
+    <div className=" w-full p-12 ">
       <div className="text-3xl text-black font-bold pb-8 ">
         <span>Setups</span>
       </div>
@@ -109,14 +109,12 @@ function Setups () {
         </div>
         <div className="h-6">
         {
-          userMaxSetups ?
+          userMaxSetups &&
           <div className="flex items-center" ref={userMaxSetupsRef} >
             <span className="text-red-500 text-xs">Maximum setups reached, please delete some before
             adding more, no good trader made serious money trading 20 strategies like a cunt.</span>   
           </div>
           
-          :
-          null 
         }
 
         {

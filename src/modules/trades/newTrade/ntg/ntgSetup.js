@@ -20,11 +20,13 @@ function NtgSetup (props) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    console.log(value);
   };
 
   useEffect(()=>{
    
     getSetups()
+    console.log(formData.setup);
   },[])
   
   

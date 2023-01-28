@@ -20,7 +20,7 @@ import Variables from './modules/variables';
 function App() {
   return (
     <BrowserRouter>
-      <div className='app bg-white'>
+      <div className='app grid grid-cols-200px-1fr bg-white m-0'>
         <div className='cols-start-1 col-span-2 cols-end-3 rows-start-1 rows-end-2'>
           <Header/>
         </div>

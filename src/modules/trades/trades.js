@@ -10,6 +10,7 @@ import TradesList from "./tradesList/tradesList";
 
 function Trades () {
   const [userInfo, setUserInfo] = useState(null)
+  /*
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => {
@@ -23,6 +24,7 @@ function Trades () {
   useEffect(()=>{
     modalIsOpen ? document.body.classList.add('overflowHidden') : document.body.classList.remove('overflowHidden')
   },[modalIsOpen])
+  */
  
 
   useEffect(()=>{
@@ -42,7 +44,7 @@ function Trades () {
         }
       })
       .catch(error => console.error(error))
-      }
+    }
   }, [])
 
   useEffect(()=>{
@@ -50,14 +52,14 @@ function Trades () {
   },[userInfo])
   return(
     <Dialog.Root>
-      <div className="relative  h-screen w-full  pt-8 p-12 " >
+      <div className="relative  w-full p-12 grid justify-center" >
         <div className="text-3xl relative z-10 text-black font-bold pb-8 " >
           <span>Journal</span>
         </div>
         <div className="text-sm h-12 relative z-10">
           <Dialog.Trigger asChild>
            <button className="slant-left-right h-12 w-36 border bg-black top-left-round
-           bottom-right-round text-white" onClick={()=> setModalIsOpen(true)}>New Trade</button>
+           bottom-right-round text-white" >New Trade</button>
           </Dialog.Trigger>
         </div>
         <Dialog.Portal>
@@ -70,7 +72,12 @@ function Trades () {
           </Dialog.Content>
           <Dialog.Overlay/>
         </Dialog.Portal>
-        <TradesList userInfo={userInfo}/>
+        <div className="">
+          <TradesList userInfo={userInfo}/>
+        </div>
+        
+        
+        
       </div>
 
     </Dialog.Root>

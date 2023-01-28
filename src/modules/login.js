@@ -55,7 +55,7 @@ function Login () {
   }, [infoIncorrect])
 
   return(
-    <div className="h-screen w-full flex justify-center items-center">
+    <div className=" w-full flex justify-center items-center">
       {
       logInSuccess ? 
 

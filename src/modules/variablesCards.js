@@ -171,8 +171,8 @@ function VariablesCards (props){
       <div className="flex items-center justify-between border-b h-6">
         <div className="top-left-round bg-red-700 w-full h-full text-white text-xs font-thin  pl-1 pr-1
         flex items-center">
-          <input className="top-left-round bg-red-700 focus2 border-steel-blue focus:bg-white focus:text-black 
-          w-full" type='text' name="title" value={formData.title} ref={titleRef}
+          <input className="top-left-round w-full outline-none bg-red-700 focus:bg-white focus:text-black 
+          " type='text' name="title" value={formData.title} ref={titleRef}
           onChange={(e)=>handleInputChange(e)} onKeyDown={handleKeyDownSubmit} 
           onBlur={handleInputBlurSubmit} placeholder='Custom Variable Title...' />
         </div>

@@ -16,13 +16,13 @@ function NtgPosition(props){
     setFormData({ ...formData, [name]: value });
 
     console.log(e.target);
-    if(e.target.value === 'long'){
+    if(e.target.value === 'LONG'){
       setIsLong(true)
       setIsShort(false)
       
       
     }
-    if(e.target.value === 'short'){
+    if(e.target.value === 'SHORT'){
       setIsLong(false)
       setIsShort(true)
     }
@@ -33,11 +33,11 @@ function NtgPosition(props){
       setIsLong(false)
       setIsShort(false)
     } 
-    if(formData.position === 'long'){
+    if(formData.position === 'LONG'){
       setIsLong(true)
       setIsShort(false)
     }
-    if(formData.position === 'short'){
+    if(formData.position === 'SHORT'){
       setIsLong(false)
       setIsShort(true)
     }
@@ -54,7 +54,7 @@ function NtgPosition(props){
       <div className="position-long flex items-center gap-x-2 h-6 border-t ">
         <label >Long</label>
         <input className="checkboxLong w-fit border border-gray-300 transition-all" type='checkbox'
-        name="position" value={'long'} checked={isLong} onChange={handleInputChange}
+        name="position" value={'LONG'} checked={isLong} onChange={handleInputChange}
         ref={longCheckboxRef} />
         {
           
@@ -63,7 +63,7 @@ function NtgPosition(props){
       <div className="position-short flex items-center gap-x-2 h-6 border-t ">
         <label >Short</label>
         <input className="checkboxShort w-fit border border-gray-300 transition-all" type='checkbox'
-        name="position" value='short' checked={isShort}  onChange={handleInputChange}
+        name="position" value='SHORT' checked={isShort}  onChange={handleInputChange}
         ref={shortCheckboxRef} />
       </div>
       

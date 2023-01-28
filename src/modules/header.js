@@ -13,11 +13,11 @@ function Header () {
   }, [])
 
   return(
-    <div className="header relative z-10 max-h-12 h-12 w-full pl-8 pr-8 flex items-center justify-between
-    text-black border-b border-red-700" > 
+    <div className="header relative z-10 max-h-12 h-12  pl-8 pr-8 flex items-center justify-between
+    text-black border-b border-red-700 w-screen" > 
     
 
-      <div className="header-logo text-4xl font-bold">T J</div>
+      <div className="header-logo text-4xl font-bold ">T J</div>
 
       {
         !userLoggedIn ? 

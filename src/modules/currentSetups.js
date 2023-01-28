@@ -15,6 +15,7 @@ function CurrentSetups (props) {
       .then(response => response.json())
       .then((data) => {
         setSetups(data.setups)
+        console.log(data);
       })
     }
   }
@@ -74,7 +75,7 @@ function CurrentSetups (props) {
   },[props])
   
   return(
-    <div className="current-setup-con w-full  overflow-y-auto ">
+    <div className="w-full overflow-y-auto ">
 
     
       <table className=" w-full ">

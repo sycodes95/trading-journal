@@ -72,7 +72,7 @@ function Variables (){
   },[variablesList])
 
   return(
-    <div className="variables-container w-full p-12 grid ">
+    <div className="variables-container w-full p-12 grid justify-center">
       <div className="text-3xl text-black font-bold pb-8 ">
         <span>Custom Variables</span>
       </div>

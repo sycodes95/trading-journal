@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
+import moment from "moment";
 //PARENT -> newTradeGeneral
 
 function NtgEntryDate(props){
@@ -21,7 +21,8 @@ function NtgEntryDate(props){
       </div>
       
       <input className=" border border-r-0 border-l-0 border-gray-300 top-left-round h-6" 
-      type='datetime-local' name="entrydate" value={formData.entrydate} onChange={handleInputChange}/>
+      type='datetime-local' name="entrydate" value={moment(formData.entrydate).format("YYYY-MM-DD hh:mm")} 
+      onChange={handleInputChange}/>
       
     </div>
   )

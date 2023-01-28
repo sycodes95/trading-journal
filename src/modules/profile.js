@@ -21,7 +21,7 @@ function Profile () {
       }
   }, [])
   return(
-    <div className="h-screen w-full flex justify-center items-center">
+    <div className="w-full flex justify-center items-center">
       
       <table className="m-4 h-96 w-full border border-black overflow-y-auto">
         <tr className="border-b border-black">

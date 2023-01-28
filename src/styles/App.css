@@ -1,6 +1,4 @@
-
 :root{
-  
   --macaroni: hsl(24, 95%, 74%);
   --macaroni-shadow: hsl(24, 100%, 84%);
   --steel-blue: hsl(205, 55%, 46%);
@@ -8,7 +6,19 @@
   --winter-green : hsl(153, 14%, 45%);
   --orange-web : hsl(37, 98%, 53%);
   --aquamarine : hsl(154, 69%, 55%);
+}
 
+.scrollbar-color::-webkit-scrollbar{
+  width: 10px;
+  height: 10px;
+}
+
+.scrollbar-color::-webkit-scrollbar-track{
+  background-color: rgb(187, 187, 187);
+}
+
+.scrollbar-color::-webkit-scrollbar-thumb{
+  background-color: black;
 }
 
 input:focus, select:focus{
@@ -16,15 +26,6 @@ input:focus, select:focus{
   border-left: solid 2px rgb(255, 0, 0);
 }
 
-.focus2:focus{
-  outline: none;
-  border-left: solid 2px var(--steel-blue);
-}
-
-input, select{
-  
-  
-}
 
 .no-highlight{
   -webkit-user-select: none;
@@ -33,49 +34,69 @@ input, select{
   user-select: none;
 }
 
-th, td{
-  min-width: 64px;
+.font-black-outline{
+  /*
+  text-shadow: -0.5px 1px 0 #000,  0.5px 1px 0 #000,0.5px -1px 0 #000, -0.5px -1px 0 #000;
+  */
+  text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, rgb(0, 0, 0) 1px 0 10px,
+  rgb(0, 0, 0) 1px 0 4px ; 
+                     
+                         
+                        
+}
+
+.max-w-1390px{
+  max-width: 1390px;
   
+}
+.min-h-600px{
+  min-height: 600px;
+  
+}
+
+.triangle-load{
+  position: relative;
+  top:12rem;
+  transform: translateY(50%);
+}
+
+
+
+@media (min-width: 1920px) {
+  .w-1390px{
+    max-width: 100%;
+  }
+  
+}
+
+
+th, td{
+  min-width: 48px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.trades-tr th,.trades-tr td{
+  max-width: 20ch;
   
 }
 
 table tr:nth-of-type(even){
-  /*
-  background-color: #cdcdcd;
-  */
-  
   background: linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.8)), url(../images/grey-mesh.jpg);
   
-  
 }
-
-table tr:nth-of-type(even) > span{
-  /*
-  background-color: #cdcdcd;
-  */
-  
-  opacity: 1;
-}
-table tr:nth-of-type(even)::after{
-  /*
-  background-color: #cdcdcd;
-  */
-  
-  
+table .trades-tr:nth-of-type(odd){
   
 }
 
 
 
 .th-wrapper{
-  
   filter: drop-shadow(0px 1px 0px rgb(24, 24, 24)) drop-shadow(1px 0px 0px rgb(24, 24, 24))
   drop-shadow(0px 0px 0px rgb(24, 24, 24)) drop-shadow(0px -1px 0px rgb(24, 24, 24));
-  
 }
 
 .th-wrapper-start{
-  
   filter: drop-shadow(0px 1px 0px rgb(67, 67, 67)) drop-shadow(1px 0px 0px rgb(67, 67, 67)) 
   drop-shadow(-1px 0px 0px rgb(67, 67, 67)) drop-shadow(0px -1px 0px rgb(67, 67, 67));
 }
@@ -91,29 +112,18 @@ table tr:nth-of-type(even)::after{
   border-radius: 2.5px;
 }
 
-.slant-start{
-  /*
-  clip-path: polygon(0% 0%,100% 0,100% 50%,75% 100%,0 100%, 0% 50%);
-  */
-  background: white;
-  
-  
-}
-
 .bg-striped{
   background: url(../images/tarkov-stripes.webp);
   background-position: center;
-  background-size: 115px;
+  background-size: 150px;
+  
+  
+  
 }
 
 
-
-
-
-.app{
-  display: grid;
+.grid-cols-200px-1fr{
   grid-template-columns: 200px 1fr;
-  
 }
 
 .top-left-round{
@@ -131,28 +141,8 @@ table tr:nth-of-type(even)::after{
   border-bottom-right-radius: 6px;
 }
 
-
-.sidebar{
-  position: relative;
-  /*
-  box-shadow: 6px 0 10px -4px rgba(0, 0, 0, 0.3);
-  */
-  border-style: solid;
-  border-width: 1px;
-  border-right-color: rgb(198, 198, 198);
-  z-index: 10;
-}
-
-.setup-container{
-  z-index: 0;
-}
-
-.current-setup-con{
-  height: 546px;
-}
-
 .DialogOverlay {
-  background-color: rgb(255, 211, 211);
+  background-color: rgb(209, 208, 208);
   position: fixed;
   inset: 0;
   

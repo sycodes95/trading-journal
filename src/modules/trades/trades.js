@@ -10,22 +10,6 @@ import TradesList from "./tradesList/tradesList";
 
 function Trades () {
   const [userInfo, setUserInfo] = useState(null)
-  /*
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const openModal = () => {
-    setModalIsOpen(true);
-  }
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-  }
-
-  useEffect(()=>{
-    modalIsOpen ? document.body.classList.add('overflowHidden') : document.body.classList.remove('overflowHidden')
-  },[modalIsOpen])
-  */
- 
 
   useEffect(()=>{
     //Token
@@ -52,14 +36,14 @@ function Trades () {
   },[userInfo])
   return(
     <Dialog.Root>
-      <div className="relative  w-full p-12 grid justify-center" >
+      <div className="relative w-full p-12 grid justify-center" >
         <div className="text-3xl relative z-10 text-black font-bold pb-8 " >
           <span>Journal</span>
         </div>
         <div className="text-sm h-12 relative z-10">
           <Dialog.Trigger asChild>
-           <button className="slant-left-right h-12 w-36 border bg-black top-left-round
-           bottom-right-round text-white" >New Trade</button>
+           <button className=" h-12 w-36 border bg-red-orange
+           rounded text-white" >New Trade</button>
           </Dialog.Trigger>
         </div>
         <Dialog.Portal>

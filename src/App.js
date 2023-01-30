@@ -15,12 +15,13 @@ import Sidebar from './modules/sidebar';
 import Setups from './modules/setups';
 import Instruments from './modules/instruments';
 import Variables from './modules/variables';
+import Logout from './modules/logout';
 
 
 function App() {
   return (
     <BrowserRouter>
-      <div className='app grid grid-cols-200px-1fr bg-white m-0'>
+      <div className='app grid  bg-white m-0'>
         <div className='cols-start-1 col-span-2 cols-end-3 rows-start-1 rows-end-2'>
           <Header/>
         </div>
@@ -31,6 +32,7 @@ function App() {
           <Routes>
             <Route path="/" exact element={<Home/>}/>
             <Route path="/login" element={<Login/>}/>
+            <Route path="/logout" element={<Logout/>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/trades" element={<Trades/>}/>
             <Route path="/profile" element={<Profile/>}/>

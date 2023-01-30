@@ -16,6 +16,8 @@ function TradesList(props){
 
   const tableRef = useRef(null);
 
+  const tradeTrRef = useRef(null)
+
   const tableHeaders = [
     'ENTRY DATE', 'STATUS', 'INSTRUMENT',
     'SETUP', 'POSITION', 'P ENTRY', 
@@ -56,12 +58,16 @@ function TradesList(props){
       behavior: 'smooth'
     });
   }
+
+  const handleTradeColor = (e) =>{
+    console.log(e);
+  }
    
   useEffect(()=>{
     fetchTrades()
   },[userInfo])
   return(
-    <div className="scrollbar-color max-w-1390px min-h-600px max-h-screen overflow-auto relative z-10" ref={tableRef} onWheel={handleWheelScroll}>
+    <div className="trade-table-con scrollbar-color max-w-1420px min-h-600px max-h-screen overflow-auto relative z-10" ref={tableRef} onWheel={handleWheelScroll}>
         
       <table className="">
         <thead>
@@ -94,16 +100,16 @@ function TradesList(props){
         <tbody>
           {
             isLoading ?
-              <th colSpan='18' className="triangle-load max-w-1390px h-full flex items-center ">
-                <Triangle  height="80" width="1390" color="#000000" ariaLabel="triangle-loading" wrapperStyle={{}}
+              <th colSpan='18' className="triangle-load max-w-1420px h-full flex items-center ">
+                <Triangle  height="80" width="1420" color="#000000" ariaLabel="triangle-loading" wrapperStyle={{}}
                 visible={true} /> 
               </th>
           
             :
             trades && 
             trades.map((t, i) =>( 
-            <tr className="trades-tr border-gray-300  h-4 text-white font-black-outline
-            outline-1 outline- outline-red-700 ">
+            <tr className={`trades-tr border-gray-300  h-4 text-white ${!t.fgl && 'font-black-outline'} 
+            ${t.fgl && t.fgl > 0 && 'font-blue-outline'} ${t.fgl && t.fgl < 0 && 'font-red-outline'} outline-1 outline`}>
               <td colSpan="1" className=" text-center text-xs text-black flex items-center justify-center fill-current
               hover:cursor-pointer transition-all">
                 <Dialog.Root>
@@ -154,7 +160,7 @@ function TradesList(props){
               {t.mfe}</td>
               <td colSpan="1" className=" text-center text-xs" >
               {t.mae}</td>
-              <td colSpan="1" className=" text-center text-xs" >
+              <td colSpan="1" className=" text-center text-xs">
               {t.fgl}</td>
               <td colSpan="1" className=" text-center text-xs" >
               {t.fees}</td>

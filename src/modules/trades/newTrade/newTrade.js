@@ -128,18 +128,18 @@ function NewTrade (props) {
 
   useEffect(()=>{
     if(generalTab){
-      generalTabRef.current.classList.add('bg-red-700')
+      generalTabRef.current.classList.add('bg-red-orange')
       //generalTabRef.current.classList.add('shadow-red-300')
       generalTabRef.current.classList.add('text-white')
-      variablesTabRef.current.classList.remove('bg-red-700')
+      variablesTabRef.current.classList.remove('bg-red-orange')
       //variablesTabRef.current.classList.remove('shadow-red-300')
       variablesTabRef.current.classList.remove('text-white')
     }
     if(variablesTab){
-      variablesTabRef.current.classList.add('bg-red-700')
+      variablesTabRef.current.classList.add('bg-red-orange')
       //variablesTabRef.current.classList.add('shadow-red-300')
       variablesTabRef.current.classList.add('text-white')
-      generalTabRef.current.classList.remove('bg-red-700')
+      generalTabRef.current.classList.remove('bg-red-orange')
       //generalTabRef.current.classList.remove('shadow-red-300')
       generalTabRef.current.classList.remove('text-white')
     }
@@ -160,7 +160,7 @@ function NewTrade (props) {
   },[editTrade])
   
   return(
-    <div className="new-trade-container">
+    <div className="new-trade-container  ">
       <div className="flex justify-between ">
         <div className="grid grid-cols-3 h-6 ">
           <button className="cols-span-1  h-6 pl-4 pr-4 text-xs 
@@ -173,7 +173,7 @@ function NewTrade (props) {
         </div>
         
         <Dialog.Close asChild>
-          <button className="h-6 text-md pl-4 pr-4 bg-red-700 text-white text-center
+          <button className="h-6 text-md pl-4 pr-4 bg-striped text-white text-center
           font-bold top-right-round">x</button>
         </Dialog.Close>
       </div>

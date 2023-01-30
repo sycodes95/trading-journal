@@ -5,6 +5,25 @@ import { Link } from "react-router-dom";
 function Header () {
   const [userLoggedIn, setUserLoggedIn] = useState(false)
   
+  const handleLogOut = () =>{
+    
+    fetch('http://localhost:5000/logout', {
+      method: 'GET',
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then((data)=>{
+      console.log(data);
+      if(!data.error) {
+        localStorage.removeItem('token')
+        window.location.href='/login'
+      }
+    })
+  
+  }
+  
+ 
+  
   useEffect(()=>{
     const token = JSON.parse(localStorage.getItem('token'))
     if(token){
@@ -14,7 +33,7 @@ function Header () {
 
   return(
     <div className="header relative z-10 max-h-12 h-12  pl-8 pr-8 flex items-center justify-between
-    text-black border-b border-red-700 w-screen" > 
+    text-white border-b border-jet bg-striped-header w-screen" > 
     
 
       <div className="header-logo text-4xl font-bold ">T J</div>
@@ -33,14 +52,14 @@ function Header () {
 
         :
 
-        <div className="header-nav grid grid-cols-2 gap-x-2 font-thin ">
+        <div className="header-nav grid grid-cols-2 gap-x-2 font-thin">
           
           <Link to='/profile' className="">
             <span className="polygon-child hover:cursor-pointer">Profile</span>
           </Link> 
-          <Link to='/logout' className="">
+          <button className="" onClick={handleLogOut}>
             <span className="polygon-child hover:cursor-pointer">Log out</span>
-          </Link> 
+          </button> 
         </div>
         
       }

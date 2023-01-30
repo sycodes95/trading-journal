@@ -16,7 +16,8 @@ module.exports = {
         'orange-web' : '#FCA311',
         'oxford-blue' : '#14213D',
         'aquamarine' : "#3DDC97",
-        'raisin' : '#211A1E'
+        'raisin' : '#211A1E',
+        'red-orange' : '#D84727'
       }
     },
   },

@@ -33,7 +33,7 @@ function NewTradeGeneral (props){
   return(
     <div className="new-trade-general text-xs w-full">
       <div className="new-trade-data ">
-        <div className="bg-red-700 pl-4 pr-4 text-black text-center bottom-right-round
+        <div className="bg-striped text-white pl-4 pr-4  text-center bottom-right-round
         transition-all">
           <span>Trade Data</span>
         </div>

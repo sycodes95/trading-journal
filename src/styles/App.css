@@ -6,6 +6,7 @@
   --winter-green : hsl(153, 14%, 45%);
   --orange-web : hsl(37, 98%, 53%);
   --aquamarine : hsl(154, 69%, 55%);
+  --red-orange: rgb(216, 71, 39);
 }
 
 .scrollbar-color::-webkit-scrollbar{
@@ -34,19 +35,10 @@ input:focus, select:focus{
   user-select: none;
 }
 
-.font-black-outline{
-  /*
-  text-shadow: -0.5px 1px 0 #000,  0.5px 1px 0 #000,0.5px -1px 0 #000, -0.5px -1px 0 #000;
-  */
-  text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, rgb(0, 0, 0) 1px 0 10px,
-  rgb(0, 0, 0) 1px 0 4px ; 
-                     
-                         
-                        
-}
 
-.max-w-1390px{
-  max-width: 1390px;
+
+.max-w-1420px{
+  max-width: 1420px;
   
 }
 .min-h-600px{
@@ -89,6 +81,42 @@ table .trades-tr:nth-of-type(odd){
   
 }
 
+.font-black-outline{
+  /*
+  text-shadow: -0.5px 1px 0 #000,  0.5px 1px 0 #000,0.5px -1px 0 #000, -0.5px -1px 0 #000;
+  */
+  text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, rgb(0, 0, 0) 1px 0 10px,
+  rgb(0, 0, 0) 1px 0 4px ; 
+                        
+}
+
+.font-black-outline-nosh{
+  /*
+  text-shadow: -0.5px 1px 0 #000,  0.5px 1px 0 #000,0.5px -1px 0 #000, -0.5px -1px 0 #000;
+  */
+  text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+                        
+}
+
+.font-blue-outline{
+  /*
+  text-shadow: -0.5px 1px 0 #000,  0.5px 1px 0 #000,0.5px -1px 0 #000, -0.5px -1px 0 #000;
+  */
+  text-shadow: -1px 1px 0 var(--steel-blue), 1px 1px 0 var(--steel-blue), 1px -1px 0 var(--steel-blue)
+  , -1px -1px 0 var(--steel-blue), #000 1px 0 5px, #000 1px 0 5px ; 
+  
+                        
+}
+
+.font-red-outline{
+  /*
+  text-shadow: -0.5px 1px 0 #000,  0.5px 1px 0 #000,0.5px -1px 0 #000, -0.5px -1px 0 #000;
+  */
+  text-shadow: -1px 1px 0 var(--red-orange), 1px 1px 0 var(--red-orange), 1px -1px 0 var(--red-orange)
+  , -1px -1px 0 var(--red-orange), #000 1px 0 5px, #000 1px 0 5px ; 
+                        
+}
+
 
 
 .th-wrapper{
@@ -121,9 +149,20 @@ table .trades-tr:nth-of-type(odd){
   
 }
 
+.bg-striped-header{
+  background:linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(../images/grey-mesh.jpg);
+  background-position: center;
+  background-size: 500px;
+
+  
+  
+  
+  
+}
+
 
 .grid-cols-200px-1fr{
-  grid-template-columns: 200px 1fr;
+  
 }
 
 .top-left-round{
@@ -184,13 +223,18 @@ table .trades-tr:nth-of-type(odd){
   }
 }
 */
-
+.app{
+  grid-template-columns: 200px 1fr;
+}
 @media screen and (max-width: 640px) {
   .DialogContent{
-    width: 95%;
+    width: 85%;
   }
   .variables-cards-container{
     grid-template-columns: 1fr;
+  }
+  .trade-table-con{
+    width: 75vw;
   }
   
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import dragIcon from "../icons/drag.svg"
 import { DragDropContext, Droppable, Draggable} from "@hello-pangea/dnd";
-
+import plusSVG from "../icons/plus.svg"
 
 import { ReactSVG } from "react-svg";
 
@@ -169,16 +169,18 @@ function VariablesCards (props){
       </div>
       
       <div className="flex items-center justify-between border-b h-6">
-        <div className="top-left-round bg-red-700 w-full h-full text-white text-xs font-thin  pl-1 pr-1
+        <div className="top-left-round bg-jet w-full h-full text-white text-xs font-thin  pl-1 pr-1
         flex items-center">
-          <input className="top-left-round w-full outline-none bg-red-700 focus:bg-white focus:text-black 
+          <input className="top-left-round w-full outline-none bg-jet focus:bg-white focus:text-black 
           " type='text' name="title" value={formData.title} ref={titleRef}
           onChange={(e)=>handleInputChange(e)} onKeyDown={handleKeyDownSubmit} 
           onBlur={handleInputBlurSubmit} placeholder='Custom Variable Title...' />
         </div>
 
-        <button className="bottom-right-round bg-gray-400 h-full text-white text-xs  w-24" 
-        onClick={handleAddVariable}>Add Variable</button>
+        <button className="bottom-right-round border border-black h-full text-black text-xs w-12 
+        flex justify-center items-center hover:text-steel-blue" onClick={handleAddVariable}>
+          <ReactSVG className="h-4 w-4  transition-colors fill-current" src={plusSVG}/>
+        </button>
       </div>
       {
         formData && 
@@ -192,7 +194,7 @@ function VariablesCards (props){
                       {(provided, snapshot) => (
                         <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
                         className="bottom-right-round variable flex items-center justify-between
-                        border-r-gray-300 border border-b-gray-300 pl-2">
+                        border-r-gray-300 border border-b-gray-300 p-1 bg-white">
                         
                           <div className="svg-container h-6 w-6 flex items-center ">
                             <ReactSVG className="text-gray-500 fill-current h-5 w-5" src={dragIcon}/>
@@ -203,7 +205,7 @@ function VariablesCards (props){
                           onChange={(e)=>handleInputChange(e,index)} onKeyDown={handleKeyDownSubmit}
                           onBlur={handleInputBlurSubmit} placeholder='Variable...' />
                           
-                          <button className=" text-red-700 text-xs p-2 w-8 font-bold 
+                          <button className=" text-red-700 text-xs  w-8 font-bold 
                           hover:text-black" onClick={(e)=>handleVariableDelete(e, index)}>x</button>
                         </div>
                       )}

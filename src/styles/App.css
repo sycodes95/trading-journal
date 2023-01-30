@@ -9,6 +9,8 @@
   --red-orange: rgb(216, 71, 39);
 }
 
+
+
 .scrollbar-color::-webkit-scrollbar{
   width: 10px;
   height: 10px;
@@ -25,7 +27,11 @@
 input:focus, select:focus{
   outline: none;
   border-left: solid 2px rgb(255, 0, 0);
+  
+  caret-color: black;
 }
+
+
 
 
 .no-highlight{
@@ -82,26 +88,20 @@ table .trades-tr:nth-of-type(odd){
 }
 
 .font-black-outline{
-  /*
-  text-shadow: -0.5px 1px 0 #000,  0.5px 1px 0 #000,0.5px -1px 0 #000, -0.5px -1px 0 #000;
-  */
+  
   text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, rgb(0, 0, 0) 1px 0 10px,
   rgb(0, 0, 0) 1px 0 4px ; 
                         
 }
 
 .font-black-outline-nosh{
-  /*
-  text-shadow: -0.5px 1px 0 #000,  0.5px 1px 0 #000,0.5px -1px 0 #000, -0.5px -1px 0 #000;
-  */
+  
   text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
                         
 }
 
 .font-blue-outline{
-  /*
-  text-shadow: -0.5px 1px 0 #000,  0.5px 1px 0 #000,0.5px -1px 0 #000, -0.5px -1px 0 #000;
-  */
+  
   text-shadow: -1px 1px 0 var(--steel-blue), 1px 1px 0 var(--steel-blue), 1px -1px 0 var(--steel-blue)
   , -1px -1px 0 var(--steel-blue), #000 1px 0 5px, #000 1px 0 5px ; 
   
@@ -109,9 +109,7 @@ table .trades-tr:nth-of-type(odd){
 }
 
 .font-red-outline{
-  /*
-  text-shadow: -0.5px 1px 0 #000,  0.5px 1px 0 #000,0.5px -1px 0 #000, -0.5px -1px 0 #000;
-  */
+  
   text-shadow: -1px 1px 0 var(--red-orange), 1px 1px 0 var(--red-orange), 1px -1px 0 var(--red-orange)
   , -1px -1px 0 var(--red-orange), #000 1px 0 5px, #000 1px 0 5px ; 
                         
@@ -144,20 +142,31 @@ table .trades-tr:nth-of-type(odd){
   background: url(../images/tarkov-stripes.webp);
   background-position: center;
   background-size: 150px;
-  
-  
-  
+}
+
+.bg-striped-150px{
+  background: url(../images/tarkov-stripes.webp);
+  background-position: center;
+  background-size: 150px;
 }
 
 .bg-striped-header{
   background:linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(../images/grey-mesh.jpg);
   background-position: center;
   background-size: 500px;
+}
 
-  
-  
-  
-  
+.bg-striped-content{
+  background:linear-gradient(rgba(255, 255, 255, 0.83), rgba(255, 255, 255, 0.83)), url(../images/grey-mesh.jpg);
+  background-position: center;
+  background-size: 500px;
+}
+
+.bg-modern{
+  background:linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url(../images/modern-texture.webp);
+  background-position: center;
+  background-size: 5px;
+
 }
 
 
@@ -181,16 +190,17 @@ table .trades-tr:nth-of-type(odd){
 }
 
 .DialogOverlay {
-  background-color: rgb(209, 208, 208);
+  background-color: rgba(0, 0, 0, 0.3);
   position: fixed;
   inset: 0;
-  
+  z-index: 0;
   animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
   
 }
 
 .DialogContent {
-  background-color: white;
+  
+  
   border-radius: 6px;
   box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
   
@@ -210,6 +220,8 @@ table .trades-tr:nth-of-type(odd){
   height: 600px;
   margin: 0 auto;
 }
+
+
 /*
 @media screen and (max-width: 600px) {
   .DialogContent{
@@ -225,7 +237,14 @@ table .trades-tr:nth-of-type(odd){
 */
 .app{
   grid-template-columns: 200px 1fr;
+  grid-template-rows: 3rem 1fr;
 }
+
+.section-info{
+  grid-template-columns: 48px 1fr;
+  grid-template-rows: 1fr;
+}
+
 @media screen and (max-width: 640px) {
   .DialogContent{
     width: 85%;
@@ -240,20 +259,19 @@ table .trades-tr:nth-of-type(odd){
 }
 
 @media (max-width: 950px) {
-  
   .app{
     display: grid;
     grid-template-columns: 1fr;
   }
-
   .side{
     display: none;
   }
-  
   .content{
     grid-column: 0 / 1;
   }
 }
+
+
 
 
 

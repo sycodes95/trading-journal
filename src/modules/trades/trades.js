@@ -40,16 +40,16 @@ function Trades () {
         <div className="text-3xl relative z-10 text-black font-bold pb-8 " >
           <span>Journal</span>
         </div>
-        <div className="text-sm h-12 relative z-10">
+        <div className="text-sm h-12 mb-4">
           <Dialog.Trigger asChild>
-           <button className=" h-12 w-36 border bg-red-orange
-           rounded text-white" >New Trade</button>
+           <button className=" h-12 w-36 border bg-steel-blue bg-opacity-70
+           rounded text-white ">New Trade</button>
           </Dialog.Trigger>
         </div>
         <Dialog.Portal>
           
           <Dialog.Overlay className="DialogOverlay"/>
-          <Dialog.Content className="DialogContent ">
+          <Dialog.Content className="DialogContent bg-white bg-opacity-80">
             {
             userInfo && <NewTrade username={userInfo.username}/>
             }

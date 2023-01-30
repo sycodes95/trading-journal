@@ -67,29 +67,30 @@ function TradesList(props){
     fetchTrades()
   },[userInfo])
   return(
-    <div className="trade-table-con scrollbar-color max-w-1420px min-h-600px max-h-screen overflow-auto relative z-10" ref={tableRef} onWheel={handleWheelScroll}>
+    <div className="trade-table-con scrollbar-color max-w-1420px min-h-600px max-h-screen
+     overflow-auto z-10 bg-white" ref={tableRef} onWheel={handleWheelScroll}>
         
-      <table className="">
-        <thead>
+      <table>
+        <thead className="bg-striped-content">
             {
               isLoading ?
               <tr className=" text-white text-xs font-bold ">
-                <th colSpan="1" className=" th-wrapper-start hover:text-desert hover:cursor-pointer transition-all">
+                <th colSpan="1" className=" th-wrapper hover:text-desert hover:cursor-pointer transition-all">
                   <div className="h-4 slant-start pl-4 pr-4 bg-striped"></div>
                 </th>
               </tr>
               :
               <tr className=" text-white text-xs font-bold ">
-                <th colSpan="1" className=" th-wrapper-start hover:text-desert hover:cursor-pointer transition-all">
+                <th colSpan="1" className=" th-wrapper hover:text-desert hover:cursor-pointer transition-all">
                   <div className="h-4 slant-start pl-4 pr-4 bg-striped"></div>
                 </th>
-                <th colSpan="1" className=" th-wrapper-start hover:text-desert hover:cursor-pointer transition-all">
+                <th colSpan="1" className=" th-wrapper hover:text-desert hover:cursor-pointer transition-all">
                   <div className="h-4 slant-right pl-4 pr-4 bg-striped">#</div>
                 </th>
                 {
                   tableHeaders.map((h, i) =>(
                     <th colSpan="1" className="th-wrapper hover:text-desert hover:cursor-pointer transition-all">
-                      <div className="h-4 slant-right pl-4 pr-4 bg-striped min-w-max ">{h}</div> 
+                      <div className="h-4 slant-right pl-4 pr-4 bg-striped min-w-max min-h-max ">{h}</div> 
                     </th>
 
                   ))
@@ -97,7 +98,7 @@ function TradesList(props){
               </tr>
             }
         </thead>
-        <tbody>
+        <tbody className="">
           {
             isLoading ?
               <th colSpan='18' className="triangle-load max-w-1420px h-full flex items-center ">

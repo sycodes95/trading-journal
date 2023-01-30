@@ -128,20 +128,16 @@ function NewTrade (props) {
 
   useEffect(()=>{
     if(generalTab){
-      generalTabRef.current.classList.add('bg-red-orange')
-      //generalTabRef.current.classList.add('shadow-red-300')
-      generalTabRef.current.classList.add('text-white')
-      variablesTabRef.current.classList.remove('bg-red-orange')
-      //variablesTabRef.current.classList.remove('shadow-red-300')
-      variablesTabRef.current.classList.remove('text-white')
+      generalTabRef.current.classList.add('bg-yellow-400')
+      //generalTabRef.current.classList.add('text-white')
+      variablesTabRef.current.classList.remove('bg-yellow-400')
+      //variablesTabRef.current.classList.remove('text-white')
     }
     if(variablesTab){
-      variablesTabRef.current.classList.add('bg-red-orange')
-      //variablesTabRef.current.classList.add('shadow-red-300')
-      variablesTabRef.current.classList.add('text-white')
-      generalTabRef.current.classList.remove('bg-red-orange')
-      //generalTabRef.current.classList.remove('shadow-red-300')
-      generalTabRef.current.classList.remove('text-white')
+      variablesTabRef.current.classList.add('bg-yellow-400')
+      //variablesTabRef.current.classList.add('text-white')
+      generalTabRef.current.classList.remove('bg-yellow-400')
+      //generalTabRef.current.classList.remove('text-white')
     }
   },[generalTab, variablesTab])
   

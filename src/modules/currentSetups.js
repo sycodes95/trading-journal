@@ -80,7 +80,7 @@ function CurrentSetups (props) {
     
       <table className=" w-full ">
         <thead>
-            <tr className="bg-red-700 text-black text-sm font-bold">
+            <tr className="bg-jet text-white text-sm font-bold">
                 <th colSpan="1" className="border-r border-black  w-16 font-thin">#</th>
                 <th colSpan="1" className="border-r border-black  w-16 font-thin">Active</th>
                 <th className="font-thin">Name</th>

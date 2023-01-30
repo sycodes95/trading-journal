@@ -33,7 +33,7 @@ function Header () {
 
   return(
     <div className="header relative z-10 max-h-12 h-12  pl-8 pr-8 flex items-center justify-between
-    text-white border-b border-jet bg-striped-header w-screen" > 
+    text-white border-b border-jet bg-striped-header w-full" > 
     
 
       <div className="header-logo text-4xl font-bold ">T J</div>

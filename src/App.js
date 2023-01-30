@@ -21,14 +21,14 @@ import Logout from './modules/logout';
 function App() {
   return (
     <BrowserRouter>
-      <div className='app grid  bg-white m-0'>
-        <div className='cols-start-1 col-span-2 cols-end-3 rows-start-1 rows-end-2'>
+      <div className='app grid   bg-white m-0 h-screen'>
+        <div className='cols-start-1 col-span-2 cols-end-3 rows-start-1 rows-end-2 row-span-1'>
           <Header/>
         </div>
         <div className='side cols-start-1 col-span-1 cols-end-2 rows-start-2 rows-end-3'>
           <Sidebar/>
         </div>
-        <div className='content cols-start-2 col-span-1 cols-end-3 rows-start-2 rows-end-3 '>
+        <div className='content cols-start-2 col-span-1 cols-end-3 rows-start-2 rows-end-3 bg-striped-content'>
           <Routes>
             <Route path="/" exact element={<Home/>}/>
             <Route path="/login" element={<Login/>}/>

@@ -112,8 +112,7 @@ function VariablesCards (props){
       setOnlyTitleEmpty(false)
 
       if(titleRef.current) titleRef.current.blur()
-
-      if(variableRef.current) variableRef.current.blur()  
+      e.target.blur()
       
     }
   }
@@ -169,10 +168,10 @@ function VariablesCards (props){
       </div>
       
       <div className="flex items-center justify-between border-b h-6">
-        <div className="top-left-round bg-jet w-full h-full text-white text-xs font-thin  pl-1 pr-1
+        <div className="top-left-round bg-jet w-full h-full text-white text-xs  pl-1 pr-1
         flex items-center">
           <input className="top-left-round w-full outline-none bg-jet focus:bg-white focus:text-black 
-          " type='text' name="title" value={formData.title} ref={titleRef}
+          font-bold" type='text' name="title" value={formData.title} ref={titleRef}
           onChange={(e)=>handleInputChange(e)} onKeyDown={handleKeyDownSubmit} 
           onBlur={handleInputBlurSubmit} placeholder='Custom Variable Title...' />
         </div>
@@ -194,16 +193,18 @@ function VariablesCards (props){
                       {(provided, snapshot) => (
                         <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
                         className="bottom-right-round variable flex items-center justify-between
-                        border-r-gray-300 border border-b-gray-300 p-1 bg-white">
+                        border-r-gray-300 border border-b-gray-300 p-1 bg-white
+                        ">
                         
                           <div className="svg-container h-6 w-6 flex items-center ">
                             <ReactSVG className="text-gray-500 fill-current h-5 w-5" src={dragIcon}/>
                           </div>
                         
-                          <input className=" w-full h-full  text-sm font-thin rounded-none pl-2 "
+                          <input className=" w-full h-full  text-sm font-thin rounded-none pl-2
+                           text-white font-black-outline "
                           type='text' name="variables" value={formData.variables[index]} ref={variableRef} 
                           onChange={(e)=>handleInputChange(e,index)} onKeyDown={handleKeyDownSubmit}
-                          onBlur={handleInputBlurSubmit} placeholder='Variable...' />
+                          onBlur={handleInputBlurSubmit} placeholder='. . .' />
                           
                           <button className=" text-red-700 text-xs  w-8 font-bold 
                           hover:text-black" onClick={(e)=>handleVariableDelete(e, index)}>x</button>

@@ -99,7 +99,7 @@ function Instruments () {
       </div>
       <div className="">
         <div className="create-new-Instrument flex justify-center items-center
-         bg-black h-16 w-96 ">
+         bg-striped-150px h-16 w-96 ">
           <div className="text-white text-sm font-thin">
             <span>Add an Instrument : </span>
           </div>

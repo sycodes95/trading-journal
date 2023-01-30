@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import CurrentSetups from "./currentSetups";
 import { ReactSVG } from "react-svg";
 import plusButton from "../icons/plus-circle-outline.svg"
+import setupsSVG from "../icons/setups.svg"
 
 function Setups () {
   
@@ -41,6 +42,7 @@ function Setups () {
       } else {
         setUserMaxSetups(false)
         setDuplicateSetupError(false)
+        setFormData({...formData, setup:''})
       }
       setNewSetupSubmitted(newSetupSubmitted + 1)
       //just updating by 1 so that currentSetup child component gets new props and re renders
@@ -81,22 +83,29 @@ function Setups () {
   }, [])
   return(
     <div className=" w-full p-12 ">
-      <div className="text-3xl text-black font-bold pb-8 ">
-        <span>Setups</span>
+      <div className="section-info text-black p-4 bg-orange-600 bg-opacity-70 rounded-sm
+      grid">
+        <div className="">
+          <ReactSVG className="h-14 w-14 " src={setupsSVG}/>
+        </div>
+
+        <div className="pl-8">
+          <div className="text-3xl">
+            <span>Setups</span>
+          </div>
+          <div className="text-sm">
+            <span>
+              Add and manage trading strategy types. 
+              Active strategies are available as a parameter for new trade entries.
+            </span>
+          </div>
+        </div>
       </div>
-      <div className="text-sm h-12">
-        <span>
-          Add and manage trading strategy types. 
-          Active strategies are available as a parameter for new trade entries.
-        </span>
-      </div>
-      <div>
-        
-      </div>
-      <div className="">
+      
+      <div className="mt-12">
         <div className="create-new-setup flex justify-center items-center
-         bg-black h-16 w-96 ">
-          <div className="text-white text-sm font-thin">
+         v h-16 w-96 rounded-sm bg-striped-150px">
+          <div className="text-white text-sm font-bold">
             <span>Create a new setup : </span>
           </div>
           

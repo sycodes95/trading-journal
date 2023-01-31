@@ -15,12 +15,9 @@ function NtgPosition(props){
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
-    console.log(e.target);
     if(e.target.value === 'LONG'){
       setIsLong(true)
       setIsShort(false)
-      
-      
     }
     if(e.target.value === 'SHORT'){
       setIsLong(false)

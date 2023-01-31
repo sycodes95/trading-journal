@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import NewTrade from "./newTrade/newTrade";
 
 import * as Dialog from '@radix-ui/react-dialog';
-
-import Modal from 'react-modal'
 import TradesList from "./tradesList/tradesList";
 
 
@@ -32,7 +30,7 @@ function Trades () {
   }, [])
 
   useEffect(()=>{
-    console.log(userInfo);
+    
   },[userInfo])
   return(
     <Dialog.Root>
@@ -43,7 +41,7 @@ function Trades () {
         <div className="text-sm h-12 mb-4">
           <Dialog.Trigger asChild>
            <button className=" h-12 w-36 border bg-steel-blue bg-opacity-70
-           rounded text-white ">New Trade</button>
+           hover:bg-opacity-50 transition-all rounded text-white ">New Trade</button>
           </Dialog.Trigger>
         </div>
         <Dialog.Portal>

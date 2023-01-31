@@ -27,7 +27,7 @@ function NtvVariables (props){
   };
 
   useEffect(()=>{
-    console.log(formData.variables);
+    
   },[formData.variables])
 
   return(

@@ -7,7 +7,7 @@ function Home () {
 
   useEffect(()=>{
     const token = JSON.parse(localStorage.getItem('token'))
-    console.log(token);
+    
     if(token) {
       fetch('http://localhost:5000/verifytoken', {
         method: 'GET',
@@ -15,9 +15,7 @@ function Home () {
       })
       .then(response => response.json())
       .then((data) => {
-          console.log(data);
           if(data.user.user){
-            console.log(data.user.user.firstname);
             setFirstName(data.user.user.firstname)
           }
           

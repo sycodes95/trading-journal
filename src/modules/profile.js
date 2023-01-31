@@ -7,7 +7,7 @@ function Profile () {
 
   useEffect(()=>{
     const token = JSON.parse(localStorage.getItem('token'))
-    console.log(token);
+    
     if(token) {
       fetch('http://localhost:5000/verifytoken', {
         method: 'GET',

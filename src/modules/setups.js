@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import CurrentSetups from "./currentSetups";
+
 import { ReactSVG } from "react-svg";
 import plusButton from "../icons/plus-circle-outline.svg"
 import setupsSVG from "../icons/setups.svg"
@@ -104,12 +105,13 @@ function Setups () {
       
       <div className="mt-12">
         <div className="create-new-setup flex justify-center items-center
-         v h-16 w-96 rounded-sm bg-striped-150px">
-          <div className="text-white text-sm font-bold">
-            <span>Create a new setup : </span>
+         v h-14 w-80 top-right-round bg-striped-150px">
+          <div className="text-white text-sm">
+            <span>Create New Setup : </span>
           </div>
           
-          <input className="text-xs ml-4 h-6" type='text' name='setup' value={formData.setup} placeholder="setup name" onChange={handleInputChange}/>
+          <input className="text-xs ml-4 h-5 w-32 top-right-round"
+           type='text' name='setup' value={formData.setup} placeholder="setup name" onChange={handleInputChange}/>
           <button className='text-xs h-6 pl-2' onClick={handleSubmit}>
             <ReactSVG className='h-6 w-6 text-white fill-current  hover:text-red-700
              transition-colors delay-100' src={plusButton}/>

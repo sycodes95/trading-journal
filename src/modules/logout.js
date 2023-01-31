@@ -9,7 +9,7 @@ function Logout (){
     })
     .then(response => response.json())
     .then((data)=>{
-      console.log(data);
+      
       if(!data.error) {
         localStorage.removeItem('token')
       }

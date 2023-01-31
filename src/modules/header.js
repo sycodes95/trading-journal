@@ -13,7 +13,7 @@ function Header () {
     })
     .then(response => response.json())
     .then((data)=>{
-      console.log(data);
+      
       if(!data.error) {
         localStorage.removeItem('token')
         window.location.href='/login'

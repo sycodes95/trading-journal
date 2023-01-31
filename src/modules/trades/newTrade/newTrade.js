@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import * as Dialog from '@radix-ui/react-dialog';
-
 import NewTradeGeneral from "./newTradeGeneral";
 
 import NewTradeVariables from "./newTradeVariables";
@@ -63,10 +62,11 @@ function NewTrade (props) {
       })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        
         if(!data.error){
           setFormData(formDataCopy)
           setSubmitSuccess(true)
+          window.location.href = '/trades'
         }
         
         if(data.error && data.error.name === 'ValidationError'){
@@ -92,7 +92,7 @@ function NewTrade (props) {
       })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        
         if(!data.error){
           setFormData(formDataCopy)
           setSubmitSuccess(true)
@@ -116,10 +116,8 @@ function NewTrade (props) {
   useEffect(()=>{
     setTimeout(()=>{
       setSubmitSuccess(false)
-      
-
     }, 5000)
-    console.log(formData);
+    
     
   },[formData])
  
@@ -152,7 +150,7 @@ function NewTrade (props) {
       setFormData(editTrade)
     }
 
-    console.log(editTrade);
+    
   },[editTrade])
   
   return(

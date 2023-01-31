@@ -21,7 +21,7 @@ function NtgOpen(props){
       setFormData({ ...formData, open: false })
     }
 
-    console.log(tradeOpen);
+    
   }, [tradeOpen])
 
   useEffect(()=>{

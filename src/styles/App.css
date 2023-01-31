@@ -189,6 +189,11 @@ table .trades-tr:nth-of-type(odd){
   border-bottom-right-radius: 6px;
 }
 
+.bottom-left-round{
+  
+  border-bottom-left-radius: 6px;
+}
+
 .DialogOverlay {
   background-color: rgba(0, 0, 0, 0.3);
   position: fixed;
@@ -218,6 +223,11 @@ table .trades-tr:nth-of-type(odd){
 
 .new-trade-container{
   height: 600px;
+  margin: 0 auto;
+}
+
+.delete-trade-container{
+  height: 400px;
   margin: 0 auto;
 }
 

@@ -35,7 +35,7 @@ function VariablesCards (props){
     })
     .then(response => response.json())
     .then((data) => {
-      console.log(data);
+      
       if(data && data.error && data.error.code){
         if(data.error.code === 11000){
           setTitleDuplicate(true)
@@ -56,7 +56,6 @@ function VariablesCards (props){
     })
     .then(response => response.json())
     .then((data) => {
-      console.log(data);
       
     })
 

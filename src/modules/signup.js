@@ -68,8 +68,7 @@ function Signup () {
   }, [userNameTaken, passwordNotMatch ])
   
   useEffect(()=>{
-    console.log(formData.password);
-    console.log(formData.confirmPassword);
+    
   }, [formData])
 
   return(

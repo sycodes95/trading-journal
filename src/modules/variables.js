@@ -20,7 +20,7 @@ function Variables (){
       .then((data) => {
         
         let listVariables = data.listVariables;
-        console.log(data.listVariables);
+        
         let list = Array(20).fill(null)
         if(listVariables.length > 0){
           listVariables.forEach((variable) =>{
@@ -70,7 +70,7 @@ function Variables (){
   }, [])
 
   useEffect(()=>{
-    console.log(variablesList);
+    
   },[variablesList])
 
   return(

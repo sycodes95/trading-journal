@@ -25,7 +25,7 @@ function NewTradeGeneral (props){
   const {formData, setFormData} = props.formDataContext
   
   useEffect(()=>{
-    console.log(formData);
+    
   },[formData])
 
   useEffect(()=>{

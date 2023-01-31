@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 //import CurrentInstruments from "./currentInstruments";
 import { ReactSVG } from "react-svg";
 import plusButton from "../icons/plus-circle-outline.svg"
+import instrumentsSVG from "../icons/instruments.svg"
 import CurrentInstruments from "./currentInstruments";
 
 function Instruments () {
@@ -64,7 +65,7 @@ function Instruments () {
   },[userInfo])
 
   useEffect(()=>{
-    console.log('test');
+    
     //Token
     const token = JSON.parse(localStorage.getItem('token'))
     
@@ -84,74 +85,70 @@ function Instruments () {
   }, [])
   return(
     <div className="Instrument-container w-full p-12 ">
-      <div className="text-3xl text-black font-bold pb-8 ">
-        <span>Instruments</span>
+      <div className="section-info text-black p-4 bg-orange-600 bg-opacity-70 rounded-sm
+      grid">
+        <div className="">
+          <ReactSVG className="h-14 w-14 " src={instrumentsSVG}/>
+        </div>
+
+        <div className="pl-8">
+          <div className="text-3xl">
+            <span>Instruments</span>
+          </div>
+          <div className="text-sm">
+            <span>
+              Add and manage financial instruments. 
+              These instruments will be available to choose
+              when creating a new trade.
+            </span>
+          </div>
+        </div>
       </div>
-      <div className="text-sm h-12">
-        <span>
-          Add and manage financial instruments. 
-          These instruments will be available to choose
-          when creating a new trade.
-        </span>
-      </div>
-      <div>
         
-      </div>
-      <div className="">
+      
+      <div className="mt-12">
         <div className="create-new-Instrument flex justify-center items-center
-         bg-striped-150px h-16 w-96 ">
+         bg-striped-150px h-14 w-80 top-right-round ">
           <div className="text-white text-sm font-thin">
-            <span>Add an Instrument : </span>
+            <span>Add Instrument : </span>
           </div>
           
-          <input className="text-xs ml-4 h-6" type='text' name='instrument' value={formData.instrument}
+          <input className="text-xs ml-4 h-5 w-32 top-right-round" type='text' name='instrument' value={formData.instrument}
            placeholder="ex. BTCUSD" onChange={handleInputChange}/>
            
           <button className='text-xs h-6 pl-2' onClick={handleSubmit}>
-            <ReactSVG className='h-6 w-6 text-white fill-current  hover:text-red-700
-             transition-colors delay-100' src={plusButton}/>
+            <ReactSVG className='h-6 w-6 text-white fill-current  hover:text-steel-blue
+             transition-colors ' src={plusButton}/>
           </button>
 
         </div>
         <div className="h-6">
         {
-          userMaxInstruments ?
+          userMaxInstruments &&
           <div className="flex items-center" >
             <span className="text-red-500 text-xs">Maximum Instruments reached, please delete some before
             adding more, no good trader made serious money trading 20 strategies like a cunt.</span>   
           </div>
-          
-          :
-          null 
         }
 
         {
-          duplicateInstrumentError ?
+          duplicateInstrumentError &&
           <div>
             <span className="text-red-500 text-xs">Instrument already exists.</span>   
           </div>
-          
-          :
-          null 
-
         }
         </div>
             
       </div>
       <div>
-        { userInfo ? 
+        { userInfo &&
         <span>{`${userInfo.firstname}'s Instruments`}</span> 
-        : 
-        null 
         }
       </div>
       {
-        
         <CurrentInstruments userInfo={userInfo} newInstrumentSubmitted={newInstrumentSubmitted}
         userMaxInstrumentsContext={userMaxInstrumentsContext}/>
-        
       }    
-     
     </div>
   )
 }

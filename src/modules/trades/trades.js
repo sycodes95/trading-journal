@@ -38,7 +38,7 @@ function Trades () {
         <div className="text-3xl relative z-10 text-black font-bold pb-8 " >
           <span>Journal</span>
         </div>
-        <div className="text-sm h-12 mb-4">
+        <div className="text-sm h-12 ">
           <Dialog.Trigger asChild>
            <button className=" h-12 w-36 border bg-steel-blue bg-opacity-70
            hover:bg-opacity-50 transition-all rounded text-white ">New Trade</button>

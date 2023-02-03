@@ -1,11 +1,19 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 
 function TradeListHead(props) {
   //PROPS
-  const isLoading = props.isLoading
+  
   const userInfo = props.userInfo
+
+  
   const {trades, setTrades} = props.tradesContext
+
+  const {page, setPage} = props.pageContext
+  const {pageCount, setPageCount} = props.pageCountContext
+  const {limitPerPage, setLimitPerPage} = props.limitPerPageContext
+  const {sortValue, setSortValue} = props.sortValueContext
+  const {isLoading, setIsLoading} = props.isLoadingContext
 
   const [tableHeadersSort, setTableHeadersSort] = useState({
     entrydate: 1, open: 1, instrument: 1,
@@ -16,34 +24,32 @@ function TradeListHead(props) {
     variables: 1, comments: 1, tv: 1
     
   })
-  /*
-  const tableHeaders = [
-    'ENTRY DATE', 'STATUS', 'INSTRUMENT',
-    'SETUP', 'POSITION', 'P ENTRY', 
-    'ENTRY', 'TP', 'SL', 
-    'EXIT DATE', 'EXIT', 'MFE', 
-    'MAE', 'GAIN/LOSS', 'FEES', 
-    'VARIABLES', 'COMMENTS', 'LINKS', 
-  ] 
-  */
+  
   const handleSort = (e, i) =>{
-    console.log(tableHeadersSort[e.field]);
-    console.log(userInfo.username);
-    fetch(`http://localhost:5000/trades-sort-get?username=${userInfo.username}&field=${e.field}&sortBy=${tableHeadersSort[e.field]}`)
+    setSortValue(e.field)
+    if(tableHeadersSort[e.field] === -1){
+      setTableHeadersSort({...tableHeadersSort, [e.field] : 1 })
+    } else if (tableHeadersSort[e.field] === 1){
+      setTableHeadersSort({...tableHeadersSort, [e.field] : -1 })
+    }
+  }
+
+  const fetchSortedTrades = () =>{
+    setIsLoading(true)
+    fetch(`http://localhost:5000/trades-sort-get?username=${userInfo.username}&field=${sortValue}&sortBy=${tableHeadersSort[sortValue]}&limit=${limitPerPage}&skip=${page*limitPerPage}`)
     .then(res => res.json())
     .then((data)=>{
+      console.log(data);
       if(!data.error){
+        setIsLoading(false)
         setTrades(data.trades)
-      }
-      if(tableHeadersSort[e.field] === -1){
-        setTableHeadersSort({...tableHeadersSort, [e.field] : 1 })
-      } else if (tableHeadersSort[e.field] === 1){
-        setTableHeadersSort({...tableHeadersSort, [e.field] : -1 })
+        setPageCount(Math.ceil(data.count / limitPerPage) - 1)
+        
       }
       
+      
     })
-    
-    
+
   }
 
   const tableHeadersAndField = [
@@ -66,7 +72,29 @@ function TradeListHead(props) {
     {header: 'COMMENTS', field:'comments' }, 
     {header: 'LINKS', field:'tv' }
   ]
+ 
+  useEffect(()=>{
+    // when page state changes, check sortvalue for a value, then fetch trades by that value
+    sortValue && fetchSortedTrades()
+    
+  },[page])
 
+  useEffect(()=>{
+    //when sort value changes, reset page to the beginning
+    setPage(0)
+    //check if sortvalue has a value, then fetch trades by that value
+    sortValue && fetchSortedTrades()
+  },[sortValue])
+
+  useEffect(()=>{
+    //when sort value changes, reset page to the beginning
+    setPage(0)
+    //check if sortvalue has a value, then fetch trades by that value
+    sortValue && fetchSortedTrades()
+  },[tableHeadersSort])
+  
+
+  
   return(
     <thead className="bg-striped-content ">
       {

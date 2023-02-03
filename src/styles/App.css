@@ -9,6 +9,16 @@
   --red-orange: rgb(216, 71, 39);
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 
 
 .scrollbar-color::-webkit-scrollbar{
@@ -237,6 +247,16 @@ table .trades-tr:nth-of-type(odd){
   width: 1420px;
 }
 
+.trades-search-bar{
+  width: 256px;
+  
+}
+
+.trades-search-bar:focus{
+  caret-color: azure;
+  
+}
+
 /*
 @media screen and (max-width: 600px) {
   .DialogContent{
@@ -273,7 +293,10 @@ table .trades-tr:nth-of-type(odd){
   .app{
     width: 100vw;
   }
-  
+  .trades-search-bar{
+    width: 100%;
+    
+  }
   
 }
 

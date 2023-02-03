@@ -16,7 +16,9 @@ import TradeListBody from "./tradeListBody";
 
 function TradesList(props){
   const userInfo = props.userInfo
+
   const [trades, setTrades] = useState(null)
+
   const [isLoading, setIsLoading] = useState(false)
 
   const [page, setPage] = useState(0);
@@ -24,34 +26,35 @@ function TradesList(props){
   const [limitPerPage, setLimitPerPage] = useState(1)
 
   const [searchValue, setSearchValue] = useState(null)
+  const [sortValue, setSortValue] = useState(null)
 
   const tableRef = useRef(null);
 
-  const tradeTrRef = useRef(null)
-
   const fetchTrades = () => {
     setIsLoading(true)
-    setTimeout(()=>{
-      if(userInfo && userInfo.username){
-        fetch(`http://localhost:5000/trades-get?username=${userInfo.username}&limit=${limitPerPage}&skip=${page*limitPerPage}`)
-        .then(response => response.json())
-        .then((data) =>{
-          console.log(data);
-          if(!data.error){
-            setTrades(data.trades)
-            setIsLoading(false)
-            setPageCount(Math.ceil(data.count / limitPerPage) - 1)
-          }
-        })
-      }
-    },666)
+    
+    if(userInfo && userInfo.username){
+      fetch(`http://localhost:5000/trades-get?username=${userInfo.username}&limit=${limitPerPage}&skip=${page*limitPerPage}`)
+      .then(response => response.json())
+      .then((data) =>{
+        console.log(data);
+        if(!data.error){
+          setTrades(data.trades)
+          setIsLoading(false)
+          setPageCount(Math.ceil(data.count / limitPerPage) - 1)
+        }
+      })
+    }
+    
   }
 
-  const fetchSearchTrades = () =>{
+  const fetchSearchedTrades = () =>{
     if(userInfo && userInfo.username){
+      setIsLoading(true)
       fetch(`http://localhost:5000/trades-search?username=${userInfo.username}&searchInput=${searchValue}&limit=${limitPerPage}&skip=${page*limitPerPage}`)
       .then(res => res.json())
       .then((data)=>{
+        setIsLoading(false)
         setTrades(data.result)
         setPageCount(Math.ceil(data.count / limitPerPage) - 1)
         console.log(data);
@@ -59,18 +62,30 @@ function TradesList(props){
     }
 
   }
-  const searchTrades = (e) =>{
+  const searchOnChangeSubmit = (e) =>{
+    setSortValue(false)
     setSearchValue(e.target.value)
   }
 
+  const handlePageInputChange = (e) =>{
+    if(e.target.value < 1){
+      setPage(0)
+    } else if (e.target.value > (pageCount)){
+      setPage(pageCount)
+    } else {
+      setPage(e.target.value - 1)
+    }
+    
+    
+  }
 
   const handleWheelScroll = (e) => {
+    //enables ability to use mouse scroll horizontally for trade table
     
-    // Get the current scroll position
     const { scrollLeft } = tableRef.current;
-    // Calculate the new scroll position based on the mouse wheel event
+    
     const newScrollLeft = scrollLeft + e.deltaY;
-    // Update the scroll position
+    
     tableRef.current.scrollTo({
       left: newScrollLeft,
       behavior: 'smooth'
@@ -97,17 +112,19 @@ function TradesList(props){
   },[userInfo])
 
   useEffect(()=>{
-    !searchValue && fetchTrades()
-    searchValue && fetchSearchTrades()
-    console.log('page');
+    //when page changes, fetch trades according to whether search value is present or not
+    !searchValue && !sortValue && fetchTrades()
+    searchValue && !sortValue && fetchSearchedTrades()
   },[page])
 
 
   useEffect(()=>{
-    if(searchValue){
-      fetchSearchTrades()
+    //when search value exists, fetch searched trades
+    if(searchValue && !sortValue){
+      fetchSearchedTrades()
     }
-    if(searchValue === '' || !searchValue){
+    //when search value is deleted or search value doesn't exist, reset the page number to beginning and fetch default trades
+    if((searchValue === '' || !searchValue) && !sortValue){
       setPage(0)
       fetchTrades()
     }
@@ -116,35 +133,53 @@ function TradesList(props){
   },[searchValue])
   return(
     <div className="w-full ">
-      <div className="w-full flex justify-end">
-        <input className="w-80 border border-yellow-500" type='text' placeholder="Search..."
-         value={searchValue} onChange={searchTrades}/>
+      <div className="w-full flex justify-end mt-1 mb-2">
+        <input className="trades-search-bar  h-6 border border-black bg-striped-header text-white rounded-md text-xs
+        pl-2 pr-2" 
+        type='text' placeholder="Search..." value={searchValue} onChange={searchOnChangeSubmit}/>
+         
       </div>
 
       <div className="trade-table-con scrollbar-color  min-h-600px max-h-screen
       overflow-x-scroll z-10 bg-white col-span-2" ref={tableRef} onWheel={handleWheelScroll}>
         
         <table className="trade-table-con ">
-          <TradeListHead isLoading={isLoading} tradesContext={{trades, setTrades}}
-          userInfo={userInfo}/>
+          <TradeListHead tradesContext={{trades, setTrades}} pageContext={{page, setPage}}
+          pageCountContext={{pageCount, setPageCount}} limitPerPageContext={{limitPerPage, setLimitPerPage}} 
+          sortValueContext={{sortValue, setSortValue}} isLoadingContext={{isLoading, setIsLoading}} userInfo={userInfo}/>
           <TradeListBody isLoading={isLoading} tradesContext={{trades, setTrades}} 
           userInfo={userInfo}/>
         </table> 
         
       </div>
-      <div className="w-full flex justify-end">
-        {
-          page !== 0 &&
-          <button onClick={handlePrev}>
-            Prev
-          </button>
-        }
-        {
-          pageCount !== page && 
-          <button onClick={handleNext}>
-            Next
-          </button>
-        }
+      <div className="w-full flex justify-center mt-2">
+        <div className=" w-16 flex justify-center">
+          {
+            page !== 0 &&
+            <button className="font-bold text-black hover:text-steel-blue transition-colors" onClick={handlePrev}>
+              Prev
+            </button>
+          }
+
+        </div>
+        <div className=" w-28 flex justify-center items-center gap-x-2">
+          
+          <div className="">
+            <input className="w-8  text-center bg-striped-header text-white mr-2 rounded-md" type="number" name=""
+            min="1" max={pageCount + 1} value={page + 1} onChange={handlePageInputChange}/>
+            <span>of {pageCount + 1}</span>       
+          </div>
+        
+        </div>
+        
+        <div className=" w-16 flex justify-center">
+          {
+            pageCount !== page && 
+            <button className="font-bold text-black hover:text-steel-blue transition-colors" onClick={handleNext}>
+              Next
+            </button>
+          }
+        </div>
         
       </div>
     </div>

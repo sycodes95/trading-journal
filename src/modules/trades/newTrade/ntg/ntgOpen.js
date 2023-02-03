@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 function NtgOpen(props){
   const [tradeOpen, setTradeOpen] = useState(true)
-  const [tradeStatus, setTradeStatus] = useState('open')
+  const [tradeStatus, setTradeStatus] = useState('OPEN')
 
   const {formData, setFormData} = props.formDataContext
 
@@ -13,12 +13,13 @@ function NtgOpen(props){
   }
 
   useEffect(()=>{
+    console.log(tradeOpen);
     if(tradeOpen == true){
-      setTradeStatus('open')
-      setFormData({ ...formData, open: true })
+      setTradeStatus('OPEN')
+      setFormData({ ...formData, open: 'OPEN' })
     } else {
-      setTradeStatus('closed')
-      setFormData({ ...formData, open: false })
+      setTradeStatus('CLOSED')
+      setFormData({ ...formData, open: 'CLOSED' })
     }
 
     
@@ -26,22 +27,23 @@ function NtgOpen(props){
 
   useEffect(()=>{
     // Changes trade status "Open" "Closed" text colors depending on trade status state.
-    if(tradeStatus === 'open'){
+    if(tradeStatus === 'OPEN'){
       tradeStatusTextRef.current.style.color = 'green'
-    } else if(tradeStatus === 'closed'){
+    } else if(tradeStatus === 'CLOSED'){
       tradeStatusTextRef.current.style.color = 'black'
     }
   }, [tradeStatus])
 
   useEffect(()=>{
-    if(formData.open === '' || formData.open === true){
+    console.log(formData);
+    if(formData.open === '' || formData.open === 'OPEN'){
       setTradeOpen(true)
-      setTradeStatus('open')
+      setTradeStatus('OPEN')
     } else {
       setTradeOpen(false)
-      setTradeStatus('closed')
+      setTradeStatus('CLOSED')
     }
-  },[])
+  },[formData.open])
 
   return(
     <div className="pt-4 pl-4 pr-4 grid grid-cols-1 pt-4 ">

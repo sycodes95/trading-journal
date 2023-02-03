@@ -1,4 +1,5 @@
 import '../src/styles/App.css';
+import { Helmet } from 'react-helmet';
 
 //--------------------------------------------------------------------------------------
 import { HashRouter, BrowserRouter, Routes, Switch, Route } from "react-router-dom";
@@ -16,12 +17,15 @@ import Setups from './modules/setups';
 import Instruments from './modules/instruments';
 import Variables from './modules/variables';
 import Logout from './modules/logout';
-
+import Dashboard from './modules/dashboard';
 
 function App() {
   return (
     <BrowserRouter>
       <div className='app grid   bg-white m-0 h-screen'>
+        <Helmet>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        </Helmet>
         <div className='cols-start-1 col-span-2 cols-end-3 rows-start-1 rows-end-2 row-span-1'>
           <Header/>
         </div>
@@ -34,6 +38,7 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/logout" element={<Logout/>}/>
             <Route path="/signup" element={<Signup/>}/>
+            <Route path='/dashboard' element={<Dashboard/>}/>
             <Route path="/trades" element={<Trades/>}/>
             <Route path="/profile" element={<Profile/>}/>
             <Route path="/setups" element={<Setups/>}/>

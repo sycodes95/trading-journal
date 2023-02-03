@@ -67,7 +67,7 @@ function TradeDelete (props){
             <span>ENTRY DATE: {moment(trade.entrydate).format("YYYY-MM-DD hh:mm")}</span>
           </div>
           <div>
-            <span>STATUS: {trade.open ? 'Open' : 'Closed'}</span>
+            <span>STATUS: {trade.open === 'OPEN' ? 'OPEN' : 'CLOSED'}</span>
           </div>
           <div>
             <span>INSTRUMENT: {trade.instrument}</span>

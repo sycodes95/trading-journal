@@ -16,7 +16,7 @@ function NewTrade (props) {
 
   const [formData, setFormData] = useState({
     username: userName,
-    open: true,
+    open: '',
     entrydate: '',
     instrument: '',
     setup: '',
@@ -62,7 +62,7 @@ function NewTrade (props) {
       })
       .then(response => response.json())
       .then(data => {
-        
+        console.log(data);
         if(!data.error){
           setFormData(formDataCopy)
           setSubmitSuccess(true)
@@ -92,7 +92,7 @@ function NewTrade (props) {
       })
       .then(response => response.json())
       .then(data => {
-        
+        console.log(data);
         if(!data.error){
           setFormData(formDataCopy)
           setSubmitSuccess(true)
@@ -108,6 +108,7 @@ function NewTrade (props) {
         //UPDATES setups after a set up is finished updating
       })
       .catch(error => {
+        console.log(error);
       })
     }
     
@@ -140,6 +141,7 @@ function NewTrade (props) {
   },[generalTab, variablesTab])
   
   useEffect(()=>{
+    console.log(editTrade);
     setFormDataCopy(formData)
   },[])
 
@@ -149,6 +151,8 @@ function NewTrade (props) {
       setEdit(true)
       setFormData(editTrade)
     }
+
+    console.log(formData);
 
     
   },[editTrade])

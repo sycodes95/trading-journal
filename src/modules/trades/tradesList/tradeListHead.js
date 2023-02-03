@@ -8,12 +8,12 @@ function TradeListHead(props) {
   const {trades, setTrades} = props.tradesContext
 
   const [tableHeadersSort, setTableHeadersSort] = useState({
-    entrydate: -1, open: -1, instrument: -1,
-    setup: -1, position: -1, plannedentry: -1,
-    entry: -1, tp: -1, sl: -1,
-    exitdate: -1, exit: -1, mfe: -1,
-    mae: -1, fgl: -1, fees: -1, 
-    variables: -1, comments: -1, tv: -1
+    entrydate: 1, open: 1, instrument: 1,
+    setup: 1, position: 1, plannedentry: 1,
+    entry: 1, tp: 1, sl: 1,
+    exitdate: 1, exit: 1, mfe: 1,
+    mae: 1, fgl: 1, fees: 1, 
+    variables: 1, comments: 1, tv: 1
     
   })
   /*

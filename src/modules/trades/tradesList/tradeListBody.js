@@ -74,7 +74,7 @@ function TradeListBody(props) {
           <td colSpan="1" className=" text-center text-xs " >
           {moment(t.entrydate).format("YYYY-MM-DD hh:mm")}</td>
           <td colSpan="1" className=" text-center text-xs" >
-          {t.open ? 'open' : 'closed'}</td>
+          {t.open === 'OPEN' ? 'OPEN' : 'CLOSED'}</td>
           <td colSpan="1" className=" text-center text-xs " >
           {t.instrument}</td>
           <td colSpan="1" className=" text-center text-xs" >

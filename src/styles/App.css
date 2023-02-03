@@ -220,6 +220,9 @@ table .trades-tr:nth-of-type(odd){
   min-width: 322px;
   
 }
+.trades-container{
+  width: 100%;
+}
 
 .new-trade-container{
   height: 600px;
@@ -230,7 +233,9 @@ table .trades-tr:nth-of-type(odd){
   height: 400px;
   margin: 0 auto;
 }
-
+.trade-table-con{
+  width: 1420px;
+}
 
 /*
 @media screen and (max-width: 600px) {
@@ -265,6 +270,10 @@ table .trades-tr:nth-of-type(odd){
   .trade-table-con{
     width: 75vw;
   }
+  .app{
+    width: 100vw;
+  }
+  
   
 }
 

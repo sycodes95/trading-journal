@@ -247,6 +247,11 @@ table .trades-tr:nth-of-type(odd){
   width: 1420px;
 }
 
+.table-top-bar{
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+}
+
 .trades-search-bar{
   width: 256px;
   
@@ -296,6 +301,11 @@ table .trades-tr:nth-of-type(odd){
   .trades-search-bar{
     width: 100%;
     
+  }
+  .table-top-bar{
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2,1fr);
+    justify-content: center;
   }
   
 }

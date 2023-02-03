@@ -33,36 +33,16 @@ function Trades () {
     
   },[userInfo])
   return(
-    <Dialog.Root>
+    
       <div className="relative w-full p-12 grid justify-center" >
-        <div className="text-3xl relative z-10 text-black font-bold pb-8 " >
+        <div className="text-3xl relative z-10 text-black p-4 w-full flex items-center
+        bg-green-500 bg-opacity-70" >
           <span>Journal</span>
         </div>
-        <div className="text-sm h-12 ">
-          <Dialog.Trigger asChild>
-           <button className=" h-12 w-36 border bg-steel-blue bg-opacity-70
-           hover:bg-opacity-50 transition-all rounded text-white ">New Trade</button>
-          </Dialog.Trigger>
-        </div>
-        <Dialog.Portal>
-          
-          <Dialog.Overlay className="DialogOverlay"/>
-          <Dialog.Content className="DialogContent bg-white bg-opacity-80">
-            {
-            userInfo && <NewTrade username={userInfo.username}/>
-            }
-          </Dialog.Content>
-          <Dialog.Overlay/>
-        </Dialog.Portal>
-        <div className="">
-          <TradesList userInfo={userInfo}/>
-        </div>
         
-        
+        <TradesList userInfo={userInfo}/>
         
       </div>
-
-    </Dialog.Root>
   )
 }
 

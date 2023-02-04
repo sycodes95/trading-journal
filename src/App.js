@@ -17,7 +17,7 @@ import Setups from './modules/setups';
 import Instruments from './modules/instruments';
 import Variables from './modules/variables';
 import Logout from './modules/logout';
-import Dashboard from './modules/dashboard';
+import Dashboard from './modules/dashboard/dashboard';
 
 function App() {
   return (

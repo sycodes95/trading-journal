@@ -13,7 +13,7 @@ function TradesList(props){
 
   const [page, setPage] = useState(0);
   const [pageCount, setPageCount] = useState(0);
-  const [limitPerPage, setLimitPerPage] = useState(2)
+  const [limitPerPage, setLimitPerPage] = useState(20)
 
   const [searchValue, setSearchValue] = useState(null)
   const [sortValue, setSortValue] = useState(null)
@@ -158,7 +158,7 @@ function TradesList(props){
           
         </div>
 
-        <div className="trade-table-con scrollbar-color  min-h-600px max-h-screen
+        <div className="trade-table-con scrollbar-color  min-h-500px max-h-screen
         overflow-x-scroll z-10 bg-white col-span-2" ref={tableRef} onWheel={handleWheelScroll}>
           
           <table className="trade-table-con ">

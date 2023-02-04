@@ -59,7 +59,10 @@ input:focus, select:focus{
 }
 .min-h-600px{
   min-height: 600px;
-  
+}
+
+.min-h-500px{
+  min-height: 500px;
 }
 
 .triangle-load{

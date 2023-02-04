@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
+import moment from "moment";
 //PARENT -> newTradeGeneral
 
 function NtgExitDate(props){
@@ -18,7 +18,8 @@ function NtgExitDate(props){
       </div>
       
       <input className=" border border-r-0 border-l-0 border-gray-300 top-left-round h-6" 
-      type='datetime-local' name="exitdate" value={formData.exitdate} onChange={handleInputChange}/>
+      type='datetime-local' name="exitdate" value={moment(formData.exitdate).format("YYYY-MM-DD hh:mm")}
+       onChange={handleInputChange}/>
       
     </div>
   )

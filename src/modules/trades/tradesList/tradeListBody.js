@@ -90,7 +90,7 @@ function TradeListBody(props) {
           <td colSpan="1" className=" text-center text-xs" >
           {t.sl}</td>
           <td colSpan="1" className=" text-center text-xs" >
-          {t.exitdate}</td>
+          {moment(t.exitdate).format("YYYY-MM-DD hh:mm")}</td>
           <td colSpan="1" className=" text-center text-xs" >
           {t.exit}</td>
           <td colSpan="1" className=" text-center text-xs" >

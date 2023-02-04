@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import DbCalendar from "./dbCalendar";
+import DbOverall from "./dbOverall";
 
 function Dashboard (){
   const [userInfo, setUserInfo] = useState(null)
   const [trades, setTrades] = useState(null)
-
-  const [winRate, setWinRate] = useState(null)
-  const [gainLoss, setGainLoss] = useState(null)
 
   const fetchTrades = () => {
     
@@ -21,26 +20,9 @@ function Dashboard (){
     }
   }
 
-  const getWinRate = () =>{
-    let winningTrades = trades.filter(t => t.fgl > 0)
-    let totalTrades = trades.filter(t => t.fgl)
-    let wr = Math.floor((winningTrades.length / totalTrades.length) * 100)
-    setWinRate(wr)
-  }
-
-  const getGainLoss = () =>{
-    let allValues = []
-    trades.forEach((t,i) =>{t.fgl && allValues.push(t.fgl)})
-    let gl = allValues.reduce((acc, cur) =>{ return acc + cur},0)
-    setGainLoss(gl)
-  }
   useEffect(()=>{
-    //Get WIN RATE
-    if(trades){
-      getWinRate()
-      getGainLoss()
-    }
-  },[trades])
+    fetchTrades()
+  }, [userInfo])
 
   useEffect(()=>{
     //Token
@@ -60,21 +42,16 @@ function Dashboard (){
       .catch(error => console.error(error))
     }
   }, [])
-
-  useEffect(()=>{
-    fetchTrades()
-  }, [userInfo])
-
   return(
-    <div className="">
-      {
-        winRate && 
-        <div>{winRate}%</div>
-      }
-      {
-        gainLoss && 
-        <div>{gainLoss}</div>
-      }
+    <div className="p-12 grid grid-cols-4">
+      <div className="col-span-1">
+        
+        <DbCalendar userInfo={userInfo} tradesContext={{trades, setTrades}}/>
+      </div>
+      <div className="col-span-3">
+        <DbOverall userInfo={userInfo} tradesContext={{trades, setTrades}} />
+      </div>
+      
     </div>
   )
 }

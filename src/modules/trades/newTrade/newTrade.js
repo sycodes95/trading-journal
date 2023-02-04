@@ -96,6 +96,7 @@ function NewTrade (props) {
         if(!data.error){
           setFormData(formDataCopy)
           setSubmitSuccess(true)
+          window.location.href = '/trades'
         }
         
         if(data.error && data.error.name === 'ValidationError'){

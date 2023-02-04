@@ -129,23 +129,17 @@ function Setups () {
         }
 
         {
-          duplicateSetupError ?
+          duplicateSetupError &&
           <div>
             <span className="text-red-500 text-xs">Setup already exists.</span>   
           </div>
-          
-          :
-          null 
-
         }
         </div>
             
       </div>
       <div>
-        { userInfo ? 
+        { userInfo &&
         <span>{`${userInfo.firstname}'s Setups`}</span> 
-        : 
-        null 
         }
       </div>
 

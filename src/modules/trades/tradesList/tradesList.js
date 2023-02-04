@@ -19,6 +19,9 @@ function TradesList(props){
   const [sortValue, setSortValue] = useState(null)
 
   const tableRef = useRef(null);
+  const overlayRef = useRef(null);
+
+  
 
   const fetchTrades = () => {
     setIsLoading(true)
@@ -94,6 +97,12 @@ function TradesList(props){
     })
 
   }
+
+  const handleOverlayClick = (event) => {
+   
+    event.preventDefault();
+    
+  };
    
   useEffect(()=>{
     //once userInfo is available, fetch trades
@@ -126,23 +135,24 @@ function TradesList(props){
       <div className="w-full mt-8">
         <div className="table-top-bar w-full grid grid-cols-2 mt-1 mb-5">
           <Dialog.Trigger className="" asChild>
-            <button className=" h-12 w-36 border bg-steel-blue bg-opacity-70
-            hover:bg-opacity-50 transition-all rounded text-white ">New Trade</button>
+            <button className=" h-12 w-36  bg-steel-blue bg-opacity-70
+            hover:bg-opacity-50 transition-all rounded text-white shadow-md ">New Trade</button>
           </Dialog.Trigger>
           <div className="w-full flex flex-col justify-end items-end">
             <input className="trades-search-bar h-6 border border-black bg-striped-header
-             bg-opacity-50 text-white rounded-md text-xs pl-2 pr-2" 
+             bg-opacity-50 text-white rounded-sm text-xs pl-2 pr-2 shadow-md" 
             type='text' placeholder="Search..." value={searchValue} onChange={searchOnChangeSubmit}/>
           </div>
           <Dialog.Portal>
           
             <Dialog.Overlay className="DialogOverlay"/>
-            <Dialog.Content className="DialogContent bg-white bg-opacity-80">
+            <Dialog.Overlay/>
+            <Dialog.Content className="DialogContent bg-white bg-opacity-80" onInteractOutside={handleOverlayClick} >
               {
               userInfo && <NewTrade username={userInfo.username}/>
               }
             </Dialog.Content>
-            <Dialog.Overlay/>
+           
           </Dialog.Portal>
           
           

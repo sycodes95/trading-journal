@@ -43,7 +43,7 @@ function NtgOpen(props){
       setTradeOpen(false)
       setTradeStatus('CLOSED')
     }
-  },[formData.open])
+  },[formData])
 
   return(
     <div className="pt-4 pl-4 pr-4 grid grid-cols-1 pt-4 ">

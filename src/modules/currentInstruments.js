@@ -61,7 +61,7 @@ function CurrentInstruments (props) {
     <div className="current-setup-con w-full  overflow-y-auto ">
 
     
-      <table className=" w-full ">
+      <table className=" w-full bg-white">
         <thead>
             <tr className="bg-jet text-white text-sm font-bold">
                 <th colSpan="1" className="border-r border-black  w-16 font-thin">#</th>
@@ -69,18 +69,16 @@ function CurrentInstruments (props) {
             </tr>
         </thead>
         <tbody>
-          {instruments ? 
+          {instruments && 
             instruments.map((s, i) =>(
-              <tr className="border-gray-300  h-4 ">
+              <tr className="border-gray-300  h-4 font-bold">
                 <td colSpan="1" className=" text-center text-xs" >{i+1}</td>
-                <td colSpan='8' className="flex justify-between pl-4 pr-4 gap-x-12 " >
+                <td colSpan='8' className="flex justify-between pl-4 pr-4 gap-x-12 items-center" >
                     <span className="text-sm">{s.instrument}</span>
                     <button onClick={()=>handleSetupDelete(s._id)} className=" text-red-700 text-md font-bold hover:text-black transition-colors delay-100">x</button>
                 </td>
               </tr>
           ))
-          :
-          null
           }
         </tbody>
 

@@ -200,7 +200,7 @@ function VariablesCards (props){
                           </div>
                         
                           <input className=" w-full h-full  text-sm font-thin rounded-none pl-2
-                           text-white font-black-outline "
+                           text-white font-black-outline-nosh "
                           type='text' name="variables" value={formData.variables[index]} ref={variableRef} 
                           onChange={(e)=>handleInputChange(e,index)} onKeyDown={handleKeyDownSubmit}
                           onBlur={handleInputBlurSubmit} placeholder='. . .' />

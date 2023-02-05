@@ -3,6 +3,9 @@ import * as Dialog from '@radix-ui/react-dialog';
 import TradeListHead from "./tradeListHead";
 import TradeListBody from "./tradeListBody";
 import NewTrade from "../newTrade/newTrade";
+import useDebounce from "../../hooks/useDebounce";
+
+import { Oval, Triangle, InfinitySpin } from "react-loader-spinner";
 
 function TradesList(props){
   const userInfo = props.userInfo
@@ -11,63 +14,57 @@ function TradesList(props){
 
   const [isLoading, setIsLoading] = useState(false)
 
+  const [searchIsLoading, setSearchIsLoading] = useState(null)
+
   const [page, setPage] = useState(0);
   const [pageCount, setPageCount] = useState(0);
   const [limitPerPage, setLimitPerPage] = useState(20)
+  
 
   const [searchValue, setSearchValue] = useState(null)
+  const debouncedSearch = useDebounce(searchValue, 500)
+  
   const [sortValue, setSortValue] = useState(null)
 
   const tableRef = useRef(null);
   const overlayRef = useRef(null);
 
   const fetchTrades = () => {
-    console.log(searchValue);
-    setIsLoading(true)
-    
     if(userInfo && userInfo.username){
+      setIsLoading(true)
       fetch(`http://localhost:5000/trades-get?username=${userInfo.username}&limit=${limitPerPage}&skip=${page*limitPerPage}`)
       .then(response => response.json())
       .then((data) =>{
-        console.log('default');
-        
         
         if(!data.error){
           setTrades(data.trades)
           setPageCount(Math.ceil(data.count / limitPerPage) - 1)
           setIsLoading(false)
-          
         }
       })
     }
-    
   }
 
   const fetchSearchedTrades = () =>{
-    console.log(searchValue);
-    if(userInfo && userInfo.username && searchValue && searchValue !== ''){
+    if(userInfo && userInfo.username){
       setIsLoading(true)
-      
-      fetch(`http://localhost:5000/trades-search?username=${userInfo.username}&searchInput=${searchValue}&limit=${limitPerPage}&skip=${page*limitPerPage}`)
+      fetch(`http://localhost:5000/trades-search?username=${userInfo.username}&searchInput=${debouncedSearch}&limit=${limitPerPage}&skip=${page*limitPerPage}`)
       .then(res => res.json())
       .then((data)=>{
-        console.log('search');
         
         if(!data.error){
           setTrades(data.result)
-          
           setPageCount(Math.ceil(data.count / limitPerPage) - 1)
           setIsLoading(false)
           console.log(data);
+          setSearchIsLoading(false)
         }
       })
     }
-
   }
   const searchOnChangeSubmit = (e) =>{
     setSortValue(false)
-    setSearchValue(()=>e.target.value)
-   
+    setSearchValue(e.target.value)
   }
 
   const handlePageInputChange = (e) =>{
@@ -79,8 +76,6 @@ function TradesList(props){
       setPage(e.target.value - 1)
     }
   }
-
-  
 
   const handleWheelScroll = (e) => {
     //enables ability to use mouse scroll horizontally for trade table
@@ -105,13 +100,10 @@ function TradesList(props){
     setPage((page)=>{
       return page + 1
     })
-
   }
 
   const handleOverlayClick = (event) => {
-   
     event.preventDefault();
-    
   };
    
   useEffect(()=>{
@@ -119,7 +111,7 @@ function TradesList(props){
     fetchTrades()
     console.log('user');
   },[userInfo])
-
+  
   useEffect(()=>{
     //when page changes, fetch trades according to whether search value is present or not
     if((!searchValue || searchValue == '') && !sortValue){
@@ -133,58 +125,43 @@ function TradesList(props){
     
     
   },[page])
-
-
-  useEffect(()=>{
-    
-    if(searchValue === '' || !searchValue ){
-      console.log('not');
-      setPage(0)
-      fetchTrades()
-    }
-    if(searchValue && searchValue !== ''){
-      console.log('yas');
-      console.log(searchValue);
-      fetchSearchedTrades()
-    }
-
-    
-    
-    
-    /*
-      //when search value is deleted or search value doesn't exist, reset the page number to beginning and fetch default trades
-    if(searchValue && searchValue !== '' && !sortValue){
-      fetchSearchedTrades()
-    }
-    if((searchValue === '' || !searchValue) && !sortValue){
-      setPage(0)
-      fetchTrades()
-    }
-    */
-
-    
   
-    
-   
+  useEffect(()=>{
+    if(debouncedSearch && !sortValue){
+      fetchSearchedTrades()
+    }
+    if(!debouncedSearch && !sortValue){
+      setPage(0)
+      fetchTrades()
+    }
+  },[debouncedSearch])
 
-    
-   
-    
-    
-    
-  },[searchValue])
   return(
     <Dialog.Root>
       <div className="w-full mt-8">
         <div className="table-top-bar w-full grid grid-cols-2 mt-1 mb-5">
-          <Dialog.Trigger className="" asChild>
+          <Dialog.Trigger className="cols-span-1" asChild>
             <button className=" h-12 w-36  bg-steel-blue bg-opacity-70
             hover:bg-opacity-50 transition-all rounded text-white shadow-md ">New Trade</button>
           </Dialog.Trigger>
-          <div className="w-full flex flex-col justify-end items-end">
-            <input className="trades-search-bar h-6 border border-black bg-striped-header
-             bg-opacity-50 text-white rounded-sm text-xs pl-2 pr-2 shadow-md" 
-            type='text' placeholder="Search..."  onChange={searchOnChangeSubmit}/>
+          <div className="cols-span-1 w-full flex flex-row justify-end items-center ">
+            <div className="border border-black w-fit p-1 flex bg-striped-header rounded-sm">
+              <input className="trades-search-bar h-6   bg-striped-header
+              bg-opacity-50 text-white rounded-sm text-xs pl-2 pr-2 shadow-md" 
+              type='text' placeholder="Search..."  onChange={searchOnChangeSubmit}/>
+              <div className="h-5 w-5">
+                {
+                  isLoading && debouncedSearch &&
+                  <Oval height="20" width="20" color="#FFFFFF" secondaryColor="#FFFFFF"
+                  strokeWidth="8" ariaLabel="triangle-loading" wrapperStyle={{}}
+                  visible={true}/>
+                }
+                
+
+              </div>
+              
+            </div>
+            
           </div>
           <Dialog.Portal>
           

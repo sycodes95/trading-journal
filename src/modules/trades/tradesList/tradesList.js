@@ -21,20 +21,22 @@ function TradesList(props){
   const tableRef = useRef(null);
   const overlayRef = useRef(null);
 
-  
-
   const fetchTrades = () => {
+    console.log(searchValue);
     setIsLoading(true)
     
     if(userInfo && userInfo.username){
       fetch(`http://localhost:5000/trades-get?username=${userInfo.username}&limit=${limitPerPage}&skip=${page*limitPerPage}`)
       .then(response => response.json())
       .then((data) =>{
-        console.log(data);
+        console.log('default');
+        
+        
         if(!data.error){
           setTrades(data.trades)
-          setIsLoading(false)
           setPageCount(Math.ceil(data.count / limitPerPage) - 1)
+          setIsLoading(false)
+          
         }
       })
     }
@@ -42,22 +44,30 @@ function TradesList(props){
   }
 
   const fetchSearchedTrades = () =>{
-    if(userInfo && userInfo.username){
+    console.log(searchValue);
+    if(userInfo && userInfo.username && searchValue && searchValue !== ''){
       setIsLoading(true)
+      
       fetch(`http://localhost:5000/trades-search?username=${userInfo.username}&searchInput=${searchValue}&limit=${limitPerPage}&skip=${page*limitPerPage}`)
       .then(res => res.json())
       .then((data)=>{
-        setIsLoading(false)
-        setTrades(data.result)
-        setPageCount(Math.ceil(data.count / limitPerPage) - 1)
-        console.log(data);
+        console.log('search');
+        
+        if(!data.error){
+          setTrades(data.result)
+          
+          setPageCount(Math.ceil(data.count / limitPerPage) - 1)
+          setIsLoading(false)
+          console.log(data);
+        }
       })
     }
 
   }
   const searchOnChangeSubmit = (e) =>{
     setSortValue(false)
-    setSearchValue(e.target.value)
+    setSearchValue(()=>e.target.value)
+   
   }
 
   const handlePageInputChange = (e) =>{
@@ -68,9 +78,9 @@ function TradesList(props){
     } else {
       setPage(e.target.value - 1)
     }
-    
-    
   }
+
+  
 
   const handleWheelScroll = (e) => {
     //enables ability to use mouse scroll horizontally for trade table
@@ -112,22 +122,55 @@ function TradesList(props){
 
   useEffect(()=>{
     //when page changes, fetch trades according to whether search value is present or not
-    !searchValue && !sortValue && fetchTrades()
-    searchValue && !sortValue && fetchSearchedTrades()
+    if((!searchValue || searchValue == '') && !sortValue){
+      console.log('page default');
+      return fetchTrades()
+    }
+    if(searchValue && searchValue !== '' && !sortValue){
+      console.log('page search');
+      return fetchSearchedTrades()
+    }
+    
+    
   },[page])
 
 
   useEffect(()=>{
-    //when search value exists, fetch searched trades
-    if(searchValue && !sortValue){
+    
+    if(searchValue === '' || !searchValue ){
+      console.log('not');
+      setPage(0)
+      fetchTrades()
+    }
+    if(searchValue && searchValue !== ''){
+      console.log('yas');
+      console.log(searchValue);
       fetchSearchedTrades()
     }
-    //when search value is deleted or search value doesn't exist, reset the page number to beginning and fetch default trades
+
+    
+    
+    
+    /*
+      //when search value is deleted or search value doesn't exist, reset the page number to beginning and fetch default trades
+    if(searchValue && searchValue !== '' && !sortValue){
+      fetchSearchedTrades()
+    }
     if((searchValue === '' || !searchValue) && !sortValue){
       setPage(0)
       fetchTrades()
     }
-    console.log(searchValue);
+    */
+
+    
+  
+    
+   
+
+    
+   
+    
+    
     
   },[searchValue])
   return(
@@ -141,7 +184,7 @@ function TradesList(props){
           <div className="w-full flex flex-col justify-end items-end">
             <input className="trades-search-bar h-6 border border-black bg-striped-header
              bg-opacity-50 text-white rounded-sm text-xs pl-2 pr-2 shadow-md" 
-            type='text' placeholder="Search..." value={searchValue} onChange={searchOnChangeSubmit}/>
+            type='text' placeholder="Search..."  onChange={searchOnChangeSubmit}/>
           </div>
           <Dialog.Portal>
           

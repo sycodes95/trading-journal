@@ -176,9 +176,9 @@ table .trades-tr:nth-of-type(odd){
 }
 
 .bg-modern{
-  background:linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url(../images/modern-texture.webp);
+  background:linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(../images/modern-texture.webp);
   background-position: center;
-  background-size: 5px;
+  background-size: cover;
 
 }
 

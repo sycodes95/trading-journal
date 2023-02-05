@@ -7,7 +7,9 @@ function DbOverall (props){
   const [winRate, setWinRate] = useState(null)
   const [gainLoss, setGainLoss] = useState(null)
   const [gainLossR, setGainLossR] = useState(null)
-  
+
+  const [overallTrades, setOverallTrades] = useState(true)
+  const [lastWeekTrades, setLastWeekTrades] = useState(null)
   const [lastMonthTrades, setLastMonthTrades] = useState(null)
 
   const getWinRate = () =>{
@@ -52,17 +54,39 @@ function DbOverall (props){
 
   const handleLastMonthTrades = () =>{
     setLastMonthTrades(true)
+    setOverallTrades(false)
+    setLastWeekTrades(false)
+  }
+
+  const handleOverallTrades = () =>{
+    setLastMonthTrades(false)
+    setOverallTrades(true)
+    setLastWeekTrades(false)
   }
   useEffect(()=>{
     //Get WIN RATE
-    if(lastMonthTrades){
+    if(lastMonthTrades && userInfo && userInfo.username){
       fetch(`http://localhost:5000/trades-get-month?username=${userInfo.username}`)
       .then(response => response.json())
       .then((data) =>{
+        
         setTrades(data.trades)
       })
     }
   },[lastMonthTrades])
+
+  useEffect(()=>{
+    //Get WIN RATE
+    if(overallTrades && userInfo && userInfo.username){
+      fetch(`http://localhost:5000/trades-get?username=${userInfo.username}`)
+      .then(response => response.json())
+      .then((data) =>{
+        
+        setTrades(data.trades)
+        
+      })
+    }
+  },[overallTrades])
 
   useEffect(()=>{
     //Get WIN RATE
@@ -76,15 +100,20 @@ function DbOverall (props){
   
   return(
     <div className="grid grid-cols-3">
-      <div className="overall">
-        <button>OVERALL</button>
+      <div className='overall text-white bg-striped-header flex justify-center items-center h-12'>
+        <button className={`border border-ruby ${overallTrades && 'bg-ruby'} bg-opacity-80 
+        h-6 p-1 flex items-center justify-center w-1/2 rounded-sm`}
+        onClick={handleOverallTrades}>OVERALL</button>
+        
       </div>
-      <div className="weekly">
-        <button>LAST WEEK</button>
+      <div className="weekly text-white bg-striped-header flex justify-center items-center h-12">
+        <button className="border border-ruby bg-opacity-80
+         h-6 p-1 flex items-center justify-center w-1/2 rounded-sm">LAST WEEK</button>
       </div>
-      <div className="monthly">
-        <button className={`hover:text-red-700 ${lastMonthTrades && 'text-red-700'}`}
-         onClick={handleLastMonthTrades}>LAST MONTH</button>
+      <div className="monthly text-white bg-striped-header flex justify-center items-center h-12">
+        <button className={`border border-ruby ${lastMonthTrades && 'bg-ruby'} bg-opacity-80 
+        h-6 p-1 flex items-center justify-center w-1/2 rounded-sm`} onClick={handleLastMonthTrades}>LAST MONTH</button>
+         
       </div>
       {
         
@@ -122,7 +151,7 @@ function DbOverall (props){
             <span>{gainLossR} </span>
           </div>
           <div className="flex justify-center text-xs">
-            <span>(R G/L) Gain Loss (R) </span>
+            <span>(R G/L) Gain Loss Average (R) </span>
           </div>
           
         </div>

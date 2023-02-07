@@ -10,11 +10,14 @@ import DbWR from "./dbOverallComps/dbWR";
 function DbOverall (props){
   const userInfo = props.userInfo
   const {trades, setTrades} = props.tradesContext
+  const [tradesWithBalance, setTradesWithBalance] = useState(null)
 
   const [overallTrades, setOverallTrades] = useState(true)
   const [lastWeekTrades, setLastWeekTrades] = useState(null)
   const [lastMonthTrades, setLastMonthTrades] = useState(null)
-  
+  const [dateNow, setDateNow] = useState(null)
+  const [dateLastMonth, setDateLastMonth] = useState(null)
+  const [dateLastYear, setDateLastYear] = useState(null)
 
   const handleLastMonthTrades = () =>{
     setLastMonthTrades(true)
@@ -27,11 +30,7 @@ function DbOverall (props){
     setOverallTrades(true)
     setLastWeekTrades(false)
   }
-
-  const cumulativePNL = trades.map((tr, i) => ({
-    exitdate: tr.exitdate,
-    balance: trades.slice(0, i + 1).reduce((sum, trade) => sum + trade.fgl, 0)
-  }));
+  
 
   useEffect(()=>{
     //Get LAST MONTH TRADES
@@ -57,6 +56,39 @@ function DbOverall (props){
       })
     }
   },[overallTrades])
+
+  useEffect(()=>{
+    
+    if(trades){
+      let cumulativePNL = []
+      let reversed = trades.reverse()
+      reversed.forEach((tr, i) =>{
+        tr.entrydate = new Date(moment(tr.entrydate).format("YYYY-MM-DD hh:mm"))
+      })
+      let firstDate = reversed[0].entrydate
+      let dayBefore = moment(firstDate).subtract(1, 'days').format()
+      cumulativePNL.push({pnl: 0, fgl:0, date: moment(dayBefore).format("YYYY-MM-DD hh:mm")})
+      reversed.reduce((acc, cur) =>{
+        if(!cur.fgl) return acc + cur.fgl;
+        cumulativePNL.push({pnl: acc + cur.fgl, fgl:cur.fgl , date: moment(cur.entrydate).format("YYYY-MM-DD hh:mm")})
+        return acc + cur.fgl;
+      },0)
+      setTradesWithBalance(cumulativePNL)
+    }
+
+  },[trades])
+
+  useEffect(()=>{
+    let now = new Date;
+    let lastMonth = new Date()
+    let lastYear = new Date()
+    lastMonth.setMonth(now.getMonth()-1)
+    lastYear.setMonth(now.getMonth() - 12)
+    setDateNow(now)
+    setDateLastMonth(lastMonth)
+    setDateLastYear(lastYear)
+    
+  },[])
 
   
 
@@ -95,18 +127,14 @@ function DbOverall (props){
       </div>
 
       <div className="w-full  col-span-3 border-l-4 border-r-4 border-b-4 border-black border-opacity-90">
-        <VictoryChart width={1000} height={300} >
+        <VictoryChart width={1000} height={300} theme={VictoryTheme.material}>
           {
-            trades &&
-            <VictoryArea theme={VictoryTheme.material}
-              data={trades.map(tr =>({
-                ...tr,
-                exitdate: tr.exitdate
-              })).reverse()}
-              x="exitdate"
-              y="fgl"
-              domain={{ y: [Math.min(...trades.map(tr => tr.fgl)), Math.max(...trades.map(tr => tr.fgl))] }}
-              style={{ data: { fill: "rgba(0, 0, 0, 0.2)" } }}
+            tradesWithBalance &&
+            <VictoryLine 
+              data={tradesWithBalance}
+              x="date"
+              y="pnl"
+              domain={{x: [0, 10]}}
             />
             
           }

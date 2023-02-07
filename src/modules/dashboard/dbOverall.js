@@ -1,56 +1,20 @@
 import { useEffect, useRef, useState } from "react";
+import { VictoryLine, VictoryChart, VictoryAxis, VictoryArea, VictoryTheme } from 'victory';
+import moment from "moment";
+import DbLosses from "./dbLosses";
+import DbGL from "./dbOverallComps/dbGL";
+import DbGLR from "./dbOverallComps/dbGLR";
+import DbWins from "./dbOverallComps/dbWins";
+import DbWR from "./dbOverallComps/dbWR";
 
 function DbOverall (props){
   const userInfo = props.userInfo
   const {trades, setTrades} = props.tradesContext
 
-  const [winRate, setWinRate] = useState(null)
-  const [gainLoss, setGainLoss] = useState(null)
-  const [gainLossR, setGainLossR] = useState(null)
-
   const [overallTrades, setOverallTrades] = useState(true)
   const [lastWeekTrades, setLastWeekTrades] = useState(null)
   const [lastMonthTrades, setLastMonthTrades] = useState(null)
-
-  const getWinRate = () =>{
-    let winningTrades = trades.filter(t => t.fgl > 0)
-    let totalTrades = trades.filter(t => t.fgl)
-    
-    let wr = Math.floor((winningTrades.length / totalTrades.length) * 100)
-    setWinRate(wr)
-  }
-
-  const getGainLoss = () =>{
-    let allValues = []
-    trades.forEach((t,i) =>{t.fgl && allValues.push(t.fgl)})
-    let gl = allValues.reduce((acc, cur) =>{ return acc + cur},0)
-    setGainLoss(gl)
-  }
-
-  const getGainLossR = () =>{
-    let winR = []
-    let lossR = []
-    trades.forEach(tr =>{
-      if(!tr.tp || !tr.sl || !tr.exit || !tr.entry){
-        return
-      }
-      if(tr.position){
-        let r = Math.round(((tr.exit - tr.entry) / (tr.entry - tr.sl)) * 100) / 100
-        r > 0 ? winR.push(r) : lossR.push(r)
-      }
-    })
-    if((winR.length + lossR.length) < 2){
-      return winR.length ? setGainLossR(winR[0]) : setGainLossR(lossR[0])
-    }
-    let winSum = winR.reduce((acc, cur)=>{
-      return acc + cur;
-    },0)
-    let lossSum = lossR.reduce((acc, cur)=>{
-      return acc + cur;
-    },0)
-    let result = Math.round(winSum / Math.abs(lossSum) * 100) / 100
-    setGainLossR(result)
-  }
+  
 
   const handleLastMonthTrades = () =>{
     setLastMonthTrades(true)
@@ -63,8 +27,14 @@ function DbOverall (props){
     setOverallTrades(true)
     setLastWeekTrades(false)
   }
+
+  const cumulativePNL = trades.map((tr, i) => ({
+    exitdate: tr.exitdate,
+    balance: trades.slice(0, i + 1).reduce((sum, trade) => sum + trade.fgl, 0)
+  }));
+
   useEffect(()=>{
-    //Get WIN RATE
+    //Get LAST MONTH TRADES
     if(lastMonthTrades && userInfo && userInfo.username){
       fetch(`http://localhost:5000/trades-get-month?username=${userInfo.username}`)
       .then(response => response.json())
@@ -76,7 +46,7 @@ function DbOverall (props){
   },[lastMonthTrades])
 
   useEffect(()=>{
-    //Get WIN RATE
+    //Get OVER ALL TRADES
     if(overallTrades && userInfo && userInfo.username){
       fetch(`http://localhost:5000/trades-get?username=${userInfo.username}`)
       .then(response => response.json())
@@ -88,76 +58,73 @@ function DbOverall (props){
     }
   },[overallTrades])
 
-  useEffect(()=>{
-    //Get WIN RATE
-    if(trades){
-      getWinRate()
-      getGainLoss()
-      getGainLossR()
-    }
-  },[trades])
+  
 
   
   return(
-    <div className="grid grid-cols-3">
-      <div className='overall text-white bg-striped-header flex justify-center items-center h-12'>
-        <button className={`border border-ruby ${overallTrades && 'bg-ruby'} bg-opacity-80 
-        h-6 p-1 flex items-center justify-center w-1/2 rounded-sm`}
+    <div className="grid grid-cols-3 ">
+
+      <div className='overall  text-white bg-striped-header flex justify-center items-center h-12'>
+        <button className={` ${overallTrades ? ' bg-green-500 text-black' 
+        : 'border border-gray-500 border-dashed' } bg-opacity-80 h-6 p-1 flex items-center justify-center w-1/2 rounded-sm`}
         onClick={handleOverallTrades}>OVERALL</button>
-        
       </div>
+
       <div className="weekly text-white bg-striped-header flex justify-center items-center h-12">
-        <button className="border border-ruby bg-opacity-80
+        <button className="border border-gray-500 bg-opacity-80
          h-6 p-1 flex items-center justify-center w-1/2 rounded-sm">LAST WEEK</button>
       </div>
+
       <div className="monthly text-white bg-striped-header flex justify-center items-center h-12">
-        <button className={`border border-ruby ${lastMonthTrades && 'bg-ruby'} bg-opacity-80 
+        <button className={`${lastMonthTrades ? 'bg-green-500 text-black' 
+        : 'border border-gray-500 border-dashed'} bg-opacity-80 
         h-6 p-1 flex items-center justify-center w-1/2 rounded-sm`} onClick={handleLastMonthTrades}>LAST MONTH</button>
-         
       </div>
-      {
-        
-        <div className="grid grid-rows-2 items-center border border-gray-400">
-          <div className="flex justify-center text-xl">
-            <span>{winRate === 0 ? '0' : winRate}% </span>
-          </div>
-          <div className="flex justify-center text-xs">
-            <span>(W/R) Win Rate </span>
-          </div>
-          
-        </div>
-        
-        
-      }
-     
-    
-      {
-        gainLoss && 
-        <div className="grid grid-rows-2 items-center border border-gray-400">
-          <div className="flex justify-center text-xl">
-            <span>{gainLoss > 0 ? `+${gainLoss}` : `${gainLoss}`} </span>
-          </div>
-          <div className="flex justify-center text-xs">
-            <span>(G/L) Gain Loss ($) </span>
-          </div>
-          
-        </div>
-      }
 
       {
-        gainLossR && 
-        <div className="grid grid-rows-2 items-center border border-gray-400">
-          <div className="flex justify-center text-xl">
-            <span>{gainLossR} </span>
-          </div>
-          <div className="flex justify-center text-xs">
-            <span>(R G/L) Gain Loss Average (R) </span>
-          </div>
-          
-        </div>
+      //-----------------------------------------------------------------------------------------------------------------
       }
+
+      <div className="general-stats col-span-3 grid grid-cols-6 bg-striped-content-big border-4 border-black border-opacity-90">
+        <DbWins trades={trades}/>
+        <DbLosses trades={trades}/>
+        <DbWR trades={trades}/>
+        <DbGL trades={trades}/>
+        <DbGLR trades={trades}/>
+        
+      </div>
+
+      <div className="w-full  col-span-3 border-l-4 border-r-4 border-b-4 border-black border-opacity-90">
+        <VictoryChart width={1000} height={300} >
+          {
+            trades &&
+            <VictoryArea theme={VictoryTheme.material}
+              data={trades.map(tr =>({
+                ...tr,
+                exitdate: tr.exitdate
+              })).reverse()}
+              x="exitdate"
+              y="fgl"
+              domain={{ y: [Math.min(...trades.map(tr => tr.fgl)), Math.max(...trades.map(tr => tr.fgl))] }}
+              style={{ data: { fill: "rgba(0, 0, 0, 0.2)" } }}
+            />
+            
+          }
+          <VictoryAxis
+            tickFormat={(t) => moment(t).format('MM/DD/YYYY')}
+            style={{ tickLabels: { fontSize: 10 } }}
+          />
+          <VictoryAxis dependentAxis />
+
+          
+        </VictoryChart>
+
+      </div>
 
       
+
+
+
       
     </div>
   )

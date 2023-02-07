@@ -36,7 +36,7 @@ function Header () {
     text-white border-b border-jet bg-striped-header w-full" > 
     
 
-      <div className="header-logo text-4xl font-bold ">T J</div>
+      <div className="header-logo text-4xl font-bold "><em>TJ.</em></div>
 
       {
         !userLoggedIn ? 

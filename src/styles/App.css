@@ -67,7 +67,7 @@ input:focus, select:focus{
 
 .triangle-load{
   position: relative;
-  top:12rem;
+  top:8rem;
   transform: translateY(50%);
 }
 
@@ -117,8 +117,6 @@ table .trades-tr:nth-of-type(odd){
   
   text-shadow: -1px 1px 0 var(--steel-blue), 1px 1px 0 var(--steel-blue), 1px -1px 0 var(--steel-blue)
   , -1px -1px 0 var(--steel-blue), #000 1px 0 5px, #000 1px 0 5px ; 
-  
-                        
 }
 
 .font-red-outline{
@@ -127,7 +125,6 @@ table .trades-tr:nth-of-type(odd){
   , -1px -1px 0 var(--red-orange), #000 1px 0 5px, #000 1px 0 5px ; 
                         
 }
-
 
 
 .th-wrapper{
@@ -169,10 +166,31 @@ table .trades-tr:nth-of-type(odd){
   background-size: 500px;
 }
 
+.bg-striped-overall{
+  background:linear-gradient(rgba(255, 255, 255, 0.9),rgba(0,0,0,.7)), url(../images/grey-mesh.jpg);
+  background-position: center;
+  background-size: 500px;
+}
+
 .bg-striped-content{
   background:linear-gradient(rgba(255, 255, 255, 0.83), rgba(255, 255, 255, 0.83)), url(../images/grey-mesh.jpg);
   background-position: center;
   background-size: 500px;
+}
+
+.bg-striped-content-big{
+  background:linear-gradient(rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.78)), url(../images/grey-mesh.jpg);
+  background-position: center;
+  background-size: 1000px;
+}
+
+
+.bg-dev{
+  background:linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../images/dev-pattern.png);
+  background-position: center;
+  background-size: 50px;
+  background-repeat: repeat;
+  
 }
 
 .bg-modern{

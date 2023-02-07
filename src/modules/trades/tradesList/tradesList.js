@@ -40,6 +40,7 @@ function TradesList(props){
           setTrades(data.trades)
           setPageCount(Math.ceil(data.count / limitPerPage) - 1)
           setIsLoading(false)
+          
         }
       })
     }
@@ -57,7 +58,7 @@ function TradesList(props){
           setPageCount(Math.ceil(data.count / limitPerPage) - 1)
           setIsLoading(false)
           console.log(data);
-          setSearchIsLoading(false)
+          
         }
       })
     }
@@ -128,6 +129,7 @@ function TradesList(props){
   
   useEffect(()=>{
     if(debouncedSearch && !sortValue){
+      setPage(0)
       fetchSearchedTrades()
     }
     if(!debouncedSearch && !sortValue){
@@ -140,7 +142,8 @@ function TradesList(props){
     <Dialog.Root>
       <div className="w-full mt-8">
         <div className="table-top-bar w-full grid grid-cols-2 mt-1 mb-5">
-          <Dialog.Trigger className="cols-span-1" asChild>
+          <Dialog.Trigger className="cols-span-1 " asChild>
+            
             <button className=" h-12 w-36  bg-steel-blue bg-opacity-70
             hover:bg-opacity-50 transition-all rounded text-white shadow-md ">New Trade</button>
           </Dialog.Trigger>

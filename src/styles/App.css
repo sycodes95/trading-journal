@@ -160,41 +160,57 @@ table .trades-tr:nth-of-type(odd){
   background-size: 150px;
 }
 
+.bg-striped-125px{
+  background:linear-gradient(rgba(255, 255, 255, 0.15), rgba(0,0,0,.1)), url(../images/tarkov-stripes.webp);
+  background-position: center;
+  background-size: 125px;
+}
+
+
 .bg-striped-header{
   background:linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(../images/grey-mesh.jpg);
   background-position: center;
   background-size: 500px;
 }
 
-.bg-striped-overall{
-  background:linear-gradient(rgba(255, 255, 255, 0.9),rgba(0,0,0,.7)), url(../images/grey-mesh.jpg);
-  background-position: center;
-  background-size: 500px;
-}
 
 .bg-striped-content{
-  background:linear-gradient(rgba(255, 255, 255, 0.83), rgba(255, 255, 255, 0.83)), url(../images/grey-mesh.jpg);
+  background:linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82)), url(../images/grey-mesh.jpg);
   background-position: center;
   background-size: 500px;
 }
 
 .bg-striped-content-big{
   background:linear-gradient(rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.78)), url(../images/grey-mesh.jpg);
+  background-position: cover;
+  background-size: 800px;
+}
+
+.bg-striped-dark{
+  background:linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(../images/grey-mesh.jpg);
   background-position: center;
-  background-size: 1000px;
+  background-size: 800px;
+
+}
+
+.bg-striped-yellow{
+  background:linear-gradient(rgba(255, 234, 0, 0.9),rgba(255, 234, 0, 0.9)), url(../images/grey-mesh.jpg);
+  background-position: center;
+  background-size: 500px;
 }
 
 
+
 .bg-dev{
-  background:linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../images/dev-pattern.png);
+  background:url(../images/dev-pattern.png);
   background-position: center;
-  background-size: 50px;
+  background-size: 75px;
   background-repeat: repeat;
   
 }
 
 .bg-modern{
-  background:linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(../images/modern-texture.webp);
+  background:linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), url(../images/modern-texture.webp);
   background-position: center;
   background-size: cover;
 
@@ -279,6 +295,11 @@ table .trades-tr:nth-of-type(odd){
 }
 
 .trades-search-bar:focus{
+  caret-color: azure;
+  
+}
+
+.caret-white:focus{
   caret-color: azure;
   
 }

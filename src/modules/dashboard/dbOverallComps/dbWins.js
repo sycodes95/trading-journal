@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react"
+import Icon from '@mdi/react';
+import { mdiThumbUpOutline } from '@mdi/js';
 
+
+import { ReactSVG } from "react-svg"
 
 function DbWins (props) {
 
@@ -18,13 +22,18 @@ function DbWins (props) {
   },[trades])
 
   return (
-    <div className="grid grid-rows-2 items-center text-green-600">
-      <div className="flex justify-center text-xl font-bold text-green-600">
-        <span>{wins === 0 ? '0' : wins} </span>
+    <div className="flex justify-center items-center text-white">
+      
+      <div className="m-2 bg-green-600 rounded-md w-10">
+        <div className="flex justify-center text-xl font-bold ">
+          <span>{wins === 0 ? '0' : wins} </span>
+        </div>
+        <div className="flex justify-center text-xs">
+          <span>Wins</span>
+        </div>
+
       </div>
-      <div className="flex justify-center text-xs">
-        <span>Wins</span>
-      </div>
+      
       
     </div>
   )

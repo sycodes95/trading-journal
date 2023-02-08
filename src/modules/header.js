@@ -33,15 +33,15 @@ function Header () {
 
   return(
     <div className="header relative z-10 max-h-12 h-12  pl-8 pr-8 flex items-center justify-between
-    text-white border-b border-jet bg-striped-header w-full" > 
+    text-white  bg-white w-full " > 
     
 
-      <div className="header-logo text-4xl font-bold "><em>TJ.</em></div>
+      <div className="header-logo text-4xl font-bold text-black"><em>TJ.</em></div>
 
       {
         !userLoggedIn ? 
 
-        <div className="header-nav grid grid-cols-2 font-thin ">
+        <div className="header-nav grid grid-cols-2 font-thin text-black">
           <Link to='/login'>
             <span className="hover:cursor-pointer">Log in</span>
           </Link>
@@ -52,7 +52,7 @@ function Header () {
 
         :
 
-        <div className="header-nav grid grid-cols-2 gap-x-2 font-thin">
+        <div className="header-nav grid grid-cols-2 gap-x-2 font-thin text-black">
           
           <Link to='/profile' className="">
             <span className="polygon-child hover:cursor-pointer">Profile</span>

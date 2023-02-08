@@ -12,7 +12,7 @@ function Sidebar () {
 
   return(
     <div className="sidebar h-full grid grid-cols-1 auto-rows-min justify-center pt-8
-    relative border border-r-gray-300 ">
+    relative ">
       
       <Link to='/dashboard' className="flex pl-8 items-center h-8 ">
         <ReactSVG className="text-black h-4 w-4 fill-current mr-2 "src={dashboardSVG}/>

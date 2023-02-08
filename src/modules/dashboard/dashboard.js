@@ -43,12 +43,12 @@ function Dashboard (){
     }
   }, [])
   return(
-    <div className="p-12 grid grid-cols-4">
-      <div className="col-span-1">
+    <div className="p-12 ">
+      <div className="">
         
         <DbCalendar userInfo={userInfo} tradesContext={{trades, setTrades}}/>
       </div>
-      <div className="col-span-3">
+      <div className="">
         <DbOverall userInfo={userInfo} tradesContext={{trades, setTrades}} />
       </div>
       

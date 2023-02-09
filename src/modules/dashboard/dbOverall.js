@@ -12,6 +12,7 @@ import DbGLR from "./dbOverallComps/dbGLR";
 import DbWins from "./dbOverallComps/dbWins";
 import DbWR from "./dbOverallComps/dbWR";
 import DbPNLGraph from "./dbPNLGraph";
+import DbMainGraph from "./dbMainGraph";
 
 function DbOverall (props){
   const userInfo = props.userInfo
@@ -90,10 +91,9 @@ function DbOverall (props){
 
   
   return(
-    <div className="grid grid-cols-4  gap-x-4">
-     
+    <div className="grid grid-cols-4  gap-x-4 gap-y-4">
       <div className="section-info col-span-4 text-black p-4 bg-yellow-500 bg-opacity-70 rounded-sm
-        grid mb-8">
+        grid  row-start-1">
         <div className="">
           <ReactSVG className="h-14 w-14 " src={tradesSVG}/>
         </div>
@@ -110,8 +110,9 @@ function DbOverall (props){
         </div>
       </div>
 
-      <div className="w-full grid grid-rows-6 col-span-1 row-start-2 row-span-1 ">
-        <div className="row-span-1 grid grid-cols-3 bg-striped-125px text-white rounded-sm">
+      <div className="w-full flex flex-col col-span-1 row-start-2 row-span-1 ">
+
+        <div className="row-span-1 grid grid-cols-3  text-white rounded-sm h-6 bg-black bg-opacity-60 top-left-round bottom-right-round">
 
           <div className='overall col-start-1 col-span-1  flex justify-center items-center 
           w-full'>
@@ -144,31 +145,41 @@ function DbOverall (props){
         {
         //-----------------------------------------------------------------------------------------------------------------
         }
-
-        <div className="general-stats row-span-5 grid grid-cols-3 grid-rows-2 bg-striped-content-big bg-opacity-20">
+        <div className="general-stats row-span-5 grid grid-cols-3 grid-rows-2 bg-black bg-opacity-20">
           
           <DbWins trades={trades}/>
           <DbLosses trades={trades}/>
           <DbWR trades={trades}/>
           <DbGL trades={trades}/>
           <DbGLR trades={trades}/>
-          
         </div>
 
+        
 
+      </div>
+
+      <div className="col-span-3  row-span-2 flex flex-col ">
+        
+        <div className="flex items-center justify-center col-span-1 bg-black bg-opacity-60
+        text-white text-xs rounded-sm h-6 top-left-round bottom-right-round">
+          <span>VARIABLES</span>
+        </div>
+        <div className="row-span-5 h-full bg-dev-invert bg-opacity-90">
+          <DbMainGraph trades={trades}/>
+        </div>
+      </div>
+
+      <div className="">
+        <div className="flex items-center justify-center col-span-1 row-span-1 bg-black bg-opacity-60
+      text-white rounded-sm h-6 text-xs top-left-round bottom-right-round">
+          <span>PERFORMANCE (PNL)</span>
+        </div>
+        <div className="bg-striped-content-big">
+          <DbPNLGraph trades={trades}/>
+        </div>
       </div>
 
       
-      <div className="w-full col-span-3 row-span-1 grid grid-rows-6 ">
-        <div className="flex items-center justify-center col-span-1 row-span-1 bg-dev
-        text-white rounded-sm">
-          <span>PERFORMANCE (PNL)</span>
-        </div>
-        <div className="row-span-5 ">
-          <DbPNLGraph trades={trades}/>
-        </div>
-        
-      </div>
 
       
 

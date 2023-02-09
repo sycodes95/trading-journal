@@ -182,7 +182,7 @@ function TradesList(props){
         </div>
 
         <div className="trade-table-con scrollbar-color  min-h-500px max-h-screen
-        overflow-x-scroll z-10 bg-white col-span-2" ref={tableRef} onWheel={handleWheelScroll}>
+        overflow-x-scroll z-10 bg-black bg-opacity-30 col-span-2" ref={tableRef} onWheel={handleWheelScroll}>
           
           <table className="trade-table-con ">
             <TradeListHead tradesContext={{trades, setTrades}} pageContext={{page, setPage}}

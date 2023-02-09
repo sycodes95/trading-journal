@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { VictoryLine, VictoryChart, VictoryAxis, VictoryArea, VictoryTheme } from 'victory';
+import { VictoryLine, VictoryChart, VictoryAxis, VictoryArea, VictoryTheme, VictoryLabel } from 'victory';
 
 import moment from "moment";
 
@@ -12,7 +12,7 @@ function DbPNLGraph (props) {
   useEffect(()=>{
     
     if(trades){
-      let cumulativePNL = []
+      let cumulativePNL = [] 
       let reversed = trades.reverse()
       reversed.forEach((tr, i) =>{
         tr.entrydate = new Date(moment(tr.entrydate).format("YYYY-MM-DD hh:mm"))
@@ -32,7 +32,7 @@ function DbPNLGraph (props) {
 
 
   return(
-    <VictoryChart width={800} height={100} padding={{top: 20, bottom:20, left:40, right:40}} domainPadding={{ x: 10, y: 10 }}  theme={VictoryTheme.grayscale}>
+    <VictoryChart width={200} height={200} padding={{top: 10, bottom:10, left:30, right:15}} domainPadding={{ x: 10, y: 10 }}  theme={VictoryTheme.grayscale}>
       {
         tradesWithBalance &&
         <VictoryArea 
@@ -40,14 +40,16 @@ function DbPNLGraph (props) {
           x="date"
           y="pnl"
           
-          style={ { data: { stroke: "#000000", strokeWidth: 2, fill:"rgba(0, 0, 0, 0.3)"}}}
+          style={ { data: { stroke: "#7393B3", strokeWidth: 1, fill:"rgba(115, 147, 179, 0.3)"}}}
         />
       }
       <VictoryAxis
         tickFormat={(t) => moment(t).format('MM/DD/YYYY')}
-        style={{ tickLabels: { fontSize: 8 } }}
+        tickLabelComponent={<VictoryLabel angle={0} />}
+        style={{ axis:{stroke: 'grey'}, tickLabels: { fontSize: 0} }}
+        
       />
-      <VictoryAxis dependentAxis style={{ tickLabels: { fontSize: 8 } }}/>
+      <VictoryAxis dependentAxis style={{axis:{stroke: 'grey'}, tickLabels: { fontSize: 6,  stroke: 'grey', strokeWidth:0.2} }}/>
 
       
     </VictoryChart>

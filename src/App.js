@@ -32,10 +32,10 @@ function App() {
         <div className='side cols-start-1 col-span-1 cols-end-2 rows-start-2 rows-end-3'>
           <Sidebar/>
         </div>
-        <div className='content cols-start-2 col-span-1 cols-end-3 rows-start-2 rows-end-3 bg-striped-content
+        <div className='content cols-start-2 col-span-1 cols-end-3 rows-start-2 rows-end-3 bg-dev
         border-t border-l border-dashed border-gray-300'>
           <Routes>
-            <Route path="/" exact element={<Home/>}/>
+            <Route path="/" exact element={<Dashboard/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/logout" element={<Logout/>}/>
             <Route path="/signup" element={<Signup/>}/>

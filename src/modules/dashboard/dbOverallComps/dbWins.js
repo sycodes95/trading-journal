@@ -23,19 +23,18 @@ function DbWins (props) {
 
   return (
     <div className="flex justify-center items-center text-white">
-      
-      <div className="m-2 bg-green-600 rounded-md w-10">
-        <div className="flex justify-center text-xl font-bold ">
-          <span>{wins === 0 ? '0' : wins} </span>
+      <div className="m-2 bg-steel-blue bg-opacity-50 rounded-md w-14 h-14 flex items-center">
+        <div className="w-full">
+          <div className="flex justify-center text-xl font-bold ">
+            <span>{wins === 0 ? '0' : wins} </span>
+          </div>
+          <div className="flex justify-center text-xs">
+            <span>Wins</span>
+          </div>
         </div>
-        <div className="flex justify-center text-xs">
-          <span>Wins</span>
-        </div>
-
       </div>
-      
-      
     </div>
+  
   )
 }
 

@@ -148,6 +148,11 @@ table .trades-tr:nth-of-type(odd){
   border-radius: 2.5px;
 }
 
+.slant-all{
+  clip-path: polygon(2% 0%, 98% 0%, 100% 100%, 0% 100%);
+  border-radius: 2.5px;
+}
+
 .bg-striped{
   background: url(../images/tarkov-stripes.webp);
   background-position: center;
@@ -187,9 +192,9 @@ table .trades-tr:nth-of-type(odd){
 }
 
 .bg-striped-dark{
-  background:linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(../images/grey-mesh.jpg);
+  background:linear-gradient(rgba(0,0,0,.9), rgba(0,0,0,.9)), url(../images/grey-mesh.jpg);
   background-position: center;
-  background-size: 800px;
+  background-size: 700px;
 
 }
 
@@ -202,10 +207,32 @@ table .trades-tr:nth-of-type(odd){
 
 
 .bg-dev{
+  background:linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),url(../images/dev-pattern.png);
+  background-position: center;
+  background-size: 75px;
+  
+  
+}
+
+.bg-dev-invert{
   background:url(../images/dev-pattern.png);
   background-position: center;
   background-size: 75px;
   background-repeat: repeat;
+  filter:invert(100%);
+  
+}
+
+
+
+
+
+.bg-grainy{
+  background:url(../images/black-texture-grainy.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: repeat;
+  filter:saturate(400%);
   
 }
 

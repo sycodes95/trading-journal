@@ -93,9 +93,9 @@ th, td{
 }
 
 table tr:nth-of-type(even){
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/tarkov-stripes.webp);
+  background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url(../images/grey-mesh.jpg);
   background-position: center;
-  background-size: 100px;
+  background-size: 800px;
   
 }
 table .trades-tr:nth-of-type(odd){

@@ -96,30 +96,30 @@ function TradeListHead(props) {
 
   
   return(
-    <thead className="bg-black bg-opacity-30 ">
+    <thead className="bg-striped-content ">
       {
         isLoading ?
         <tr className=" text-white text-xs font-bold ">
           <th colSpan="1" className=" th-wrapper hover:text-yellow-100 hover:cursor-pointer transition-all">
-            <div className="h-4  pl-4 pr-4 bg-dev"></div>
+            <div className="h-4 slant-start pl-4 pr-4 bg-black"></div>
           </th>
         </tr>
         :
         <tr className=" text-white text-xs font-bold ">
           <th colSpan="1" className=" th-wrapper hover:text-yellow-100 hover:cursor-pointer transition-all">
-            <div className="h-4  pl-4 pr-4 bg-dev">d</div>
+            <div className="h-4 slant-start pl-4 pr-4 bg-black">d</div>
           </th>
           <th colSpan="1" className=" th-wrapper hover:text-yellow-100 hover:cursor-pointer transition-all">
-            <div className="h-4  pl-4 pr-4 bg-dev"></div>
+            <div className="h-4 slant-right pl-4 pr-4 bg-black"></div>
           </th>
           <th colSpan="1" className=" th-wrapper hover:text-yellow-100 hover:cursor-pointer transition-all">
-            <div className="h-4  pl-4 pr-4 bg-dev">#</div>
+            <div className="h-4 slant-right pl-4 pr-4 bg-black">#</div>
           </th>
           {
             tableHeadersAndField.map((e, i) =>(
-              <th colSpan="1" className=" hover:text-yellow-100 hover:cursor-pointer transition-all"
+              <th colSpan="1" className="th-wrapper hover:text-yellow-100 hover:cursor-pointer transition-all"
               onClick={()=>handleSort(e,i)}>
-                <div className="h-4  pl-4 pr-4 bg-dev min-w-max min-h-max ">{e.header}</div> 
+                <div className="h-4 slant-right pl-4 pr-4 bg-black min-w-max min-h-max ">{e.header}</div> 
               </th>
             ))
           } 

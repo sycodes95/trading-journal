@@ -18,7 +18,7 @@ function TradeListBody(props) {
   
 
   return(
-    <tbody className="">
+    <tbody className="bg-white">
       {
         isLoading ?
           <th colSpan='18' className="triangle-load max-w-1420px h-full flex items-center ">

@@ -144,7 +144,7 @@ function TradesList(props){
         <div className="table-top-bar w-full grid grid-cols-2 mt-1 mb-5">
           <Dialog.Trigger className="cols-span-1 " asChild>
             
-            <button className=" h-12 w-36  bg-steel-blue bg-opacity-70
+            <button className=" h-12 w-36  bg-steel-blue bg-opacity-80
             hover:bg-opacity-50 transition-all rounded text-white shadow-md ">New Trade</button>
           </Dialog.Trigger>
           <div className="cols-span-1 w-full flex flex-row justify-end items-center ">
@@ -182,7 +182,7 @@ function TradesList(props){
         </div>
 
         <div className="trade-table-con scrollbar-color  min-h-500px max-h-screen
-        overflow-x-scroll z-10 bg-black bg-opacity-30 col-span-2" ref={tableRef} onWheel={handleWheelScroll}>
+        overflow-x-scroll z-10 bg-white  col-span-2" ref={tableRef} onWheel={handleWheelScroll}>
           
           <table className="trade-table-con ">
             <TradeListHead tradesContext={{trades, setTrades}} pageContext={{page, setPage}}

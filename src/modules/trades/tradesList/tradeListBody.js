@@ -28,8 +28,8 @@ function TradeListBody(props) {
         :
         trades && 
         trades.map((t, i) =>( 
-        <tr className={`trades-tr border-gray-300  h-4 text-white ${!t.fgl && 'font-black-outline'} 
-        ${t.fgl && t.fgl > 0 && 'font-blue-outline'} ${t.fgl && t.fgl < 0 && 'font-red-outline'} outline-1 outline`}>
+        <tr className={`trades-tr   h-4 text-white ${!t.fgl && 'font-black-outline'} 
+        ${t.fgl && t.fgl > 0 && 'font-blue-outline'} ${t.fgl && t.fgl < 0 && 'font-red-outline'} `}>
           <td colSpan="1" className=" text-center text-xs text-black fill-current
           hover:cursor-pointer transition-all">
             <Dialog.Root>

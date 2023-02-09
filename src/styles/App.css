@@ -93,7 +93,9 @@ th, td{
 }
 
 table tr:nth-of-type(even){
-  background: linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.8)), url(../images/grey-mesh.jpg);
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/tarkov-stripes.webp);
+  background-position: center;
+  background-size: 100px;
   
 }
 table .trades-tr:nth-of-type(odd){
@@ -115,14 +117,14 @@ table .trades-tr:nth-of-type(odd){
 
 .font-blue-outline{
   
-  text-shadow: -1px 1px 0 var(--steel-blue), 1px 1px 0 var(--steel-blue), 1px -1px 0 var(--steel-blue)
-  , -1px -1px 0 var(--steel-blue), #000 1px 0 5px, #000 1px 0 5px ; 
+  text-shadow: -1px 1px 0 navy, 1px 1px 0 navy, 1px -1px 0 navy
+  , -1px -1px 0 navy, #000 1px 0 5px, #000 1px 0 5px ; 
 }
 
 .font-red-outline{
   
-  text-shadow: -1px 1px 0 var(--red-orange), 1px 1px 0 var(--red-orange), 1px -1px 0 var(--red-orange)
-  , -1px -1px 0 var(--red-orange), #000 1px 0 5px, #000 1px 0 5px ; 
+  text-shadow: -1px 1px 0 darkred, 1px 1px 0 darkred, 1px -1px 0 darkred
+  , -1px -1px 0 darkred, #000 1px 0 5px, #000 1px 0 5px ; 
                         
 }
 

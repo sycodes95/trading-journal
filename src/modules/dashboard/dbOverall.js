@@ -112,13 +112,14 @@ function DbOverall (props){
 
       <div className="w-full flex flex-col col-span-1 row-start-2 row-span-1 ">
 
-        <div className="row-span-1 grid grid-cols-3  text-white rounded-sm h-6 bg-black bg-opacity-60 top-left-round bottom-right-round">
+        <div className="row-span-1 grid grid-cols-3  text-black rounded-sm  bg-white top-left-round bottom-right-round
+        font-bold text-xs h-6 border border-gray-300">
 
           <div className='overall col-start-1 col-span-1  flex justify-center items-center 
           w-full'>
 
             <button className={` ${overallTrades && ' border-b border-white'}
-            bg-opacity-80 h-6 p-1 flex items-center justify-center text-xs`}
+            bg-opacity-80 h-6 p-1 flex items-center justify-center text-xs hover:text-gray-500 transition-all`}
             onClick={handleOverallTrades}>OVERALL</button>
             
           </div>
@@ -145,7 +146,7 @@ function DbOverall (props){
         {
         //-----------------------------------------------------------------------------------------------------------------
         }
-        <div className="general-stats row-span-5 grid grid-cols-3 grid-rows-2 bg-black bg-opacity-20">
+        <div className="general-stats row-span-5 grid grid-cols-3 grid-rows-2 bg-white bg-opacity-20">
           
           <DbWins trades={trades}/>
           <DbLosses trades={trades}/>
@@ -158,23 +159,24 @@ function DbOverall (props){
 
       </div>
 
-      <div className="col-span-3  row-span-2 flex flex-col ">
+      <div className="col-span-3  row-span-2 flex flex-col">
         
-        <div className="flex items-center justify-center col-span-1 bg-black bg-opacity-60
-        text-white text-xs rounded-sm h-6 top-left-round bottom-right-round">
+        <div className="flex items-center justify-center col-span-1 bg-white 
+        text-black border border-gray-300 text-xs rounded-sm h-6 top-left-round bottom-right-round">
           <span>VARIABLES</span>
         </div>
-        <div className="row-span-5 h-full bg-dev-invert bg-opacity-90">
-          <DbMainGraph trades={trades}/>
+        <div className="row-span-5 h-full bg-white">
+          <DbMainGraph trades={trades} userInfo={userInfo}/>
+          
         </div>
       </div>
 
       <div className="">
-        <div className="flex items-center justify-center col-span-1 row-span-1 bg-black bg-opacity-60
-      text-white rounded-sm h-6 text-xs top-left-round bottom-right-round">
+        <div className="flex items-center justify-center col-span-1 row-span-1 bg-white 
+      text-black border border-gray-300 rounded-sm h-6 text-xs top-left-round bottom-right-round">
           <span>PERFORMANCE (PNL)</span>
         </div>
-        <div className="bg-striped-content-big">
+        <div className="bg-white">
           <DbPNLGraph trades={trades}/>
         </div>
       </div>

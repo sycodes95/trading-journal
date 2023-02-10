@@ -36,7 +36,7 @@ function Trades () {
   return(
     
       <div className="relative w-full p-12 grid justify-center" >
-        <div className="section-info text-black p-4 bg-green-500 bg-opacity-70 rounded-sm
+        <div className="section-info text-black p-4 bg-ruby bg-opacity-50 rounded-sm
         grid ">
           <div className="">
             <ReactSVG className="h-14 w-14 " src={tradesSVG}/>

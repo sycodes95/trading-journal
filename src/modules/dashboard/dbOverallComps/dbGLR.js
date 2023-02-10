@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 
 function DbGLR (props) {
   const trades = props.trades
+
   const [gainLossR, setGainLossR] = useState(null)
 
   const getGainLossR = () =>{

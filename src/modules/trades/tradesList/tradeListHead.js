@@ -99,27 +99,28 @@ function TradeListHead(props) {
     <thead className="bg-striped-content ">
       {
         isLoading ?
-        <tr className=" text-white text-xs font-bold ">
-          <th colSpan="1" className=" th-wrapper hover:text-yellow-100 hover:cursor-pointer transition-all">
-            <div className="h-4 slant-start pl-4 pr-4 bg-black"></div>
+        <tr className="  text-xs font-bold ">
+          <th colSpan="1" className=" hover:text-gray-500 hover:cursor-pointer transition-all">
+            <div className="h-4 pl-4 pr-4 bg-white border border-gray-300 top-left-round bottom-right-round"></div>
           </th>
         </tr>
         :
-        <tr className=" text-white text-xs font-bold ">
-          <th colSpan="1" className=" th-wrapper hover:text-yellow-100 hover:cursor-pointer transition-all">
-            <div className="h-4 slant-start pl-4 pr-4 bg-black">d</div>
+        <tr className=" text-black text-xs font-bold ">
+          <th colSpan="1" className="  hover:text-gray-500 hover:cursor-pointer transition-all">
+            <div className="h-4 pl-4 pr-4 bg-white border border-gray-300 top-left-round bottom-right-round">d</div>
           </th>
-          <th colSpan="1" className=" th-wrapper hover:text-yellow-100 hover:cursor-pointer transition-all">
-            <div className="h-4 slant-right pl-4 pr-4 bg-black"></div>
+          <th colSpan="1" className=" hover:text-gray-500 hover:cursor-pointer transition-all">
+            <div className="h-4 pl-4 pr-4 bg-white border border-gray-300 top-left-round bottom-right-round"></div>
           </th>
-          <th colSpan="1" className=" th-wrapper hover:text-yellow-100 hover:cursor-pointer transition-all">
-            <div className="h-4 slant-right pl-4 pr-4 bg-black">#</div>
+          <th colSpan="1" className=" hover:text-gray-500 hover:cursor-pointer transition-all">
+            <div className="h-4 pl-4 pr-4 bg-white border border-gray-300 top-left-round bottom-right-round">#</div>
           </th>
           {
             tableHeadersAndField.map((e, i) =>(
-              <th colSpan="1" className="th-wrapper hover:text-yellow-100 hover:cursor-pointer transition-all"
+              <th colSpan="1" className=" hover:text-gray-500 hover:cursor-pointer transition-all"
               onClick={()=>handleSort(e,i)}>
-                <div className="h-4 slant-right pl-4 pr-4 bg-black min-w-max min-h-max ">{e.header}</div> 
+                <div className="h-4 pl-4 pr-4 bg-white border border-gray-300 min-w-max min-h-max 
+                top-left-round bottom-right-round">{e.header}</div> 
               </th>
             ))
           } 

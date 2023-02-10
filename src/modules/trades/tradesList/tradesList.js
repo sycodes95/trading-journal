@@ -144,13 +144,13 @@ function TradesList(props){
         <div className="table-top-bar w-full grid grid-cols-2 mt-1 mb-5">
           <Dialog.Trigger className="cols-span-1 " asChild>
             
-            <button className=" h-12 w-36  bg-steel-blue bg-opacity-80
-            hover:bg-opacity-50 transition-all rounded text-white shadow-md ">New Trade</button>
+            <button className=" h-12 w-36  bg-ruby bg-opacity-50
+            hover:bg-opacity-30 transition-all rounded text-black shadow-md ">New Trade</button>
           </Dialog.Trigger>
           <div className="cols-span-1 w-full flex flex-row justify-end items-center ">
-            <div className="border border-black w-fit p-1 flex bg-striped-header rounded-sm">
-              <input className="trades-search-bar h-6   bg-striped-header
-              bg-opacity-50 text-white rounded-sm text-xs pl-2 pr-2 shadow-md" 
+            <div className=" w-fit p-1 flex bg-gray-300 rounded-sm">
+              <input className="trades-search-bar h-6   bg-white
+               text-black rounded-sm text-xs pl-2 pr-2 shadow-md" 
               type='text' placeholder="Search..."  onChange={searchOnChangeSubmit}/>
               <div className="h-5 w-5">
                 {

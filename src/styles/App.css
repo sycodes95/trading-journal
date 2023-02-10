@@ -31,7 +31,7 @@ input[type=number] {
 }
 
 .scrollbar-color::-webkit-scrollbar-thumb{
-  background-color: black;
+  background-color: rgb(208, 208, 208);
 }
 
 input:focus, select:focus{
@@ -117,8 +117,8 @@ table .trades-tr:nth-of-type(odd){
 
 .font-blue-outline{
   
-  text-shadow: -1px 1px 0 navy, 1px 1px 0 navy, 1px -1px 0 navy
-  , -1px -1px 0 navy, #000 1px 0 5px, #000 1px 0 5px ; 
+  text-shadow: -0.8px 0.8px 0 navy, 0.8px 0.8px 0 navy, 0.8px -0.8px 0 navy
+  , -0.8px -0.8px 0 navy, #000 1px 0 5px, #000 1px 0 5px ; 
 }
 
 .font-red-outline{
@@ -189,6 +189,12 @@ table .trades-tr:nth-of-type(odd){
 
 .bg-striped-content-big{
   background:linear-gradient(rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.78)), url(../images/grey-mesh.jpg);
+  background-position: cover;
+  background-size: 800px;
+}
+
+.bg-striped-content-big-light{
+  background:linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url(../images/grey-mesh.jpg);
   background-position: cover;
   background-size: 800px;
 }

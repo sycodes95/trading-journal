@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 
 
 function NtvVariables (props){
+  const variableList = props.variableList
   const {formData, setFormData} = props.formDataContext
   const variableListIndex = props.index
 
   const [selectedVariable, setSelectedVariable] = useState(null)
 
-  const handleInputChange = (e) => {
-
-    const { name, value } = e.target;
+  const handleInputChange = (e, groupTitle) => {
     
+    const { name, value } = e.target;
+    console.log(groupTitle);
     if(value === ''){
       const variables = [...formData.variables];
       variables.splice(variableListIndex, 1)
@@ -18,7 +19,8 @@ function NtvVariables (props){
 
     } else {
       const variables = [...formData.variables];
-      variables[variableListIndex] = value;
+      variables[variableListIndex] = {title: groupTitle, variable: value};
+      console.log(value);
       setFormData({ ...formData, variables });
     }
     
@@ -27,26 +29,39 @@ function NtvVariables (props){
   };
 
   useEffect(()=>{
-    
+    console.log(formData.variables);
   },[formData.variables])
 
   return(
     <div className="">
       {
-        props.variableList &&
+        variableList &&
         <div className="grid grid-rows-2 justify-center">
-          <label className="flex items-center text-black">{`${props.variableList.title}`}</label>
+          <label className="flex items-center text-black">{`${variableList.title}`}</label>
           <div className="flex ">
-            <select className="w-4" name="variables" onClick={handleInputChange}>
+            <select className="w-4" name="variables" onClick={(e)=>handleInputChange(e, variableList.title)}>
               <option value='' hidden></option>
               {
-                props.variableList.variables.map((v) =>(
+                variableList.variables.map((v) =>(
                   <option value={v}>{`${v}`}</option>
                 ))
               }
             </select>
-            <input className="border border-r-0 border-l-0 border-gray-300  top-left-round w-28 h-6"
-            type='text' name="variables" value={formData.variables[variableListIndex]} onChange={handleInputChange}/>
+            {
+              
+              formData.variables[variableListIndex] ?
+              <input className="border border-r-0 border-l-0 border-gray-300  top-left-round w-28 h-6"
+              type='text' name="variables" value={formData.variables[variableListIndex].variable} 
+              onChange={(e)=>handleInputChange(e, variableList.title)}/>
+              :
+              
+
+              <input className="border border-r-0 border-l-0 border-gray-300  top-left-round w-28 h-6"
+              type='text' name="variables" value='' 
+              onChange={(e)=>handleInputChange(e, variableList.title)}/>
+
+            } 
+            
 
           </div>
          

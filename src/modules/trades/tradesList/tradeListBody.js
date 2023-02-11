@@ -104,7 +104,7 @@ function TradeListBody(props) {
           <td colSpan="1" className=" text-center text-xs">
             {
               t.variables.map((v,i)=>(
-                v && <span>{v}, </span>
+                v && <span>{v.variable}, </span>
               ))
             }
           </td>

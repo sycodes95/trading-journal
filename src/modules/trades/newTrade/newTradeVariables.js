@@ -13,7 +13,7 @@ function NewTradeVariables (props){
     fetch(`http://localhost:5000/get-variables-list?username=${formData.username}`)
     .then(response => response.json())
     .then((data) =>{
-      
+      console.log(data);
       setVariables(data.listVariables)
       
     })

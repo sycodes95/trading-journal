@@ -12,19 +12,17 @@ import {
   VictoryClipContainer
 } from 'victory';
 
-import moment from "moment";
+import moment, { duration } from "moment";
 import Selector from "./dbMainGraph/selector";
 import GraphSelector from "./dbMainGraph/selector";
 
 function DbMainGraph (props) {
  
   const userInfo = props.userInfo
-
-  const [trades, setTrades] = useState(null)
+  const trades = props.trades
+ 
 
   const [variableGroups, setVariableGroups] = useState(null)
-
-  const [variableTrades, setVariableTrades] = useState(null)
 
   const [graphTradeData, setGraphTradeData] = useState(null)
 
@@ -72,7 +70,7 @@ function DbMainGraph (props) {
     let groupIndex = variableGroups.findIndex(group => group.title === title)
     let variables = group.variables
     console.log(variables);
-
+    
     let fetchPromises = variables.map((variable) => {
       return fetch(
         `http://localhost:5000/trades-search-variables?username=${userInfo.username}&searchInputTitle=${title}&searchInputVariable=${variable}`
@@ -96,27 +94,6 @@ function DbMainGraph (props) {
       setGraphTradeData(tradeData);
       
     });
-    /*
-    variables.forEach((variable,i) =>{
-      
-      fetch(`http://localhost:5000/trades-search-variables?username=${userInfo.username}&searchInputTitle=${title}&searchInputVariable=${variable}`)
-      .then(response => response.json())
-      .then((data) =>{
-        if(!data.error){
-          if(data.trades.length){
-            tradeData.push({group: title, variable: variable, trades: data.trades, symbolIndex: groupIndex})
-          }
-          
-          if(variables.length === i+1){
-            
-            setGraphTradeData(tradeData)
-            console.log(tradeData);
-          }
-        }
-      })
-
-    })
-    */
     
   }
 
@@ -189,10 +166,6 @@ function DbMainGraph (props) {
     }
     
   },[variableGroups])
-
-  useEffect(()=>{
-    
-  },[scatterData])
 
   useEffect(()=>{
     console.log(graphTradeData);
@@ -318,7 +291,12 @@ function DbMainGraph (props) {
               data={scatterData}
               style={styles.scatter}
               size={1}
+              activeSize={5}
               labelComponent={<VictoryLabel dy={-3} />}
+              animate={{onLoad: { duration: 500 }}}
+                
+                
+              
             />
           }
           
@@ -367,9 +345,7 @@ function DbMainGraph (props) {
       {
 
       }
-      <div className="selectors col-span-2">
-        <GraphSelector tradesContext={{trades, setTrades}} userInfo={userInfo}/>
-      </div>
+      
       
 
     </div>

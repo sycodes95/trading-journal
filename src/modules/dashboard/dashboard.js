@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { UserProps } from "victory";
 import DbCalendar from "./dbCalendar";
 import DbOverall from "./dbOverall";
 
@@ -23,6 +24,10 @@ function Dashboard (){
   useEffect(()=>{
     fetchTrades()
   }, [userInfo])
+
+  useEffect(()=>{
+    console.log('get FETCH');
+  },[trades])
 
   useEffect(()=>{
     //Token

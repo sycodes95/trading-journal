@@ -44,7 +44,9 @@ function DbOverall (props){
     setLastWeekTrades(false)
   }
   
-
+  useEffect(()=>{
+    console.log('trades FETCH');
+  },[trades])
   
   useEffect(()=>{
     //Get OVER ALL TRADES

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { 
   VictoryLine,
   VictoryChart,
@@ -12,9 +12,11 @@ import {
   VictoryClipContainer
 } from 'victory';
 
+import _ from 'lodash';
 import moment, { duration } from "moment";
 import Selector from "./dbMainGraph/selector";
 import GraphSelector from "./dbMainGraph/selector";
+
 
 function DbMainGraph (props) {
  
@@ -23,8 +25,6 @@ function DbMainGraph (props) {
  
 
   const [variableGroups, setVariableGroups] = useState(null)
-
-  const [graphTradeData, setGraphTradeData] = useState(null)
 
   const [legendNamesAndSymbols, setLegendNamesAndSymbols] = useState(null)
 
@@ -53,7 +53,10 @@ function DbMainGraph (props) {
     { fill: "pink", type: "star" },
   ]
 
+  
+
   const getVariableGroups = () =>{
+    
     fetch(`http://localhost:5000/get-variables-list?username=${userInfo.username}`)
       .then(response => response.json())
       .then((data) =>{
@@ -64,13 +67,26 @@ function DbMainGraph (props) {
   }
 
   const getTradesByVariableGroups = (title) =>{
-    let tradeData = []
+    const tradesByVariable = variableGroups
+      .find(group => group.title === title)
+      .variables
+      .map(variable => {
+        const dataset = trades.filter(trade =>
+          trade.variables.some(vari =>
+            vari.variable === variable && vari.title === title
+          )
+        );
+        return {
+          group: title,
+          variable,
+          trades: dataset,
+          symbolIndex: variableGroups.findIndex(group => group.title === title),
+        };
+      });
+
+    formatScatter(tradesByVariable);
     
-    let group = variableGroups.find(t => t.title === title)
-    let groupIndex = variableGroups.findIndex(group => group.title === title)
-    let variables = group.variables
-    console.log(variables);
-    
+    /*
     let fetchPromises = variables.map((variable) => {
       return fetch(
         `http://localhost:5000/trades-search-variables?username=${userInfo.username}&searchInputTitle=${title}&searchInputVariable=${variable}`
@@ -94,12 +110,13 @@ function DbMainGraph (props) {
       setGraphTradeData(tradeData);
       
     });
+    */
     
   }
 
-  const formatScatter = () =>{
+  const formatScatter = (tradesByVariable) =>{
     let result = []
-    graphTradeData.forEach(dataset =>{
+    tradesByVariable.forEach(dataset =>{
       const {group, variable, trades, symbolIndex} = dataset
       let WR = 0
       let AVG_R = []
@@ -134,29 +151,31 @@ function DbMainGraph (props) {
         })
       }
     })
-    setScatterData(()=> result)
+    setScatterData(result)
   }
 
-  const handleLabelClick = (event) =>{
+  const handleLegendClick = (event) =>{
     const label = event.target.textContent;
+    
     getTradesByVariableGroups(label)
   }
+
+  
 
   const createLegend = () =>{
     const legend = []
     const names = variableGroups.map(v => v.title)
     for(let i = 0; i < names.length; i++){
       legend.push({name: names[i], symbol: legendSymbols[i]})
-
     }
-    return setLegendNamesAndSymbols(legend)
+    setLegendNamesAndSymbols(legend)
   }
 
  
   useEffect(()=>{
+    console.log('userInfo');
     if(userInfo && userInfo.username){
       getVariableGroups()
-      
     }
   },[userInfo])
   
@@ -167,96 +186,90 @@ function DbMainGraph (props) {
     
   },[variableGroups])
 
-  useEffect(()=>{
-    console.log(graphTradeData);
-    if(graphTradeData){
-      formatScatter()
-    }
-
-  },[graphTradeData])
 
   const MAX_WINRATE = 100;
   const MAX_R = 10;
 
   const styles = {
     classLabel: {
-        fontSize: 3,
-        fill: '#ddd',
-        strokeWidth: 1,
+      fontSize: 3,
+      fill: '#ddd',
+      strokeWidth: 1,
     },
     xaxis: {
-        tickLabels: {
-            fontSize: 3,
-        },
-        grid: {
-            stroke: '#999999',
-        },
-        axisLabel: {
-            fontSize: 4,
-            padding: 5,
-            fill: '#000000',
-        },
+      tickLabels: {
+        fontSize: 3,
+      },
+      grid: {
+        stroke: '#999999',
+      },
+      axisLabel: {
+        fontSize: 4,
+        padding: 5,
+        fill: '#000000',
+      },
     },
     yaxis: {
-        tickLabels: {
-            fill: '#000000',
-            fontSize: 3,
-        },
-        grid: {
-            stroke: '#999999',
-        },
-        axisLabel: {
-            fontSize: 4,
-            padding: 5,
-            fill: '#000000',
-        },
-        ticks: {
-            size: 0,
-        },
+      tickLabels: {
+          fill: '#000000',
+          fontSize: 3,
+      },
+      grid: {
+          stroke: '#999999',
+      },
+      axisLabel: {
+          fontSize: 4,
+          padding: 5,
+          fill: '#000000',
+      },
+      ticks: {
+          size: 0,
+      },
     },
     scatter: {
-        labels: {
-            fontSize: 2.5,
-            fill: ({datum}) => datum.fill,
-            dy: ({datum}) => datum.dy
-        },
-        data:{
-          fill: ({datum}) => datum.fill,
-          
-        }
+
+      labels: {
+        fontSize: 2.5,
+        fill: ({datum}) => datum.fill,
+        
+      },
+      data:{
+        fill: ({datum}) => datum.fill,
+        
+      }
         
     },
     legend: {
-        border: {
-            stroke: '#000000',
-            fill: '#FFF',
-            width: 42,
-            strokeDasharray: 2,
-        },
-        labels: {
-            fill: '#000000',
-            fontSize: 3,
-            cursor: 'pointer',
-            
-        },
-        title: {
-            fill: '#000000',
-            fontSize: 3,
-            padding: 2,
-        },
-        maxWidth: 30
+      border: {
+        stroke: '#000000',
+        fill: '#FFF',
+        width: 42,
+        strokeDasharray: 2,
+      },
+      labels: {
+        fill: '#000000',
+        fontSize: 3,
+        cursor: 'pointer',
+          
+      },
+      title: {
+        fill: '#000000',
+        fontSize: 3,
+        padding: 2,
+      },
+      maxWidth: 30
     },
     annotionLine: {
-        data: {
-            stroke: '#888',
-            strokeWidth: 0.5,
-            strokeDasharray: 1,
-        },
-        labels: {
-            angle: -90,
-            fill: '#ccc',
-            fontSize: 3,
-        },
+      data: {
+        stroke: '#888',
+        strokeWidth: 0.5,
+        strokeDasharray: 1,
+      },
+      labels: {
+        angle: -90,
+        fill: '#ccc',
+        fontSize: 3,
+      },
     },
   };
   
@@ -265,11 +278,13 @@ function DbMainGraph (props) {
 
   const chartMinDomain = { y: 0, x: 0 };
   const chartMaxDomain = { y: MAX_WINRATE, x: MAX_R };
+  const chartAnimate = { duration: 500 };
 
   return(
     <div className="grid grid-cols-10 h-full bg-striped-content-big-light">
       <div className="chart col-span-10">
         <VictoryChart 
+          
           width={300} 
           height={150} 
           padding={{top: 5, bottom:20, left:15, right:50}} 
@@ -285,20 +300,7 @@ function DbMainGraph (props) {
             />
           }
         > 
-          {
-            scatterData &&
-            <VictoryScatter
-              data={scatterData}
-              style={styles.scatter}
-              size={1}
-              activeSize={5}
-              labelComponent={<VictoryLabel dy={-3} />}
-              animate={{onLoad: { duration: 500 }}}
-                
-                
-              
-            />
-          }
+          
           
           <VictoryAxis
             tickFormat={(t) => `${t}R`}
@@ -317,6 +319,22 @@ function DbMainGraph (props) {
             label="Win Rate"
             
           />
+
+          {
+            scatterData && 
+            <VictoryScatter
+              animate={{onLoad: { delay: 0, duration: 1 }, onEnter: { delay: 0, duration: 1 }, onExit: { delay: 0, duration: 1 }, duration:500}}
+              
+              style={styles.scatter}
+              labelComponent={<VictoryLabel dy={-3} />}
+              size={1}
+              activeSize={5}
+              data={scatterData}
+              
+                
+              
+            />
+          }
           {
             legendNamesAndSymbols &&
             <VictoryLegend
@@ -328,8 +346,10 @@ function DbMainGraph (props) {
               events={[
                 {
                   target: 'labels',
+
                   eventHandlers: {
-                    onClick: handleLabelClick,
+                    
+                    onClick: handleLegendClick,
                   },
                 },
               ]}

@@ -63,19 +63,21 @@ function CurrentInstruments (props) {
     
       <table className=" w-full bg-white">
         <thead>
-            <tr className="bg-jet text-white text-sm font-bold">
-                <th colSpan="1" className="border-r border-black  w-16 font-thin">#</th>
-                <th className="font-thin">Name</th>
+            <tr className="bg-white border border-gray-300 text-black text-sm font-bold ">
+                <th colSpan="1" className="border-r border-gray-300  w-16 font-thin">#</th>
+                <th className="font-thin">Instrument Name</th>
             </tr>
         </thead>
         <tbody>
           {instruments && 
             instruments.map((s, i) =>(
-              <tr className="border-gray-300  h-4 font-bold">
+              <tr className="border-gray-300  h-4 text-white font-black-outline-light">
                 <td colSpan="1" className=" text-center text-xs" >{i+1}</td>
                 <td colSpan='8' className="flex justify-between pl-4 pr-4 gap-x-12 items-center" >
                     <span className="text-sm">{s.instrument}</span>
-                    <button onClick={()=>handleSetupDelete(s._id)} className=" text-red-700 text-md font-bold hover:text-black transition-colors delay-100">x</button>
+                    <button onClick={()=>handleSetupDelete(s._id)}
+                     className=" text-black text-sm font-bold  hover:text-red-500
+                      transition-colors ">x</button>
                 </td>
               </tr>
           ))

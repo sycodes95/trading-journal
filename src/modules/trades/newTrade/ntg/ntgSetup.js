@@ -9,7 +9,7 @@ function NtgSetup (props) {
 
   function getSetups () {
     if(formData){
-      fetch(`http://localhost:5000/getsetups?username=${formData.username}`)
+      fetch(`http://localhost:5000/get-setups?username=${formData.username}`)
       .then(response => response.json())
       .then((data) => {
         setSetups(data.setups)

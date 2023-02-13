@@ -5,6 +5,9 @@ import { ReactSVG } from "react-svg";
 import plusButton from "../icons/plus-circle-outline.svg"
 import instrumentsSVG from "../icons/instruments.svg"
 import CurrentInstruments from "./currentInstruments";
+import Icon from '@mdi/react';
+import { mdiPlusBox } from '@mdi/js';
+
 
 function Instruments () {
   
@@ -85,7 +88,7 @@ function Instruments () {
   }, [])
   return(
     <div className="Instrument-container w-full p-12 ">
-      <div className="section-info text-black p-4 bg-orange-600 bg-opacity-70 rounded-sm
+      <div className="section-info text-black p-4 bg-gray-400 bg-opacity-70 rounded-sm
       grid">
         <div className="">
           <ReactSVG className="h-14 w-14 " src={instrumentsSVG}/>
@@ -108,17 +111,16 @@ function Instruments () {
       
       <div className="mt-12">
         <div className="create-new-Instrument flex justify-center items-center
-         bg-striped-150px h-14 w-80 top-right-round ">
-          <div className="text-white text-sm font-thin">
+         bg-gray-400 bg-opacity-70 h-8 w-80 rounded-sm ">
+          <div className="text-black text-sm font-thin">
             <span>Add Instrument : </span>
           </div>
           
-          <input className="text-xs ml-4 h-5 w-32 top-right-round" type='text' name='instrument' value={formData.instrument}
+          <input className="text-xs ml-4 h-5 w-32 rounded-sm" type='text' name='instrument' value={formData.instrument}
            placeholder="ex. BTCUSD" onChange={handleInputChange}/>
            
-          <button className='text-xs h-6 pl-2' onClick={handleSubmit}>
-            <ReactSVG className='h-6 w-6 text-white fill-current  hover:text-steel-blue
-             transition-colors ' src={plusButton}/>
+          <button className='text-xs h-6 pl-2 flex items-center' onClick={handleSubmit}>
+          <Icon className="hover:text-white transition-all h-5 " path={mdiPlusBox} size={1.05} />
           </button>
 
         </div>

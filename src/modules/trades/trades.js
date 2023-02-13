@@ -36,10 +36,10 @@ function Trades () {
   return(
     
       <div className="relative w-full p-12 grid justify-center" >
-        <div className="section-info text-black p-4 bg-ruby bg-opacity-50 rounded-sm
+        <div className="section-info text-white p-4 bg-dev rounded-sm
         grid ">
           <div className="">
-            <ReactSVG className="h-14 w-14 " src={tradesSVG}/>
+            <ReactSVG className="h-14 w-14 text-white fill-current" src={tradesSVG}/>
           </div>
 
           <div className="pl-8">

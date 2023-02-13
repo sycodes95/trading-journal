@@ -11,7 +11,7 @@ function CurrentSetups (props) {
 
   function getSetups () {
     if(props.userInfo){
-      fetch(`http://localhost:5000/getsetups?username=${props.userInfo.username}`)
+      fetch(`http://localhost:5000/get-setups?username=${props.userInfo.username}`)
       .then(response => response.json())
       .then((data) => {
         setSetups(data.setups)
@@ -80,19 +80,19 @@ function CurrentSetups (props) {
     
       <table className=" w-full bg-white">
         <thead>
-            <tr className="bg-jet text-white text-sm font-bold">
-                <th colSpan="1" className="border-r border-black  w-16 font-thin">#</th>
-                <th colSpan="1" className="border-r border-black  w-16 font-thin">Active</th>
-                <th className="font-thin">Name</th>
+            <tr className="bg-white border border-gray-300 text-black text-sm font-bold">
+                <th colSpan="1" className="border-r border-gray-300  w-16 font-thin">#</th>
+                <th colSpan="1" className="border-r border-gray-300  w-16 font-thin">Active</th>
+                <th className="font-thin">Setup Name</th>
             </tr>
         </thead>
         <tbody>
           {setups &&
             setups.map((s, i) =>(
-              <tr className="border-gray-300  h-4 text-black font-bold">
+              <tr className="border-gray-300  h-4 text-white font-black-outline-light">
                 <td colSpan="1" className=" text-center text-xs" >{i+1}</td>
                 <td colSpan="1" className=" text-center " >
-                    <input className="" type='checkbox' name="active" checked={s.active} onClick={()=>handleSetupEditActive(s._id)}/>
+                    <input className="black-check" type='checkbox' name="active" checked={s.active} onChange={()=>handleSetupEditActive(s._id)}/>
                 </td>
                 <td colSpan='8' className="flex justify-between items-center pl-4 pr-4 gap-x-12 " >
                     <span className="text-sm">{s.setup}</span>

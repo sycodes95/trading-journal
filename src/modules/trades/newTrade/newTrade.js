@@ -128,15 +128,15 @@ function NewTrade (props) {
 
   useEffect(()=>{
     if(generalTab){
-      generalTabRef.current.classList.add('bg-yellow-400')
+      generalTabRef.current.classList.add('bg-ruby')
       //generalTabRef.current.classList.add('text-white')
-      variablesTabRef.current.classList.remove('bg-yellow-400')
+      variablesTabRef.current.classList.remove('bg-ruby')
       //variablesTabRef.current.classList.remove('text-white')
     }
     if(variablesTab){
-      variablesTabRef.current.classList.add('bg-yellow-400')
+      variablesTabRef.current.classList.add('bg-ruby')
       //variablesTabRef.current.classList.add('text-white')
-      generalTabRef.current.classList.remove('bg-yellow-400')
+      generalTabRef.current.classList.remove('bg-ruby')
       //generalTabRef.current.classList.remove('text-white')
     }
   },[generalTab, variablesTab])
@@ -163,17 +163,17 @@ function NewTrade (props) {
       <div className="flex justify-between ">
         <div className="grid grid-cols-3 h-6 ">
           <button className="cols-span-1  h-6 pl-4 pr-4 text-xs 
-          transition-all top-left-round top-right-round "
+          transition-all top-left-round top-right-round bg-opacity-70"
           onClick={handleGeneralTabClick} ref={generalTabRef}>General</button>
           <button className="cols-span-1  h-6 pl-4 pr-4 text-xs
-          transition-all top-left-round top-right-round"
+          transition-all top-left-round top-right-round bg-opacity-70"
           onClick={handleVariablesTabClick} ref={variablesTabRef}>Variables</button>
           
         </div>
         
         <Dialog.Close asChild>
-          <button className="h-6 text-md pl-4 pr-4 bg-striped text-white text-center
-          font-bold top-right-round">x</button>
+          <button className="h-6 text-md pl-4 pr-4 bg-ruby bg-opacity-70 text-white text-center
+          font-bold top-right-round hover:text-black transition-all">x</button>
         </Dialog.Close>
       </div>
       {

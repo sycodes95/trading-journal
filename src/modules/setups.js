@@ -5,6 +5,8 @@ import CurrentSetups from "./currentSetups";
 import { ReactSVG } from "react-svg";
 import plusButton from "../icons/plus-circle-outline.svg"
 import setupsSVG from "../icons/setups.svg"
+import Icon from '@mdi/react';
+import { mdiPlusBox } from '@mdi/js';
 
 function Setups () {
   
@@ -84,7 +86,7 @@ function Setups () {
   }, [])
   return(
     <div className=" w-full p-12 ">
-      <div className="section-info text-black p-4 bg-orange-600 bg-opacity-70 rounded-sm
+      <div className="section-info text-black p-4 bg-gray-400 bg-opacity-70 rounded-sm
       grid">
         <div className="">
           <ReactSVG className="h-14 w-14 " src={setupsSVG}/>
@@ -105,16 +107,16 @@ function Setups () {
       
       <div className="mt-12">
         <div className="create-new-setup flex justify-center items-center
-         v h-14 w-80 top-right-round bg-striped-150px">
-          <div className="text-white text-sm">
-            <span>Create New Setup : </span>
+         bg-gray-400 bg-opacity-70 h-8 w-80 rounded-sm ">
+          <div className="text-black text-sm font-thin">
+            <span>Add New Setup : </span>
           </div>
           
-          <input className="text-xs ml-4 h-5 w-32 top-right-round"
-           type='text' name='setup' value={formData.setup} placeholder="setup name" onChange={handleInputChange}/>
-          <button className='text-xs h-6 pl-2' onClick={handleSubmit}>
-            <ReactSVG className='h-6 w-6 text-white fill-current  hover:text-red-700
-             transition-colors delay-100' src={plusButton}/>
+          <input className="text-xs ml-4 h-5 w-32 rounded-sm"
+           type='text' name='setup' value={formData.setup} placeholder="SETUP" onChange={handleInputChange}/>
+          <button className='text-xs h-6 pl-2 flex items-center' onClick={handleSubmit} >
+            
+            <Icon className="hover:text-white transition-all h-5 " path={mdiPlusBox} size={1.05} />
           </button>
 
         </div>

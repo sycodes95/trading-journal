@@ -18,8 +18,11 @@ function DbMainGraph (props) {
  
   const [filterByVariables, setFilterByVariables] = useState(false)
   const [variableGroups, setVariableGroups] = useState(null)
+  
 
   const [filterBySetups, setFilterBySetups] = useState(false)
+  const [setupGroups, setSetupGroups] = useState(null)
+  const [setupOverall, setSetupOverall] = useState(true)
 
   const [legendNamesAndSymbols, setLegendNamesAndSymbols] = useState(null)
 
@@ -61,14 +64,38 @@ function DbMainGraph (props) {
       })
   }
 
-  const handleLegendClick = (event, index) =>{
-    const label = event.target.textContent;
-    getTradesByVariableGroups(label)
-    setSelectedLegend(label)
+  const getSetupGroups = () =>{
     
+    fetch(`http://localhost:5000/get-setups?username=${userInfo.username}`)
+      .then(response => response.json())
+      .then((data) =>{
+        
+        if(!data.error){
+          setSetupGroups(data.setups)
+        }
+      })
   }
 
+
+  const handleLegendClick = (event, index) =>{
+    
+    
+    const label = event.target.textContent;
+    if(filterByVariables){
+      getTradesByVariableGroups(label)
+    }
+    if(filterBySetups){
+      getTradesBySetupGroups(label)
+    }
+    //getTradesBySetupGroups(label)
+    //getTradesByVariableGroups(label)
+    setSelectedLegend(label)
+  }
+
+  
   const getTradesByVariableGroups = (title) =>{
+    
+    
     const tradesByVariable = variableGroups
       .find(group => group.title === title)
       .variables
@@ -79,20 +106,60 @@ function DbMainGraph (props) {
           )
         );
         return {
+          filter: 'variable',
           group: title,
           variable,
           trades: dataset,
           symbolIndex: variableGroups.findIndex(group => group.title === title),
         };
       });
+
+     
+    console.log(tradesByVariable);
     formatScatterData(tradesByVariable);
+  }
+
+  const getTradesBySetupGroups = (label) =>{
+    
+    const tradesBySetup = setupGroups
+      .map(data =>{
+        if(label){
+          const dataset = trades.filter(trade =>
+            trade.setup === label
+          )
+          console.log(setupGroups);
+          return {
+            filter: 'setup',
+            setup: label,
+            trades: dataset,
+            symbolIndex: setupGroups.findIndex(group => group.setup === label)
+          }
+        }
+      })
+    formatScatterData(tradesBySetup);
   }
 
   const formatScatterData = (tradesData) =>{
     let result = []
+    
+    if(setupOverall && scatterData){
+      result = scatterData
+    }
+    
     tradesData.forEach(dataset =>{
-      const {group, variable, trades, symbolIndex} = dataset
-      let WR = 0
+      
+      const {filter, trades, symbolIndex, variable, setup} = dataset
+      console.log(variable);
+      const label = () =>{
+        if(filter === 'setup'){
+          return setup
+        }
+        if(filter === 'variable'){
+          return variable
+        }
+      }
+      
+      
       let AVG_R = []
       trades.forEach(trade =>{
         console.log(trade);
@@ -117,20 +184,30 @@ function DbMainGraph (props) {
         result.push({
           x: x, 
           y: y, 
-          label: variable, 
+          label: label(), 
           symbol: legendSymbols[symbolIndex].type, 
           fill: legendSymbols[symbolIndex].fill, 
-          parent: group
+          
           
         })
       }
     })
-    setScatterData(result)
+    setScatterData(()=>result)
   }
 
   const createLegend = () =>{
     const legend = []
-    const names = variableGroups.map(v => v.title)
+    let groups = setupGroups;
+    let names = setupGroups.map(group => group.setup)
+    if(filterBySetups) {
+      groups = setupGroups;
+      names = setupGroups.map(group => group.setup)
+    } else if (filterByVariables) {
+      groups = variableGroups;
+      names = variableGroups.map(group => group.title)
+    }
+    
+    
     for(let i = 0; i < names.length; i++){
       legend.push({name: names[i], symbol: legendSymbols[i]})
     }
@@ -154,16 +231,57 @@ function DbMainGraph (props) {
     }, [selectedLegend]);
 
     return <VictoryLabel {...props} style={style} />;
-};
- 
+  };
+
+  const handleFilterByVariables = (e) =>{
+    setScatterData(null)
+    setFilterBySetups(false)
+    setFilterByVariables(true)
+    setSetupOverall(false)
+  }
+
+  const handleFilterBySetups = (e) =>{
+    setScatterData(null)
+    setFilterBySetups(true)
+    setFilterByVariables(false)
+    setSetupOverall(false)
+  }
+
   useEffect(()=>{
-    userInfo && userInfo.username && getVariableGroups()
+    userInfo && userInfo.username && getVariableGroups() 
+    userInfo && userInfo.username && getSetupGroups()
   },[userInfo])
   
-  useEffect(()=>{
-    variableGroups && createLegend()
-  },[variableGroups])
+  
 
+  useEffect(()=>{
+    setupGroups && createLegend()
+    setupGroups && trades && setupGroups.forEach(g =>{
+      console.log('g');
+      getTradesBySetupGroups(g.setup)
+    })
+  },[setupGroups, trades])
+  /*
+  useEffect(()=>{
+    setupGroups && trades && setupGroups.forEach(g =>{
+      console.log('g');
+      getTradesBySetupGroups(g.setup)
+    })
+    //setupOverall && 
+  },[setupOverall])
+  */
+  useEffect(()=>{
+    console.log(scatterData);
+  },[scatterData])
+
+  useEffect(()=>{
+    filterBySetups && createLegend()
+  },[filterBySetups])
+
+  useEffect(()=>{
+    filterByVariables && createLegend()
+  },[filterByVariables])
+ 
 
   const MAX_WINRATE = 100;
   const MAX_R = 10;
@@ -206,7 +324,7 @@ function DbMainGraph (props) {
     },
     scatter: {
       labels: {
-        fontSize: 2.5,
+        fontSize: 3,
         fill: ({datum}) => datum.fill,
         
       },
@@ -263,8 +381,8 @@ function DbMainGraph (props) {
         <div className="w-full flex justify-end col-span-full text-sm gap-x-2 items-center">
           <div>Filter by :</div>
           <button className="">Instrument</button>
-          <button>Setup</button>
-          <button>Variables</button>
+          <button onClick={handleFilterBySetups}>Setup</button>
+          <button onClick={handleFilterByVariables}>Variables</button>
 
           
         </div>
@@ -332,27 +450,15 @@ function DbMainGraph (props) {
                   target: "labels",
                   eventHandlers: {
                     onClick:handleLegendClick
-                      
-                      
-                    
                   }
-                  
                 }
               ]}
-              
-             
-              
               x={258}
               y={0}
             />
           }
-          
-          
         </VictoryChart>
-
       </div>
-      
-     
     </div>
   )
 }

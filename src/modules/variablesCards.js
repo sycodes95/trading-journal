@@ -167,7 +167,7 @@ function VariablesCards (props){
       </div>
       
       <div className="flex items-center justify-between border-b h-6">
-        <div className="top-left-round bg-jet w-full h-full text-white text-xs  pl-1 pr-1
+        <div className="top-left-round bg-dev w-full h-full text-white text-xs  pl-1 pr-1
         flex items-center">
           <input className="top-left-round w-full outline-none bg-dev focus:bg-white  
           font-bold caret-white" type='text' name="title" value={formData.title} ref={titleRef}
@@ -199,8 +199,8 @@ function VariablesCards (props){
                             <ReactSVG className="text-gray-500 fill-current h-5 w-5" src={dragIcon}/>
                           </div>
                         
-                          <input className=" w-full h-full  text-sm font-thin rounded-none pl-2
-                           text-white font-black-outline-nosh "
+                          <input className=" w-full h-full  text-xs font-thin rounded-none pl-2
+                           text-white font-black-outline-light "
                           type='text' name="variables" value={formData.variables[index]} ref={variableRef} 
                           onChange={(e)=>handleInputChange(e,index)} onKeyDown={handleKeyDownSubmit}
                           onBlur={handleInputBlurSubmit} placeholder='. . .' />

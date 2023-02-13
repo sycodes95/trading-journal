@@ -75,10 +75,10 @@ function Variables (){
 
   return(
     <div className="variables-container w-full p-12 grid justify-center">
-      <div className="section-info text-black p-4 bg-orange-600 bg-opacity-70 rounded-sm
+      <div className="section-info text-white p-4 bg-dev bg-opacity-70 rounded-sm
       grid  ">
         <div className="">
-          <ReactSVG className="h-14 w-14 " src={VariablesSVG}/>
+          <ReactSVG className="h-14 w-14 text-white fill-current" src={VariablesSVG}/>
         </div>
         
         
@@ -101,7 +101,7 @@ function Variables (){
       2xl:grid-cols-5  xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2  sm:grid sm:grid-cols-2
        mt-8 w-fit justify-self-center">
         {
-          variablesList ?
+          variablesList &&
           variablesList.map((list, index) =>(
             <div className="card col-span-1 ">
               <VariablesCards username={userInfo.username} index={index} 
@@ -109,8 +109,7 @@ function Variables (){
               
             </div>
           ))
-          :
-          null
+          
         }
       </div>
     </div>

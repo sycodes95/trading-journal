@@ -144,8 +144,8 @@ function TradesList(props){
         <div className="table-top-bar w-full grid grid-cols-2 mt-1 mb-5">
           <Dialog.Trigger className="cols-span-1 " asChild>
             
-            <button className=" h-12 w-36  bg-ruby bg-opacity-50
-            hover:bg-opacity-30 transition-all rounded text-black shadow-md ">New Trade</button>
+            <button className=" h-12 w-36  bg-dev bg-opacity-50
+            hover:bg-opacity-30 transition-all rounded text-white shadow-md ">New Trade</button>
           </Dialog.Trigger>
           <div className="cols-span-1 w-full flex flex-row justify-end items-center ">
             <div className=" w-fit p-1 flex bg-gray-300 rounded-sm">

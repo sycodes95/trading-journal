@@ -32,7 +32,7 @@ function DbPNLGraph (props) {
 
 
   return(
-    <VictoryChart width={200} height={200} padding={{top: 10, bottom:10, left:30, right:15}} domainPadding={{ x: 10, y: 10 }}  theme={VictoryTheme.grayscale}>
+    <VictoryChart width={200} height={200} padding={{top: 10, bottom:10, left:30, right:15}} domainPadding={{ x: 10, y: 10 }}  theme={VictoryTheme.material}>
       {
         tradesWithBalance &&
         <VictoryArea 
@@ -40,16 +40,26 @@ function DbPNLGraph (props) {
           x="date"
           y="pnl"
           
-          style={ { data: { stroke: "#7393B3", strokeWidth: 1, fill:"rgba(115, 147, 179, 0.3)"}}}
+          style={ { data: { stroke: "#7393B3", strokeWidth: 1, fill:"rgba(115, 147, 179, 1)"}}}
         />
       }
       <VictoryAxis
         tickFormat={(t) => moment(t).format('MM/DD/YYYY')}
         tickLabelComponent={<VictoryLabel angle={0} />}
-        style={{ axis:{stroke: 'grey'}, tickLabels: { fontSize: 0} }}
+        style={{
+           axis:{stroke: 'lightgray', opacity: 1},
+           tickLabels: { fontSize: 0},
+           grid:{stroke: 'none',  strokeDasharray: [], opacity: 0.3} 
+        }}
         
       />
-      <VictoryAxis dependentAxis style={{axis:{stroke: 'grey'}, tickLabels: { fontSize: 6,  stroke: 'grey', strokeWidth:0.2} }}/>
+      <VictoryAxis dependentAxis 
+        style={{
+          axis:{stroke: 'lightgray', opacity: 1},
+          tickLabels: { fontSize: 6,  stroke: 'grey', strokeWidth:0.2},
+          grid:{stroke: 'none',  strokeDasharray: [], opacity: 0.3}  
+        }}
+      />
 
       
     </VictoryChart>

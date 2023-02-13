@@ -9,51 +9,46 @@ import {
   VictoryLabel,
   VictoryContainer,
   VictoryLegend,
-  VictoryClipContainer
 } from 'victory';
-
-import _ from 'lodash';
-import moment, { duration } from "moment";
-import Selector from "./dbMainGraph/selector";
-import GraphSelector from "./dbMainGraph/selector";
-
 
 function DbMainGraph (props) {
  
   const userInfo = props.userInfo
   const trades = props.trades
  
-
+  const [filterByVariables, setFilterByVariables] = useState(false)
   const [variableGroups, setVariableGroups] = useState(null)
 
+  const [filterBySetups, setFilterBySetups] = useState(false)
+
   const [legendNamesAndSymbols, setLegendNamesAndSymbols] = useState(null)
+
+  const [selectedLegend, setSelectedLegend] = useState("")
 
   const [scatterData, setScatterData] = useState(null)
 
   const legendSymbols = [
-    { fill: "darkred", type: "diamond" },
+    { fill: "gray", type: "diamond" },
+    { fill: "gray", type: "square" },
+    { fill: "gray", type: "circle" },
+    { fill: "gray", type: "star" },
+    { fill: "red", type: "diamond" },
     { fill: "red", type: "square" },
-    { fill: "orange", type: "circle" },
+    { fill: "red", type: "circle" },
+    { fill: "red", type: "star" },
+    { fill: "darkgreen", type: "diamond" },
+    { fill: "darkgreen", type: "square" },
+    { fill: "darkgreen", type: "circle" },
+    { fill: "darkgreen", type: "star" },
+    { fill: "black", type: "diamond" },
+    { fill: "black", type: "square" },
+    { fill: "black", type: "circle" },
     { fill: "black", type: "star" },
-    { fill: "navy", type: "diamond" },
-    { fill: "navy", type: "square" },
-    { fill: "navy", type: "circle" },
-    { fill: "navy", type: "star" },
-    { fill: "purple", type: "diamond" },
-    { fill: "purple", type: "square" },
-    { fill: "purple", type: "circle" },
-    { fill: "purple", type: "star" },
-    { fill: "green", type: "diamond" },
-    { fill: "green", type: "square" },
-    { fill: "green", type: "circle" },
-    { fill: "green", type: "star" },
     { fill: "pink", type: "diamond" },
     { fill: "pink", type: "square" },
     { fill: "pink", type: "circle" },
     { fill: "pink", type: "star" },
   ]
-
-  
 
   const getVariableGroups = () =>{
     
@@ -64,6 +59,13 @@ function DbMainGraph (props) {
           setVariableGroups(data.listVariables)
         }
       })
+  }
+
+  const handleLegendClick = (event, index) =>{
+    const label = event.target.textContent;
+    getTradesByVariableGroups(label)
+    setSelectedLegend(label)
+    
   }
 
   const getTradesByVariableGroups = (title) =>{
@@ -83,40 +85,12 @@ function DbMainGraph (props) {
           symbolIndex: variableGroups.findIndex(group => group.title === title),
         };
       });
-
-    formatScatter(tradesByVariable);
-    
-    /*
-    let fetchPromises = variables.map((variable) => {
-      return fetch(
-        `http://localhost:5000/trades-search-variables?username=${userInfo.username}&searchInputTitle=${title}&searchInputVariable=${variable}`
-      )
-        .then(response => response.json())
-        .then(data => {
-          if (!data.error) {
-            if (data.trades.length) {
-              tradeData.push({
-                group: title,
-                variable: variable,
-                trades: data.trades,
-                symbolIndex: groupIndex
-              });
-            }
-          }
-        });
-    });
-  
-    Promise.all(fetchPromises).then(() => {
-      setGraphTradeData(tradeData);
-      
-    });
-    */
-    
+    formatScatterData(tradesByVariable);
   }
 
-  const formatScatter = (tradesByVariable) =>{
+  const formatScatterData = (tradesData) =>{
     let result = []
-    tradesByVariable.forEach(dataset =>{
+    tradesData.forEach(dataset =>{
       const {group, variable, trades, symbolIndex} = dataset
       let WR = 0
       let AVG_R = []
@@ -154,14 +128,6 @@ function DbMainGraph (props) {
     setScatterData(result)
   }
 
-  const handleLegendClick = (event) =>{
-    const label = event.target.textContent;
-    
-    getTradesByVariableGroups(label)
-  }
-
-  
-
   const createLegend = () =>{
     const legend = []
     const names = variableGroups.map(v => v.title)
@@ -171,19 +137,31 @@ function DbMainGraph (props) {
     setLegendNamesAndSymbols(legend)
   }
 
+  const LegendLabel = (props) => {
+    const { selectedDatumName, datum } = props;
+    const style = useMemo(() => {
+      let style = props.style;
+
+      if (selectedDatumName === datum.name) {
+        style = {
+          ...props.style,
+          textDecoration: 'underline',
+          fill: '#000000',
+        };
+      }
+
+      return style;
+    }, [selectedLegend]);
+
+    return <VictoryLabel {...props} style={style} />;
+};
  
   useEffect(()=>{
-    console.log('userInfo');
-    if(userInfo && userInfo.username){
-      getVariableGroups()
-    }
+    userInfo && userInfo.username && getVariableGroups()
   },[userInfo])
   
   useEffect(()=>{
-    if(variableGroups){
-      createLegend()
-    }
-    
+    variableGroups && createLegend()
   },[variableGroups])
 
 
@@ -227,7 +205,6 @@ function DbMainGraph (props) {
       },
     },
     scatter: {
-
       labels: {
         fontSize: 2.5,
         fill: ({datum}) => datum.fill,
@@ -250,7 +227,7 @@ function DbMainGraph (props) {
         fill: '#000000',
         fontSize: 3,
         cursor: 'pointer',
-          
+        
       },
       title: {
         fill: '#000000',
@@ -283,6 +260,14 @@ function DbMainGraph (props) {
   return(
     <div className="grid grid-cols-10 h-full bg-striped-content-big-light">
       <div className="chart col-span-10">
+        <div className="w-full flex justify-end col-span-full text-sm gap-x-2 items-center">
+          <div>Filter by :</div>
+          <button className="">Instrument</button>
+          <button>Setup</button>
+          <button>Variables</button>
+
+          
+        </div>
         <VictoryChart 
           
           width={300} 
@@ -301,13 +286,12 @@ function DbMainGraph (props) {
           }
         > 
           
-          
           <VictoryAxis
             tickFormat={(t) => `${t}R`}
             tickLabelComponent={<VictoryLabel angle={0} />}
             tickValues={xTickValues}
             style={styles.xaxis}
-            label="Profit Factor"
+            label="R Multiple"
             
           />
           <VictoryAxis 
@@ -324,52 +308,52 @@ function DbMainGraph (props) {
             scatterData && 
             <VictoryScatter
               animate={{onLoad: { delay: 0, duration: 1 }, onEnter: { delay: 0, duration: 1 }, onExit: { delay: 0, duration: 1 }, duration:500}}
-              
               style={styles.scatter}
               labelComponent={<VictoryLabel dy={-3} />}
               size={1}
               activeSize={5}
               data={scatterData}
-              
-                
-              
             />
           }
+          
           {
-            legendNamesAndSymbols &&
+            legendNamesAndSymbols && 
             <VictoryLegend
               data={legendNamesAndSymbols}
               title='Filter by variable type'
               gutter={10}
               orientation="vertical"
               style={styles.legend}
+              labelComponent={
+                <LegendLabel selectedDatumName={selectedLegend} />
+              }
               events={[
                 {
-                  target: 'labels',
-
+                  target: "labels",
                   eventHandlers: {
+                    onClick:handleLegendClick
+                      
+                      
                     
-                    onClick: handleLegendClick,
-                  },
-                },
+                  }
+                  
+                }
               ]}
+              
+             
               
               x={258}
               y={0}
             />
           }
           
+          
         </VictoryChart>
 
       </div>
-      {
-
-      }
       
-      
-
+     
     </div>
-
   )
 }
 

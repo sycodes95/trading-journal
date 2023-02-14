@@ -11,6 +11,9 @@ import {
   VictoryLegend,
 } from 'victory';
 
+import styles from "./dbMainGraph/style";
+import legendSymbols from "./dbMainGraph/symbols";
+
 function DbMainGraph (props) {
  
   const userInfo = props.userInfo
@@ -18,11 +21,9 @@ function DbMainGraph (props) {
  
   const [filterByVariables, setFilterByVariables] = useState(false)
   const [variableGroups, setVariableGroups] = useState(null)
-  
 
   const [filterBySetups, setFilterBySetups] = useState(false)
   const [setupGroups, setSetupGroups] = useState(null)
-  const [setupOverall, setSetupOverall] = useState(true)
 
   const [legendNamesAndSymbols, setLegendNamesAndSymbols] = useState(null)
 
@@ -30,62 +31,35 @@ function DbMainGraph (props) {
 
   const [scatterData, setScatterData] = useState(null)
 
-  const legendSymbols = [
-    { fill: "gray", type: "diamond" },
-    { fill: "gray", type: "square" },
-    { fill: "gray", type: "circle" },
-    { fill: "gray", type: "star" },
-    { fill: "red", type: "diamond" },
-    { fill: "red", type: "square" },
-    { fill: "red", type: "circle" },
-    { fill: "red", type: "star" },
-    { fill: "darkgreen", type: "diamond" },
-    { fill: "darkgreen", type: "square" },
-    { fill: "darkgreen", type: "circle" },
-    { fill: "darkgreen", type: "star" },
-    { fill: "black", type: "diamond" },
-    { fill: "black", type: "square" },
-    { fill: "black", type: "circle" },
-    { fill: "black", type: "star" },
-    { fill: "pink", type: "diamond" },
-    { fill: "pink", type: "square" },
-    { fill: "pink", type: "circle" },
-    { fill: "pink", type: "star" },
-  ]
-
-  const getVariableGroups = () =>{
-    
+  
+  const getGroups = () =>{
     fetch(`http://localhost:5000/get-variables-list?username=${userInfo.username}`)
-      .then(response => response.json())
-      .then((data) =>{
-        if(!data.error){
-          setVariableGroups(data.listVariables)
-        }
-      })
-  }
+    .then(response => response.json())
+    .then((data) =>{
+      if(!data.error){
+        setVariableGroups(data.listVariables)
+      }
+    })
 
-  const getSetupGroups = () =>{
-    
     fetch(`http://localhost:5000/get-setups?username=${userInfo.username}`)
-      .then(response => response.json())
-      .then((data) =>{
-        
-        if(!data.error){
-          setSetupGroups(data.setups)
-        }
-      })
+    .then(response => response.json())
+    .then((data) =>{
+      if(!data.error){
+        setSetupGroups(data.setups)
+      }
+    })
   }
-
 
   const handleLegendClick = (event, index) =>{
     
-    
     const label = event.target.textContent;
+    console.log(label);
     if(filterByVariables){
-      getTradesByVariableGroups(label)
+      setScatterData(getTradesByVariableGroups(label))
     }
     if(filterBySetups){
-      getTradesBySetupGroups(label)
+      console.log('filterBySetups');
+      setScatterData(getTradesBySetupGroups(label))
     }
     //getTradesBySetupGroups(label)
     //getTradesByVariableGroups(label)
@@ -114,20 +88,21 @@ function DbMainGraph (props) {
         };
       });
 
-     
+    
     console.log(tradesByVariable);
-    formatScatterData(tradesByVariable);
+    //setScatterData(formatScatterData(tradesByVariable));
+    return formatScatterData(tradesByVariable)
   }
 
   const getTradesBySetupGroups = (label) =>{
-    
+    console.log(label);
     const tradesBySetup = setupGroups
       .map(data =>{
         if(label){
           const dataset = trades.filter(trade =>
             trade.setup === label
           )
-          console.log(setupGroups);
+          console.log('dataset:', dataset);
           return {
             filter: 'setup',
             setup: label,
@@ -136,15 +111,15 @@ function DbMainGraph (props) {
           }
         }
       })
-    formatScatterData(tradesBySetup);
+    
+    
+    console.log(tradesBySetup);
+   
+    return formatScatterData(tradesBySetup)
   }
 
   const formatScatterData = (tradesData) =>{
     let result = []
-    
-    if(setupOverall && scatterData){
-      result = scatterData
-    }
     
     tradesData.forEach(dataset =>{
       
@@ -192,25 +167,25 @@ function DbMainGraph (props) {
         })
       }
     })
-    setScatterData(()=>result)
+    console.log(result);
+    return result
+    
   }
 
   const createLegend = () =>{
-    const legend = []
-    let groups = setupGroups;
-    let names = setupGroups.map(group => group.setup)
-    if(filterBySetups) {
-      groups = setupGroups;
-      names = setupGroups.map(group => group.setup)
-    } else if (filterByVariables) {
-      groups = variableGroups;
-      names = variableGroups.map(group => group.title)
+    const names = () =>{
+      if(!filterBySetups && !filterByVariables || filterBySetups){
+        return setupGroups.map(group => {
+          return group.setup
+        })
+      }
+      if(filterByVariables){
+        return variableGroups.map(group =>{
+          return group.title
+        })
+      }
     }
-    
-    
-    for(let i = 0; i < names.length; i++){
-      legend.push({name: names[i], symbol: legendSymbols[i]})
-    }
+    const legend = names().map((name, index) => ({ name, symbol: legendSymbols[index] }));
     setLegendNamesAndSymbols(legend)
   }
 
@@ -232,47 +207,51 @@ function DbMainGraph (props) {
 
     return <VictoryLabel {...props} style={style} />;
   };
+  const getAllSetupData = () =>{
+    let data = []
+    setupGroups.forEach(g =>{
+      data.push(getTradesBySetupGroups(g.setup))
+    })
+    console.log(data);
+    let result = data.map(d => d[0])
+    setScatterData(result)
+  }
+
+  const getAllVariableData = () =>{
+    let data = []
+    variableGroups.forEach(g =>{
+      data.push(getTradesBySetupGroups(g.title))
+    })
+    console.log(data);
+    let result = data.map(d => d[0])
+    setScatterData(result)
+  }
 
   const handleFilterByVariables = (e) =>{
+    const firstVariableGroup = variableGroups[0].title
     setScatterData(null)
     setFilterBySetups(false)
     setFilterByVariables(true)
-    setSetupOverall(false)
+    setScatterData(getTradesByVariableGroups(firstVariableGroup))
+    
   }
 
   const handleFilterBySetups = (e) =>{
     setScatterData(null)
     setFilterBySetups(true)
     setFilterByVariables(false)
-    setSetupOverall(false)
+    getAllSetupData()
+    
   }
 
   useEffect(()=>{
-    userInfo && userInfo.username && getVariableGroups() 
-    userInfo && userInfo.username && getSetupGroups()
+    userInfo && userInfo.username && getGroups()
   },[userInfo])
   
-  
-
   useEffect(()=>{
     setupGroups && createLegend()
-    setupGroups && trades && setupGroups.forEach(g =>{
-      console.log('g');
-      getTradesBySetupGroups(g.setup)
-    })
-  },[setupGroups, trades])
-  /*
-  useEffect(()=>{
-    setupGroups && trades && setupGroups.forEach(g =>{
-      console.log('g');
-      getTradesBySetupGroups(g.setup)
-    })
-    //setupOverall && 
-  },[setupOverall])
-  */
-  useEffect(()=>{
-    console.log(scatterData);
-  },[scatterData])
+    setupGroups && trades && getAllSetupData()
+  },[setupGroups])
 
   useEffect(()=>{
     filterBySetups && createLegend()
@@ -285,88 +264,6 @@ function DbMainGraph (props) {
 
   const MAX_WINRATE = 100;
   const MAX_R = 10;
-
-  const styles = {
-    classLabel: {
-      fontSize: 3,
-      fill: '#ddd',
-      strokeWidth: 1,
-    },
-    xaxis: {
-      tickLabels: {
-        fontSize: 3,
-      },
-      grid: {
-        stroke: '#999999',
-      },
-      axisLabel: {
-        fontSize: 4,
-        padding: 5,
-        fill: '#000000',
-      },
-    },
-    yaxis: {
-      tickLabels: {
-          fill: '#000000',
-          fontSize: 3,
-      },
-      grid: {
-          stroke: '#999999',
-      },
-      axisLabel: {
-          fontSize: 4,
-          padding: 5,
-          fill: '#000000',
-      },
-      ticks: {
-          size: 0,
-      },
-    },
-    scatter: {
-      labels: {
-        fontSize: 3,
-        fill: ({datum}) => datum.fill,
-        
-      },
-      data:{
-        fill: ({datum}) => datum.fill,
-        
-      }
-        
-    },
-    legend: {
-      border: {
-        stroke: '#000000',
-        fill: '#FFF',
-        width: 42,
-        strokeDasharray: 2,
-      },
-      labels: {
-        fill: '#000000',
-        fontSize: 3,
-        cursor: 'pointer',
-        
-      },
-      title: {
-        fill: '#000000',
-        fontSize: 3,
-        padding: 2,
-      },
-      maxWidth: 30
-    },
-    annotionLine: {
-      data: {
-        stroke: '#888',
-        strokeWidth: 0.5,
-        strokeDasharray: 1,
-      },
-      labels: {
-        angle: -90,
-        fill: '#ccc',
-        fontSize: 3,
-      },
-    },
-  };
   
   const yTickValues = [10, 20, 30, 40, 50, 60, 70, 80, 90 ,100]
   const xTickValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]

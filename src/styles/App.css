@@ -23,6 +23,19 @@ input[type=number] {
   accent-color: black
 }
 
+::-webkit-scrollbar{
+  width: 14px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track{
+  background-color: gray;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: rgb(208, 208, 208);
+}
+
 
 .scrollbar-color::-webkit-scrollbar{
   width: 10px;
@@ -39,7 +52,7 @@ input[type=number] {
 
 input:focus, select:focus{
   outline: none;
-  border-left: solid 2px rgb(255, 0, 0);
+  border-left: solid 2px rgb(0, 0, 0);
   
   caret-color: black;
 }
@@ -346,6 +359,11 @@ table .trades-tr:nth-of-type(odd){
 
 .caret-white:focus{
   caret-color: azure;
+  
+}
+
+.caret-black:focus{
+  caret-color: black;
   
 }
 

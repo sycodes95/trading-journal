@@ -150,7 +150,7 @@ function TradesList(props){
           <div className="cols-span-1 w-full flex flex-row justify-end items-center ">
             <div className=" w-fit p-1 flex bg-gray-300 rounded-sm">
               <input className="trades-search-bar h-6   bg-white
-               text-black rounded-sm text-xs pl-2 pr-2 shadow-md" 
+               text-black rounded-sm text-xs pl-2 pr-2 shadow-md caret-black" 
               type='text' placeholder="Search..."  onChange={searchOnChangeSubmit}/>
               <div className="h-5 w-5">
                 {

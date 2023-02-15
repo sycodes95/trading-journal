@@ -9,13 +9,26 @@ function DbLosses (props) {
 
   const getLossesCount = () =>{
     let losingTrades = trades.filter(t => t.fgl < 0)
-    setLosses(losingTrades.length)
+    
+    if(!losingTrades || losingTrades.length < 1) {
+      console.log('hi');
+      setLosses(0)
+    } else {
+      setLosses(losingTrades.length)
+    }
+    
   }
 
   useEffect(()=>{
     //Get WIN RATE
     trades && getLossesCount()
+    !trades && setLosses(0)
+    console.log(trades);
   },[trades])
+
+  useEffect(()=>{
+    console.log(losses);
+  },[losses])
 
   return (
     <div className="flex justify-center items-center text-white">

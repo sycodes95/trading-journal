@@ -14,7 +14,8 @@ function Dashboard (){
       .then(response => response.json())
       .then((data) =>{
         console.log(data);
-        setTrades(data.trades)
+        if(data.trades.length) setTrades(data.trades)
+        
         
       })
 

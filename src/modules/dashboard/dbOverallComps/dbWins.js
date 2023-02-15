@@ -19,6 +19,7 @@ function DbWins (props) {
   useEffect(()=>{
     //Get WIN RATE
     trades && getWinsCount()
+    !trades && setWins(0)
   },[trades])
 
   return (

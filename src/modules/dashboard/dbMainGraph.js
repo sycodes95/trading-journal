@@ -31,7 +31,7 @@ function DbMainGraph (props) {
 
   const [scatterData, setScatterData] = useState(null)
 
-  
+  /*
   const getGroups = () =>{
     fetch(`http://localhost:5000/get-variables-list?username=${userInfo.username}`)
     .then(response => response.json())
@@ -46,9 +46,32 @@ function DbMainGraph (props) {
     .then((data) =>{
       if(!data.error){
         setSetupGroups(data.setups)
+        setFilterBySetups(true)
       }
     })
+    
   }
+  */
+
+  const getGroups = () => {
+    Promise.all([
+      fetch(`http://localhost:5000/get-variables-list?username=${userInfo.username}`),
+      fetch(`http://localhost:5000/get-setups?username=${userInfo.username}`)
+    ])
+      .then((responses) => Promise.all(responses.map(response => response.json())))
+      .then(([variablesData, setupsData]) => {
+        if (!variablesData.error) {
+          setVariableGroups(variablesData.listVariables);
+        }
+  
+        if (!setupsData.error) {
+          setSetupGroups(setupsData.setups);
+          
+        }
+      })
+      
+      .catch(error => console.error(error));
+  };
 
   const handleLegendClick = (event, index) =>{
     
@@ -96,24 +119,22 @@ function DbMainGraph (props) {
 
   const getTradesBySetupGroups = (label) =>{
     console.log(label);
+    
     const tradesBySetup = setupGroups
-      .map(data =>{
-        if(label){
-          const dataset = trades.filter(trade =>
-            trade.setup === label
-          )
-          console.log('dataset:', dataset);
-          return {
-            filter: 'setup',
-            setup: label,
-            trades: dataset,
-            symbolIndex: setupGroups.findIndex(group => group.setup === label)
-          }
-        }
-      })
+    .filter(data => data.setup === label)
+    .map(data =>{
+      const dataset = trades.filter(trade => trade.setup === label)
+      return {
+        filter: 'setup',
+        setup: label,
+        trades: dataset,
+        symbolIndex: setupGroups.findIndex(group => group.setup === label)
+      }
+    })
     
     
     console.log(tradesBySetup);
+
    
     return formatScatterData(tradesBySetup)
   }
@@ -122,7 +143,7 @@ function DbMainGraph (props) {
     let result = []
     
     tradesData.forEach(dataset =>{
-      
+      console.log(dataset);
       const {filter, trades, symbolIndex, variable, setup} = dataset
       console.log(variable);
       const label = () =>{
@@ -208,6 +229,7 @@ function DbMainGraph (props) {
     return <VictoryLabel {...props} style={style} />;
   };
   const getAllSetupData = () =>{
+    setFilterBySetups(true)
     let data = []
     setupGroups.forEach(g =>{
       data.push(getTradesBySetupGroups(g.setup))
@@ -245,13 +267,20 @@ function DbMainGraph (props) {
   }
 
   useEffect(()=>{
+    console.log(scatterData);
+  },[scatterData])
+
+  useEffect(()=>{
+    console.log('userinfo');
     userInfo && userInfo.username && getGroups()
   },[userInfo])
   
   useEffect(()=>{
+    console.log('setupGroups');
     setupGroups && createLegend()
     setupGroups && trades && getAllSetupData()
-  },[setupGroups])
+    
+  },[setupGroups, trades])
 
   useEffect(()=>{
     filterBySetups && createLegend()

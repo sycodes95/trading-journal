@@ -23,6 +23,7 @@ function Dashboard (){
   }
 
   useEffect(()=>{
+    
     fetchTrades()
   }, [userInfo])
 

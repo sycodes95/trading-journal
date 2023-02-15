@@ -241,9 +241,9 @@ table .trades-tr:nth-of-type(odd){
   background:linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),url(../images/dev-pattern.png);
   background-position: center;
   background-size: 75px;
-  
-  
 }
+
+
 
 .bg-dev-invert{
   background:url(../images/dev-pattern.png);
@@ -273,6 +273,8 @@ table .trades-tr:nth-of-type(odd){
   background-size: cover;
 
 }
+
+
 
 
 .grid-cols-200px-1fr{

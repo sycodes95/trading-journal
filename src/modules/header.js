@@ -41,20 +41,20 @@ function Header () {
       {
         !userLoggedIn ? 
 
-        <div className="header-nav grid grid-cols-2 font-thin text-black">
-          <Link to='/login'>
-            <span className="hover:cursor-pointer">Log in</span>
+        <div className="header-nav grid grid-cols-2  text-black">
+          <Link className="flex justify-center w-32 col-span-1" to='/login'>
+            <span className="hover:cursor-pointer">LOG IN</span>
           </Link>
-          <Link to='/signup'>
-            <span className="hover:cursor-pointer">Sign up</span>
+          <Link className="flex justify-center w-32 col-span-1" to='/signup'>
+            <span className="hover:cursor-pointer">REGISTRATION</span>
           </Link> 
         </div>
 
         :
 
-        <div className="header-nav grid grid-cols-2 gap-x-2 font-thin text-black">
+        <div className="header-nav grid grid-cols-2 gap-x-2 font-bold text-black  ">
           
-          <Link to='/profile' className="">
+          <Link className="flex justify-center" to='/profile' >
             <span className="polygon-child hover:cursor-pointer">Profile</span>
           </Link> 
           <button className="" onClick={handleLogOut}>

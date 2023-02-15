@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, redirect } from "react-router-dom";
-
+import { Triangle } from "react-loader-spinner";
+import { ReactSVG } from "react-svg";
+import earth from "../images/earth.svg"
 
 function Login () {
   const [formData, setFormData] = useState({
@@ -55,33 +57,52 @@ function Login () {
   }, [infoIncorrect])
 
   return(
-    <div className=" w-full flex justify-center items-center">
+    <div className=" w-full h-full flex justify-center ">
       {
       logInSuccess ? 
 
-      <div>Log in successful</div>
+      <div className="w-80 h-96 p-4  text-black flex flex-col gap-y-2 bg-striped-content-big relative top-36">
+        Fetching Data...
+      </div>
 
       :
 
-      <form className='w-2/5 border-b-2 text-black grid  gap-y-2' onSubmit={handleSubmit}>
+      <form className='w-80 h-96 p-4  text-black flex flex-col gap-y-2 bg-striped-content-big relative top-36' onSubmit={handleSubmit}>
 
        
-        
-        <label className="flex flex-row  justify-between items-center text-sm col-span-full">
-          <span>Username:</span> 
+        <div className="h-16 form-logo flex justify-center mt-4">
+          <ReactSVG className="text-gray-500 fill-current" src={earth}/>
+        </div>
+        <div className="text-center text-gray-300 mt-2 font-bold font-black-outline-light">
+          <span>AUTHORIZATION</span>
+        </div>
+        <label className="flex flex-row justify-center items-center text-sm col-span-full text-xs mt-4">
+          <span>EMAIL</span> 
           <span className="hidden text-xs text-red-500 font-thin col-span-full" ref={infoIncorrectRef} > Username or Password is incorrect </span>
         </label>
-        <input className='border-b border-blue-500 outline-none col-span-full' type='text' name='username' value={formData.username} onChange={handleInputChange} maxLength='69'/>
+        <div className="flex justify-center">
+          <input className='outline-none col-span-full h-6 w-3/4 justify-self-center' 
+          type='text' name='username' value={formData.username} onChange={handleInputChange} maxLength='69'/>
+
+        </div>
         
-        <label className="flex flex-row  justify-between items-center text-sm col-span-full"> 
-          
+        
+        <label className="flex flex-row justify-center items-center text-sm col-span-full text-xs"> 
+          <span>PASSWORD</span> 
         </label>
-        <input className='border-b border-blue-500 outline-none col-span-full' type='password' name='password' value={formData.password} onChange={handleInputChange}/>
+        <div className="flex justify-center">
+          <input className=' outline-none col-span-full h-6 w-3/4 justify-self-center' 
+          type='password' name='password' value={formData.password} onChange={handleInputChange}/>
+            
+        </div>
+       
         
 
         
+        <div className="flex justify-center mt-8">
+          <button className="col-span-full bg-opacity-70 bg-black hover:bg-opacity-90 transition-all h-10 w-3/4 justify-self-center text-white" type="submit">LOGIN</button>
+        </div>
         
-        <button className="col-span-full" type="submit">Submit</button>
 
       </form> 
 

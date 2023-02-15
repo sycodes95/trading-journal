@@ -94,7 +94,7 @@ function DbOverall (props){
   
   return(
     <div className="grid grid-cols-4  gap-x-4 gap-y-4">
-      <div className="section-info col-span-4 text-black p-4 bg-yellow-500 bg-opacity-50 rounded-sm
+      <div className="section-info col-span-4 text-black p-4 bg-yellow-600 bg-opacity-50 rounded-sm
         grid  row-start-1">
         <div className="">
           <ReactSVG className="h-14 w-14 " src={tradesSVG}/>

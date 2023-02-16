@@ -53,11 +53,11 @@ function DbMainGraph (props) {
   };
 
   const handleLegendClick = (event, index) =>{
-    
+    console.log(index);
     const label = event.target.textContent;
     console.log(label);
     if(filterByVariables){
-      setScatterData(getTradesByVariableGroups(label))
+      setScatterData(getTradesByVariableGroups(label, index))
     }
     if(filterBySetups){
       console.log('filterBySetups');
@@ -94,24 +94,26 @@ function DbMainGraph (props) {
   }
 
   
-  const getTradesByVariableGroups = (title) =>{
+  const getTradesByVariableGroups = (title, index) =>{
     
-    
+    console.log(variableGroups);
     const tradesByVariable = variableGroups
-      .find(group => group.title === title)
+      .at(index)
       .variables
-      .map(variable => {
+      .map((variable, i) => {
+        
         const dataset = trades.filter(trade =>
-          trade.variables.some(vari =>
-            vari.variable === variable && vari.title === title
+          trade.variables.some((vari, vIndex) =>
+            vari.variable.toLowerCase() === variable.toLowerCase() && vari.title.toLowerCase() === title.toLowerCase()
           )
         );
+        console.log(dataset);
         return {
           filter: 'variable',
           group: title,
           variable,
           trades: dataset,
-          symbolIndex: variableGroups.findIndex(group => group.title === title),
+          symbolIndex: variableGroups.findIndex(group => group.title.toLowerCase() === title.toLowerCase())
         };
       });
 
@@ -122,22 +124,22 @@ function DbMainGraph (props) {
   }
 
   const getTradesBySetupGroups = (label) =>{
-    console.log(label);
+    
     
     const tradesBySetup = setupGroups
     .filter(data => data.setup === label)
     .map(data =>{
-      const dataset = trades.filter(trade => trade.setup === label)
+      const dataset = trades.filter(trade => trade.setup.toLowerCase() === label.toLowerCase())
       return {
         filter: 'setup',
         setup: label,
         trades: dataset,
-        symbolIndex: setupGroups.findIndex(group => group.setup === label)
+        symbolIndex: setupGroups.findIndex(group => group.setup.toLowerCase() === label.toLowerCase())
       }
     })
     
     
-    console.log(tradesBySetup);
+   
 
    
     return formatScatterData(tradesBySetup)
@@ -147,9 +149,9 @@ function DbMainGraph (props) {
     let result = []
     
     tradesData.forEach(dataset =>{
-      console.log(dataset);
+      
       const {filter, trades, symbolIndex, variable, setup} = dataset
-      console.log(variable);
+      
       const label = () =>{
         if(filter === 'setup'){
           return setup
@@ -162,7 +164,7 @@ function DbMainGraph (props) {
       
       let AVG_R = []
       trades.forEach(trade =>{
-        console.log(trade);
+        
         if(!trade.tp || !trade.sl || !trade.exit || !trade.entry) return;
         let R = Math.round(((trade.exit - trade.entry) / (trade.entry - trade.sl)) * 100) / 100
         R < 0 ? AVG_R.push(0) : AVG_R.push(R)
@@ -192,7 +194,7 @@ function DbMainGraph (props) {
         })
       }
     })
-    console.log(result);
+    
     return result
     
   }
@@ -238,7 +240,7 @@ function DbMainGraph (props) {
     setupGroups.forEach(g =>{
       data.push(getTradesBySetupGroups(g.setup))
     })
-    console.log(data);
+    ;
     let result = data.map(d => d[0])
     setScatterData(result)
   }
@@ -248,7 +250,7 @@ function DbMainGraph (props) {
     variableGroups.forEach(g =>{
       data.push(getTradesBySetupGroups(g.title))
     })
-    console.log(data);
+    
     let result = data.map(d => d[0])
     setScatterData(result)
   }
@@ -271,16 +273,16 @@ function DbMainGraph (props) {
   }
 
   useEffect(()=>{
-    console.log(scatterData);
+    
   },[scatterData])
 
   useEffect(()=>{
-    console.log('userinfo');
+    
     userInfo && userInfo.username && getGroups()
   },[userInfo])
   
   useEffect(()=>{
-    console.log('setupGroups');
+    
     setupGroups && createLegend()
     setupGroups && trades && getAllSetupData()
     
@@ -295,7 +297,7 @@ function DbMainGraph (props) {
   },[filterByVariables])
   
   useEffect(()=>{
-    console.log(legendNamesAndSymbols);
+    
   },[legendNamesAndSymbols])
 
   const filterTypeData = [
@@ -408,7 +410,9 @@ function DbMainGraph (props) {
                 {
                   target: "labels",
                   eventHandlers: {
-                    onClick:handleLegendClick
+                    onClick: (event, { index }) => {
+                      handleLegendClick(event, index); // pass the index to the handler function
+                    }
                   }
                 }
               ]}

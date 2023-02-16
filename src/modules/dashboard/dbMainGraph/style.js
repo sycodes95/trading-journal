@@ -57,7 +57,7 @@ const styles = {
     },
     labels: {
       fill: '#000000',
-      fontSize: 3,
+      fontSize: 2.5,
       cursor: 'pointer',
       
     },

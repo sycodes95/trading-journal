@@ -37,13 +37,13 @@ function NtvVariables (props){
       {
         variableList &&
         <div className="grid grid-rows-2 justify-center">
-          <label className="flex items-center text-black">{`${variableList.title}`}</label>
-          <div className="flex ">
+          <label className="flex items-center text-black w-28 overflow-hidden whitespace-nowrap">{`${variableList.title}`}</label>
+          <div className="flex justify-center">
             <select className="w-4" name="variables" onClick={(e)=>handleInputChange(e, variableList.title)}>
               <option value='' hidden></option>
               {
                 variableList.variables.map((v) =>(
-                  <option value={v}>{`${v}`}</option>
+                  <option className="text-lg" value={v}>{`${v}`}</option>
                 ))
               }
             </select>

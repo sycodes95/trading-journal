@@ -129,7 +129,7 @@ function VariablesCards (props){
   }
 
   useEffect(()=>{
-    if(formData.title === '' && formData.variables[0] !== '' ){
+    if(formData.title === '' && formData.variables[0] !== '' && formData.variables.length ){
       setOnlyTitleEmpty(true)
     } else {
       setOnlyTitleEmpty(false);
@@ -141,6 +141,10 @@ function VariablesCards (props){
       setBothTitleVariablesEmpty(false);
     }  
   },[formData])
+
+  useEffect(()=>{
+    console.log(onlyTitleEmpty);
+  },[onlyTitleEmpty])
   
   useEffect(()=>{
     // once variablesList from parent component is passed down and it exists for this card, 

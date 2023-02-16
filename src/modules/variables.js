@@ -70,7 +70,7 @@ function Variables (){
   }, [])
 
   useEffect(()=>{
-    
+    console.log(variablesList);
   },[variablesList])
 
   return(

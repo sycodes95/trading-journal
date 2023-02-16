@@ -33,7 +33,7 @@ function NewTradeGeneral (props){
   return(
     <div className="new-trade-general text-xs w-full">
       <div className="new-trade-data ">
-        <div className="bg-ruby bg-opacity-70 text-black pl-4 pr-4  text-center bottom-right-round
+        <div className="bg-gray-400 bg-opacity-70 text-black pl-4 pr-4  text-center bottom-right-round
         transition-all">
           <span>Trade Data</span>
         </div>

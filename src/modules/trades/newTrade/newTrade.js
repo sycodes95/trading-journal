@@ -128,15 +128,15 @@ function NewTrade (props) {
 
   useEffect(()=>{
     if(generalTab){
-      generalTabRef.current.classList.add('bg-ruby')
+      generalTabRef.current.classList.add('bg-gray-400')
       //generalTabRef.current.classList.add('text-white')
-      variablesTabRef.current.classList.remove('bg-ruby')
+      variablesTabRef.current.classList.remove('bg-gray-400')
       //variablesTabRef.current.classList.remove('text-white')
     }
     if(variablesTab){
-      variablesTabRef.current.classList.add('bg-ruby')
+      variablesTabRef.current.classList.add('bg-gray-400')
       //variablesTabRef.current.classList.add('text-white')
-      generalTabRef.current.classList.remove('bg-ruby')
+      generalTabRef.current.classList.remove('bg-gray-400')
       //generalTabRef.current.classList.remove('text-white')
     }
   },[generalTab, variablesTab])
@@ -172,7 +172,7 @@ function NewTrade (props) {
         </div>
         
         <Dialog.Close asChild>
-          <button className="h-6 text-md pl-4 pr-4 bg-ruby bg-opacity-70 text-white text-center
+          <button className="h-6 text-md pl-4 pr-4 bg-gray-400 bg-opacity-70 text-white text-center
           font-bold top-right-round hover:text-black transition-all">x</button>
         </Dialog.Close>
       </div>

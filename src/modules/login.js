@@ -13,10 +13,12 @@ function Login () {
   const [logInSuccess, setLogInSuccess] = useState(false)
   const [infoIncorrect, setInfoIncorrect] = useState(false)
 
+  const [demoAcc, setDemoAcc] = useState(false)
+
   const infoIncorrectRef = useRef(null)
 
   function handleSubmit(e){
-    e.preventDefault();
+    e && e.preventDefault();
     fetch('http://localhost:5000/login', {
       method: 'POST',
       body: JSON.stringify(formData),
@@ -45,10 +47,19 @@ function Login () {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleDemoAccount = () =>{
+    setFormData({
+      username: 'kevin',
+      password: '123'
+    })
+
+    setDemoAcc(true)
+
+  }
   useEffect(()=>{
-    
+    demoAcc && handleSubmit()
     //window.location.reload()
-  },[logInSuccess])
+  },[demoAcc])
 
   useEffect(()=>{
     //show error message if username or pw is incorrect, hide error message other wise.
@@ -61,13 +72,13 @@ function Login () {
       {
       logInSuccess ? 
 
-      <div className="w-80 h-96 p-4  text-black flex flex-col gap-y-2 bg-striped-content-big relative top-36">
+      <div className="w-80 h-96 p-4  text-black flex flex-col gap-y-2 bg-striped-content-big relative top-36 text-xs">
         Fetching Data...
       </div>
 
       :
 
-      <form className='w-80 h-96 p-4  text-black flex flex-col gap-y-2 bg-striped-content-big relative top-36' onSubmit={handleSubmit}>
+      <form className='w-80 h-fit p-4  text-black flex flex-col gap-y-2 bg-striped-content-big relative top-36' onSubmit={handleSubmit}>
 
        
         <div className="h-16 form-logo flex justify-center mt-4">
@@ -76,7 +87,7 @@ function Login () {
         <div className="text-center text-gray-300 mt-2 font-bold font-black-outline-light">
           <span>AUTHORIZATION</span>
         </div>
-        <label className="flex flex-row justify-center items-center text-sm col-span-full text-xs mt-4">
+        <label className="flex flex-row justify-center items-center col-span-full text-xs mt-4">
           <span>EMAIL</span> 
           <span className="hidden text-xs text-red-500 font-thin col-span-full" ref={infoIncorrectRef} > Username or Password is incorrect </span>
         </label>
@@ -87,7 +98,7 @@ function Login () {
         </div>
         
         
-        <label className="flex flex-row justify-center items-center text-sm col-span-full text-xs"> 
+        <label className="flex flex-row justify-center items-center col-span-full text-xs"> 
           <span>PASSWORD</span> 
         </label>
         <div className="flex justify-center">
@@ -100,7 +111,13 @@ function Login () {
 
         
         <div className="flex justify-center mt-8">
-          <button className="col-span-full bg-opacity-70 bg-black hover:bg-opacity-90 transition-all h-10 w-3/4 justify-self-center text-white" type="submit">LOGIN</button>
+          <button className="col-span-full bg-opacity-70 bg-black hover:bg-opacity-90 transition-all h-10 w-3/4 justify-self-center text-white"
+           type="submit">LOGIN</button>
+        </div>
+
+        <div className="flex justify-center mt-4 mb-4">
+          <button className="col-span-full bg-opacity-70 bg-red-500 hover:bg-opacity-90 transition-all h-5 w-3/4 justify-self-center text-white text-xs" 
+          onClick={handleDemoAccount}>USE DEMO ACCOUNT</button>
         </div>
         
 

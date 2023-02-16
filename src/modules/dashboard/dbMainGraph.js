@@ -28,30 +28,9 @@ function DbMainGraph (props) {
   const [legendNamesAndSymbols, setLegendNamesAndSymbols] = useState(null)
 
   const [selectedLegend, setSelectedLegend] = useState("")
+  const [selectedFilterTypeLegend, setSelectedFilterTypeLegend] = useState("")
 
   const [scatterData, setScatterData] = useState(null)
-
-  /*
-  const getGroups = () =>{
-    fetch(`http://localhost:5000/get-variables-list?username=${userInfo.username}`)
-    .then(response => response.json())
-    .then((data) =>{
-      if(!data.error){
-        setVariableGroups(data.listVariables)
-      }
-    })
-
-    fetch(`http://localhost:5000/get-setups?username=${userInfo.username}`)
-    .then(response => response.json())
-    .then((data) =>{
-      if(!data.error){
-        setSetupGroups(data.setups)
-        setFilterBySetups(true)
-      }
-    })
-    
-  }
-  */
 
   const getGroups = () => {
     Promise.all([
@@ -87,6 +66,31 @@ function DbMainGraph (props) {
     //getTradesBySetupGroups(label)
     //getTradesByVariableGroups(label)
     setSelectedLegend(label)
+  }
+
+  const handleLegendTypeClick = (event, index) =>{
+    
+    const label = event.target.textContent;
+    if(label === 'INSTRUMENTS'){
+
+    }
+    if(label === 'SETUPS'){
+      setScatterData(null)
+      setFilterBySetups(true)
+      setFilterByVariables(false)
+      getAllSetupData()
+      
+    }
+    if(label === 'VARIABLES'){
+      const firstVariableGroup = variableGroups[0].title
+      setScatterData(null)
+      setFilterBySetups(false)
+      setFilterByVariables(true)
+      setScatterData(getTradesByVariableGroups(firstVariableGroup))
+      
+    }
+
+    setSelectedFilterTypeLegend(label)
   }
 
   
@@ -289,7 +293,16 @@ function DbMainGraph (props) {
   useEffect(()=>{
     filterByVariables && createLegend()
   },[filterByVariables])
- 
+  
+  useEffect(()=>{
+    console.log(legendNamesAndSymbols);
+  },[legendNamesAndSymbols])
+
+  const filterTypeData = [
+    {name: 'INSTRUMENTS', symbol: {fill: 'red'}},
+    {name: 'SETUPS', symbol: {fill: 'navy'}},
+    {name: 'VARIABLES', symbol: {fill: 'black'}},
+  ]
 
   const MAX_WINRATE = 100;
   const MAX_R = 10;
@@ -304,11 +317,8 @@ function DbMainGraph (props) {
   return(
     <div className="grid grid-cols-10 h-full bg-striped-content-big-light">
       <div className="chart col-span-10">
-        <div className="w-full flex justify-end col-span-full text-sm gap-x-2 items-center">
-          <div>Filter by :</div>
-          <button className="">Instrument</button>
-          <button onClick={handleFilterBySetups}>Setup</button>
-          <button onClick={handleFilterByVariables}>Variables</button>
+        <div className="w-full flex justify-end items-center col-span-full text-sm gap-x-2 items-center">
+          
 
           
         </div>
@@ -316,7 +326,7 @@ function DbMainGraph (props) {
           
           width={300} 
           height={150} 
-          padding={{top: 5, bottom:20, left:15, right:50}} 
+          padding={{top: 8, bottom:20, left:15, right:50}} 
           domainPadding={{ x: 10, y: 10 }}  
           theme={VictoryTheme.material}
           minDomain={chartMinDomain}
@@ -360,17 +370,40 @@ function DbMainGraph (props) {
             />
           }
           
+          <VictoryLegend
+            data={filterTypeData}
+            title='FILTER BY TYPE'
+            gutter={10}
+            orientation="vertical"
+            style={styles.legend}
+            labelComponent={
+              <LegendLabel selectedDatumName={selectedFilterTypeLegend} />
+            }
+            events={[
+              {
+                target: "labels",
+                eventHandlers: {
+                  onClick:handleLegendTypeClick
+                }
+              }
+            ]}
+            x={258}
+            y={8}
+          />
+          
           {
             legendNamesAndSymbols && 
+            
             <VictoryLegend
               data={legendNamesAndSymbols}
-              title='Filter by variable type'
+              
               gutter={10}
               orientation="vertical"
               style={styles.legend}
               labelComponent={
                 <LegendLabel selectedDatumName={selectedLegend} />
               }
+              
               events={[
                 {
                   target: "labels",
@@ -380,7 +413,7 @@ function DbMainGraph (props) {
                 }
               ]}
               x={258}
-              y={0}
+              y={35}
             />
           }
         </VictoryChart>

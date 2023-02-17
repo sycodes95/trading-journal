@@ -1,30 +1,25 @@
 import { useEffect, useRef, useState } from "react";
-import { ReactSVG } from "react-svg";
-import tradesSVG from "../../icons/trades.svg"
-import thumbsUpSVG from "../../icons/dashboard/thumbs-up.svg"
 
-import thumbsDownSVG from "../../icons/dashboard/thumbs-down.svg"
+import DbLosses from "./lossCount";
+import DbGL from "./gainLoss";
+import DbGLR from "./gainLossR";
+import DbWins from "./winCount";
+import DbWR from "./winRate";
 
-import moment from "moment";
-import DbLosses from "./dbOverallComps/dbLosses";
-import DbGL from "./dbOverallComps/dbGL";
-import DbGLR from "./dbOverallComps/dbGLR";
-import DbWins from "./dbOverallComps/dbWins";
-import DbWR from "./dbOverallComps/dbWR";
-import DbPNLGraph from "./dbPNLGraph";
-import DbMainGraph from "./dbMainGraph";
 
-function DbOverall (props){
+
+import AdvancedGraph from "../advancedGraph/advancedGraph";
+import Banner from "./banner";
+import PnlGraph from "../pnlGraph/pnlGraph";
+
+
+function OverallStats (props){
   const userInfo = props.userInfo
   const {trades, setTrades} = props.tradesContext
-  
 
   const [overallTrades, setOverallTrades] = useState(true)
   const [lastWeekTrades, setLastWeekTrades] = useState(null)
   const [lastMonthTrades, setLastMonthTrades] = useState(null)
-  
-
-  
 
   const handleOverallTrades = () =>{
     setLastMonthTrades(false)
@@ -84,35 +79,12 @@ function DbOverall (props){
       })
     }
   },[lastMonthTrades])
-
-
-  
-
-  
-  
-
   
   return(
     <div className="grid grid-cols-4  gap-x-4 gap-y-4">
-      <div className="section-info col-span-4 text-black p-4 bg-yellow-600 bg-opacity-50 rounded-sm
-        grid  row-start-1">
-        <div className="">
-          <ReactSVG className="h-14 w-14 " src={tradesSVG}/>
-        </div>
+      <Banner/>
 
-        <div className="pl-8">
-          <div className="text-3xl">
-            <span>Dashboard</span>
-          </div>
-          <div className="text-sm">
-            <span>
-              Create, edit, and track your trades. Sort by categories or use the search bar to find specific trades.
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div className="w-full flex flex-col col-span-1 row-start-2 row-span-1 ">
+      <div className="overall-stats w-full flex flex-col">
 
         <div className="row-span-1 grid grid-cols-3  text-black rounded-sm  bg-white top-left-round bottom-right-round
         font-bold text-xs h-6 border border-gray-300">
@@ -143,7 +115,6 @@ function DbOverall (props){
           </div>
 
         </div>
-        
 
         {
         //-----------------------------------------------------------------------------------------------------------------
@@ -157,29 +128,29 @@ function DbOverall (props){
           <DbGLR trades={trades}/>
         </div>
 
-        
-
       </div>
 
-      <div className="col-span-3  row-span-2 flex flex-col">
+      <div className="overall-main-graph col-span-3  row-span-2 flex flex-col">
         
         <div className="flex items-center justify-center col-span-1 bg-white 
         text-black border border-gray-300 text-xs rounded-sm h-6 top-left-round bottom-right-round">
-          <span>VARIABLES</span>
+          <span>ADVANCED REPORTS</span>
         </div>
         <div className="row-span-5 h-full bg-white">
-          <DbMainGraph trades={trades} userInfo={userInfo}/>
+          <AdvancedGraph trades={trades} userInfo={userInfo}/>
           
         </div>
       </div>
 
-      <div className="">
-        <div className="flex items-center justify-center col-span-1 row-span-1 bg-white 
-      text-black border border-gray-300 rounded-sm h-6 text-xs top-left-round bottom-right-round">
-          <span>PERFORMANCE (PNL)</span>
-        </div>
-        <div className="bg-white">
-          <DbPNLGraph trades={trades}/>
+      <div className="overall-performance">
+        <div className="bg-white h-full">
+          <div className="flex items-center justify-center col-span-1 row-span-1 bg-white 
+        text-black border-t border-gray-300 rounded-sm h-6 text-xs top-left-round bottom-right-round">
+            <span>PERFORMANCE (PNL)</span>
+          </div>
+          <div className="">
+            <PnlGraph trades={trades}/>
+          </div>
         </div>
       </div>
       
@@ -187,4 +158,4 @@ function DbOverall (props){
   )
 }
 
-export default DbOverall;
+export default OverallStats;

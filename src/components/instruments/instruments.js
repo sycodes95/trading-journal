@@ -2,11 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 //import CurrentInstruments from "./currentInstruments";
 import { ReactSVG } from "react-svg";
-import plusButton from "../icons/plus-circle-outline.svg"
-import instrumentsSVG from "../icons/instruments.svg"
-import CurrentInstruments from "./currentInstruments";
+import plusButton from "../../icons/plus-circle-outline.svg"
+import instrumentsSVG from "../../icons/instruments.svg"
+
 import Icon from '@mdi/react';
 import { mdiPlusBox } from '@mdi/js';
+import InstrumentsTable from "./instrumentsTable";
 
 
 function Instruments () {
@@ -148,7 +149,7 @@ function Instruments () {
         }
       </div>
       {
-        <CurrentInstruments userInfo={userInfo} newInstrumentSubmitted={newInstrumentSubmitted}
+        <InstrumentsTable userInfo={userInfo} newInstrumentSubmitted={newInstrumentSubmitted}
         userMaxInstrumentsContext={userMaxInstrumentsContext}/>
       }    
     </div>

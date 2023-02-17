@@ -21,7 +21,7 @@ const styles = {
   },
   yaxis: {
     tickLabels: {
-        fill: '#000000',
+        fill: 'gray',
         fontSize: 3,
     },
     grid: {

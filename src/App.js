@@ -5,19 +5,18 @@ import { useEffect, useState } from 'react';
 import { HashRouter, BrowserRouter, Routes, Switch, Route, Redirect, useNavigate } from "react-router-dom";
 //--------------------------------------------------------------------------------------
 
-import Header from './modules/header';
-import Footer from './modules/footer';
-import Login from './modules/login';
-import Signup from './modules/signup';
-import Home from './modules/home';
-import Trades from './modules/trades/trades';
-import Profile from './modules/profile';
-import Sidebar from './modules/sidebar';
-import Setups from './modules/setups';
-import Instruments from './modules/instruments';
-import Variables from './modules/variables';
-import Logout from './modules/logout';
-import Dashboard from './modules/dashboard/dashboard';
+import Header from './components/header';
+
+import Login from './components/login';
+import Signup from './components/signup';
+import Trades from './components/trades/trades';
+import Profile from './components/profile';
+import Sidebar from './components/sidebar';
+import Setups from './components/setups';
+import Instruments from './components/instruments/instruments';
+import Variables from './components/variables';
+import Logout from './components/logout';
+import Dashboard from './components/dashboard/dashboard';
 
 function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(false)

@@ -24,7 +24,7 @@ function DbWins (props) {
 
   return (
     <div className="flex justify-center items-center text-white">
-      <div className="m-2 bg-steel-blue bg-opacity-50 rounded-md w-14 h-14 flex items-center">
+      <div className="m-2 bg-steel-blue bg-opacity-50 rounded-md w-16 h-14 flex items-center">
         <div className="w-full">
           <div className="flex justify-center text-xl font-bold ">
             <span>{wins === 0 ? '0' : wins} </span>

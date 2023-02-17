@@ -14,8 +14,6 @@ function TradesList(props){
 
   const [isLoading, setIsLoading] = useState(false)
 
-  const [searchIsLoading, setSearchIsLoading] = useState(null)
-
   const [page, setPage] = useState(0);
   const [pageCount, setPageCount] = useState(0);
   const [limitPerPage, setLimitPerPage] = useState(20)
@@ -27,7 +25,6 @@ function TradesList(props){
   const [sortValue, setSortValue] = useState(null)
 
   const tableRef = useRef(null);
-  const overlayRef = useRef(null);
 
   const fetchTrades = () => {
     if(userInfo && userInfo.username){

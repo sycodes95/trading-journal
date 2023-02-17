@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 
-function DbLosses (props) {
+function LossCount (props) {
 
   const trades = props.trades
 
@@ -16,7 +16,6 @@ function DbLosses (props) {
     } else {
       setLosses(losingTrades.length)
     }
-    
   }
 
   useEffect(()=>{
@@ -32,7 +31,7 @@ function DbLosses (props) {
 
   return (
     <div className="flex justify-center items-center text-white">
-      <div className="m-2 bg-ruby bg-opacity-50 rounded-md w-14 h-14 flex items-center">
+      <div className="m-2 bg-ruby bg-opacity-50 rounded-md w-16 h-14 flex items-center">
         <div className="w-full">
           <div className="flex justify-center text-xl font-bold ">
             <span>{losses === 0 ? '0' : losses} </span>
@@ -46,4 +45,4 @@ function DbLosses (props) {
   )
 }
 
-export default DbLosses;
+export default LossCount;

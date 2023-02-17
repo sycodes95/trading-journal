@@ -11,10 +11,10 @@ import {
   VictoryLegend,
 } from 'victory';
 
-import styles from "./dbMainGraph/style";
-import legendSymbols from "./dbMainGraph/symbols";
+import styles from "./style";
+import legendSymbols from "./symbols";
 
-function DbMainGraph (props) {
+function AdvancedGraph (props) {
  
   const userInfo = props.userInfo
   const trades = props.trades
@@ -45,10 +45,8 @@ function DbMainGraph (props) {
   
         if (!setupsData.error) {
           setSetupGroups(setupsData.setups);
-          
         }
       })
-      
       .catch(error => console.error(error));
   };
 
@@ -107,7 +105,7 @@ function DbMainGraph (props) {
             vari.variable.toLowerCase() === variable.toLowerCase() && vari.title.toLowerCase() === title.toLowerCase()
           )
         );
-        console.log(dataset);
+        
         return {
           filter: 'variable',
           group: title,
@@ -116,7 +114,6 @@ function DbMainGraph (props) {
           symbolIndex: variableGroups.findIndex(group => group.title.toLowerCase() === title.toLowerCase())
         };
       });
-
     
     console.log(tradesByVariable);
     //setScatterData(formatScatterData(tradesByVariable));
@@ -124,7 +121,6 @@ function DbMainGraph (props) {
   }
 
   const getTradesBySetupGroups = (label) =>{
-    
     
     const tradesBySetup = setupGroups
     .filter(data => data.setup === label)
@@ -137,11 +133,6 @@ function DbMainGraph (props) {
         symbolIndex: setupGroups.findIndex(group => group.setup.toLowerCase() === label.toLowerCase())
       }
     })
-    
-    
-   
-
-   
     return formatScatterData(tradesBySetup)
   }
 
@@ -160,7 +151,6 @@ function DbMainGraph (props) {
           return variable
         }
       }
-      
       
       let AVG_R = []
       trades.forEach(trade =>{
@@ -194,7 +184,6 @@ function DbMainGraph (props) {
         })
       }
     })
-    
     return result
     
   }
@@ -255,50 +244,26 @@ function DbMainGraph (props) {
     setScatterData(result)
   }
 
-  const handleFilterByVariables = (e) =>{
-    const firstVariableGroup = variableGroups[0].title
-    setScatterData(null)
-    setFilterBySetups(false)
-    setFilterByVariables(true)
-    setScatterData(getTradesByVariableGroups(firstVariableGroup))
-    
-  }
-
-  const handleFilterBySetups = (e) =>{
-    setScatterData(null)
-    setFilterBySetups(true)
-    setFilterByVariables(false)
-    getAllSetupData()
-    
-  }
-
   useEffect(()=>{
-    
-  },[scatterData])
-
-  useEffect(()=>{
-    
     userInfo && userInfo.username && getGroups()
+
   },[userInfo])
   
   useEffect(()=>{
-    
     setupGroups && createLegend()
     setupGroups && trades && getAllSetupData()
-    
+
   },[setupGroups, trades])
 
   useEffect(()=>{
     filterBySetups && createLegend()
+
   },[filterBySetups])
 
   useEffect(()=>{
     filterByVariables && createLegend()
+
   },[filterByVariables])
-  
-  useEffect(()=>{
-    
-  },[legendNamesAndSymbols])
 
   const filterTypeData = [
     {name: 'INSTRUMENTS', symbol: {fill: 'red'}},
@@ -314,18 +279,12 @@ function DbMainGraph (props) {
 
   const chartMinDomain = { y: 0, x: 0 };
   const chartMaxDomain = { y: MAX_WINRATE, x: MAX_R };
-  const chartAnimate = { duration: 500 };
 
   return(
     <div className="grid grid-cols-10 h-full bg-striped-content-big-light">
       <div className="chart col-span-10">
-        <div className="w-full flex justify-end items-center col-span-full text-sm gap-x-2 items-center">
-          
-
-          
-        </div>
+        
         <VictoryChart 
-          
           width={300} 
           height={150} 
           padding={{top: 8, bottom:20, left:15, right:50}} 
@@ -348,8 +307,8 @@ function DbMainGraph (props) {
             tickValues={xTickValues}
             style={styles.xaxis}
             label="R Multiple"
-            
           />
+
           <VictoryAxis 
             dependentAxis 
             tickFormat={(t) => t === 100 ? '' : `${t}%`}
@@ -357,7 +316,6 @@ function DbMainGraph (props) {
             tickValues={yTickValues}
             style={styles.yaxis}
             label="Win Rate"
-            
           />
 
           {
@@ -426,4 +384,4 @@ function DbMainGraph (props) {
   )
 }
 
-export default DbMainGraph;
+export default AdvancedGraph;

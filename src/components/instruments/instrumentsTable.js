@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useContext} from "react";
 import { Link } from "react-router-dom";
 
 
-function CurrentInstruments (props) {
+function InstrumentsTable (props) {
   //PROPS contains:  {userInfo}, {newSetupSubmitted}, {userMaxInstrumentsContext}
 
   const {userMaxInstruments, setUserMaxInstruments} = props.userMaxInstrumentsContext;
@@ -90,4 +90,4 @@ function CurrentInstruments (props) {
    
   )
 }
-export default CurrentInstruments;
+export default InstrumentsTable;

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { UserProps } from "victory";
-import DbCalendar from "./dbCalendar";
-import DbOverall from "./dbOverall";
+
+import OverallStats from "./overallStats/overallStats";
+
 
 function Dashboard (){
   const [userInfo, setUserInfo] = useState(null)
@@ -51,12 +51,9 @@ function Dashboard (){
   }, [])
   return(
     <div className="p-8 ">
+     
       <div className="">
-        
-        <DbCalendar userInfo={userInfo} tradesContext={{trades, setTrades}}/>
-      </div>
-      <div className="">
-        <DbOverall userInfo={userInfo} tradesContext={{trades, setTrades}} />
+        <OverallStats userInfo={userInfo} tradesContext={{trades, setTrades}} />
       </div>
       
     </div>

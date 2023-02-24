@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 function NtvVariables (props){
   const variableList = props.variableList
   const {formData, setFormData} = props.formDataContext
-  const variableListIndex = props.index
+  const [variableListIndex, setVariableListIndex] = useState(null)
 
   const [selectedVariable, setSelectedVariable] = useState(null)
 
@@ -29,7 +29,8 @@ function NtvVariables (props){
   };
 
   useEffect(()=>{
-    console.log(formData.variables);
+    
+    setVariableListIndex(formData.variables.findIndex(obj => obj.title === variableList.title));
   },[formData.variables])
 
   return(

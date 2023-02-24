@@ -16,12 +16,16 @@ function VariablesCards (props){
 
   const [titleDuplicate, setTitleDuplicate] = useState(null)
 
+  const [previousVariable, setPreviousVariable] = useState(null)
+
   const [formData, setFormData] = useState({
     username: usernameProps,
     title: '',
     variables: [''],
     listIndex: indexProps
   })
+
+  
 
   const titleRef = useRef(null)
 
@@ -46,8 +50,23 @@ function VariablesCards (props){
         setTitleDuplicate(false)
       }
     })
+    
+    
+    fetch(`http://localhost:5000/trades-edit-variables?username=${usernameProps}`, {
+      method: 'PUT',
+      body: JSON.stringify({ variables: { previousTitle: previousVariable.title, newTitle: formData.title }}),
+      headers: { 'Content-Type': 'application/json'}
+    })
+    .then(response => response.json())
+    .then((data) => {
+      console.log(data);
+      if(data && data.error){
+        console.log(data.error);
+      } 
+    })
+    
   }
-
+  ///trades-edit-variables
   const fetchDelete = () =>{
     fetch('http://localhost:5000/delete-variables-list', {
       method: 'DELETE',
@@ -142,6 +161,8 @@ function VariablesCards (props){
     }  
   },[formData])
 
+  
+
   useEffect(()=>{
     console.log(onlyTitleEmpty);
   },[onlyTitleEmpty])
@@ -157,8 +178,18 @@ function VariablesCards (props){
         variables: data.variables,
         listIndex: data.listIndex 
       }) 
+      setPreviousVariable({
+        username: data.username,
+        title: data.title,
+        variables: data.variables,
+        listIndex: data.listIndex 
+      })
     }
   }, [props.variablesList]) 
+
+  useEffect(()=>{
+    
+  },[previousVariable])
   
   return(
     

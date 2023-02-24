@@ -97,21 +97,22 @@ function AdvancedGraph (props) {
   }
 
   
-  const getTradesByVariableGroups = (title ,variableParentIndex, index) =>{
+  const getTradesByVariableGroups = (title ,index) =>{
     
-    console.log(variableGroups);
     const tradesByVariable = variableGroups
       .at(index)
       .variables
       .map((variable, i) => {
-        console.log(variable);
+        console.log(variableGroups.indexOf(obj => obj.title === title));
         const dataset = trades.filter(trade => 
           trade.variables.some((vari, vIndex) => 
-            vari && vari.variable.toLowerCase() === variable.toLowerCase() && vIndex === variableParentIndex
+            vari && vari.variable.toLowerCase() === variable.toLowerCase() && vari.title === title
+
             
             
           )
         );
+        
         
         return {
           filter: 'variable',

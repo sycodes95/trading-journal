@@ -1,3 +1,4 @@
+import { indexOf } from "lodash";
 import { useState, useEffect, useMemo } from "react";
 import { 
   VictoryLine,
@@ -51,11 +52,14 @@ function AdvancedGraph (props) {
   };
 
   const handleLegendClick = (event, index) =>{
-    console.log(index);
+    console.log(variableGroups);
+    
     const label = event.target.textContent;
-    console.log(label);
+    const variableParentIndex = variableGroups.findIndex(obj => obj.title === label);
+    console.log(variableParentIndex);
+    
     if(filterByVariables){
-      setScatterData(getTradesByVariableGroups(label, index))
+      setScatterData(getTradesByVariableGroups(label ,variableParentIndex, index))
     }
     if(filterBySetups){
       console.log('filterBySetups');
@@ -81,10 +85,11 @@ function AdvancedGraph (props) {
     }
     if(label === 'VARIABLES'){
       const firstVariableGroup = variableGroups[0].title
+      const variableParentIndex = variableGroups.findIndex(obj => obj.title === firstVariableGroup);
       setScatterData(null)
       setFilterBySetups(false)
       setFilterByVariables(true)
-      setScatterData(getTradesByVariableGroups(firstVariableGroup))
+      setScatterData(getTradesByVariableGroups(firstVariableGroup, variableParentIndex))
       
     }
 
@@ -92,7 +97,7 @@ function AdvancedGraph (props) {
   }
 
   
-  const getTradesByVariableGroups = (title, index) =>{
+  const getTradesByVariableGroups = (title ,variableParentIndex, index) =>{
     
     console.log(variableGroups);
     const tradesByVariable = variableGroups
@@ -102,7 +107,7 @@ function AdvancedGraph (props) {
         console.log(variable);
         const dataset = trades.filter(trade => 
           trade.variables.some((vari, vIndex) => 
-            vari && vari.variable.toLowerCase() === variable.toLowerCase() && vari.title.toLowerCase() === title.toLowerCase() 
+            vari && vari.variable.toLowerCase() === variable.toLowerCase() && vIndex === variableParentIndex
             
             
           )

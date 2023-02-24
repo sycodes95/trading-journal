@@ -179,19 +179,19 @@ table .trades-tr:nth-of-type(odd){
 }
 
 .bg-striped{
-  background: url(../images/tarkov-stripes.webp);
+  background: url(../images/stripes.webp);
   background-position: center;
   background-size: 150px;
 }
 
 .bg-striped-150px{
-  background: url(../images/tarkov-stripes.webp);
+  background: url(../images/stripes.webp);
   background-position: center;
   background-size: 150px;
 }
 
 .bg-striped-125px{
-  background:linear-gradient(rgba(255, 255, 255, 0.15), rgba(0,0,0,.1)), url(../images/tarkov-stripes.webp);
+  background:linear-gradient(rgba(255, 255, 255, 0.15), rgba(0,0,0,.1)), url(../images/stripes.webp);
   background-position: center;
   background-size: 125px;
 }

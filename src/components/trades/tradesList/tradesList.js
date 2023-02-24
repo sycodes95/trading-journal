@@ -125,6 +125,7 @@ function TradesList(props){
   },[page])
   
   useEffect(()=>{
+    console.log(debouncedSearch);
     if(debouncedSearch && !sortValue){
       setPage(0)
       fetchSearchedTrades()

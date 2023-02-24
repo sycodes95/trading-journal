@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react"
 
 
-function DbGL (props) {
+function GainLoss (props) {
   const trades = props.trades
-  const [gainLoss, setGainLoss] = useState(null)
-
-  
+  const [gainLoss, setGainLoss] = useState(0)
 
   const getGainLoss = () =>{
     let allValues = []
@@ -20,8 +18,6 @@ function DbGL (props) {
   },[trades])
 
   return (
-    
-    
 
     <div className="flex justify-center items-center text-black">
       <div className="m-2 bg-opacity-50 rounded-md  flex items-center">
@@ -39,4 +35,4 @@ function DbGL (props) {
   )
 }
 
-export default DbGL;
+export default GainLoss;

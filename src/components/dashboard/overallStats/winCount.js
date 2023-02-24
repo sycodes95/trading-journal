@@ -5,7 +5,7 @@ import { mdiThumbUpOutline } from '@mdi/js';
 
 import { ReactSVG } from "react-svg"
 
-function DbWins (props) {
+function WinCount (props) {
 
   const trades = props.trades
 
@@ -39,4 +39,4 @@ function DbWins (props) {
   )
 }
 
-export default DbWins;
+export default WinCount;

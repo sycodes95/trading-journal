@@ -154,12 +154,13 @@ function AdvancedGraph (props) {
       
       let AVG_R = []
       trades.forEach(trade =>{
-        
-        if(!trade.tp || !trade.sl || !trade.exit || !trade.entry) return;
+        console.log(trade);
+        if(!trade.sl || !trade.exit || !trade.entry) return;
         let R = Math.round(((trade.exit - trade.entry) / (trade.entry - trade.sl)) * 100) / 100
         R < 0 ? AVG_R.push(0) : AVG_R.push(R)
+        
       })
-     
+      
       let x = AVG_R.reduce((acc, cur) => acc + cur, 0) / AVG_R.length;
       if (isNaN(x)) return;
 
@@ -172,19 +173,21 @@ function AdvancedGraph (props) {
       }
       
       if(!isNaN(y)){
-        
         result.push({
           x: x, 
           y: y, 
           label: label(), 
           symbol: legendSymbols[symbolIndex].type, 
           fill: legendSymbols[symbolIndex].fill, 
-          
-          
         })
+        
       }
     })
-    return result
+    console.log(result.length ? true : false);
+    if(result.length){
+      return result
+    }
+    
     
   }
 
@@ -226,12 +229,19 @@ function AdvancedGraph (props) {
   const getAllSetupData = () =>{
     setFilterBySetups(true)
     let data = []
+    
     setupGroups.forEach(g =>{
-      data.push(getTradesBySetupGroups(g.setup))
+      //check if data is valid. Must not be undefined or null
+      let checkValid = getTradesBySetupGroups(g.setup)
+      checkValid !== undefined && checkValid !== null && data.push(getTradesBySetupGroups(g.setup))
     })
-    ;
-    let result = data.map(d => d[0])
-    setScatterData(result)
+    console.log(data);
+    if(data.length){
+      
+      let result = data.map(d => d[0])
+      setScatterData(result)
+    }
+    
   }
 
   const getAllVariableData = () =>{

@@ -116,6 +116,7 @@ function NewTrade (props) {
   }
   
   useEffect(()=>{
+    console.log(formData);
     setTimeout(()=>{
       setSubmitSuccess(false)
     }, 5000)

@@ -1,38 +1,38 @@
 import { useEffect, useState } from "react"
 
-function DbGLR (props) {
+function GainLossR (props) {
   const trades = props.trades
 
-  const [gainLossR, setGainLossR] = useState(null)
+  const [gainLossR, setGainLossR] = useState(0)
 
   const getGainLossR = () =>{
-    let winR = []
-    let lossR = []
-    trades.forEach(tr =>{
-      if(!tr.tp || !tr.sl || !tr.exit || !tr.entry){
+    let rMultiples = []
+    trades.forEach(trade =>{
+      if(!trade.sl || !trade.exit || !trade.entry || !trade.position){
         return
       }
-      if(tr.position){
-        let r = Math.round(((tr.exit - tr.entry) / (tr.entry - tr.sl)) * 100) / 100
-        r > 0 ? winR.push(r) : lossR.push(r)
-      }
+      let risk = Math.abs(trade.entry - trade.sl);
+      let profitLoss = trade.position === 'LONG' ? trade.exit- trade.entry : trade.entry - trade.exit;
+      let rMultiple = profitLoss / risk;
+      rMultiples.push(rMultiple);
+
+
+      
     })
-    if((winR.length + lossR.length) < 2){
-      return winR.length ? setGainLossR(winR[0]) : setGainLossR(lossR[0])
-    }
-    let winSum = winR.reduce((acc, cur)=>{
-      return acc + cur;
-    },0)
-    let lossSum = lossR.reduce((acc, cur)=>{
-      return acc + cur;
-    },0)
-    let result = Math.round(winSum / Math.abs(lossSum) * 100) / 100
-    setGainLossR(result)
+
+    let avgR = Math.round((rMultiples.reduce((total, r) => total + r, 0) / rMultiples.length) * 100) / 100;
+    
+    setGainLossR(avgR)
   }
   useEffect(()=>{
     //Get WIN RATE
     trades && getGainLossR()
   },[trades])
+
+  useEffect(()=>{
+    //Get WIN RATE
+    console.log(gainLossR);
+  },[gainLossR])
 
 
   return (
@@ -45,7 +45,7 @@ function DbGLR (props) {
             <span>{gainLossR}</span>
           </div>
           <div className="flex justify-center text-xs">
-            <span>Total G/L (R)</span>
+            <span>Avg (R)</span>
           </div>
         </div>
       </div>
@@ -53,4 +53,4 @@ function DbGLR (props) {
   )
 }
 
-export default DbGLR;
+export default GainLossR;

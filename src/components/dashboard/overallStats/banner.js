@@ -1,7 +1,7 @@
 import { ReactSVG } from "react-svg";
 import tradesSVG from "../../../icons/trades.svg"
 
-function DashboardBanner () {
+function Banner () {
   return (
     <div className="section-info col-span-4 text-black p-4 bg-red-600 bg-opacity-50 rounded-sm
       grid  row-start-1">
@@ -23,4 +23,4 @@ function DashboardBanner () {
   )
 }
 
-export default DashboardBanner
+export default Banner

@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 function NtvVariables (props){
   const variableList = props.variableList
   const {formData, setFormData} = props.formDataContext
-  const [variableListIndex, setVariableListIndex] = useState(null)
-
+  const variableListIndex = props.index
+  const [vIndex, setVIndex] = useState(null)
   const [selectedVariable, setSelectedVariable] = useState(null)
 
   const handleInputChange = (e, groupTitle) => {
@@ -14,7 +14,7 @@ function NtvVariables (props){
     console.log(groupTitle);
     if(value === '' || !value){
       const variables = [...formData.variables];
-      variables.splice(variableListIndex, 1, '')
+      variables.splice(variableListIndex, 1, {title: '', variable: ''})
       setFormData({ ...formData, variables });
 
     } else {
@@ -29,14 +29,25 @@ function NtvVariables (props){
   };
 
   useEffect(()=>{
-    
-    setVariableListIndex(formData.variables.findIndex(obj => obj.title === variableList.title));
+    console.log(formData.variables);
+    console.log(variableList);
+    //setVariableListIndex(formData.variables.findIndex(obj => obj.title === variableList.title));
   },[formData.variables])
 
   useEffect(()=>{
-    console.log(formData)
-  },[formData])
+    
+    let selected = formData.variables.find(obj => obj.title === variableList.title);
+    if(selected) setSelectedVariable(selected.variable)
+    
 
+  },[formData.variables, variableList])
+  useEffect(()=>{
+    console.log(vIndex);
+  },[vIndex])
+
+  useEffect(()=>{
+
+  },[selectedVariable])
   return(
     <div className="">
       {
@@ -54,9 +65,9 @@ function NtvVariables (props){
             </select>
             {
               
-              formData.variables[variableListIndex] ?
+              selectedVariable ?
               <input className="border border-r-0 border-l-0 border-gray-300  top-left-round w-28 h-6"
-              type='text' name="variables" value={formData.variables[variableListIndex].variable} 
+              type='text' name="variables" value={selectedVariable} 
               onChange={(e)=>handleInputChange(e, variableList.title)}/>
               :
               

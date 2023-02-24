@@ -33,7 +33,7 @@ function NewTrade (props) {
     fees: '',
     comments: '',
     tv: '',
-    variables: [],
+    variables: Array(20).fill({ title: '', variable: ''}),
     public: false,
   })
 

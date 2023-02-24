@@ -12,9 +12,9 @@ function NtvVariables (props){
     
     const { name, value } = e.target;
     console.log(groupTitle);
-    if(value === ''){
+    if(value === '' || !value){
       const variables = [...formData.variables];
-      variables.splice(variableListIndex, 1)
+      variables.splice(variableListIndex, 1, '')
       setFormData({ ...formData, variables });
 
     } else {

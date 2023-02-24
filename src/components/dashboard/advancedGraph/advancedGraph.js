@@ -99,10 +99,12 @@ function AdvancedGraph (props) {
       .at(index)
       .variables
       .map((variable, i) => {
-        
-        const dataset = trades.filter(trade =>
-          trade.variables.some((vari, vIndex) =>
-            vari.variable.toLowerCase() === variable.toLowerCase() && vari.title.toLowerCase() === title.toLowerCase()
+        console.log(variable);
+        const dataset = trades.filter(trade => 
+          trade.variables.some((vari, vIndex) => 
+            vari && vari.variable.toLowerCase() === variable.toLowerCase() && vari.title.toLowerCase() === title.toLowerCase() 
+            
+            
           )
         );
         

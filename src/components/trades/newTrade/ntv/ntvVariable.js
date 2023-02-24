@@ -33,6 +33,10 @@ function NtvVariables (props){
     setVariableListIndex(formData.variables.findIndex(obj => obj.title === variableList.title));
   },[formData.variables])
 
+  useEffect(()=>{
+    console.log(formData)
+  },[formData])
+
   return(
     <div className="">
       {

@@ -18,7 +18,9 @@ function NewTradeVariables (props){
       
     })
   }
-
+  useEffect(()=>{
+    console.log(variables);
+  },[variables])
 
 
   useEffect(()=>{

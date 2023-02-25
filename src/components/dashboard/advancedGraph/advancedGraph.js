@@ -107,9 +107,6 @@ function AdvancedGraph (props) {
         const dataset = trades.filter(trade => 
           trade.variables.some((vari, vIndex) => 
             vari && vari.variable.toLowerCase() === variable.toLowerCase() && vari.title === title
-
-            
-            
           )
         );
         

@@ -8,15 +8,18 @@ function PnlGraph (props) {
   const trades = props.trades
 
   const [tradesWithBalance, setTradesWithBalance] = useState(null)
+  const [noTrades, setNoTrades] = useState(null)
 
   useEffect(()=>{
-    
-    if(trades){
+    console.log(trades);
+    if(trades && trades.length){
+      console.log('balance');
       let cumulativePNL = [] 
       let reversed = trades.reverse()
       reversed.forEach((tr, i) =>{
         tr.entrydate = new Date(moment(tr.entrydate).format("YYYY-MM-DD hh:mm"))
       })
+      
       let firstDate = reversed[0].entrydate
       let dayBefore = moment(firstDate).subtract(1, 'days').format()
       cumulativePNL.push({pnl: 0, fgl:0, date: moment(dayBefore).format("YYYY-MM-DD hh:mm")})
@@ -26,11 +29,17 @@ function PnlGraph (props) {
         return acc + cur.fgl;
       },0)
       setTradesWithBalance(cumulativePNL)
+    } else {
+      setTradesWithBalance([])
     }
 
   },[trades])
-
-
+  useEffect(()=>{
+    console.log(tradesWithBalance);
+  },[tradesWithBalance])
+  useEffect(()=>{
+    console.log(noTrades);
+  },[noTrades])
   return(
     <div className="bg-striped-content-big-light">
 
@@ -42,16 +51,14 @@ function PnlGraph (props) {
       padding={{top: 10, bottom:10, left:30, right:15}} 
       domainPadding={{ x: 10, y: 10 }}  
       theme={VictoryTheme.material}>
-        {
-          tradesWithBalance &&
-          <VictoryArea 
-            data={tradesWithBalance}
-            x="date"
-            y="pnl"
-            
-            style={ { data: { stroke: "#7393B3", strokeWidth: 1, fill:"rgba(115, 147, 179, 0.5)"}}}
-          />
-        }
+        <VictoryArea
+          data={tradesWithBalance} // use an empty array if tradesWithBalance is null
+          x="date"
+          y="pnl"
+          style={{data: {stroke: "#7393B3", strokeWidth: 1, fill: "rgba(115, 147, 179, 0.5)"}}}
+        />
+
+        
         <VictoryAxis
           tickFormat={(t) => moment(t).format('MM/DD/YYYY')}
           tickLabelComponent={<VictoryLabel angle={0} />}

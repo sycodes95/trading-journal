@@ -19,15 +19,14 @@ function AdvancedGraph (props) {
  
   const userInfo = props.userInfo
   const trades = props.trades
- 
-  const [filterByVariables, setFilterByVariables] = useState(false)
+  
   const [variableGroups, setVariableGroups] = useState(null)
-
-  const [filterBySetups, setFilterBySetups] = useState(false)
   const [setupGroups, setSetupGroups] = useState(null)
+  
+  const [filterByVariables, setFilterByVariables] = useState(false)
+  const [filterBySetups, setFilterBySetups] = useState(false)
 
   const [legendNamesAndSymbols, setLegendNamesAndSymbols] = useState(null)
-
   const [selectedLegend, setSelectedLegend] = useState("")
   const [selectedFilterTypeLegend, setSelectedFilterTypeLegend] = useState("")
 
@@ -40,37 +39,34 @@ function AdvancedGraph (props) {
     ])
       .then((responses) => Promise.all(responses.map(response => response.json())))
       .then(([variablesData, setupsData]) => {
-        if (!variablesData.error) {
-          setVariableGroups(variablesData.listVariables);
-        }
-  
-        if (!setupsData.error) {
-          setSetupGroups(setupsData.setups);
-        }
+
+        if (!variablesData.error) setVariableGroups(variablesData.listVariables);
+        
+        if (!setupsData.error) setSetupGroups(setupsData.setups);
+
       })
       .catch(error => console.error(error));
   };
 
   const handleLegendClick = (event, index) =>{
-    console.log(variableGroups);
-    
-    const label = event.target.textContent;
-    const variableParentIndex = variableGroups.findIndex(obj => obj.title === label);
-    console.log(variableParentIndex);
+
+    const title = event.target.textContent;
+
+    const variableTitleIndex = variableGroups.findIndex(obj => obj.title === title);
     
     if(filterByVariables){
-      setScatterData(getTradesByVariableGroups(label ,variableParentIndex, index))
+      setScatterData(getTradesByVariableGroups(title ,variableTitleIndex, index))
     }
     if(filterBySetups){
       console.log('filterBySetups');
-      setScatterData(getTradesBySetupGroups(label))
+      setScatterData(getTradesBySetupGroups(title))
     }
     //getTradesBySetupGroups(label)
     //getTradesByVariableGroups(label)
-    setSelectedLegend(label)
+    setSelectedLegend(title)
   }
 
-  const handleLegendTypeClick = (event, index) =>{
+  const handleFilterClick = (event, index) =>{
     
     const label = event.target.textContent;
     if(label === 'INSTRUMENTS'){
@@ -85,12 +81,11 @@ function AdvancedGraph (props) {
     }
     if(label === 'VARIABLES'){
       const firstVariableGroup = variableGroups[0].title
-      const variableParentIndex = variableGroups.findIndex(obj => obj.title === firstVariableGroup);
+      const variableTitleIndex = variableGroups.findIndex(obj => obj.title === firstVariableGroup);
       setScatterData(null)
       setFilterBySetups(false)
       setFilterByVariables(true)
-      setScatterData(getTradesByVariableGroups(firstVariableGroup, variableParentIndex))
-      
+      setScatterData(getTradesByVariableGroups(firstVariableGroup, variableTitleIndex))
     }
 
     setSelectedFilterTypeLegend(label)
@@ -102,26 +97,20 @@ function AdvancedGraph (props) {
     const tradesByVariable = variableGroups
       .at(index)
       .variables
-      .map((variable, i) => {
-        console.log(variableGroups.indexOf(obj => obj.title === title));
+      .map(variable => {
+        
         const dataset = trades.filter(trade => 
-          trade.variables.some((vari, vIndex) => 
-            vari && vari.variable.toLowerCase() === variable.toLowerCase() && vari.title === title
-          )
+          trade.variables.some(v => v && v.variable.toLowerCase() === variable.toLowerCase() && v.title === title)
         );
-        
-        
         return {
           filter: 'variable',
           group: title,
-          variable,
+          variable: variable,
           trades: dataset,
           symbolIndex: variableGroups.findIndex(group => group.title.toLowerCase() === title.toLowerCase())
         };
       });
     
-    console.log(tradesByVariable);
-    //setScatterData(formatScatterData(tradesByVariable));
     return formatScatterData(tradesByVariable)
   }
 
@@ -142,61 +131,56 @@ function AdvancedGraph (props) {
   }
 
   const formatScatterData = (tradesData) =>{
-    let result = []
+    let result = [];
     
     tradesData.forEach(dataset =>{
       
-      const {filter, trades, symbolIndex, variable, setup} = dataset
+      const {filter, trades, symbolIndex, variable, setup} = dataset;
       
       const label = () =>{
         if(filter === 'setup'){
-          return setup
+          return setup;
         }
         if(filter === 'variable'){
-          return variable
+          return variable;
         }
-      }
+      };
       
       let AVG_R = []
       trades.forEach(trade =>{
         console.log(trade);
         if(!trade.sl || !trade.exit || !trade.entry) return;
-        let R = Math.round(((trade.exit - trade.entry) / (trade.entry - trade.sl)) * 100) / 100
+        const R = Math.round(((trade.exit - trade.entry) / (trade.entry - trade.sl)) * 100) / 100
         R < 0 ? AVG_R.push(0) : AVG_R.push(R)
         
       })
-      
-      let x = AVG_R.reduce((acc, cur) => acc + cur, 0) / AVG_R.length;
-      if (isNaN(x)) return;
+      const averageR = AVG_R.reduce((acc, cur) => acc + cur, 0) / AVG_R.length;
 
-      let winningTrades = trades.filter(t => t.fgl > 0)
-      let totalTrades = trades.filter(t => t.fgl)
+      if (isNaN(averageR)) return;
 
-      let y = 0;
-      if(winningTrades.length > 0){
-        y = Math.floor((winningTrades.length / totalTrades.length) * 100)
-      }
+      const winningTrades = trades.filter(trade => trade.fgl > 0);
+      const totalTrades = trades.filter(trade => trade.fgl);
+
+      const winRate = winningTrades.length > 0 ? Math.floor((winningTrades.length / totalTrades.length) * 100) : 0;
       
-      if(!isNaN(y)){
+      if(!isNaN(winRate)){
         result.push({
-          x: x, 
-          y: y, 
+          x: averageR, 
+          y: winRate, 
           label: label(), 
           symbol: legendSymbols[symbolIndex].type, 
           fill: legendSymbols[symbolIndex].fill, 
-        })
+        });
         
-      }
-    })
-    console.log(result.length ? true : false);
+      };
+    });
+    
     if(result.length){
-      return result
-    }
-    
-    
-  }
+      return result;
+    };
+  };
 
-  const createLegend = () =>{
+  const createLegendNamesAndSymbols = () =>{
     const names = () =>{
       if(!filterBySetups && !filterByVariables || filterBySetups){
         return setupGroups.map(group => {
@@ -265,18 +249,18 @@ function AdvancedGraph (props) {
   },[userInfo])
   
   useEffect(()=>{
-    setupGroups && createLegend()
+    setupGroups && createLegendNamesAndSymbols()
     setupGroups && trades && getAllSetupData()
 
   },[setupGroups, trades])
 
   useEffect(()=>{
-    filterBySetups && createLegend()
+    filterBySetups && createLegendNamesAndSymbols()
 
   },[filterBySetups])
 
   useEffect(()=>{
-    filterByVariables && createLegend()
+    filterByVariables && createLegendNamesAndSymbols()
 
   },[filterByVariables])
 
@@ -358,7 +342,7 @@ function AdvancedGraph (props) {
               {
                 target: "labels",
                 eventHandlers: {
-                  onClick:handleLegendTypeClick
+                  onClick:handleFilterClick
                 }
               }
             ]}

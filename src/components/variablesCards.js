@@ -103,23 +103,6 @@ function VariablesCards (props){
     
   }
 
-  const handleInputBlurSubmit = () =>{
-    if(bothTitleVariablesEmpty) {
-      fetchDelete()
-    } else if (onlyTitleEmpty){
-      return 
-    } 
-    if(formData.title.length && formData.title !== '' && formData.variables.length && formData.variables[0] !== ''){
-      if(previousVariable) fetchAndUpdateTrades()
-      fetchPost()
-    } 
-      
-    
-    
-  }
-
-  
-
   const handleInputChange = (e,index ) => {
     
     const { name, value } = e.target;
@@ -136,6 +119,20 @@ function VariablesCards (props){
     
   };
 
+  const handleInputBlurSubmit = () =>{
+    if(bothTitleVariablesEmpty) {
+      fetchDelete()
+    } else if (onlyTitleEmpty){
+      return 
+    } 
+    if(formData.title.length && formData.title !== '' && formData.variables.length && formData.variables[0] !== ''){
+      //if title and variables exists
+      if(previousVariable) fetchAndUpdateTrades()
+
+      fetchPost()
+    } 
+  }
+
   const handleKeyDownSubmit = (e) =>{
     
     if(e.key === 'Enter' && formData.title !== ''){
@@ -146,7 +143,7 @@ function VariablesCards (props){
   }
 
   function handleOnDragEnd (result){
-    
+
     if (!result.destination) return;
 
     const items = formData.variables;
@@ -154,6 +151,7 @@ function VariablesCards (props){
     items.splice(result.destination.index, 0, reorderedItem);
 
     setFormData({...formData, variables: items});
+
     fetchPost()
   }
 
@@ -174,11 +172,6 @@ function VariablesCards (props){
     
   },[formData])
 
-  
-
-  useEffect(()=>{
-    
-  },[bothTitleVariablesEmpty])
   
   useEffect(()=>{
     // once variablesList from parent component is passed down and it exists for this card, 

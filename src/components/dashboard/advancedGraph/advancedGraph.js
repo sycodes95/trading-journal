@@ -58,7 +58,7 @@ function AdvancedGraph (props) {
       setScatterData(getTradesByVariableGroups(title ,variableTitleIndex, index))
     }
     if(filterBySetups){
-      console.log('filterBySetups');
+      
       setScatterData(getTradesBySetupGroups(title))
     }
     //getTradesBySetupGroups(label)
@@ -82,6 +82,8 @@ function AdvancedGraph (props) {
     if(label === 'VARIABLES'){
       const firstVariableGroup = variableGroups[0].title
       const variableTitleIndex = variableGroups.findIndex(obj => obj.title === firstVariableGroup);
+      
+      setSelectedLegend(firstVariableGroup)
       setScatterData(null)
       setFilterBySetups(false)
       setFilterByVariables(true)
@@ -148,7 +150,7 @@ function AdvancedGraph (props) {
       
       let AVG_R = []
       trades.forEach(trade =>{
-        console.log(trade);
+        
         if(!trade.sl || !trade.exit || !trade.entry) return;
         const R = Math.round(((trade.exit - trade.entry) / (trade.entry - trade.sl)) * 100) / 100
         R < 0 ? AVG_R.push(0) : AVG_R.push(R)
@@ -224,7 +226,7 @@ function AdvancedGraph (props) {
       let checkValid = getTradesBySetupGroups(g.setup)
       checkValid !== undefined && checkValid !== null && data.push(getTradesBySetupGroups(g.setup))
     })
-    console.log(data);
+    
     if(data.length){
       
       let result = data.map(d => d[0])
@@ -261,8 +263,8 @@ function AdvancedGraph (props) {
 
   useEffect(()=>{
     filterByVariables && createLegendNamesAndSymbols()
-
-  },[filterByVariables])
+    
+  },[filterByVariables, variableGroups])
 
   const filterTypeData = [
     {name: 'INSTRUMENTS', symbol: {fill: 'red'}},

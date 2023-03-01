@@ -32,6 +32,7 @@ function VariablesCards (props){
   const variableRef = useRef(null)
 
   const fetchPost = () =>{
+    console.log(formData)
     fetch('http://localhost:5000/new-variables-list', {
       method: 'POST',
       body: JSON.stringify(formData),
@@ -52,6 +53,11 @@ function VariablesCards (props){
     })
     
     
+    
+    
+  }
+
+  const fetchAndUpdateTrades = () =>{
     fetch(`http://localhost:5000/trades-edit-variables?username=${usernameProps}`, {
       method: 'PUT',
       body: JSON.stringify({ variables: { previousTitle: previousVariable.title, newTitle: formData.title }}),
@@ -59,15 +65,15 @@ function VariablesCards (props){
     })
     .then(response => response.json())
     .then((data) => {
-      console.log(data);
+      
       if(data && data.error){
         console.log(data.error);
       } 
     })
-    
   }
   ///trades-edit-variables
   const fetchDelete = () =>{
+    
     fetch('http://localhost:5000/delete-variables-list', {
       method: 'DELETE',
       body: JSON.stringify(formData),
@@ -75,7 +81,7 @@ function VariablesCards (props){
     })
     .then(response => response.json())
     .then((data) => {
-      
+      console.log(data);
     })
 
   }
@@ -84,25 +90,35 @@ function VariablesCards (props){
     setFormData({ ...formData, variables: [...formData.variables, '']})
   }
 
+  const handleVariableDelete = (e, index) => {
+    const newVariables = formData.variables
+    newVariables.splice(index, 1)
+    console.log(formData.title);
+    if(!formData.title) console.log('hi');
+    console.log(formData.variables.length);
+    if(formData.variables.length === 0 && (formData.title === '' || !formData.title)){
+      fetchDelete()
+    } 
+    setFormData({...formData, variables: newVariables})
+    
+  }
+
   const handleInputBlurSubmit = () =>{
     if(bothTitleVariablesEmpty) {
       fetchDelete()
     } else if (onlyTitleEmpty){
-      return
-    } else {
+      return 
+    } 
+    if(formData.title.length && formData.title !== '' && formData.variables.length && formData.variables[0] !== ''){
+      if(previousVariable) fetchAndUpdateTrades()
       fetchPost()
-    }
+    } 
+      
+    
     
   }
 
-  const handleVariableDelete = (e, index) => {
-    const newVariables = formData.variables
-    newVariables.splice(index, 1)
-
-    setFormData({...formData, variables: newVariables})
-    
-    fetchPost()
-  }
+  
 
   const handleInputChange = (e,index ) => {
     
@@ -121,14 +137,8 @@ function VariablesCards (props){
   };
 
   const handleKeyDownSubmit = (e) =>{
-    if(e.key === 'Enter' && formData.title === ''){
-
-      return setOnlyTitleEmpty(true)
-    }
+    
     if(e.key === 'Enter' && formData.title !== ''){
-
-      setOnlyTitleEmpty(false)
-
       if(titleRef.current) titleRef.current.blur()
       e.target.blur()
       
@@ -148,24 +158,27 @@ function VariablesCards (props){
   }
 
   useEffect(()=>{
-    if(formData.title === '' && formData.variables[0] !== '' && formData.variables.length ){
+    
+    console.log(formData);
+    if(formData.title === '' && formData.variables[0] !== '' && formData.variables.length !== 0){
       setOnlyTitleEmpty(true)
     } else {
       setOnlyTitleEmpty(false);
     }  
 
-    if(formData.title === '' && (formData.variables[0] === '' || formData.variables.length < 1)){
+    if((formData.title === '' && formData.variables[0] === '') || (formData.title === '' && formData.variables.length === 0)){
       setBothTitleVariablesEmpty(true)
     } else {
       setBothTitleVariablesEmpty(false);
     }  
+    
   },[formData])
 
   
 
   useEffect(()=>{
-    console.log(onlyTitleEmpty);
-  },[onlyTitleEmpty])
+    
+  },[bothTitleVariablesEmpty])
   
   useEffect(()=>{
     // once variablesList from parent component is passed down and it exists for this card, 
@@ -185,11 +198,11 @@ function VariablesCards (props){
         listIndex: data.listIndex 
       })
     }
-  }, [props.variablesList]) 
+  }, [props.variablesList, indexProps]) 
 
   useEffect(()=>{
     
-  },[previousVariable])
+  },[previousVariable ])
   
   return(
     
@@ -235,7 +248,7 @@ function VariablesCards (props){
                           </div>
                         
                           <input className=" w-full h-full  text-xs font-thin rounded-none pl-2
-                           text-white font-black-outline-light "
+                           text-black"
                           type='text' name="variables" value={formData.variables[index]} ref={variableRef} 
                           onChange={(e)=>handleInputChange(e,index)} onKeyDown={handleKeyDownSubmit}
                           onBlur={handleInputBlurSubmit} placeholder='. . .' />

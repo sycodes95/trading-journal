@@ -18,7 +18,7 @@ function GainLoss (props) {
   },[trades])
 
   return (
-
+    
     <div className="flex justify-center items-center text-black">
       <div className="m-2 bg-opacity-50 rounded-md  flex items-center">
         <div className="w-full">

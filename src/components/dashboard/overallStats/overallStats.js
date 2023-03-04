@@ -136,7 +136,7 @@ function OverallStats (props){
         text-black border border-gray-300 text-xs rounded-sm h-6 top-left-round bottom-right-round">
           <span>ADVANCED REPORTS</span>
         </div>
-        <div className="row-span-5 h-full bg-white">
+        <div className="row-span-5 h-full object-cover bg-white">
           <AdvancedGraph trades={trades} userInfo={userInfo}/>
           
         </div>

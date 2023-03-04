@@ -96,7 +96,7 @@ function TradeListHead(props) {
 
   
   return(
-    <thead className="bg-striped-content ">
+    <thead className="bg-striped-content">
       {
         isLoading ?
         <tr className="  text-xs font-bold ">

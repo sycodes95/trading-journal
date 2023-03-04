@@ -88,13 +88,13 @@ input:focus, select:focus{
 }
 
 
-
 @media (min-width: 1920px) {
   .w-1390px{
     max-width: 100%;
   }
   
 }
+
 
 
 th, td{
@@ -108,15 +108,14 @@ th, td{
   
 }
 
+
 table tr:nth-of-type(even){
   background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url(../images/grey-mesh.jpg);
   background-position: center;
   background-size: 800px;
   
 }
-table .trades-tr:nth-of-type(odd){
-  
-}
+
 
 .font-black-outline{
   
@@ -340,9 +339,11 @@ table .trades-tr:nth-of-type(odd){
   height: 400px;
   margin: 0 auto;
 }
-.trade-table-con{
-  width: 1420px;
-}
+
+
+
+
+
 
 .table-top-bar{
   grid-template-columns: repeat(2, 1fr);
@@ -407,6 +408,7 @@ table .trades-tr:nth-of-type(odd){
   grid-row: 3 / 4;
   grid-column: 1/2;
 }
+/*
 
 @media (max-width: 1366px) {
   .overall-stats{
@@ -422,6 +424,11 @@ table .trades-tr:nth-of-type(odd){
  
   }
 }
+*/
+@media (max-width: 1440px){
+  
+}
+
 
 @media (max-width: 950px) {
   .app{
@@ -443,9 +450,7 @@ table .trades-tr:nth-of-type(odd){
   .variables-cards-container{
     grid-template-columns: 1fr;
   }
-  .trade-table-con{
-    width: 82vw;
-  }
+  
   .app{
     width: 100vw;
   }

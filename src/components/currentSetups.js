@@ -98,6 +98,7 @@ function CurrentSetups (props) {
                     <span className="text-sm">{s.setup}</span>
                     <button onClick={()=>handleSetupDelete(s._id)} className=" text-red-700 text-md font-bold hover:text-black transition-colors delay-100">x</button>
                 </td>
+                
               </tr>
           ))
          

@@ -178,19 +178,29 @@ function TradesList(props){
           
           
         </div>
-
-        <div className="trade-table-con scrollbar-color  min-h-500px max-h-screen
-        overflow-x-scroll z-10 bg-white  col-span-2" ref={tableRef} onWheel={handleWheelScroll}>
+        
+        <div className="trade-table-con w-full  scrollbar-color min-h-500px
+         bg-white col-span-2 relative overflow-x-auto" ref={tableRef} onWheel={handleWheelScroll}>
           
-          <table className="trade-table-con ">
-            <TradeListHead tradesContext={{trades, setTrades}} pageContext={{page, setPage}}
-            pageCountContext={{pageCount, setPageCount}} limitPerPageContext={{limitPerPage, setLimitPerPage}} 
-            sortValueContext={{sortValue, setSortValue}} isLoadingContext={{isLoading, setIsLoading}} userInfo={userInfo}/>
-            <TradeListBody isLoading={isLoading} tradesContext={{trades, setTrades}} 
-            userInfo={userInfo}/>
+          <table className="absolute w-full">
+            
+            
+              <TradeListHead tradesContext={{trades, setTrades}} pageContext={{page, setPage}}
+              pageCountContext={{pageCount, setPageCount}} limitPerPageContext={{limitPerPage, setLimitPerPage}} 
+              sortValueContext={{sortValue, setSortValue}} isLoadingContext={{isLoading, setIsLoading}} userInfo={userInfo}/>
+              <TradeListBody isLoading={isLoading} tradesContext={{trades, setTrades}} 
+              userInfo={userInfo}/>
+             
+
+            
+            
           </table> 
           
         </div>
+         
+
+        
+        
         <div className="w-full flex justify-center mt-2">
           <div className=" w-16 flex justify-center">
             {

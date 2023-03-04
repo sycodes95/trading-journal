@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 import VariablesCards from "./variablesCards";
-import VariablesSVG from "../icons/variables.svg"
+import VariablesSVG from "../../icons/variables.svg"
 
 function Variables (){
   const [userInfo, setUserInfo] = useState(null)

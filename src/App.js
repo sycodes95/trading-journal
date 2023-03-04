@@ -14,7 +14,7 @@ import Profile from './components/profile';
 import Sidebar from './components/sidebar';
 import Setups from './components/setups';
 import Instruments from './components/instruments/instruments';
-import Variables from './components/variables';
+import Variables from './components/variables/variables';
 import Logout from './components/logout';
 import Dashboard from './components/dashboard/dashboard';
 

@@ -1,7 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import dragIcon from "../icons/drag.svg"
+import dragIcon from "../../icons/drag.svg"
 import { DragDropContext, Droppable, Draggable} from "@hello-pangea/dnd";
-import plusSVG from "../icons/plus.svg"
+import plusSVG from "../../icons/plus.svg"
+import Icon from '@mdi/react';
+import { mdiArchive, mdiCheckBold } from '@mdi/js';
+import { Oval, Triangle, InfinitySpin } from "react-loader-spinner";
+
+
 
 import { ReactSVG } from "react-svg";
 
@@ -18,6 +23,9 @@ function VariablesCards (props){
 
   const [previousVariable, setPreviousVariable] = useState(null)
 
+  const [archiveLoading, setArchiveLoading] = useState(false)
+  const [archiveSuccess, setArchiveSuccess] = useState(false)
+
   const [formData, setFormData] = useState({
     username: usernameProps,
     title: '',
@@ -32,7 +40,7 @@ function VariablesCards (props){
   const variableRef = useRef(null)
 
   const fetchPost = () =>{
-    console.log(formData)
+    
     fetch('http://localhost:5000/new-variables-list', {
       method: 'POST',
       body: JSON.stringify(formData),
@@ -58,6 +66,7 @@ function VariablesCards (props){
   }
 
   const fetchAndUpdateTrades = () =>{
+    
     fetch(`http://localhost:5000/trades-edit-variables?username=${usernameProps}`, {
       method: 'PUT',
       body: JSON.stringify({ variables: { previousTitle: previousVariable.title, newTitle: formData.title }}),
@@ -86,8 +95,38 @@ function VariablesCards (props){
 
   }
 
+  const fetchArchivePost = () =>{
+      setArchiveLoading(true)
+      const formatted = {
+        username: formData.username,
+        title: formData.title,
+        variables: formData.variables,
+        date: new Date ()
+      }
+      fetch(`http://localhost:5000/post-variables-archive`, {
+        method: 'POST',
+        body: JSON.stringify(formatted),
+        headers: { 'Content-Type': 'application/json'}
+
+      })
+      .then(response => response.json())
+      .then((data) => {
+        if(data && !data.error){
+          setArchiveLoading(false)
+          setArchiveSuccess(true)
+          setTimeout(()=>{
+            setArchiveSuccess(false)
+          },1000)
+          
+        }
+        console.log(data);
+      })
+
+  }
+
   const handleAddVariable = () =>{
     setFormData({ ...formData, variables: [...formData.variables, '']})
+    
   }
 
   const handleVariableDelete = (e, index) => {
@@ -121,6 +160,7 @@ function VariablesCards (props){
 
   const handleInputBlurSubmit = () =>{
     if(bothTitleVariablesEmpty) {
+      
       fetchDelete()
     } else if (onlyTitleEmpty){
       return 
@@ -157,7 +197,7 @@ function VariablesCards (props){
 
   useEffect(()=>{
     
-    console.log(formData);
+    
     if(formData.title === '' && formData.variables[0] !== '' && formData.variables.length !== 0){
       setOnlyTitleEmpty(true)
     } else {
@@ -188,7 +228,7 @@ function VariablesCards (props){
         username: data.username,
         title: data.title,
         variables: data.variables,
-        listIndex: data.listIndex 
+        date: new Date ()
       })
     }
   }, [props.variablesList, indexProps]) 
@@ -200,12 +240,14 @@ function VariablesCards (props){
   return(
     
     <div className="variables-card w-64 h-auto text-sm ">
+      
       <div className="input-errors h-6">
         { onlyTitleEmpty && <span className="text-red-700 text-xs">title required *</span> }
         
         { titleDuplicate && <span className="text-red-700 text-xs">duplicate title *</span>}
 
       </div>
+      
       
       <div className="flex items-center justify-between border-b h-6">
         <div className="top-left-round bg-dev w-full h-full text-white text-xs  pl-1 pr-1
@@ -233,7 +275,7 @@ function VariablesCards (props){
                       {(provided, snapshot) => (
                         <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
                         className="bottom-right-round variable flex items-center justify-between
-                        border-r-gray-300 border border-b-gray-300 bg-gray-300  
+                        border-r-gray-300 border border-b-gray-300 bg-white
                         ">
                         
                           <div className="svg-container h-5 w-5 flex items-center ">
@@ -259,6 +301,42 @@ function VariablesCards (props){
           </Droppable>
         </DragDropContext>
       }
+      {
+        !onlyTitleEmpty && !bothTitleVariablesEmpty &&
+        <div className="pl-2 pr-2  bg-white w-full bottom-right-round grid grid-cols-3
+        border-b border-r border-gray-300">
+          <div className="col-start-2 flex justify-center items-center">
+            <button className="text-xs text-gray-500 font-bold hover:text-black transition-colors duration-200"
+            onClick={fetchArchivePost}
+            >
+            ARCHIVE
+            </button>
+            
+          </div>
+
+          <div className="col-start-3 flex justify-end items-center">
+            {
+              archiveLoading &&
+              <Oval height="12" width="12" color="#808080" secondaryColor="#FFFFFF"
+              strokeWidth="8" ariaLabel="triangle-loading" wrapperStyle={{}}
+              visible={true}/>
+            }
+            {
+              archiveSuccess && 
+              <Icon color='green' path={mdiCheckBold} size={0.6} />
+            }
+            
+          </div>
+         
+            
+            
+
+          
+          
+          
+        </div>
+      }
+      
     </div>
   )
 }

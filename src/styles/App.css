@@ -443,7 +443,7 @@ table tr:nth-of-type(even){
   }
 }
 
-@media screen and (max-width: 640px) {
+@media (max-width: 640px) {
   .DialogContent{
     width: 85%;
   }
@@ -454,10 +454,13 @@ table tr:nth-of-type(even){
   .app{
     width: 100vw;
   }
+  .trades-search-bar-container{
+    width: 100%;
+  }
   .trades-search-bar{
     width: 100%;
-    
   }
+  
   .table-top-bar{
     grid-template-columns: 1fr;
     grid-template-rows: repeat(2,1fr);

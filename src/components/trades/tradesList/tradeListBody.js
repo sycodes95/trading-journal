@@ -21,8 +21,8 @@ function TradeListBody(props) {
     <tbody className="bg-white">
       {
         isLoading ?
-          <th colSpan='18' className="triangle-load  h-full flex items-center ">
-            <Triangle  height="80" width="1420" color="#000000" ariaLabel="triangle-loading" wrapperStyle={{}}
+          <th colSpan='18' className="triangle-load  h-full w-full flex justify-center items-center ">
+            <Triangle  height="80" width={100} color="#000000" ariaLabel="triangle-loading" wrapperStyle={{}}
             visible={true} /> 
           </th>
         :

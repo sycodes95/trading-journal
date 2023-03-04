@@ -145,15 +145,15 @@ function TradesList(props){
             <button className=" h-12 w-36  bg-dev bg-opacity-50
             hover:bg-opacity-30 transition-all rounded text-white shadow-md ">New Trade</button>
           </Dialog.Trigger>
-          <div className="cols-span-1 w-full flex flex-row justify-end items-center ">
-            <div className=" w-fit p-1 flex bg-gray-300 rounded-sm">
+          <div className="cols-span-1 w-full flex flex-row justify-end items-end ">
+            <div className="trades-search-bar-container p-1 flex bg-gray-300 rounded-sm">
               <input className="trades-search-bar h-6   bg-white
-               text-black rounded-sm text-xs pl-2 pr-2 shadow-md caret-black" 
+               text-black rounded-sm text-xs pl-2 pr-2  caret-black" 
               type='text' placeholder="Search..."  onChange={searchOnChangeSubmit}/>
               <div className="h-5 w-5">
                 {
                   isLoading && debouncedSearch &&
-                  <Oval height="20" width="20" color="#FFFFFF" secondaryColor="#FFFFFF"
+                  <Oval height="20" width="20" color="#000000" secondaryColor="#FFFFFF"
                   strokeWidth="8" ariaLabel="triangle-loading" wrapperStyle={{}}
                   visible={true}/>
                 }

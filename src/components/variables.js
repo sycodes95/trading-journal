@@ -97,8 +97,8 @@ function Variables (){
         
       </div>
       
-      <div className="variables-cards-container grid grid-cols-4  h-full gap-x-12 
-      2xl:grid-cols-5  xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2  sm:grid sm:grid-cols-2
+      <div className="variables-cards-container    h-full gap-x-12 
+      flex flex-wrap justify-center
        mt-8 w-fit justify-self-center">
         {
           variablesList &&

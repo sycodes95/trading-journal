@@ -233,14 +233,14 @@ function VariablesCards (props){
                       {(provided, snapshot) => (
                         <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
                         className="bottom-right-round variable flex items-center justify-between
-                        border-r-gray-300 border border-b-gray-300 p-1 bg-white
+                        border-r-gray-300 border border-b-gray-300 bg-gray-300  
                         ">
                         
-                          <div className="svg-container h-6 w-6 flex items-center ">
+                          <div className="svg-container h-5 w-5 flex items-center ">
                             <ReactSVG className="text-gray-500 fill-current h-5 w-5" src={dragIcon}/>
                           </div>
                         
-                          <input className=" w-full h-full  text-xs font-thin rounded-none pl-2
+                          <input className=" w-full h-7  text-xs font-thin rounded-none pl-2
                            text-black"
                           type='text' name="variables" value={formData.variables[index]} ref={variableRef} 
                           onChange={(e)=>handleInputChange(e,index)} onKeyDown={handleKeyDownSubmit}

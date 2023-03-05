@@ -143,11 +143,7 @@ function Instruments () {
         </div>
             
       </div>
-      <div>
-        { userInfo &&
-        <span>{`${userInfo.firstname}'s Instruments`}</span> 
-        }
-      </div>
+      
       {
         <InstrumentsTable userInfo={userInfo} newInstrumentSubmitted={newInstrumentSubmitted}
         userMaxInstrumentsContext={userMaxInstrumentsContext}/>

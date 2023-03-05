@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useContext} from "react";
 import { Link } from "react-router-dom";
-
+import { ReactSVG } from "react-svg";
+import trashSVG from '../../icons/trash.svg'
 
 function InstrumentsTable (props) {
   //PROPS contains:  {userInfo}, {newSetupSubmitted}, {userMaxInstrumentsContext}
@@ -64,20 +65,25 @@ function InstrumentsTable (props) {
       <table className=" w-full bg-white">
         <thead>
             <tr className="bg-white border border-gray-300 text-black text-sm font-bold ">
+                <th colSpan="1" className="border-r border-gray-300 font-thin w-16"></th>
                 <th colSpan="1" className="border-r border-gray-300  w-16 font-thin">#</th>
-                <th className="font-thin">Instrument Name</th>
+                <th colSpan="8" className="font-thin">Instrument Name</th>
             </tr>
         </thead>
         <tbody>
           {instruments && 
             instruments.map((s, i) =>(
-              <tr className="border-gray-300  h-4 text-white font-black-outline-light">
+              <tr className="border-gray-300  h-4 text-black font-bold">
+                <td colSpan="1" className="flex justify-center items-center">
+                  <button onClick={()=>handleSetupDelete(s._id)}
+                  className=" text-black text-sm font-bold  hover:text-gray-500
+                  transition-colors">
+                    <ReactSVG src={trashSVG} className="h-4 w-5  fill-current "/>
+                  </button>
+                </td>
                 <td colSpan="1" className=" text-center text-xs" >{i+1}</td>
-                <td colSpan='8' className="flex justify-between pl-4 pr-4 gap-x-12 items-center" >
+                <td colSpan='8' className="flex justify-between pl-4 pr-4 gap-x-12" >
                     <span className="text-sm">{s.instrument}</span>
-                    <button onClick={()=>handleSetupDelete(s._id)}
-                     className=" text-black text-sm font-bold  hover:text-red-500
-                      transition-colors ">x</button>
                 </td>
               </tr>
           ))

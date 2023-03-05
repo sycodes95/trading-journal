@@ -12,7 +12,7 @@ import Signup from './components/signup';
 import Trades from './components/trades/trades';
 import Profile from './components/profile';
 import Sidebar from './components/sidebar';
-import Setups from './components/setups';
+import Setups from './components/setups/setups';
 import Instruments from './components/instruments/instruments';
 import Variables from './components/variables/variables';
 import Logout from './components/logout';

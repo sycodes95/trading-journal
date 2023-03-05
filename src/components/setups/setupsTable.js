@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, useContext} from "react";
 import { Link } from "react-router-dom";
-
-
-function CurrentSetups (props) {
+import trashSVG from '../../icons/trash.svg'
+import { ReactSVG } from "react-svg";
+function SetupsTable (props) {
   //PROPS contains:  {userInfo}, {newSetupSubmitted}, {userMaxSetupsContext}
 
   const {userMaxSetups, setUserMaxSetups} = props.userMaxSetupsContext;
@@ -81,22 +81,28 @@ function CurrentSetups (props) {
       <table className=" w-full bg-white">
         <thead>
             <tr className="bg-white border border-gray-300 text-black text-sm font-bold">
-                <th colSpan="1" className="border-r border-gray-300  w-16 font-thin">#</th>
-                <th colSpan="1" className="border-r border-gray-300  w-16 font-thin">Active</th>
-                <th className="font-thin">Setup Name</th>
+              <th colSpan="1" className="border-r border-gray-300  w-16 font-thin"></th>
+              <th colSpan="1" className="border-r border-gray-300  w-16 font-thin">#</th>
+              <th colSpan="1" className="border-r border-gray-300  w-16 font-thin">Active</th>
+              <th className="font-thin">Setup Name</th>
             </tr>
         </thead>
         <tbody>
           {setups &&
             setups.map((s, i) =>(
-              <tr className="border-gray-300  h-4 text-white font-black-outline-light">
+              <tr className="border-gray-300  h-4 text-black font-bold">
+                <td colSpan="1" className=" text-center text-xs" >
+                  <button onClick={()=>handleSetupDelete(s._id)} className=" text-black text-md font-bold hover:text-gray-500 transition-colors">
+                    <ReactSVG src={trashSVG} className="h-4 w-5  fill-current "/>
+                  </button>
+                </td>
                 <td colSpan="1" className=" text-center text-xs" >{i+1}</td>
                 <td colSpan="1" className=" text-center " >
                     <input className="black-check" type='checkbox' name="active" checked={s.active} onChange={()=>handleSetupEditActive(s._id)}/>
                 </td>
                 <td colSpan='8' className="flex justify-between items-center pl-4 pr-4 gap-x-12 " >
                     <span className="text-sm">{s.setup}</span>
-                    <button onClick={()=>handleSetupDelete(s._id)} className=" text-red-700 text-md font-bold hover:text-black transition-colors delay-100">x</button>
+                    
                 </td>
                 
               </tr>
@@ -111,4 +117,4 @@ function CurrentSetups (props) {
       
   )
 }
-export default CurrentSetups;
+export default SetupsTable;

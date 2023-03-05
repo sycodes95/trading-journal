@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 import VariablesCards from "./variablesCards";
 import VariablesSVG from "../../icons/variables.svg"
+import VariablesArchive from "./variablesArchive";
 
 function Variables (){
   const [userInfo, setUserInfo] = useState(null)
 
   const [variablesList, setVariablesList] = useState(null)
 
-  
+  const [viewArchive, setViewArchive] = useState(false)
 
 
   function getVariablesList (){
@@ -34,18 +35,22 @@ function Variables (){
         
       })
 
-
     }
     
   }
- 
 
+  const handleViewArchive = () => {
+    setViewArchive(!viewArchive)
+  }
   
   useEffect(()=>{
-    
     //get variablelist from db
     getVariablesList()
   }, [userInfo])
+
+  useEffect(()=>{
+    console.log(viewArchive);
+  },[viewArchive])
 
   useEffect(()=>{
     
@@ -74,7 +79,7 @@ function Variables (){
   },[variablesList])
 
   return(
-    <div className="variables-container w-full p-12 grid justify-center">
+    <div className="variables-container w-full p-12 justify-center">
       <div className="section-info text-white p-4 bg-dev bg-opacity-70 rounded-sm
       grid  ">
         <div className="">
@@ -112,6 +117,20 @@ function Variables (){
           
         }
       </div>
+
+      <div className="pt-12 w-full flex justify-center ">
+        <button className="border border-gray-400 bg-white rounded-sm text-sm pl-1 pr-1" onClick={handleViewArchive}>
+          VIEW ARCHIVED
+        </button>
+        
+      </div>
+      <div className="relative">
+        {
+          viewArchive && 
+          <VariablesArchive username={userInfo.username}/>
+        }
+      </div>
+      
     </div>
   )
 }

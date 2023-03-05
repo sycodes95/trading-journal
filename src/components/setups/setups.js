@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import CurrentSetups from "./currentSetups";
+import CurrentSetups from "./setupsTable";
 
 import { ReactSVG } from "react-svg";
-import plusButton from "../icons/plus-circle-outline.svg"
-import setupsSVG from "../icons/setups.svg"
+
+import setupsSVG from "../../icons/setups.svg"
 import Icon from '@mdi/react';
 import { mdiPlusBox } from '@mdi/js';
+import SetupsTable from "./setupsTable";
 
 function Setups () {
   
@@ -145,7 +146,7 @@ function Setups () {
         }
       </div>
 
-      <CurrentSetups userInfo={userInfo} newSetupSubmitted={newSetupSubmitted}
+      <SetupsTable userInfo={userInfo} newSetupSubmitted={newSetupSubmitted}
       userMaxSetupsContext={userMaxSetupsContext}/>
     </div>
   )

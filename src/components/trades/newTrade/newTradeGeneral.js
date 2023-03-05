@@ -52,7 +52,7 @@ function NewTradeGeneral (props){
             <NtgStoploss formDataContext={{formData, setFormData}}/>
           </div>
 
-          <div className="col-span-1 border-b border-gray-300 h-64">
+          <div className="col-span-1  border-gray-300 h-64">
             <NtgExitDate formDataContext={{formData, setFormData}}/>
             <NtgExit formDataContext={{formData, setFormData}}/>
             <NtgGainLoss formDataContext={{formData, setFormData}}/>
@@ -73,7 +73,7 @@ function NewTradeGeneral (props){
             
           </div>
 
-          <div className="col-span-1 border-b border-r  border-gray-300 bottom-right-round h-64">
+          <div className="col-span-1  border-r  border-gray-300 bottom-right-round h-64">
             <NtgMFE formDataContext={{formData, setFormData}}/>
             <NtgMAE formDataContext={{formData, setFormData}}/>
             <NtgOpen formDataContext={{formData, setFormData}}/>

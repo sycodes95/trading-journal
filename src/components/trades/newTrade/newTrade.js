@@ -188,8 +188,8 @@ function NewTrade (props) {
         <NewTradeVariables formDataContext={{formData, setFormData}}/>
       }
 
-      <div className="grid grid-cols-2 items-center h-12 w-full absolute bottom-0">
-        <div className="flex justify-center items-center text-sm">
+      <div className="grid grid-cols-2 items-center h-12 w-full absolute bottom-0 border-t border-gray-300">
+        <div className="flex justify-center items-center text-sm  h-full border-r border-gray-300">
           <button className="" onClick={handleFormSubmit}>Save</button>
         </div>
         <Dialog.Close asChild>

@@ -27,7 +27,7 @@ function NewTradeVariables (props){
     getVariables()
   },[formData.username])
   return(
-    <div className="new-trade-variables text-xs w-full ">
+    <div className="new-trade-variables text-xs w-full">
       <div className="">
         <div className="bg-gray-400 bg-opacity-70 pl-4 pr-4 text-black text-center bottom-right-round
         transition-all">

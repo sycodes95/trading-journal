@@ -119,7 +119,7 @@ function Variables (){
       </div>
 
       <div className="pt-12 w-full flex justify-center ">
-        <button className="border border-gray-400 bg-white rounded-sm text-sm pl-1 pr-1" onClick={handleViewArchive}>
+        <button className="border border-gray-400 bg-white rounded-md text-sm pl-1 pr-1 hover:bg-gray-300 transition-colors" onClick={handleViewArchive}>
           VIEW ARCHIVED
         </button>
         

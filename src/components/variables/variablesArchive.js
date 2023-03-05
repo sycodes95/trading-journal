@@ -27,7 +27,7 @@ function VariablesArchive (props) {
   },[archive])
 
   return (
-    <div className="w-full p-8 text-sm flex flex-wrap justify-center gap-x-2 gap-y-2">
+    <div className="w-full p-8 text-sm flex flex-wrap justify-center gap-x-2 gap-y-2 mb-40">
       {
         archive &&
         archive.map(group => (

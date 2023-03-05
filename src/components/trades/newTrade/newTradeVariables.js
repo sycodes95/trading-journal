@@ -33,7 +33,7 @@ function NewTradeVariables (props){
         transition-all">
           <span>Variables Data</span>
         </div>
-        <div className="grid grid-cols-2 h-128 pt-4">
+        <div className="new-trade-variables-container grid grid-cols-2  pt-4 h-full">
           {
             variables && 
             variables.map((v, index) =>(

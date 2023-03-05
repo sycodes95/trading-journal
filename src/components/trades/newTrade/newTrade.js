@@ -160,7 +160,7 @@ function NewTrade (props) {
   },[editTrade])
   
   return(
-    <div className="new-trade-container  ">
+    <div className="new-trade-container relative">
       <div className="flex justify-between ">
         <div className="grid grid-cols-3 h-6 ">
           <button className="cols-span-1  h-6 pl-4 pr-4 text-xs 
@@ -188,7 +188,7 @@ function NewTrade (props) {
         <NewTradeVariables formDataContext={{formData, setFormData}}/>
       }
 
-      <div className="grid grid-cols-2 items-center h-12 justify-end">
+      <div className="grid grid-cols-2 items-center h-12 w-full absolute bottom-0">
         <div className="flex justify-center items-center text-sm">
           <button className="" onClick={handleFormSubmit}>Save</button>
         </div>

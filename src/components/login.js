@@ -27,7 +27,7 @@ function Login () {
      .then(response => response.json())
      .then((data) => {
         
-        
+        console.log(data);
         if(data.token){
           setLogInSuccess(true)
           localStorage.setItem('token', JSON.stringify(data.token))
@@ -72,13 +72,16 @@ function Login () {
       {
       logInSuccess ? 
 
-      <div className="w-80 h-96 p-4  text-black flex flex-col gap-y-2 bg-striped-content-big relative top-36 text-xs">
+      <div className="w-80 h-96 p-4  text-black flex flex-col gap-y-2 bg-striped-dark-alt relative top-36 text-xs
+      border-4 border-black border-opacity-50">
         Fetching Data...
       </div>
 
       :
 
-      <form className='w-80 h-fit p-4  text-black flex flex-col gap-y-2 bg-striped-content-big relative top-36' onSubmit={handleSubmit}>
+      <form className='w-80 h-fit p-4  text-white flex flex-col gap-y-2 bg-striped-dark-alt relative top-36
+      border-4 border-black border-opacity-50' 
+      onSubmit={handleSubmit}>
 
        
         <div className="h-16 form-logo flex justify-center mt-4">
@@ -92,7 +95,7 @@ function Login () {
           <span className="hidden text-xs text-red-500 font-thin col-span-full" ref={infoIncorrectRef} > Username or Password is incorrect </span>
         </label>
         <div className="flex justify-center">
-          <input className='outline-none col-span-full h-6 w-3/4 justify-self-center' 
+          <input className='outline-none col-span-full h-6 w-3/4 justify-self-center bg-black' 
           type='text' name='username' value={formData.username} onChange={handleInputChange} maxLength='69'/>
 
         </div>
@@ -102,7 +105,7 @@ function Login () {
           <span>PASSWORD</span> 
         </label>
         <div className="flex justify-center">
-          <input className=' outline-none col-span-full h-6 w-3/4 justify-self-center' 
+          <input className=' outline-none col-span-full h-6 w-3/4 justify-self-center bg-black' 
           type='password' name='password' value={formData.password} onChange={handleInputChange}/>
             
         </div>
@@ -111,7 +114,7 @@ function Login () {
 
         
         <div className="flex justify-center mt-8">
-          <button className="col-span-full bg-opacity-70 bg-black hover:bg-opacity-90 transition-all h-10 w-3/4 justify-self-center text-white"
+          <button className="col-span-full bg-opacity-50 bg-black hover:bg-opacity-90 transition-all h-10 w-3/4 justify-self-center text-white"
            type="submit">LOGIN</button>
         </div>
 

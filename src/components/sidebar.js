@@ -11,30 +11,30 @@ function Sidebar () {
   
 
   return(
-    <div className="sidebar h-full grid grid-cols-1 auto-rows-min justify-center pt-8
-    relative ">
+    <div className="sidebar h-full flex items-center justify-center gap-x-6
+    relative bg-black bg-opacity-25">
       
-      <Link to='/dashboard' className="flex pl-8 items-center h-8 ">
-        <ReactSVG className="text-black h-4 w-4 fill-current mr-2 "src={dashboardSVG}/>
-        <div>
-          <span className="text-black hover:text-green-500 transition-all duration-500 text-sm   w-full ">Dashboard</span>
-        </div>
+      <Link to='/dashboard' className="flex justify-center items-center h-8 ">
+        <ReactSVG className="text-white h-4 w-4 fill-current mr-2 "src={dashboardSVG}/>
+        
+        <span className="text-white hover:text-gray-500 transition-all text-xs w-full ">DASHBOARD</span>
+      
       </Link>
-      <Link to='/trades' className="flex pl-8 items-center h-8">
-        <ReactSVG className="text-black h-4 w-4 fill-current mr-2 "src={tradesSVG}/>
-        <span className="text-black hover:text-green-500 transition-all duration-500 text-sm   w-full">Trades</span>
+      <Link to='/trades' className="flex justify-center items-center h-8">
+        <ReactSVG className="text-white h-4 w-4 fill-current mr-2 "src={tradesSVG}/>
+        <span className="text-white hover:text-gray-500 transition-all text-xs   w-full">TRADES</span>
       </Link>
-      <Link to='/instruments' className="flex pl-8  items-center h-8">
-      <ReactSVG className="text-black h-4 w-4 fill-current mr-2 "src={instrumentsSVG}/>
-        <span className="text-black hover:text-green-500 transition-all duration-500  text-sm   w-full">Instruments</span>
+      <Link to='/instruments' className="flex justify-center items-center h-8">
+      <ReactSVG className="text-white h-4 w-4 fill-current mr-2 "src={instrumentsSVG}/>
+        <span className="text-white hover:text-gray-500 transition-all text-xs   w-full">INSTRUMENTS</span>
       </Link>
-      <Link to='/setups' className="flex pl-8  items-center h-8">
-        <ReactSVG className="text-black h-4 w-4 fill-current mr-2 " src={setupsSVG}/>
-        <span className="text-black hover:text-green-500 transition-all duration-500  text-sm  w-full">Setups</span>
+      <Link to='/setups' className="flex justify-center items-center h-8">
+        <ReactSVG className="text-white h-4 w-4 fill-current mr-2 " src={setupsSVG}/>
+        <span className="text-white hover:text-gray-500 transition-all text-xs  w-full">SETUPS</span>
       </Link>
-      <Link to='/variables' className="flex pl-8  items-center h-8">
-      <ReactSVG className="text-black h-4 w-4 fill-current mr-2 " src={variablesSVG}/>
-        <span className="text-black hover:text-green-500 transition-all duration-500  text-sm  w-full">Variables</span>
+      <Link to='/variables' className="flex justify-center items-center h-8">
+      <ReactSVG className="text-white h-4 w-4 fill-current mr-2 " src={variablesSVG}/>
+        <span className="text-white hover:text-gray-500 transition-all text-xs  w-full">VARIABLES</span>
       </Link>
     </div>
 

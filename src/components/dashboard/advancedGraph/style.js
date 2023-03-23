@@ -16,7 +16,7 @@ const styles = {
     axisLabel: {
       fontSize: 4,
       padding: 5,
-      fill: '#000000',
+      fill: '#FFFFFF',
     },
   },
   yaxis: {
@@ -30,7 +30,7 @@ const styles = {
     axisLabel: {
         fontSize: 4,
         padding: 5,
-        fill: '#000000',
+        fill: '#FFFFFF',
     },
     ticks: {
         size: 0,
@@ -51,22 +51,24 @@ const styles = {
   legend: {
     border: {
       stroke: '#000000',
-      fill: '#FFF',
+      fill: 'rgba(0,0,0,0.3)',
       width: 42,
       strokeDasharray: 2,
     },
     labels: {
-      fill: '#000000',
+      fill: '#FFFFFF',
       fontSize: 2.5,
       cursor: 'pointer',
       
     },
     title: {
-      fill: '#000000',
+      fill: '#FFFFFF',
       fontSize: 3,
       padding: 2,
     },
-    maxWidth: 30
+    maxWidth: 30,
+    
+    
   },
   annotionLine: {
     data: {

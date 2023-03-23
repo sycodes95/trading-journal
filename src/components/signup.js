@@ -74,7 +74,7 @@ function Signup () {
   }, [formData])
 
   return(
-    <div className=" w-full flex justify-center items-center">
+    <div className=" w-full flex justify-center items-center ">
       {
       signUpSuccess ? 
 
@@ -82,7 +82,8 @@ function Signup () {
 
       :
 
-      <form className='w-80 p-4 text-black grid  gap-y-2 bg-striped-content-big relative top-36' onSubmit={handleSubmit}>
+      <form className='w-80 p-4 text-black grid  gap-y-2 bg-striped-dark-alt 
+      border-4 border-black border-opacity-40 relative top-36 ' onSubmit={handleSubmit}>
         <div className="h-16 form-logo flex justify-center mt-4">
           <ReactSVG className="text-gray-500 fill-current" src={earth}/>
         </div>
@@ -91,29 +92,34 @@ function Signup () {
           <span>REGISTER NEW ACCOUNT</span>
         </div>
 
-        <label className="flex justify-center text-xs col-span-full mt-4">First Name </label>
-        <input className=' outline-none col-span-full w-3/4 justify-self-center' 
+        <label className="flex justify-center text-xs col-span-full mt-4 text-white">First Name </label>
+        <input className=' outline-none col-span-full w-3/4 justify-self-center caret-white text-white
+        bg-black' 
         type='text' name='firstname' value={formData.firstname} onChange={handleInputChange} maxLength='69'/>
         
-        <label className="flex justify-center text-xs col-span-full"> Last Name </label>
-        <input className=' outline-none col-span-full w-3/4 justify-self-center' 
+        <label className="flex justify-center text-xs col-span-full text-white"> Last Name </label>
+        <input className=' outline-none col-span-full w-3/4 justify-self-center caret-white text-white
+        bg-black' 
         type='text' name='lastname' value={formData.lastname} onChange={handleInputChange} maxLength='69'/>
         
-        <label className="flex justify-center items-center text-xs col-span-full">
-          <span>Email</span> <span className="hidden text-xs text-red-500 font-thin col-span-full" ref={usernameTakenRef}> Username Taken! </span>
+        <label className="flex justify-center items-center text-xs col-span-full text-white">
+          <span>Email</span> <span className="hidden text-xs text-red-500 font-thin col-span-full " ref={usernameTakenRef}> Username Taken! </span>
         </label>
-        <input className='outline-none col-span-full w-3/4 justify-self-center' type='text' name='username' 
+        <input className='outline-none col-span-full w-3/4 justify-self-center caret-white text-white
+        bg-black' type='text' name='username' 
         value={formData.username} onChange={handleInputChange} maxLength='69'/>
         
-        <label className="flex justify-center items-center text-xs col-span-full"> 
+        <label className="flex justify-center items-center text-xs col-span-full text-white"> 
           <span>Password</span> <span className="hidden text-xs text-red-500 font-thin col-span-full" ref={passwordNotMatchRef}> Passwords Did Not Match!</span>  
         </label>
-        <input className='outline-none col-span-full w-3/4 justify-self-center' 
+        <input className='outline-none col-span-full w-3/4 justify-self-center caret-white text-white
+        bg-black' 
         type='password' name='password' value={formData.password} onChange={handleInputChange}/>
         
 
-        <label className="flex justify-center text-xs col-span-full"> Confirm password </label>
-        <input className=' outline-none col-span-full w-3/4 justify-self-center' 
+        <label className="flex justify-center text-xs col-span-full text-white"> Confirm password </label>
+        <input className=' outline-none col-span-full w-3/4 justify-self-center caret-white text-white
+        bg-black' 
         type='password' name='confirm_password' value={formData.confirm_password} onChange={handleInputChange}/>
         
         <div className="flex justify-center mt-8 mb-8">

@@ -208,7 +208,7 @@ function AdvancedGraph (props) {
         style = {
           ...props.style,
           textDecoration: 'underline',
-          fill: '#000000',
+          fill: '#FFFFFF',
         };
       }
 
@@ -268,8 +268,8 @@ function AdvancedGraph (props) {
 
   const filterTypeData = [
     {name: 'INSTRUMENTS', symbol: {fill: 'red'}},
-    {name: 'SETUPS', symbol: {fill: 'navy'}},
-    {name: 'VARIABLES', symbol: {fill: 'black'}},
+    {name: 'SETUPS', symbol: {fill: 'skyblue'}},
+    {name: 'VARIABLES', symbol: {fill: 'white'}},
   ]
 
   const MAX_WINRATE = 100;
@@ -282,10 +282,14 @@ function AdvancedGraph (props) {
   const chartMaxDomain = { y: MAX_WINRATE, x: MAX_R };
 
   return(
-    <div className="grid grid-cols-10 h-full bg-striped-content-big-light">
-      <div className="chart col-span-10">
+    <div className="grid grid-cols-10 h-full ">
+      <div className="h-6 w-full flex justify-center items-center col-span-full text-white text-xs  bg-striped-dark-alt">
+          <span>ADVANCED REPORTS</span>
+        </div>
+      <div className="col-span-10">
         
         <VictoryChart 
+        
           width={300} 
           height={150} 
           padding={{top: 8, bottom:20, left:15, right:50}} 
@@ -344,7 +348,7 @@ function AdvancedGraph (props) {
               {
                 target: "labels",
                 eventHandlers: {
-                  onClick:handleFilterClick
+                  onClick:handleFilterClick 
                 }
               }
             ]}

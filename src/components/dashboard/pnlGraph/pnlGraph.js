@@ -34,6 +34,8 @@ function PnlGraph (props) {
     }
 
   },[trades])
+
+  
   useEffect(()=>{
     console.log(tradesWithBalance);
   },[tradesWithBalance])
@@ -41,7 +43,7 @@ function PnlGraph (props) {
     console.log(noTrades);
   },[noTrades])
   return(
-    <div className="bg-striped-content-big-light">
+    <div className="">
 
     
       <VictoryChart 

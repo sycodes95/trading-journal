@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import tjlogo from "../images/TJ-logos_transparent.png"
+import edgescoutLogo from "../images/edgescout.png"
 
 function Header () {
   const [userLoggedIn, setUserLoggedIn] = useState(false)
@@ -19,10 +19,7 @@ function Header () {
         window.location.href='/login'
       }
     })
-  
   }
-  
- 
   
   useEffect(()=>{
     const token = JSON.parse(localStorage.getItem('token'))
@@ -32,40 +29,48 @@ function Header () {
   }, [])
 
   return(
-    <div className="header relative z-10 max-h-12 h-12  pl-4 pr-8 flex items-center justify-between
-    text-white  bg-white w-full " > 
-    
+    <div className="z-10 h-full  flex items-center justify-center
+    text-white bg-black bg-opacity-20 " > 
 
-      <div className="header-logo text-4xl font-bold text-black">
-        <img className="h-32" src={tjlogo}/>
+      <div className="flex justify-between items-center h-12 w-10/12 relative overflow-hidden">
+
+      
+      <div className="header-logo text-4xl font-bold text-white">
+        <img className="h-28" src={edgescoutLogo}/>
       </div>
 
       {
-        !userLoggedIn ? 
+      !userLoggedIn ? 
 
-        <div className="header-nav grid grid-cols-2  text-black">
-          <Link className="flex justify-center w-32 col-span-1 text-white text-sm font-black-outline-light" to='/login'>
-            <span className="hover:cursor-pointer">LOG IN</span>
-          </Link>
-          <Link className="flex justify-center items-center w-32 col-span-1 text-white text-sm font-black-outline-light" to='/signup'>
-            <span className="hover:cursor-pointer">REGISTRATION</span>
-          </Link> 
-        </div>
+      <div className="header-nav h-full grid grid-cols-2  text-white">
+        <Link className="flex justify-center items-center text-xs bg-green-700 bg-opacity-10 p-2 
+        hover:text-gray-600 transition-all" to='/login'>
+          <span className="hover:cursor-pointer">LOG IN</span>
+        </Link>
+        <Link className="flex justify-center items-center text-xs bg-yellow-500 bg-opacity-10 p-2 
+        hover:text-gray-400 transition-all" to='/signup'>
+          <span className="hover:cursor-pointer">REGISTRATION</span>
+        </Link> 
+      </div>
 
-        :
+      :
 
-        <div className="header-nav grid grid-cols-2 gap-x-2 text-black  ">
-          
-          <Link className="flex justify-center" to='/profile' >
-            <span className="polygon-child hover:cursor-pointer">Profile</span>
-          </Link> 
-          <button className="" onClick={handleLogOut}>
-            <span className="polygon-child hover:cursor-pointer">Log out</span>
-          </button> 
-        </div>
+      <div className="header-nav h-full grid grid-cols-2 text-white  ">
+        
+        <Link className="flex justify-center items-center text-xs bg-black bg-opacity-25 p-2 
+        hover:text-gray-600 transition-all" to='/profile' >
+        
+          <span className="polygon-child hover:cursor-pointer">PROFILE</span>
+        </Link> 
+        <button className="flex justify-center items-center text-xs bg-red-700 bg-opacity-25 p-2 
+        hover:text-red-600 transition-all"
+        onClick={handleLogOut}>
+          <span className="polygon-child hover:cursor-pointer ">LOG OUT</span>
+        </button> 
+      </div>
         
       }
-
+      </div>
   </div>
 
   

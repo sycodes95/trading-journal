@@ -96,31 +96,31 @@ function TradeListHead(props) {
 
   
   return(
-    <thead className="bg-striped-content">
+    <thead className="bg-striped-dark-alt">
       {
         isLoading ?
         <tr className="  text-xs font-bold ">
           <th colSpan="1" className=" hover:text-gray-500 hover:cursor-pointer transition-all">
-            <div className="h-4 pl-4 pr-4 bg-white border border-gray-300 top-left-round bottom-right-round"></div>
+            <div className="h-4 pl-4 pr-4 bg-black bg-opacity-25 border border-gray-800 top-left-round bottom-right-round"></div>
           </th>
         </tr>
         :
         <tr className=" text-black text-xs font-bold ">
           <th colSpan="1" className="  hover:text-gray-500 hover:cursor-pointer transition-all">
-            <div className="h-4 pl-4 pr-4 bg-white border border-gray-300 top-left-round bottom-right-round">d</div>
+            <div className="h-4 pl-4 pr-4 bg-black bg-opacity-25 border border-gray-800 top-left-round bottom-right-round">d</div>
           </th>
           <th colSpan="1" className=" hover:text-gray-500 hover:cursor-pointer transition-all">
-            <div className="h-4 pl-4 pr-4 bg-white border border-gray-300 top-left-round bottom-right-round"></div>
+            <div className="h-4 pl-4 pr-4 bg-black bg-opacity-25 border border-gray-800 top-left-round bottom-right-round"></div>
           </th>
           <th colSpan="1" className=" hover:text-gray-500 hover:cursor-pointer transition-all">
-            <div className="h-4 pl-4 pr-4 bg-white border border-gray-300 top-left-round bottom-right-round">#</div>
+            <div className="h-4 pl-4 pr-4 bg-black bg-opacity-25 border border-gray-800 top-left-round bottom-right-round">#</div>
           </th>
           {
             tableHeadersAndField.map((e, i) =>(
               <th colSpan="1" className=" hover:text-gray-500 hover:cursor-pointer transition-all"
               onClick={()=>handleSort(e,i)}>
-                <div className="h-4 pl-4 pr-4 bg-white border border-gray-300 min-w-max min-h-max 
-                top-left-round bottom-right-round">{e.header}</div> 
+                <div className="h-4 pl-4 pr-4 bg-black bg-opacity-25 text-white border border-gray-800 min-w-max min-h-max 
+                top-left-round bottom-right-round hover:text-gray-500 transition-all">{e.header}</div> 
               </th>
             ))
           } 

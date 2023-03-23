@@ -12,30 +12,32 @@ function Variables (){
 
   const [viewArchive, setViewArchive] = useState(false)
 
-
   function getVariablesList (){
     
-    if(userInfo){
-      fetch(`http://localhost:5000/get-variables-list?username=${userInfo.username}`)
-      .then(response => response.json())
-      .then((data) => {
-        
-        let listVariables = data.listVariables;
-        
-        let list = Array(20).fill(null)
-        if(listVariables.length > 0){
-          listVariables.forEach((variable) =>{
-            list.splice(variable.listIndex, 1, variable)
-          })
-          
-          setVariablesList(list)
-        } else {
-          setVariablesList(list)
-        }
-        
-      })
+    fetch(`http://localhost:5000/get-variables-list?username=${userInfo.username}`)
+    .then(response => response.json())
+    .then((data) => {
+      
+      let listVariables = data.listVariables;
 
-    }
+      let list = Array(20).fill(null)
+
+      if(listVariables.length > 0){
+
+        listVariables.forEach((variable) =>{
+
+          list.splice(variable.listIndex, 1, variable)
+        })
+
+        setVariablesList(list)
+
+      } else {
+
+        setVariablesList(list)
+
+      }
+      
+    })
     
   }
 
@@ -44,8 +46,7 @@ function Variables (){
   }
   
   useEffect(()=>{
-    //get variablelist from db
-    getVariablesList()
+    userInfo && getVariablesList()
   }, [userInfo])
 
   useEffect(()=>{
@@ -53,7 +54,6 @@ function Variables (){
   },[viewArchive])
 
   useEffect(()=>{
-    
     //Token
     const token = JSON.parse(localStorage.getItem('token'))
     
@@ -79,58 +79,61 @@ function Variables (){
   },[variablesList])
 
   return(
-    <div className="variables-container w-full p-12 justify-center">
-      <div className="section-info text-white p-4 bg-dev bg-opacity-70 rounded-sm
-      grid  ">
-        <div className="">
-          <ReactSVG className="h-14 w-14 text-white fill-current" src={VariablesSVG}/>
-        </div>
-        
-        
-        <div className="pl-8">
-          <div className="text-2xl">
-            <span>Custom Variables</span>
+    <div className="variables-container p-12 flex justify-center">
+      <div className="w-10/12 flex flex-col">
+        <section className="section-info text-white p-4 bg-black bg-opacity-40 rounded-sm
+        grid items-center">
+          <div className="">
+            <ReactSVG className="h-14 w-14 text-white fill-current" src={VariablesSVG}/>
           </div>
-          <div className="text-sm">
-            <span>
-              Add and manage variable types. 
-              Variables are important to track, and if used 
-              correctly, will increase your edge.
-            </span>
-          </div>
-        </div>
-        
-      </div>
-      
-      <div className="variables-cards-container    h-full gap-x-12 
-      flex flex-wrap justify-center
-       mt-8 w-fit justify-self-center">
-        {
-          variablesList &&
-          variablesList.map((list, index) =>(
-            <div className="card col-span-1 ">
-              <VariablesCards username={userInfo.username} index={index} 
-               variablesList={variablesList}/>
-              
-            </div>
-          ))
           
-        }
-      </div>
+          
+          <div className="pl-8">
+            <div className="text-2xl">
+              <span>Custom Variables</span>
+            </div>
+            <div className="text-sm">
+              <span>
+                Add and manage variable types. 
+                Variables are important to track, and if used 
+                correctly, will increase your edge.
+              </span>
+            </div>
+          </div>
+          
+        </section>
 
-      <div className="pt-12 w-full flex justify-center ">
-        <button className="border border-gray-400 bg-white rounded-md text-sm pl-1 pr-1 hover:bg-gray-300 transition-colors" onClick={handleViewArchive}>
-          VIEW ARCHIVED
-        </button>
-        
+        <section className="flex">
+          <div className="variables-cards-container h-full gap-x-12 
+          flex flex-wrap justify-center
+          mt-8 w-fit bg-black bg-opacity-25 pb-6">
+            {
+              variablesList &&
+              variablesList.map((list, index) =>(
+                <div className="card ">
+                  <VariablesCards username={userInfo.username} index={index} 
+                  variablesList={variablesList}/>
+                  
+                </div>
+              ))
+              
+            }
+          </div>
+        </section>
+
+        <div className="pt-12 w-full flex justify-center ">
+          <button className="border border-gray-400 bg-white rounded-md text-sm pl-1 pr-1 hover:bg-gray-300 transition-colors" onClick={handleViewArchive}>
+            VIEW ARCHIVED
+          </button>
+          
+        </div>
+        <div className="relative">
+          {
+            viewArchive && 
+            <VariablesArchive username={userInfo.username}/>
+          }
+        </div>
       </div>
-      <div className="relative">
-        {
-          viewArchive && 
-          <VariablesArchive username={userInfo.username}/>
-        }
-      </div>
-      
     </div>
   )
 }

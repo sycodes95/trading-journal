@@ -18,7 +18,7 @@ function TradeListBody(props) {
   
 
   return(
-    <tbody className="bg-white">
+    <tbody className="bg-black bg-opacity-25">
       {
         isLoading ?
           <th colSpan='18' className="triangle-load  h-full w-full flex justify-center items-center ">
@@ -28,9 +28,9 @@ function TradeListBody(props) {
         :
         trades && 
         trades.map((t, i) =>( 
-        <tr className={`trades-tr   h-4 text-white ${!t.fgl && 'font-black-outline'} 
-        ${t.fgl && t.fgl > 0 && 'font-blue-outline'} ${t.fgl && t.fgl < 0 && 'font-red-outline'} `}>
-          <td colSpan="1" className=" text-center text-xs text-black fill-current
+        <tr className={`trades-tr   h-4 font-black-outline ${!t.fgl && 'text-white'} 
+        ${t.fgl && t.fgl > 0 && 'text-green-300 font-black-outline'} ${t.fgl && t.fgl < 0 && 'text-red-500'} `}>
+          <td colSpan="1" className=" text-center text-xs fill-current
           hover:cursor-pointer transition-all">
             <Dialog.Root>
               <Dialog.Trigger>
@@ -50,7 +50,7 @@ function TradeListBody(props) {
             </Dialog.Root>
           </td>
 
-          <td colSpan="1" className=" text-center text-xs text-black flex items-center justify-center fill-current
+          <td colSpan="1" className=" text-center text-xs  flex items-center justify-center fill-current
           hover:cursor-pointer transition-all">
             <Dialog.Root>
               <Dialog.Trigger>

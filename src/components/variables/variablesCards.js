@@ -249,17 +249,18 @@ function VariablesCards (props){
       </div>
       
       
-      <div className="flex items-center justify-between border-b h-6">
-        <div className="top-left-round bg-dev w-full h-full text-white text-xs  pl-1 pr-1
+      <div className="flex items-center justify-between h-6 ">
+        <div className="top-left-round bg-striped-dark-alt w-full h-full text-white text-xs  pl-1 pr-1
         flex items-center">
-          <input className="top-left-round w-full outline-none bg-dev focus:bg-white  
+          <input className="top-left-round w-full outline-none bg-black bg-opacity-0 focus:bg-black focus:bg-opacity-30 
           font-bold caret-white" type='text' name="title" value={formData.title} ref={titleRef}
           onChange={(e)=>handleInputChange(e)} onKeyDown={handleKeyDownSubmit} 
           onBlur={handleInputBlurSubmit} placeholder='Custom Variable Title...' />
         </div>
 
-        <button className="bottom-right-round border border-black h-full text-black text-xs w-12 
-        flex justify-center items-center hover:text-steel-blue" onClick={handleAddVariable}>
+        <button className="bottom-right-round border border-gray-800 h-full text-black text-xs w-9
+        flex justify-center items-center bg-green-800 bg-opacity-40 hover:bg-opacity-80 transition-all" 
+        onClick={handleAddVariable}>
           <ReactSVG className="h-4 w-4  transition-colors fill-current" src={plusSVG}/>
         </button>
       </div>
@@ -275,7 +276,7 @@ function VariablesCards (props){
                       {(provided, snapshot) => (
                         <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
                         className="bottom-right-round variable flex items-center justify-between
-                        border-r-gray-300 border border-b-gray-300 bg-white
+                         border-r border-b border-gray-900 bg-black bg-opacity-30 
                         ">
                         
                           <div className="svg-container h-5 w-5 flex items-center ">
@@ -283,12 +284,12 @@ function VariablesCards (props){
                           </div>
                         
                           <input className=" w-full h-7  text-xs font-thin rounded-none pl-2
-                           text-black"
+                           text-white bg-black bg-opacity-30 caret-white"
                           type='text' name="variables" value={formData.variables[index]} ref={variableRef} 
                           onChange={(e)=>handleInputChange(e,index)} onKeyDown={handleKeyDownSubmit}
                           onBlur={handleInputBlurSubmit} placeholder='. . .' />
                           
-                          <button className=" text-red-700 text-xs  w-8 font-bold 
+                          <button className=" text-red-700 text-xs  w-10 font-bold 
                           hover:text-black" onClick={(e)=>handleVariableDelete(e, index)}>x</button>
                         </div>
                       )}
@@ -303,10 +304,10 @@ function VariablesCards (props){
       }
       {
         !onlyTitleEmpty && !bothTitleVariablesEmpty &&
-        <div className="pl-2 pr-2  bg-white w-full bottom-right-round grid grid-cols-3
-        border-b border-r border-gray-300">
+        <div className="pl-2 pr-2  bg-black bg-opacity-30 w-full bottom-right-round grid grid-cols-3
+        border-b border-r border-gray-900">
           <div className="col-start-2 flex justify-center items-center">
-            <button className="text-xs text-gray-500 font-bold hover:text-black transition-colors duration-200"
+            <button className="text-xs text-gray-500 font-bold hover:text-green-300 transition-colors"
             onClick={fetchArchivePost}
             >
             ARCHIVE

@@ -50,9 +50,9 @@ function Dashboard (){
     }
   }, [])
   return(
-    <div className="p-8 ">
+    <div className="pt-8  flex justify-center">
      
-      <div className="">
+      <div className="w-10/12">
         <OverallStats userInfo={userInfo} tradesContext={{trades, setTrades}} />
       </div>
       

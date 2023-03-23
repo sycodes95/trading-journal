@@ -28,22 +28,22 @@ function App() {
   }, [])
   return (
     <BrowserRouter>
-      <div className='app grid   bg-white m-0 h-screen'>
+      <div className='app flex flex-col bg-dev-blue m-0 h-full'>
         <Helmet>
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         </Helmet>
-        <div className='cols-start-1 col-span-2 cols-end-3 rows-start-1 rows-end-2 row-span-1'>
+        <div className='h-full bg-black bg-opacity-25'>
           <Header/>
         </div>
         {
           userLoggedIn &&
-          <div className='side cols-start-1 col-span-1 cols-end-2 rows-start-2 rows-end-3'>
+          <div className='max-950-hidden'>
             <Sidebar/>
           </div>
         }
         
-        <div className={`content ${userLoggedIn ? 'cols-start-2 col-span-1' : 'cols-start-1 col-span-2'} cols-end-3  rows-start-2 rows-end-3 bg-striped-content
-        border-t border-l border-dashed border-gray-300`}>
+        <div className='bg-dev-blue w-full'>
+        
 
           
           <Routes>

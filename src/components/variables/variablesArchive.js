@@ -42,13 +42,13 @@ function VariablesArchive (props) {
       {
         archive &&
         archive.map(group => (
-          <div className=" w-64 overflow-x-auto p-2 bg-black bg-opacity-30 rounded-sm h-full ">
+          <div className=" w-64 overflow-x-auto p-2 bg-black bg-opacity-30 rounded-sm h-full flex flex-col gap-y-2 ">
             
             <div className="flex justify-center text-white font-bold bg-black bg-opacity-40">
               {group.title}
             </div>
             
-            <div className="flex flex-col items-center text-white flex-grow">
+            <div className="flex flex-col items-center text-white flex-grow gap-y-1">
               {
                 group.variables.map(variable => (
                   <span>{variable}</span>

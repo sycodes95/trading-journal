@@ -106,7 +106,7 @@ function Variables (){
         <section className="flex">
           <div className="variables-cards-container h-full gap-x-12 
           flex flex-wrap justify-center
-          mt-8 w-fit bg-black bg-opacity-25 pb-6">
+          mt-8 w-fit  pb-6">
             {
               variablesList &&
               variablesList.map((list, index) =>(
@@ -122,7 +122,7 @@ function Variables (){
         </section>
 
         <div className="pt-12 w-full flex justify-center ">
-          <button className="border border-gray-400 bg-white rounded-md text-sm pl-1 pr-1 hover:bg-gray-300 transition-colors" onClick={handleViewArchive}>
+          <button className="border border-gray-800 bg-black bg-opacity-30 hover:bg-opacity-20 text-white rounded-md text-sm p-2  transition-colors" onClick={handleViewArchive}>
             VIEW ARCHIVED
           </button>
           

@@ -16,6 +16,17 @@ function VariablesArchive (props) {
     
   }
 
+  const deleteArchive = (id) => {
+    fetch(`http://localhost:5000/delete-variables-archive?username=${username}&_id=${id}`,{
+      method: 'DELETE'
+    })
+    .then(response => response.json())
+    .then(data=> {
+      if(data.result) getArchive()
+    })
+    
+  }
+
   useEffect(()=>{ 
     if(username) {
       getArchive()
@@ -27,23 +38,28 @@ function VariablesArchive (props) {
   },[archive])
 
   return (
-    <div className="w-full p-8 text-sm flex flex-wrap justify-center gap-x-2 gap-y-2 mb-40">
+    <div className="w-full p-8 text-sm flex flex-wrap justify-center gap-x-12 gap-y-2 mb-40 ">
       {
         archive &&
         archive.map(group => (
-          <div className="border border-gray-300 w-64 overflow-x-auto p-2 bg-white rounded-sm">
+          <div className=" w-64 overflow-x-auto p-2 bg-black bg-opacity-30 rounded-sm h-full ">
             
-            <div className="flex justify-center text-black font-bold bg-gray-300">
+            <div className="flex justify-center text-white font-bold bg-black bg-opacity-40">
               {group.title}
             </div>
             
-            <div className="flex flex-col items-center ">
+            <div className="flex flex-col items-center text-white flex-grow">
               {
                 group.variables.map(variable => (
                   <span>{variable}</span>
                 ))
               }
             </div>
+
+            <button className="w-full bg-striped-dark flex justify-center text-center text-red-800 text-xs" 
+            onClick={()=> deleteArchive(group._id)}>
+              DELETE ARCHIVE
+            </button>
             
           </div>
         ))

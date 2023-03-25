@@ -333,6 +333,7 @@ table tr:nth-of-type(even){
 
 .DialogOverlay {
   background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
   position: fixed;
   inset: 0;
   z-index: 10;

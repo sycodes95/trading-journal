@@ -22,9 +22,11 @@ function AdvancedGraph (props) {
   
   const [variableGroups, setVariableGroups] = useState(null)
   const [setupGroups, setSetupGroups] = useState(null)
+  const [instrumentGroups, setInstrumentGroups] = useState(null)
   
   const [filterByVariables, setFilterByVariables] = useState(false)
   const [filterBySetups, setFilterBySetups] = useState(false)
+  const [filterByInstruments, setFilterByInstruments] = useState(false)
 
   const [legendNamesAndSymbols, setLegendNamesAndSymbols] = useState(null)
   const [selectedLegend, setSelectedLegend] = useState("")
@@ -35,18 +37,55 @@ function AdvancedGraph (props) {
   const getGroups = () => {
     Promise.all([
       fetch(`http://localhost:5000/get-variables-list?username=${userInfo.username}`),
-      fetch(`http://localhost:5000/get-setups?username=${userInfo.username}`)
+      fetch(`http://localhost:5000/get-setups?username=${userInfo.username}`),
+      fetch(`http://localhost:5000/getinstruments?username=${userInfo.username}`)
     ])
       .then((responses) => Promise.all(responses.map(response => response.json())))
-      .then(([variablesData, setupsData]) => {
+      .then(([variablesData, setupsData, instrumentsData]) => {
 
         if (!variablesData.error) setVariableGroups(variablesData.listVariables);
         
         if (!setupsData.error) setSetupGroups(setupsData.setups);
 
+        if (!instrumentsData.error) setInstrumentGroups(instrumentsData.instruments);
+
       })
       .catch(error => console.error(error));
   };
+
+  const handleFilterClick = (event, index) =>{
+    
+    const label = event.target.textContent;
+    if(label === 'INSTRUMENTS'){
+      setScatterData(null)
+      setFilterByInstruments(true)
+      setFilterBySetups(false)
+      setFilterByVariables(false)
+      getAllInstrumentsData()
+
+    }
+    if(label === 'SETUPS'){
+      setScatterData(null)
+      setFilterByInstruments(false)
+      setFilterBySetups(true)
+      setFilterByVariables(false)
+      getAllSetupData()
+      
+    }
+    if(label === 'VARIABLES'){
+      const firstVariableGroup = variableGroups[0].title
+      const variableTitleIndex = variableGroups.findIndex(obj => obj.title === firstVariableGroup);
+      
+      setSelectedLegend(firstVariableGroup)
+      setScatterData(null)
+      setFilterByInstruments(false)
+      setFilterBySetups(false)
+      setFilterByVariables(true)
+      setScatterData(getTradesByVariableGroups(firstVariableGroup, variableTitleIndex))
+    }
+
+    setSelectedFilterTypeLegend(label)
+  }
 
   const handleLegendClick = (event, index) =>{
 
@@ -61,37 +100,16 @@ function AdvancedGraph (props) {
       
       setScatterData(getTradesBySetupGroups(title))
     }
+    if(filterByInstruments){
+      
+      setScatterData(getTradesByInstrumentGroups(title))
+    }
     //getTradesBySetupGroups(label)
     //getTradesByVariableGroups(label)
     setSelectedLegend(title)
   }
 
-  const handleFilterClick = (event, index) =>{
-    
-    const label = event.target.textContent;
-    if(label === 'INSTRUMENTS'){
-
-    }
-    if(label === 'SETUPS'){
-      setScatterData(null)
-      setFilterBySetups(true)
-      setFilterByVariables(false)
-      getAllSetupData()
-      
-    }
-    if(label === 'VARIABLES'){
-      const firstVariableGroup = variableGroups[0].title
-      const variableTitleIndex = variableGroups.findIndex(obj => obj.title === firstVariableGroup);
-      
-      setSelectedLegend(firstVariableGroup)
-      setScatterData(null)
-      setFilterBySetups(false)
-      setFilterByVariables(true)
-      setScatterData(getTradesByVariableGroups(firstVariableGroup, variableTitleIndex))
-    }
-
-    setSelectedFilterTypeLegend(label)
-  }
+  
 
   
   const getTradesByVariableGroups = (title ,index) =>{
@@ -132,20 +150,33 @@ function AdvancedGraph (props) {
     return formatScatterData(tradesBySetup)
   }
 
+  const getTradesByInstrumentGroups = (label) =>{
+    
+    const tradesByInstrument = instrumentGroups
+    .filter(data => data.instrument === label)
+    .map(data =>{
+      const dataset = trades.filter(trade => trade.instrument.toLowerCase() === label.toLowerCase())
+      return {
+        filter: 'instrument',
+        instrument: label,
+        trades: dataset,
+        symbolIndex: instrumentGroups.findIndex(group => group.instrument.toLowerCase() === label.toLowerCase())
+      }
+    })
+    return formatScatterData(tradesByInstrument)
+  }
+
   const formatScatterData = (tradesData) =>{
     let result = [];
     
     tradesData.forEach(dataset =>{
       
-      const {filter, trades, symbolIndex, variable, setup} = dataset;
+      const {filter, trades, symbolIndex, variable, setup, instrument} = dataset;
       
       const label = () =>{
-        if(filter === 'setup'){
-          return setup;
-        }
-        if(filter === 'variable'){
-          return variable;
-        }
+        if(filter === 'instrument') return instrument;
+        if(filter === 'setup') return setup;
+        if(filter === 'variable') return variable;
       };
       
       let AVG_R = []
@@ -184,9 +215,15 @@ function AdvancedGraph (props) {
 
   const createLegendNamesAndSymbols = () =>{
     const names = () =>{
-      if(!filterBySetups && !filterByVariables || filterBySetups){
+      
+      if(filterBySetups){
         return setupGroups.map(group => {
           return group.setup
+        })
+      }
+      if((!filterBySetups && !filterByVariables) || filterByInstruments){
+        return instrumentGroups.map(group => {
+          return group.instrument
         })
       }
       if(filterByVariables){
@@ -195,7 +232,10 @@ function AdvancedGraph (props) {
         })
       }
     }
+    
     const legend = names().map((name, index) => ({ name, symbol: legendSymbols[index] }));
+    
+    
     setLegendNamesAndSymbols(legend)
   }
 
@@ -217,14 +257,15 @@ function AdvancedGraph (props) {
 
     return <VictoryLabel {...props} style={style} />;
   };
-  const getAllSetupData = () =>{
-    setFilterBySetups(true)
+
+  const getAllInstrumentsData = () =>{
+    setFilterByInstruments(true)
     let data = []
     
-    setupGroups.forEach(g =>{
+    instrumentGroups.forEach(g =>{
       //check if data is valid. Must not be undefined or null
-      let checkValid = getTradesBySetupGroups(g.setup)
-      checkValid !== undefined && checkValid !== null && data.push(getTradesBySetupGroups(g.setup))
+      let checkValid = getTradesByInstrumentGroups(g.instrument)
+      checkValid !== undefined && checkValid !== null && data.push(checkValid)
     })
     
     if(data.length){
@@ -234,6 +275,26 @@ function AdvancedGraph (props) {
     }
     
   }
+
+  
+  const getAllSetupData = () =>{
+    setFilterBySetups(true)
+    let data = []
+    
+    setupGroups.forEach(g =>{
+      //check if data is valid. Must not be undefined or null
+      let checkValid = getTradesBySetupGroups(g.setup)
+      checkValid !== undefined && checkValid !== null && data.push(checkValid)
+    })
+    
+    if(data.length){
+      
+      let result = data.map(d => d[0])
+      setScatterData(result)
+    }
+    
+  }
+  
 
   const getAllVariableData = () =>{
     let data = []
@@ -249,13 +310,24 @@ function AdvancedGraph (props) {
     userInfo && userInfo.username && getGroups()
 
   },[userInfo])
+
+  useEffect(()=>{
+    console.log(scatterData);
+
+  },[scatterData])
   
   useEffect(()=>{
-    setupGroups && createLegendNamesAndSymbols()
-    setupGroups && trades && getAllSetupData()
+    
+    instrumentGroups && createLegendNamesAndSymbols()
+    instrumentGroups && trades && getAllInstrumentsData()
+    setSelectedFilterTypeLegend('INSTRUMENTS')
+  },[instrumentGroups, trades])
+  
+  useEffect(()=>{
+    filterByInstruments && createLegendNamesAndSymbols()
 
-  },[setupGroups, trades])
-
+  },[filterByInstruments])
+  
   useEffect(()=>{
     filterBySetups && createLegendNamesAndSymbols()
 

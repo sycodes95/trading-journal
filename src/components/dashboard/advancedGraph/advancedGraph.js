@@ -22,9 +22,11 @@ function AdvancedGraph (props) {
   
   const [variableGroups, setVariableGroups] = useState(null)
   const [setupGroups, setSetupGroups] = useState(null)
+  const [instrumentGroups, setInstrumentGroups] = useState(null)
   
   const [filterByVariables, setFilterByVariables] = useState(false)
   const [filterBySetups, setFilterBySetups] = useState(false)
+  const [filterByInstruments, setFilterByInstruments] = useState(null)
 
   const [legendNamesAndSymbols, setLegendNamesAndSymbols] = useState(null)
   const [selectedLegend, setSelectedLegend] = useState("")

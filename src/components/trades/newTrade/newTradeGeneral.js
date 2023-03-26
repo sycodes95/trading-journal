@@ -31,20 +31,20 @@ function NewTradeGeneral (props){
   useEffect(()=>{
   },[])
   return(
-    <div className="new-trade-general text-xs w-full">
+    <div className="new-trade-general text-xs  w-full ">
       <div className="new-trade-data ">
-        <div className="bg-gray-400 bg-opacity-70 text-black pl-4 pr-4  text-center bottom-right-round
+        <div className=" text-black pl-4 pr-4  text-center bottom-right-round
         transition-all">
           <span>Trade Data</span>
         </div>
-        <div className="grid grid-cols-2">
-          <div className="col-span-1 border-b border-gray-300 h-64 ">
+        <div className="grid grid-cols-2 bg-black bg-opacity-0">
+          <div className="col-span-1  h-64">
             <NtgEntryDate  formDataContext={{formData, setFormData}}/>
             <NtgInstrument formDataContext={{formData, setFormData}}/>
             <NtgSetup formDataContext={{formData, setFormData}}/>
             <NtgPosition formDataContext={{formData, setFormData}}/>
           </div>
-          <div className="col-span-1 border-b border-r  border-gray-300 bottom-right-round h-64
+          <div className="col-span-1 h-64
           ">
             <NtgPlannedEntry formDataContext={{formData, setFormData}}/>
             <NtgEntry formDataContext={{formData, setFormData}}/>

@@ -22,7 +22,7 @@ function TradeListBody(props) {
       {
         isLoading ?
           <th colSpan='18' className="triangle-load  h-full w-full flex justify-center items-center ">
-            <Triangle  height="80" width={100} color="#000000" ariaLabel="triangle-loading" wrapperStyle={{}}
+            <Triangle  height="80" width={100} color="#FFFFFF" ariaLabel="triangle-loading" wrapperStyle={{}}
             visible={true} /> 
           </th>
         :

@@ -28,7 +28,7 @@ function Dashboard (){
   }, [userInfo])
 
   useEffect(()=>{
-    console.log('get FETCH');
+    console.log(trades);
   },[trades])
 
   useEffect(()=>{

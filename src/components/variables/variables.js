@@ -79,8 +79,8 @@ function Variables (){
   },[variablesList])
 
   return(
-    <div className="variables-container p-12 flex justify-center">
-      <div className="w-10/12 flex flex-col">
+    <div className=" p-12 flex justify-center">
+      <div className="VARIABLES-CONTAINER w-10/12 flex flex-col">
         <section className="section-info text-white p-4 bg-black bg-opacity-40 rounded-sm
         grid items-center">
           <div className="">
@@ -103,10 +103,10 @@ function Variables (){
           
         </section>
 
-        <section className="flex">
+        <section className="flex ">
           <div className="variables-cards-container h-full gap-x-12 
           flex flex-wrap justify-center
-          mt-8 w-fit  pb-6">
+          mt-8   pb-6">
             {
               variablesList &&
               variablesList.map((list, index) =>(
@@ -127,7 +127,7 @@ function Variables (){
           </button>
           
         </div>
-        <div className="relative">
+        <div className="relative w-full">
           {
             viewArchive && 
             <VariablesArchive username={userInfo.username}/>

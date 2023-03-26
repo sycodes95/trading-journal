@@ -189,14 +189,7 @@ table tr:nth-of-type(even){
   rgba(0, 0, 0, 0.3) 10px)
 }
 
-.bg-striped-blue{
-  background: repeating-linear-gradient( 
-  45deg,
-  rgb(42, 43, 80, 0.5),
-  rgba(42, 43, 80, 0.1) 5px,
-  rgba(0, 0, 0, 0.3) 5px,
-  rgba(0, 0, 0, 0.3) 10px)
-}
+
 
 .bg-striped-dark-alt{
   background: repeating-linear-gradient( 
@@ -206,6 +199,24 @@ table tr:nth-of-type(even){
   rgba(0, 0, 0, 0.3) 2px,
   rgba(0, 0, 0, 0.3) 10px)
   
+}
+
+.bg-striped-blue{
+  background: repeating-linear-gradient( 
+  45deg,
+  rgb(42, 43, 80, 0.5),
+  rgba(42, 43, 80, 0.1) 5px,
+  rgba(0, 0, 0, 0.3) 5px,
+  rgba(0, 0, 0, 0.3) 10px)
+}
+
+.bg-striped-red{
+  background: repeating-linear-gradient( 
+  45deg,
+  rgba(100, 41, 41, 0.5),
+  rgba(100, 41, 41, 0.5) 5px,
+  rgba(0, 0, 0, 0.3) 5px,
+  rgba(0, 0, 0, 0.3) 10px)
 }
 
 .bg-striped{
@@ -472,16 +483,17 @@ table tr:nth-of-type(even){
   .max-950-hidden{
     display: none;
   }
-  
-  
+  .SETUP-CONTAINER, .INSTRUMENT-CONTAINER{
+    width: 100%;
+  }
+  .VARIABLES-CONTAINER{
+    width: 100%;
+  }
 }
 
 @media (max-width: 640px) {
   .DialogContent{
     width: 85%;
-  }
-  .variables-cards-container{
-    grid-template-columns: 1fr;
   }
   
   .app{

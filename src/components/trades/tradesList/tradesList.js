@@ -146,14 +146,14 @@ function TradesList(props){
             hover:bg-opacity-30 transition-all rounded text-white shadow-md ">New Trade</button>
           </Dialog.Trigger>
           <div className="cols-span-1 w-full flex flex-row justify-end items-end ">
-            <div className="trades-search-bar-container p-1 flex bg-gray-300 rounded-sm">
-              <input className="trades-search-bar h-6   bg-white
-               text-black rounded-sm text-xs pl-2 pr-2  caret-black" 
+            <div className="trades-search-bar-container p-1 flex bg-black bg-opacity-25 rounded-sm">
+              <input className="trades-search-bar h-6   bg-black bg-opacity-30
+               text-white rounded-sm text-xs pl-2 pr-2  caret-white" 
               type='text' placeholder="Search..."  onChange={searchOnChangeSubmit}/>
               <div className="h-5 w-5">
                 {
                   isLoading && debouncedSearch &&
-                  <Oval height="20" width="20" color="#000000" secondaryColor="#FFFFFF"
+                  <Oval height="20" width="20" csolor="#000000" secondaryColor="#FFFFFF"
                   strokeWidth="8" ariaLabel="triangle-loading" wrapperStyle={{}}
                   visible={true}/>
                 }
@@ -168,7 +168,7 @@ function TradesList(props){
           
             <Dialog.Overlay className="DialogOverlay"/>
             <Dialog.Overlay/>
-            <Dialog.Content className="DialogContent bg-white bg-opacity-80" onInteractOutside={handleOverlayClick} >
+            <Dialog.Content className="DialogContent bg-striped-dark-alt" onInteractOutside={handleOverlayClick} >
               {
               userInfo && <NewTrade username={userInfo.username}/>
               }

@@ -62,23 +62,23 @@ function InstrumentsTable (props) {
     <div className="current-setup-con w-full  overflow-y-auto ">
 
     
-      <table className=" w-full bg-white">
+      <table className=" w-full bg-black bg-opacity-25">
         <thead>
-            <tr className="bg-white border border-gray-300 text-black text-sm font-bold ">
-                <th colSpan="1" className="border-r border-gray-300 font-thin w-16"></th>
-                <th colSpan="1" className="border-r border-gray-300  w-16 font-thin">#</th>
+            <tr className="bg-blue-400 bg-opacity-25  text-white text-sm font-bold ">
+                <th colSpan="1" className="border-r-2 border-black border-opacity-0 font-thin w-16"></th>
+                <th colSpan="1" className="border-r-2 border-black border-opacity-0  w-16 font-thin">#</th>
                 <th colSpan="8" className="font-thin">Instrument Name</th>
             </tr>
         </thead>
         <tbody>
           {instruments && 
             instruments.map((s, i) =>(
-              <tr className="border-gray-300  h-4 text-black font-bold">
+              <tr className="border-gray-300  h-4 text-white font-bold">
                 <td colSpan="1" className="flex justify-center items-center">
                   <button onClick={()=>handleSetupDelete(s._id)}
-                  className=" text-black text-sm font-bold  hover:text-gray-500
+                  className="text-sm font-bold  hover:text-gray-500
                   transition-colors">
-                    <ReactSVG src={trashSVG} className="h-4 w-5  fill-current "/>
+                    <ReactSVG src={trashSVG} className="h-4 w-5 fill-current "/>
                   </button>
                 </td>
                 <td colSpan="1" className=" text-center text-xs" >{i+1}</td>

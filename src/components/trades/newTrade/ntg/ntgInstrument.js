@@ -25,7 +25,7 @@ function NtgInstrument (props){
   return(
     <div className="instrument-container pl-4 pr-4 grid grid-cols-1 pt-4 w-40">
       <div className="grid grid-cols-2 ">
-        <label>Instrument</label>
+        <label className="text-white">Instrument</label>
         {
           !formData.instrument && 
           <span className="text-red-700 text-md justify-self-end">*</span>
@@ -34,7 +34,7 @@ function NtgInstrument (props){
       </div>
       
       <div className="flex w-full">
-        <select className="w-4" name="instrument" onClick={handleInputChange}>
+        <select className="w-4 border border-gray-800 h-6 bg-black caret-white text-white" name="instrument" onClick={handleInputChange}>
           <option value='' hidden></option>
           {
             instruments && instruments.map((el, index) =>(
@@ -42,7 +42,7 @@ function NtgInstrument (props){
             ))
           }
         </select>
-        <input className="border border-r-0 border-l-0 border-gray-300  top-left-round w-28 h-6"
+        <input className="border border-gray-800 w-28 top-left-round h-6 bg-black caret-white text-white"
          type='text' name="instrument" value={formData.instrument} onChange={handleInputChange}/>
         
       </div>

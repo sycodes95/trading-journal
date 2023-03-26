@@ -86,68 +86,70 @@ function Setups () {
     }
   }, [])
   return(
-    <div className=" w-full p-12 ">
-      <div className="section-info text-black p-4 bg-gray-400 bg-opacity-70 rounded-sm
-      grid">
-        <div className="">
-          <ReactSVG className="h-14 w-14 " src={setupsSVG}/>
-        </div>
+    <div className=" w-full p-8 flex justify-center">
+      <div className="SETUP-CONTAINER w-10/12 flex flex-col gap-y-8 ">
 
-        <div className="pl-8">
-          <div className="text-3xl">
-            <span>Setups</span>
-          </div>
-          <div className="text-sm">
-            <span>
-              Add and manage trading strategy types. 
-              Active strategies are available as a parameter for new trade entries.
-            </span>
-          </div>
-        </div>
-      </div>
       
-      <div className="mt-12">
-        <div className="create-new-setup flex justify-center items-center
-         bg-gray-400 bg-opacity-70 h-8 w-80 rounded-sm ">
-          <div className="text-black text-sm font-thin">
-            <span>Add New Setup : </span>
+        <div className="section-info text-white p-4 bg-red-400 bg-opacity-50 rounded-sm
+        grid">
+          <div className="">
+            <ReactSVG className="h-14 w-14 fill-current" src={setupsSVG}/>
           </div>
-          
-          <input className="text-xs ml-4 h-5 w-32 rounded-sm"
-           type='text' name='setup' value={formData.setup} placeholder="SETUP" onChange={handleInputChange}/>
-          <button className='text-xs h-6 pl-2 flex items-center' onClick={handleSubmit} >
-            
-            <Icon className="hover:text-white transition-all h-5 " path={mdiPlusBox} size={1.05} />
-          </button>
 
+          <div className="pl-8">
+            <div className="text-3xl">
+              <span>Setups</span>
+            </div>
+            <div className="text-sm">
+              <span>
+                Add and manage trading strategy types. 
+                Active strategies are available as a parameter for new trade entries.
+              </span>
+            </div>
+          </div>
         </div>
-        <div className="h-6">
-        {
-          userMaxSetups &&
-          <div className="flex items-center" ref={userMaxSetupsRef} >
-            <span className="text-red-500 text-xs">Maximum setups reached, please delete some before
-            adding more, no good trader made serious money trading 20 strategies like a cunt.</span>   
-          </div>
-          
-        }
-
-        {
-          duplicateSetupError &&
-          <div>
-            <span className="text-red-500 text-xs">Setup already exists.</span>   
-          </div>
-        }
-        </div>
+        
+        <div className="">
+          <div className="create-new-setup flex justify-center items-center
+          bg-red-400 bg-opacity-50 h-8 w-80 rounded-sm ">
+            <div className="text-white text-sm font-thin">
+              <span>Add New Setup : </span>
+            </div>
             
-      </div>
-      <div>
-        { userInfo &&
-        <span>{`${userInfo.firstname}'s Setups`}</span> 
-        }
-      </div>
+            <input className="text-xs ml-4 h-5 w-32 rounded-sm bg-black bg-opacity-40 p-1 text-white caret-white"
+            type='text' name='setup' value={formData.setup} placeholder="SETUP" onChange={handleInputChange}/>
+            <button className='text-xs text-white h-6 pl-2 flex items-center' onClick={handleSubmit} >
+              
+              <Icon className="hover:text-gray-500 transition-all h-5 " path={mdiPlusBox} size={1.05} />
+            </button>
 
-      <SetupsTable userInfo={userInfo} newSetupSubmitted={newSetupSubmitted}
-      userMaxSetupsContext={userMaxSetupsContext}/>
+          </div>
+          <div className="h-6">
+          {
+            userMaxSetups &&
+            <div className="flex items-center" ref={userMaxSetupsRef} >
+              <span className="text-red-500 text-xs">Maximum setups reached, please delete some before
+              adding more.</span>   
+            </div>
+            
+          }
+
+          {
+            duplicateSetupError &&
+            <div>
+              <span className="text-red-500 text-xs">Setup already exists.</span>   
+            </div>
+          }
+          </div>
+              
+        </div>
+        
+        <div className="">
+          <SetupsTable userInfo={userInfo} newSetupSubmitted={newSetupSubmitted}
+          userMaxSetupsContext={userMaxSetupsContext}/>
+        </div>
+       
+      </div>
     </div>
   )
 }

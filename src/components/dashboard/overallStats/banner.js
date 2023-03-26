@@ -3,7 +3,7 @@ import tradesSVG from "../../../icons/trades.svg"
 
 function Banner () {
   return (
-    <div className="section-info col-span-4 text-black p-4 bg-red-600 bg-opacity-50 rounded-sm
+    <div className="section-info col-span-4 text-white p-4 bg-red-600 bg-opacity-50 rounded-sm
       grid  row-start-1">
       <div className="">
         <ReactSVG className="h-14 w-14 fill-current" src={tradesSVG}/>

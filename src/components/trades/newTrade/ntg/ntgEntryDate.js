@@ -12,15 +12,15 @@ function NtgEntryDate(props){
   return(
     <div className=" pl-4 pr-4 grid grid-cols-1 pt-4 w-40">
       
-      <div className="grid grid-cols-2 ">
-        <label className="text-xs ">Entry Date</label> 
+      <div className="grid grid-cols-2">
+        <label className="text-white">Entry Date</label> 
         {
           !formData.entrydate && 
           <span className="text-red-700 text-xs justify-self-end">*</span>
         }
       </div>
       
-      <input className=" border border-r-0 border-l-0 border-gray-300 top-left-round h-6" 
+      <input className="border border-gray-800 w-32 top-left-round h-6 bg-black caret-white text-white" 
       type='datetime-local' name="entrydate" value={moment(formData.entrydate).format("YYYY-MM-DD hh:mm")} 
       onChange={handleInputChange}/>
       

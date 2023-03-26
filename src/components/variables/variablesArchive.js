@@ -38,7 +38,7 @@ function VariablesArchive (props) {
   },[archive])
 
   return (
-    <div className="w-full p-8 text-sm flex flex-wrap justify-center gap-x-12 gap-y-2 mb-40 ">
+    <div className="w-full text-sm flex flex-wrap justify-center gap-x-12 gap-y-2 mt-8 mb-40 ">
       {
         archive &&
         archive.map(group => (
@@ -56,7 +56,8 @@ function VariablesArchive (props) {
               }
             </div>
 
-            <button className="w-full bg-striped-dark flex justify-center text-center text-red-800 text-xs" 
+            <button className="w-full bg-red-700 bg-opacity-25 hover:text-red-700 flex items-center justify-center text-center text-white  text-xs
+            font-bold transition-all" 
             onClick={()=> deleteArchive(group._id)}>
               DELETE ARCHIVE
             </button>

@@ -13,7 +13,6 @@ function NtgOpen(props){
   }
 
   useEffect(()=>{
-    console.log(tradeOpen);
     if(tradeOpen == true){
       setTradeStatus('OPEN')
       setFormData({ ...formData, open: 'OPEN' })
@@ -35,7 +34,6 @@ function NtgOpen(props){
   }, [tradeStatus])
 
   useEffect(()=>{
-    console.log(formData);
     if(formData.open === '' || formData.open === 'OPEN'){
       setTradeOpen(true)
       setTradeStatus('OPEN')

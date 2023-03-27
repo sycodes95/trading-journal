@@ -31,7 +31,6 @@ function GainLossR (props) {
 
   useEffect(()=>{
     //Get WIN RATE
-    console.log(gainLossR);
   },[gainLossR])
 
 

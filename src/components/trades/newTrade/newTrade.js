@@ -62,7 +62,6 @@ function NewTrade (props) {
       })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         if(!data.error){
           setFormData(formDataCopy)
           setSubmitSuccess(true)
@@ -92,7 +91,6 @@ function NewTrade (props) {
       })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         if(!data.error){
           setFormData(formDataCopy)
           setSubmitSuccess(true)
@@ -116,7 +114,6 @@ function NewTrade (props) {
   }
   
   useEffect(()=>{
-    console.log(formData);
     setTimeout(()=>{
       setSubmitSuccess(false)
     }, 5000)
@@ -143,7 +140,6 @@ function NewTrade (props) {
   },[generalTab, variablesTab])
   
   useEffect(()=>{
-    console.log(editTrade);
     setFormDataCopy(formData)
   },[])
 
@@ -154,7 +150,6 @@ function NewTrade (props) {
       setFormData(editTrade)
     }
 
-    console.log(formData);
 
     
   },[editTrade])

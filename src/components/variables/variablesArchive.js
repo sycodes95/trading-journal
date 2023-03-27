@@ -34,7 +34,6 @@ function VariablesArchive (props) {
   },[username])
 
   useEffect(()=>{ 
-    console.log(archive);
   },[archive])
 
   return (

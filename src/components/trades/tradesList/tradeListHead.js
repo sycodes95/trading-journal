@@ -39,7 +39,6 @@ function TradeListHead(props) {
     fetch(`http://localhost:5000/trades-sort-get?username=${userInfo.username}&field=${sortValue}&sortBy=${tableHeadersSort[sortValue]}&limit=${limitPerPage}&skip=${page*limitPerPage}`)
     .then(res => res.json())
     .then((data)=>{
-      console.log(data);
       if(!data.error){
         setIsLoading(false)
         setTrades(data.trades)

@@ -11,7 +11,6 @@ function NtvVariables (props){
   const handleInputChange = (e, groupTitle) => {
     
     const { name, value } = e.target;
-    console.log(groupTitle);
     if(value === '' || !value){
       const variables = [...formData.variables];
       variables.splice(variableListIndex, 1, {title: '', variable: ''})
@@ -20,7 +19,6 @@ function NtvVariables (props){
     } else {
       const variables = [...formData.variables];
       variables[variableListIndex] = {title: groupTitle, variable: value};
-      console.log(value);
       setFormData({ ...formData, variables });
     }
     
@@ -29,8 +27,6 @@ function NtvVariables (props){
   };
 
   useEffect(()=>{
-    console.log(formData.variables);
-    console.log(variableList);
     //setVariableListIndex(formData.variables.findIndex(obj => obj.title === variableList.title));
   },[formData.variables])
 
@@ -42,7 +38,6 @@ function NtvVariables (props){
 
   },[formData.variables, variableList])
   useEffect(()=>{
-    console.log(vIndex);
   },[vIndex])
 
   useEffect(()=>{

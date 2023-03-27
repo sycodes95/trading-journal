@@ -54,7 +54,6 @@ function TradesList(props){
           setTrades(data.result)
           setPageCount(Math.ceil(data.count / limitPerPage) - 1)
           setIsLoading(false)
-          console.log(data);
           
         }
       })
@@ -107,17 +106,14 @@ function TradesList(props){
   useEffect(()=>{
     //once userInfo is available, fetch trades
     fetchTrades()
-    console.log('user');
   },[userInfo])
   
   useEffect(()=>{
     //when page changes, fetch trades according to whether search value is present or not
     if((!searchValue || searchValue == '') && !sortValue){
-      console.log('page default');
       return fetchTrades()
     }
     if(searchValue && searchValue !== '' && !sortValue){
-      console.log('page search');
       return fetchSearchedTrades()
     }
     
@@ -125,7 +121,6 @@ function TradesList(props){
   },[page])
   
   useEffect(()=>{
-    console.log(debouncedSearch);
     if(debouncedSearch && !sortValue){
       setPage(0)
       fetchSearchedTrades()

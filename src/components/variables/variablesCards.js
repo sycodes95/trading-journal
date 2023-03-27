@@ -76,7 +76,6 @@ function VariablesCards (props){
     .then((data) => {
       
       if(data && data.error){
-        console.log(data.error);
       } 
     })
   }
@@ -90,7 +89,6 @@ function VariablesCards (props){
     })
     .then(response => response.json())
     .then((data) => {
-      console.log(data);
     })
 
   }
@@ -119,7 +117,6 @@ function VariablesCards (props){
           },1000)
           
         }
-        console.log(data);
       })
 
   }
@@ -132,9 +129,7 @@ function VariablesCards (props){
   const handleVariableDelete = (e, index) => {
     const newVariables = formData.variables
     newVariables.splice(index, 1)
-    console.log(formData.title);
     if(!formData.title) console.log('hi');
-    console.log(formData.variables.length);
     if(formData.variables.length === 0 && (formData.title === '' || !formData.title)){
       fetchDelete()
     } 

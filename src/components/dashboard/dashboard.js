@@ -13,7 +13,6 @@ function Dashboard (){
       fetch(`http://localhost:5000/trades-get?username=${userInfo.username}`)
       .then(response => response.json())
       .then((data) =>{
-        console.log(data);
         if(data.trades.length) setTrades(data.trades)
         
         
@@ -28,7 +27,6 @@ function Dashboard (){
   }, [userInfo])
 
   useEffect(()=>{
-    console.log(trades);
   },[trades])
 
   useEffect(()=>{

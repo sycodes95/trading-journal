@@ -33,7 +33,6 @@ function Signup () {
      .then(response => response.json())
      .then((data) => {
         
-        console.log(data);
         if(data.user){
           setSignUpSuccess(true)
           window.location.href = '/'

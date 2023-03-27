@@ -312,8 +312,6 @@ function AdvancedGraph (props) {
   },[userInfo])
 
   useEffect(()=>{
-    console.log(scatterData);
-
   },[scatterData])
   
   useEffect(()=>{

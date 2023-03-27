@@ -40,7 +40,6 @@ function OverallStats (props){
   }
   
   useEffect(()=>{
-    console.log('trades FETCH');
   },[trades])
   
   useEffect(()=>{

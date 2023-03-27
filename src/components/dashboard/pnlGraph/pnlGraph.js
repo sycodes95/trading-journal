@@ -1,89 +1,81 @@
 import { useState, useEffect } from "react";
 import { VictoryLine, VictoryChart, VictoryAxis, VictoryArea, VictoryTheme, VictoryLabel, VictoryCandlestick } from 'victory';
+import { ResponsiveLine } from "@nivo/line";
 
-import moment from "moment";
+function PnlGraph ({trades}) {
 
-function PnlGraph (props) {
+  const [data, setData] = useState(null)
 
-  const trades = props.trades
-
-  const [tradesWithBalance, setTradesWithBalance] = useState(null)
-  const [noTrades, setNoTrades] = useState(null)
+  const getData = () => {
+    let newDataArr = []
+    trades.forEach((trade, index) => {
+      let x = index + 1;
+      let y;
+      index - 1 >= 0 
+      ? y = newDataArr[index - 1].y + trade.fgl
+      : y = trade.fgl
+      newDataArr.push({ x, y }) 
+    })
+    setData([{ id: 'Pnl Graph', data: newDataArr}])
+  }
 
   useEffect(()=>{
-    console.log(trades);
-    if(trades && trades.length){
-      console.log('balance');
-      let cumulativePNL = [] 
-      let reversed = trades.reverse()
-      reversed.forEach((tr, i) =>{
-        tr.entrydate = new Date(moment(tr.entrydate).format("YYYY-MM-DD hh:mm"))
-      })
-      
-      let firstDate = reversed[0].entrydate
-      let dayBefore = moment(firstDate).subtract(1, 'days').format()
-      cumulativePNL.push({pnl: 0, fgl:0, date: moment(dayBefore).format("YYYY-MM-DD hh:mm")})
-      reversed.reduce((acc, cur) =>{
-        if(!cur.fgl) return acc + cur.fgl;
-        cumulativePNL.push({pnl: acc + cur.fgl, fgl:cur.fgl , date: moment(cur.entrydate).format("YYYY-MM-DD hh:mm")})
-        return acc + cur.fgl;
-      },0)
-      setTradesWithBalance(cumulativePNL)
-    } else {
-      setTradesWithBalance([])
-    }
-
+    trades && getData()
   },[trades])
-
   
-  useEffect(()=>{
-    console.log(tradesWithBalance);
-  },[tradesWithBalance])
-  useEffect(()=>{
-    console.log(noTrades);
-  },[noTrades])
   return(
-    <div className="">
-
-    
-      <VictoryChart 
-      width={200} 
-      height={200} 
-      responsive={true}
-      padding={{top: 10, bottom:10, left:30, right:15}} 
-      domainPadding={{ x: 10, y: 10 }}  
-      theme={VictoryTheme.material}>
-        <VictoryArea
-          data={tradesWithBalance} // use an empty array if tradesWithBalance is null
-          x="date"
-          y="pnl"
-          style={{data: {stroke: "#7393B3", strokeWidth: 1, fill: "rgba(115, 147, 179, 0.5)"}}}
-        />
-
-        
-        <VictoryAxis
-          tickFormat={(t) => moment(t).format('MM/DD/YYYY')}
-          tickLabelComponent={<VictoryLabel angle={0} />}
-          style={{
-            axis:{stroke: 'lightgray', opacity: 1},
-            tickLabels: { fontSize: 0},
-            grid:{stroke: 'none',  strokeDasharray: [], opacity: 0.3} 
-          }}
-          
-        />
-        <VictoryAxis dependentAxis 
-          style={{
-            axis:{stroke: 'lightgray', opacity: 1},
-            tickLabels: { fontSize: 6,  stroke: 'grey', strokeWidth:0.2},
-            grid:{stroke: 'none',  strokeDasharray: [], opacity: 0.3}  
-          }}
-        />
-
-        
-      </VictoryChart>
+    <div className="h-96 w-full">
+      {
+      data &&
+      <ResponsiveLine
+      data={data}
+      margin={{ top: 50, right: 60, bottom: 50, left: 60 }}
+      enableGridX={false}
+      enableGridY={false}
+      xScale={{ type: 'point' }}
+      yScale={{
+          type: 'linear',
+          min: 'auto',
+          max: 'auto',
+          stacked: false,
+          reverse: false
+      }}
+      yFormat=" >-.2f"
+      colors={{ scheme: 'set2' }}
+      theme={{
+        textColor: 'gray',
+        fontSize: 10,
+      }}
+      axisTop={null}
+      axisRight={null}
+      axisBottom={{
+        orient: 'bottom',
+        tickSize: 5,
+        tickPadding: 5,
+        tickRotation: 0,
+        legend: 'TRADES',
+        legendOffset: 36,
+        legendPosition: 'middle'
+      }}
+      axisLeft={{
+        orient: 'left',
+        tickSize: 5,
+        tickPadding: 5,
+        tickRotation: 0,
+        legend: 'BALANCE',
+        legendOffset: -40,
+        legendPosition: 'middle'
+      }}
+      pointSize={10}
+      pointColor={{ theme: 'background' }}
+      pointBorderWidth={2}
+      pointBorderColor={{ from: 'serieColor' }}
+      pointLabelYOffset={-12}
+      useMesh={true}
+      
+      />
+    }
     </div>
-
-
   )
 }
 

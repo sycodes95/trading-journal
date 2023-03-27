@@ -9,6 +9,8 @@
     "@hello-pangea/dnd": "^16.2.0",
     "@mdi/js": "^7.1.96",
     "@mdi/react": "^1.6.1",
+    "@nivo/core": "^0.80.0",
+    "@nivo/line": "^0.80.0",
     "@radix-ui/react-dialog": "^1.0.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

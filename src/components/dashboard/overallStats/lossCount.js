@@ -11,7 +11,6 @@ function LossCount (props) {
     let losingTrades = trades.filter(t => t.fgl < 0)
     
     if(!losingTrades || losingTrades.length < 1) {
-      console.log('hi');
       setLosses(0)
     } else {
       setLosses(losingTrades.length)
@@ -22,11 +21,9 @@ function LossCount (props) {
     //Get WIN RATE
     trades && getLossesCount()
     !trades && setLosses(0)
-    console.log(trades);
   },[trades])
 
   useEffect(()=>{
-    console.log(losses);
   },[losses])
 
   return (

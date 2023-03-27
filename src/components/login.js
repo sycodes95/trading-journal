@@ -27,7 +27,7 @@ function Login () {
      .then(response => response.json())
      .then((data) => {
         
-        console.log(data);
+        
         if(data.token){
           setLogInSuccess(true)
           localStorage.setItem('token', JSON.stringify(data.token))

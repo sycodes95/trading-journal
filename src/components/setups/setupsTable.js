@@ -15,7 +15,6 @@ function SetupsTable (props) {
       .then(response => response.json())
       .then((data) => {
         setSetups(data.setups)
-        console.log(data);
       })
     }
   }

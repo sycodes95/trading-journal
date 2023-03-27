@@ -19,7 +19,6 @@ function TradeDelete (props){
   */
 
   const handleDelete = () =>{
-    console.log(trades);
     fetch('http://localhost:5000/trade-delete', {
       method: 'DELETE',
       body: JSON.stringify(trade),
@@ -36,11 +35,9 @@ function TradeDelete (props){
           window.location.href = '/trades'
         },500)
       }
-      console.log(data);
       
     })
   }
-  console.log(props);
   return(
     <div className="delete-trade-container  rounded-lg flex flex-col">
       <div className="h-full">

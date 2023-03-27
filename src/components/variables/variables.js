@@ -50,7 +50,6 @@ function Variables (){
   }, [userInfo])
 
   useEffect(()=>{
-    console.log(viewArchive);
   },[viewArchive])
 
   useEffect(()=>{
@@ -75,7 +74,6 @@ function Variables (){
   }, [])
 
   useEffect(()=>{
-    console.log(variablesList);
   },[variablesList])
 
   return(

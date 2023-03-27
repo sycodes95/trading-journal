@@ -8,21 +8,16 @@ function Dashboard (){
   const [trades, setTrades] = useState(null)
 
   const fetchTrades = () => {
-    
     if(userInfo && userInfo.username){
       fetch(`http://localhost:5000/trades-get?username=${userInfo.username}`)
       .then(response => response.json())
       .then((data) =>{
         if(data.trades.length) setTrades(data.trades)
-        
-        
       })
-
     }
   }
 
   useEffect(()=>{
-    
     fetchTrades()
   }, [userInfo])
 
@@ -48,9 +43,9 @@ function Dashboard (){
     }
   }, [])
   return(
-    <div className="pt-8  flex justify-center">
+    <div className="pt-8 pb-12  flex justify-center">
      
-      <div className="w-10/12">
+      <div className="OVERALL-STATS-CONTAINER w-10/12">
         <OverallStats userInfo={userInfo} tradesContext={{trades, setTrades}} />
       </div>
       

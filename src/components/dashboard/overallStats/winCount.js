@@ -23,17 +23,18 @@ function WinCount (props) {
   },[trades])
 
   return (
-    <div className="flex justify-center items-center text-white">
-      <div className="m-2 bg-steel-blue bg-opacity-50 rounded-md w-16 h-14 flex items-center">
-        <div className="w-full">
+    <div className="flex justify-center items-center text-blue-400">
+      
+        <div className="w-full flex justify-between bg-black bg-opacity-25 pl-4 pr-4">
+          <div className="flex justify-center items-center text-sm">
+            <span>WIN COUNT</span>
+          </div>
           <div className="flex justify-center text-xl font-bold ">
             <span>{wins === 0 ? '0' : wins} </span>
           </div>
-          <div className="flex justify-center text-xs">
-            <span>Wins</span>
-          </div>
+          
         </div>
-      </div>
+      
     </div>
   
   )

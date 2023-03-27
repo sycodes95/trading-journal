@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
-import DbLosses from "./lossCount";
-import DbGL from "./gainLoss";
-import DbGLR from "./gainLossR";
-import DbWins from "./winCount";
-import DbWR from "./winRate";
+import LossCount from "./lossCount";
+import GainLoss from "./gainLoss";
+import GainLossR from "./gainLossR";
+import WinCount from "./winCount";
+import WinRate from "./winRate";
 
 
 
@@ -83,7 +83,7 @@ function OverallStats (props){
     <div className="grid grid-cols-4  gap-x-4 gap-y-4">
       <Banner/>
 
-      <div className="overall-stats w-full flex flex-col bg-black bg-opacity-25">
+      <div className="overall-stats w-full flex flex-col bg-black bg-opacity-25 col-span-1">
 
         <div className="row-span-1 grid grid-cols-3  text-white rounded-sm bg-striped-dark-alt 
         font-bold text-xs h-6 ">
@@ -118,35 +118,33 @@ function OverallStats (props){
         {
         //-----------------------------------------------------------------------------------------------------------------
         }
-        <div className="general-stats row-span-5 grid grid-cols-3 grid-rows-2 ">
+        <div className="flex flex-col justify-between gap-y-2 p-2">
+          <WinRate trades={trades}/>
+          <WinCount trades={trades}/>
+          <LossCount trades={trades}/>
           
-          <DbWins trades={trades}/>
-          <DbLosses trades={trades}/>
-          <DbWR trades={trades}/>
-          <DbGL trades={trades}/>
-          <DbGLR trades={trades}/>
+          <GainLoss trades={trades}/>
+          <GainLossR trades={trades}/>
         </div>
 
       </div>
+      <div className="overall-performance row-start-1 col-start-2">
+        <div className="bg-black bg-opacity-25 h-full">
+          
+          <div className="">
+            <PnlGraph trades={trades}/>
+          </div>
+        </div>
+      </div>
 
-      <div className="overall-main-graph col-span-3  row-span-2 flex flex-col bg-black bg-opacity-25">
+      <div className="overall-main-graph col-span-4  row-span-2 flex flex-col bg-black bg-opacity-25">
         <div className="row-span-5 h-full object-cover">
           <AdvancedGraph trades={trades} userInfo={userInfo}/>
           
         </div>
       </div>
 
-      <div className="overall-performance">
-        <div className="bg-black bg-opacity-25 h-full">
-          <div className="flex items-center justify-center col-span-1 row-span-1 bg-striped-dark-alt 
-         rounded-sm h-6 text-xs top-left-round bottom-right-round">
-            <span>PERFORMANCE (PNL)</span>
-          </div>
-          <div className="">
-            <PnlGraph trades={trades}/>
-          </div>
-        </div>
-      </div>
+      
       
     </div>
   )

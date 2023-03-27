@@ -356,7 +356,7 @@ function AdvancedGraph (props) {
       <div className="h-6 w-full flex justify-center items-center col-span-full text-white text-xs  bg-striped-dark-alt">
           <span>ADVANCED REPORTS</span>
         </div>
-      <div className="col-span-10">
+      <div className=" col-span-10">
         
         <VictoryChart 
         

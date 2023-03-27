@@ -27,16 +27,15 @@ function LossCount (props) {
   },[losses])
 
   return (
-    <div className="flex justify-center items-center text-white">
-      <div className="m-2 bg-ruby bg-opacity-50 rounded-md w-16 h-14 flex items-center">
-        <div className="w-full">
-          <div className="flex justify-center text-xl font-bold ">
-            <span>{losses === 0 ? '0' : losses} </span>
-          </div>
-          <div className="flex justify-center text-xs">
-            <span>Losses</span>
-          </div>
+    <div className="flex justify-center items-center text-red-400">  
+      <div className="w-full flex justify-between bg-black bg-opacity-25 pl-4 pr-4">
+        <div className="flex justify-center items-center text-sm">
+          <span>LOSS COUNT</span>
         </div>
+        <div className="flex justify-center text-xl font-bold ">
+          <span>{losses === 0 ? '0' : losses} </span>
+        </div>
+        
       </div>
     </div>
   )

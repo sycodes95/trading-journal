@@ -15,9 +15,6 @@ function GainLossR (props) {
       let profitLoss = trade.position === 'LONG' ? trade.exit- trade.entry : trade.entry - trade.exit;
       let rMultiple = profitLoss / risk;
       rMultiples.push(rMultiple);
-
-
-      
     })
 
     let avgR = Math.round((rMultiples.reduce((total, r) => total + r, 0) / rMultiples.length) * 100) / 100;
@@ -29,26 +26,21 @@ function GainLossR (props) {
     trades && getGainLossR()
   },[trades])
 
-  useEffect(()=>{
-    //Get WIN RATE
-  },[gainLossR])
-
-
   return (
     
 
-    <div className="flex justify-center items-center text-black">
-      <div className="m-2 bg-opacity-50 rounded-md  flex items-center">
-        <div className="w-full">
-          <div className="flex justify-center text-lg font-bold ">
-            <span>{gainLossR}</span>
-          </div>
-          <div className="flex justify-center text-xs">
-            <span>Avg (R)</span>
-          </div>
-        </div>
+    
+  <div className="flex justify-center items-center text-gray-400">  
+    <div className="w-full flex justify-between bg-black bg-opacity-25 pl-4 pr-4">
+      <div className="flex justify-center items-center text-sm">
+        <span>AVG R MULTIPLE</span>
       </div>
+      <div className="flex justify-center text-xl font-bold ">
+      <span>{gainLossR}</span>
+      </div>
+      
     </div>
+  </div>
   )
 }
 

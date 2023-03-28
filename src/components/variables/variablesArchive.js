@@ -6,7 +6,7 @@ function VariablesArchive (props) {
   const username = props.username;
   const [archive, setArchive] = useState(null)
   const getArchive = () => {
-    fetch(`http://localhost:5000/get-variables-archive?username=${username}`)
+    fetch(`${process.env.REACT_APP_API_HOST}/get-variables-archive?username=${username}`)
     .then(response => response.json())
     .then(data=> {
       if(data && !data.error) {
@@ -17,7 +17,7 @@ function VariablesArchive (props) {
   }
 
   const deleteArchive = (id) => {
-    fetch(`http://localhost:5000/delete-variables-archive?username=${username}&_id=${id}`,{
+    fetch(`${process.env.REACT_APP_API_HOST}/delete-variables-archive?username=${username}&_id=${id}`,{
       method: 'DELETE'
     })
     .then(response => response.json())

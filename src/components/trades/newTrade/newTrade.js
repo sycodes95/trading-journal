@@ -53,7 +53,7 @@ function NewTrade (props) {
 
   const handleFormSubmit = () =>{
     if(!edit){
-      fetch(`http://localhost:5000/new-trade-post`, {
+      fetch(`${process.env.REACT_APP_API_HOST}/new-trade-post`, {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: {
@@ -82,7 +82,7 @@ function NewTrade (props) {
 
     }
     if(edit){
-      fetch(`http://localhost:5000/trade-post`, {
+      fetch(`${process.env.REACT_APP_API_HOST}/trade-post`, {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: {

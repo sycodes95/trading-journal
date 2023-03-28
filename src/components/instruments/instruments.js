@@ -28,7 +28,7 @@ function Instruments () {
 
   const handleSubmit = () =>{
     
-    fetch('http://localhost:5000/newinstrument', {
+    fetch(`${process.env.REACT_APP_API_HOST}/newinstrument`, {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: { 'Content-Type': 'application/json'}
@@ -74,7 +74,7 @@ function Instruments () {
     const token = JSON.parse(localStorage.getItem('token'))
     
     if(token) {
-      fetch('http://localhost:5000/verifytoken', {
+      fetch(`${process.env.REACT_APP_API_HOST}/verifytoken`, {
         method: 'GET',
         headers: { 'authorization': `Bearer ${token}`}
       })

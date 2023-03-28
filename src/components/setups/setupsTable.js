@@ -11,7 +11,7 @@ function SetupsTable (props) {
 
   function getSetups () {
     if(props.userInfo){
-      fetch(`http://localhost:5000/get-setups?username=${props.userInfo.username}`)
+      fetch(`${process.env.REACT_APP_API_HOST}/get-setups?username=${props.userInfo.username}`)
       .then(response => response.json())
       .then((data) => {
         setSetups(data.setups)
@@ -21,7 +21,7 @@ function SetupsTable (props) {
 
   const handleSetupDelete = (id) =>{
     setSetups(setups.filter(s => s._id !== id))
-    fetch('http://localhost:5000/deletesetups', {
+    fetch(`${process.env.REACT_APP_API_HOST}/deletesetups`, {
       method: 'DELETE' ,
       headers:{
         'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ function SetupsTable (props) {
 
   const handleSetupEditActive = (id) =>{
     
-    fetch(`http://localhost:5000/patchsetups`, {
+    fetch(`${process.env.REACT_APP_API_HOST}/patchsetups`, {
       method: 'PATCH',
       body: JSON.stringify({id}),
       headers: {

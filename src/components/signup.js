@@ -25,7 +25,7 @@ function Signup () {
 
   function handleSubmit(e){
     e.preventDefault();
-    fetch('http://localhost:5000/signup', {
+    fetch(`${process.env.REACT_APP_API_HOST}/signup`, {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: { 'Content-Type': 'application/json'}

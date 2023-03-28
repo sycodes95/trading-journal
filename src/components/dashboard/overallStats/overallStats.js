@@ -45,7 +45,7 @@ function OverallStats (props){
   useEffect(()=>{
     //Get OVER ALL TRADES
     if(overallTrades && userInfo && userInfo.username){
-      fetch(`http://localhost:5000/trades-get?username=${userInfo.username}`)
+      fetch(`${process.env.REACT_APP_API_HOST}/trades-get?username=${userInfo.username}`)
       .then(response => response.json())
       .then((data) =>{
         
@@ -58,7 +58,7 @@ function OverallStats (props){
   useEffect(()=>{
     //Get LAST MONTH TRADES
     if(lastWeekTrades && userInfo && userInfo.username){
-      fetch(`http://localhost:5000/trades-get-week?username=${userInfo.username}`)
+      fetch(`${process.env.REACT_APP_API_HOST}/trades-get-week?username=${userInfo.username}`)
       .then(response => response.json())
       .then((data) =>{
         setTrades(data.trades)
@@ -71,7 +71,7 @@ function OverallStats (props){
   useEffect(()=>{
     //Get LAST MONTH TRADES
     if(lastMonthTrades && userInfo && userInfo.username){
-      fetch(`http://localhost:5000/trades-get-month?username=${userInfo.username}`)
+      fetch(`${process.env.REACT_APP_API_HOST}/trades-get-month?username=${userInfo.username}`)
       .then(response => response.json())
       .then((data) =>{
         setTrades(data.trades)

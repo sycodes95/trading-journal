@@ -12,7 +12,7 @@ function InstrumentsTable (props) {
 
   function getInstruments () {
     if(props.userInfo){
-      fetch(`http://localhost:5000/getinstruments?username=${props.userInfo.username}`)
+      fetch(`${process.env.REACT_APP_API_HOST}/getinstruments?username=${props.userInfo.username}`)
       .then(response => response.json())
       .then((data) => {
           
@@ -23,7 +23,7 @@ function InstrumentsTable (props) {
 
   const handleSetupDelete = (id) =>{
     setInstruments(instruments.filter(s => s._id !== id))
-    fetch('http://localhost:5000/deleteinstruments', {
+    fetch(`${process.env.REACT_APP_API_HOST}/deleteinstruments`, {
       method: 'DELETE' ,
       headers:{
         'Content-Type': 'application/json'

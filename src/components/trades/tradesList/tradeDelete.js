@@ -19,7 +19,7 @@ function TradeDelete (props){
   */
 
   const handleDelete = () =>{
-    fetch('http://localhost:5000/trade-delete', {
+    fetch(`${process.env.REACT_APP_API_HOST}/trade-delete`, {
       method: 'DELETE',
       body: JSON.stringify(trade),
       headers: {

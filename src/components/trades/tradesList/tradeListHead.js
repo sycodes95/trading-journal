@@ -36,7 +36,7 @@ function TradeListHead(props) {
 
   const fetchSortedTrades = () =>{
     setIsLoading(true)
-    fetch(`http://localhost:5000/trades-sort-get?username=${userInfo.username}&field=${sortValue}&sortBy=${tableHeadersSort[sortValue]}&limit=${limitPerPage}&skip=${page*limitPerPage}`)
+    fetch(`${process.env.REACT_APP_API_HOST}/trades-sort-get?username=${userInfo.username}&field=${sortValue}&sortBy=${tableHeadersSort[sortValue]}&limit=${limitPerPage}&skip=${page*limitPerPage}`)
     .then(res => res.json())
     .then((data)=>{
       if(!data.error){

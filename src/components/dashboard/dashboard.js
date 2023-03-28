@@ -9,7 +9,7 @@ function Dashboard (){
 
   const fetchTrades = () => {
     if(userInfo && userInfo.username){
-      fetch(`http://localhost:5000/trades-get?username=${userInfo.username}`)
+      fetch(`${process.env.REACT_APP_API_HOST}/trades-get?username=${userInfo.username}`)
       .then(response => response.json())
       .then((data) =>{
         if(data.trades.length) setTrades(data.trades)
@@ -21,6 +21,10 @@ function Dashboard (){
     fetchTrades()
   }, [userInfo])
 
+  useEffect(()=> {
+    console.log(process.env.API_HOST);
+  })
+
   useEffect(()=>{
   },[trades])
 
@@ -28,7 +32,7 @@ function Dashboard (){
     //Token
     const token = JSON.parse(localStorage.getItem('token'))
     if(token) {
-      fetch('http://localhost:5000/verifytoken', {
+      fetch(`${process.env.REACT_APP_API_HOST}/verifytoken`, {
         method: 'GET',
         headers: { 'authorization': `Bearer ${token}`}
       })

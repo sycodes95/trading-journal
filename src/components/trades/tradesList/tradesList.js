@@ -29,7 +29,7 @@ function TradesList(props){
   const fetchTrades = () => {
     if(userInfo && userInfo.username){
       setIsLoading(true)
-      fetch(`http://localhost:5000/trades-get?username=${userInfo.username}&limit=${limitPerPage}&skip=${page*limitPerPage}`)
+      fetch(`${process.env.REACT_APP_API_HOST}/trades-get?username=${userInfo.username}&limit=${limitPerPage}&skip=${page*limitPerPage}`)
       .then(response => response.json())
       .then((data) =>{
         
@@ -46,7 +46,7 @@ function TradesList(props){
   const fetchSearchedTrades = () =>{
     if(userInfo && userInfo.username){
       setIsLoading(true)
-      fetch(`http://localhost:5000/trades-search?username=${userInfo.username}&searchInput=${debouncedSearch}&limit=${limitPerPage}&skip=${page*limitPerPage}`)
+      fetch(`${process.env.REACT_APP_API_HOST}/trades-search?username=${userInfo.username}&searchInput=${debouncedSearch}&limit=${limitPerPage}&skip=${page*limitPerPage}`)
       .then(res => res.json())
       .then((data)=>{
         

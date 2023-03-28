@@ -14,7 +14,7 @@ function Variables (){
 
   function getVariablesList (){
     
-    fetch(`http://localhost:5000/get-variables-list?username=${userInfo.username}`)
+    fetch(`${process.env.REACT_APP_API_HOST}/get-variables-list?username=${userInfo.username}`)
     .then(response => response.json())
     .then((data) => {
       
@@ -57,7 +57,7 @@ function Variables (){
     const token = JSON.parse(localStorage.getItem('token'))
     
     if(token) {
-      fetch('http://localhost:5000/verifytoken', {
+      fetch(`${process.env.REACT_APP_API_HOST}/verifytoken`, {
         method: 'GET',
         headers: { 'authorization': `Bearer ${token}`}
       })

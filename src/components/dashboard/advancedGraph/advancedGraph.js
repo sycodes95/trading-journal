@@ -36,9 +36,9 @@ function AdvancedGraph (props) {
 
   const getGroups = () => {
     Promise.all([
-      fetch(`http://localhost:5000/get-variables-list?username=${userInfo.username}`),
-      fetch(`http://localhost:5000/get-setups?username=${userInfo.username}`),
-      fetch(`http://localhost:5000/getinstruments?username=${userInfo.username}`)
+      fetch(`${process.env.REACT_APP_API_HOST}/get-variables-list?username=${userInfo.username}`),
+      fetch(`${process.env.REACT_APP_API_HOST}/get-setups?username=${userInfo.username}`),
+      fetch(`${process.env.REACT_APP_API_HOST}/getinstruments?username=${userInfo.username}`)
     ])
       .then((responses) => Promise.all(responses.map(response => response.json())))
       .then(([variablesData, setupsData, instrumentsData]) => {

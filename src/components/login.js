@@ -19,7 +19,7 @@ function Login () {
 
   function handleSubmit(e){
     e && e.preventDefault();
-    fetch('http://localhost:5000/login', {
+    fetch(`${process.env.REACT_APP_API_HOST}/login`, {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: { 'Content-Type': 'application/json'}
@@ -49,8 +49,8 @@ function Login () {
 
   const handleDemoAccount = () =>{
     setFormData({
-      username: 'kevin',
-      password: '123'
+      username: process.env.REACT_APP_DEMO_EMAIL,
+      password: process.env.REACT_APP_DEMO_PASSWORD
     })
 
     setDemoAcc(true)

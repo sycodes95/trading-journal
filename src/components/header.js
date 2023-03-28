@@ -7,7 +7,7 @@ function Header () {
   
   const handleLogOut = () =>{
     
-    fetch('http://localhost:5000/logout', {
+    fetch(`${process.env.REACT_APP_API_HOST}/logout`, {
       method: 'GET',
       credentials: 'include'
     })

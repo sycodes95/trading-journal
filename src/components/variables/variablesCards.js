@@ -41,7 +41,7 @@ function VariablesCards (props){
 
   const fetchPost = () =>{
     
-    fetch('http://localhost:5000/new-variables-list', {
+    fetch(`${process.env.REACT_APP_API_HOST}/new-variables-list`, {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: { 'Content-Type': 'application/json'}
@@ -67,7 +67,7 @@ function VariablesCards (props){
 
   const fetchAndUpdateTrades = () =>{
     
-    fetch(`http://localhost:5000/trades-edit-variables?username=${usernameProps}`, {
+    fetch(`${process.env.REACT_APP_API_HOST}/trades-edit-variables?username=${usernameProps}`, {
       method: 'PUT',
       body: JSON.stringify({ variables: { previousTitle: previousVariable.title, newTitle: formData.title }}),
       headers: { 'Content-Type': 'application/json'}
@@ -82,7 +82,7 @@ function VariablesCards (props){
   ///trades-edit-variables
   const fetchDelete = () =>{
     
-    fetch('http://localhost:5000/delete-variables-list', {
+    fetch(`${process.env.REACT_APP_API_HOST}/delete-variables-list`, {
       method: 'DELETE',
       body: JSON.stringify(formData),
       headers: { 'Content-Type': 'application/json'}
@@ -101,7 +101,7 @@ function VariablesCards (props){
         variables: formData.variables,
         date: new Date ()
       }
-      fetch(`http://localhost:5000/post-variables-archive`, {
+      fetch(`${process.env.REACT_APP_API_HOST}/post-variables-archive`, {
         method: 'POST',
         body: JSON.stringify(formatted),
         headers: { 'Content-Type': 'application/json'}

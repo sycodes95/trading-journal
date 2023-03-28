@@ -12,7 +12,7 @@ function NtgInstrument (props){
 
   function getInstruments () {
     if(formData){
-      fetch(`http://localhost:5000/getinstruments?username=${formData.username}`)
+      fetch(`${process.env.REACT_APP_API_HOST}/getinstruments?username=${formData.username}`)
       .then(response => response.json())
       .then((data) => {
         setInstruments(data.instruments)

@@ -28,7 +28,7 @@ function Setups () {
 
   const handleSubmit = () =>{
     
-    fetch('http://localhost:5000/newsetup', {
+    fetch(`${process.env.REACT_APP_API_HOST}/newsetup`, {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: { 'Content-Type': 'application/json'}
@@ -72,7 +72,7 @@ function Setups () {
     const token = JSON.parse(localStorage.getItem('token'))
     
     if(token) {
-      fetch('http://localhost:5000/verifytoken', {
+      fetch(`${process.env.REACT_APP_API_HOST}/verifytoken`, {
         method: 'GET',
         headers: { 'authorization': `Bearer ${token}`}
       })

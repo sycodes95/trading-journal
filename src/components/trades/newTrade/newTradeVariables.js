@@ -10,7 +10,7 @@ function NewTradeVariables (props){
   
 
   const getVariables = () =>{
-    fetch(`http://localhost:5000/get-variables-list?username=${formData.username}`)
+    fetch(`${process.env.REACT_APP_API_HOST}/get-variables-list?username=${formData.username}`)
     .then(response => response.json())
     .then((data) =>{
       setVariables(data.listVariables)

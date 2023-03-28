@@ -16,7 +16,7 @@ function TradesList(props){
 
   const [page, setPage] = useState(0);
   const [pageCount, setPageCount] = useState(0);
-  const [limitPerPage, setLimitPerPage] = useState(20)
+  const [limitPerPage, setLimitPerPage] = useState(5)
   
 
   const [searchValue, setSearchValue] = useState(null)
@@ -163,7 +163,7 @@ function TradesList(props){
           
             <Dialog.Overlay className="DialogOverlay"/>
             <Dialog.Overlay/>
-            <Dialog.Content className="DialogContent bg-striped-dark-alt" onInteractOutside={handleOverlayClick} >
+            <Dialog.Content className="DialogContent" onInteractOutside={handleOverlayClick} >
               {
               userInfo && <NewTrade username={userInfo.username}/>
               }
@@ -189,10 +189,10 @@ function TradesList(props){
         </div>
         
         <div className="w-full flex justify-center mt-2">
-          <div className=" w-16 flex justify-center">
+          <div className=" w-16 flex justify-center text-white">
             {
               page !== 0 &&
-              <button className="font-bold text-black hover:text-steel-blue transition-colors" onClick={handlePrev}>
+              <button className="font-bold hover:text-green-700 transition-colors" onClick={handlePrev}>
                 Prev
               </button>
             }
@@ -200,18 +200,18 @@ function TradesList(props){
           </div>
           <div className=" w-28 flex justify-center items-center gap-x-2">
             
-            <div className="">
-              <input className="w-8  text-center bg-striped-header text-white mr-2 rounded-md" type="number" name=""
+            <div className="text-white">
+              <input className="w-8  text-center bg-striped-dark-alt  mr-2 rounded-md" type="number" name=""
               min="1" max={pageCount + 1} value={page + 1} onChange={handlePageInputChange}/>
               <span>of {pageCount + 1}</span>       
             </div>
           
           </div>
           
-          <div className=" w-16 flex justify-center">
+          <div className=" w-16 flex justify-center text-white">
             {
               pageCount !== page && 
-              <button className="font-bold text-black hover:text-steel-blue transition-colors" onClick={handleNext}>
+              <button className="font-bold hover:text-gray-400 transition-colors" onClick={handleNext}>
                 Next
               </button>
             }

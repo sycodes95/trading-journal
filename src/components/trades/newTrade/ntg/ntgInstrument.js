@@ -23,7 +23,7 @@ function NtgInstrument (props){
     getInstruments()
   },[])
   return(
-    <div className="instrument-container pl-4 pr-4 grid grid-cols-1 pt-4 w-40">
+    <div className="instrument-container pl-4 pr-4 grid grid-cols-1 pt-4 w-full">
       <div className="grid grid-cols-2 ">
         <label className="text-white">Instrument</label>
         {
@@ -42,7 +42,7 @@ function NtgInstrument (props){
             ))
           }
         </select>
-        <input className="border border-gray-800 w-28 top-left-round h-6 bg-black caret-white text-white"
+        <input className="border border-gray-800 w-full top-left-round h-6 bg-black caret-white text-white"
          type='text' name="instrument" value={formData.instrument} onChange={handleInputChange}/>
         
       </div>

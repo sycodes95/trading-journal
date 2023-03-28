@@ -48,9 +48,12 @@ function NtvVariables (props){
       {
         variableList &&
         <div className="grid grid-rows-2 justify-center">
-          <label className="flex items-center text-black w-28 overflow-hidden whitespace-nowrap">{`${variableList.title}`}</label>
+          <label className="flex items-center w-28 overflow-hidden whitespace-nowrap text-white">
+          {`${variableList.title}`}
+          </label>
           <div className="flex justify-center">
-            <select className="w-4" name="variables" onClick={(e)=>handleInputChange(e, variableList.title)}>
+            <select className="w-4 border border-gray-800 h-6 bg-black caret-white text-white" 
+            name="variables" onClick={(e)=>handleInputChange(e, variableList.title)}>
               <option value='' hidden></option>
               {
                 variableList.variables.map((v) =>(
@@ -61,13 +64,13 @@ function NtvVariables (props){
             {
               
               selectedVariable ?
-              <input className="border border-r-0 border-l-0 border-gray-300  top-left-round w-28 h-6"
+              <input className="border border-gray-800 w-28 top-left-round h-6 bg-black caret-white text-white"
               type='text' name="variables" value={selectedVariable} 
               onChange={(e)=>handleInputChange(e, variableList.title)}/>
               :
               
 
-              <input className="border border-r-0 border-l-0 border-gray-300  top-left-round w-28 h-6"
+              <input className="border border-gray-800 w-28 top-left-round h-6 bg-black caret-white text-white"
               type='text' name="variables" value='' 
               onChange={(e)=>handleInputChange(e, variableList.title)}/>
 

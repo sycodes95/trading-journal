@@ -31,20 +31,17 @@ function NewTradeGeneral (props){
   useEffect(()=>{
   },[])
   return(
-    <div className="new-trade-general text-xs  w-full ">
-      <div className="new-trade-data ">
-        <div className=" text-black pl-4 pr-4  text-center bottom-right-round
-        transition-all">
-          <span>Trade Data</span>
-        </div>
-        <div className="grid grid-cols-2 bg-black bg-opacity-0">
-          <div className="col-span-1  h-64">
+    <div className="relative h-full text-xs  w-full ">
+      <div className="h-full overflow-y-scroll overflow-x-hidden">
+        
+        <div className="grid grid-cols-2 max-width-300px-grid-cols-1">
+          <div className="col-span-1 h-64 ">
             <NtgEntryDate  formDataContext={{formData, setFormData}}/>
             <NtgInstrument formDataContext={{formData, setFormData}}/>
             <NtgSetup formDataContext={{formData, setFormData}}/>
             <NtgPosition formDataContext={{formData, setFormData}}/>
           </div>
-          <div className="col-span-1 h-64
+          <div className="col-span-1 h-64 
           ">
             <NtgPlannedEntry formDataContext={{formData, setFormData}}/>
             <NtgEntry formDataContext={{formData, setFormData}}/>
@@ -52,7 +49,7 @@ function NewTradeGeneral (props){
             <NtgStoploss formDataContext={{formData, setFormData}}/>
           </div>
 
-          <div className="col-span-1  border-gray-300 h-64">
+          <div className="col-span-1  border-gray-300 h-64 ">
             <NtgExitDate formDataContext={{formData, setFormData}}/>
             <NtgExit formDataContext={{formData, setFormData}}/>
             <NtgGainLoss formDataContext={{formData, setFormData}}/>
@@ -73,7 +70,7 @@ function NewTradeGeneral (props){
             
           </div>
 
-          <div className="col-span-1  border-r  border-gray-300 bottom-right-round h-64">
+          <div className="col-span-1   bottom-right-round h-64 flex flex-col items-center">
             <NtgMFE formDataContext={{formData, setFormData}}/>
             <NtgMAE formDataContext={{formData, setFormData}}/>
             <NtgOpen formDataContext={{formData, setFormData}}/>

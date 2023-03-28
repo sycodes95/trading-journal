@@ -126,15 +126,15 @@ function NewTrade (props) {
 
   useEffect(()=>{
     if(generalTab){
-      generalTabRef.current.classList.add('bg-gray-400')
+      generalTabRef.current.classList.add('bg-green-700')
       //generalTabRef.current.classList.add('text-white')
-      variablesTabRef.current.classList.remove('bg-gray-400')
+      variablesTabRef.current.classList.remove('bg-green-700')
       //variablesTabRef.current.classList.remove('text-white')
     }
     if(variablesTab){
-      variablesTabRef.current.classList.add('bg-gray-400')
+      variablesTabRef.current.classList.add('bg-green-700')
       //variablesTabRef.current.classList.add('text-white')
-      generalTabRef.current.classList.remove('bg-gray-400')
+      generalTabRef.current.classList.remove('bg-green-700')
       //generalTabRef.current.classList.remove('text-white')
     }
   },[generalTab, variablesTab])
@@ -155,21 +155,21 @@ function NewTrade (props) {
   },[editTrade])
   
   return(
-    <div className="new-trade-container relative">
+    <div className="new-trade-container relative bg-black bg-opacity-25 flex flex-col">
       <div className="flex justify-between ">
-        <div className="grid grid-cols-3 h-6 ">
+        <div className="grid grid-cols-3 h-6 w-full  border-b-4 border-green-700 border-opacity-70">
           <button className="cols-span-1  h-6 pl-4 pr-4 text-xs 
-          transition-all top-left-round top-right-round bg-opacity-70"
+          transition-all top-left-round top-right-round bg-opacity-70 text-white"
           onClick={handleGeneralTabClick} ref={generalTabRef}>General</button>
           <button className="cols-span-1  h-6 pl-4 pr-4 text-xs
-          transition-all top-left-round top-right-round bg-opacity-70"
+          transition-all top-left-round top-right-round bg-opacity-70 text-white"
           onClick={handleVariablesTabClick} ref={variablesTabRef}>Variables</button>
           
         </div>
         
         <Dialog.Close asChild>
-          <button className="h-6 text-md pl-4 pr-4 bg-gray-400 bg-opacity-70 text-white text-center
-          font-bold top-right-round hover:text-black transition-all">x</button>
+          <button className="h-6 text-md pl-4 pr-4 bg-green-700 bg-opacity-70 text-white text-center
+          font-bold top-right-round hover:bg-opacity-50 transition-all">x</button>
         </Dialog.Close>
       </div>
       {
@@ -183,13 +183,15 @@ function NewTrade (props) {
         <NewTradeVariables formDataContext={{formData, setFormData}}/>
       }
 
-      <div className="grid grid-cols-2 items-center h-12 w-full absolute bottom-0 border-t border-gray-300">
-        <div className="flex justify-center items-center text-sm  h-full border-r border-gray-300">
-          <button className="" onClick={handleFormSubmit}>Save</button>
+      <div className="grid grid-cols-2 items-center h-12 w-full  border-t border-gray-800 text-white">
+        <div className="flex justify-center items-center text-sm  h-full border-r border-gray-800
+         ">
+          <button className="h-full w-full hover:cursor-pointer bg-blue-400 bg-opacity-25 hover:bg-opacity-40 transition-all bottom-left-round"
+           onClick={handleFormSubmit}>Save</button>
         </div>
-        <Dialog.Close asChild>
-          <div className="flex justify-center items-center text-sm">
-            <button className="">Cancel</button>
+        <Dialog.Close className="hover:cursor-pointer bg-red-400 bg-opacity-25 hover:bg-opacity-40 transition-all" asChild>
+          <div className="flex justify-center items-center text-sm  h-full bottom-right-round">
+            Cancel
           </div>
         </Dialog.Close>
       </div>

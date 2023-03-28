@@ -10,13 +10,13 @@ import Header from './components/header';
 import Login from './components/login';
 import Signup from './components/signup';
 import Trades from './components/trades/trades';
-import Profile from './components/profile';
-import Sidebar from './components/sidebar';
+
 import Setups from './components/setups/setups';
 import Instruments from './components/instruments/instruments';
 import Variables from './components/variables/variables';
-import Logout from './components/logout';
+
 import Dashboard from './components/dashboard/dashboard';
+import NavBar from './components/navbar';
 
 function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(false)
@@ -37,8 +37,8 @@ function App() {
         </div>
         {
           userLoggedIn &&
-          <div className='max-950-hidden'>
-            <Sidebar/>
+          <div className=''>
+            <NavBar/>
           </div>
         }
         
@@ -55,11 +55,10 @@ function App() {
             }
             
             <Route path="/login" element={<Login/>}/>
-            <Route path="/logout" element={<Logout/>}/>
+            
             <Route path="/signup" element={<Signup/>}/>
             <Route path='/dashboard' element={<Dashboard/>}/>
             <Route path="/trades" element={<Trades/>}/>
-            <Route path="/profile" element={<Profile/>}/>
             <Route path="/setups" element={<Setups/>}/>
             <Route path='/instruments' element={<Instruments/>}/>
             <Route path='/variables' element={<Variables/>}/>

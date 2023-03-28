@@ -111,7 +111,7 @@ function Setups () {
         
         <div className="">
           <div className="create-new-setup flex justify-center items-center
-          bg-red-400 bg-opacity-50 h-8 w-80 rounded-sm ">
+          bg-red-400 bg-opacity-50 h-8 w-80 max-width-640px-w-full rounded-sm ">
             <div className="text-white text-sm font-thin">
               <span>Add New Setup : </span>
             </div>

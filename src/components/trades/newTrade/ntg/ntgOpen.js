@@ -44,12 +44,12 @@ function NtgOpen(props){
   },[formData.entry])
 
   return(
-    <div className="pt-4 pl-4 pr-4 grid grid-cols-1 pt-4 ">
-      <div className="">
+    <div className="pt-4 pl-4 pr-4 grid grid-cols-1">
+      <div className="text-white">
         <span>Trade Status</span>
       </div>
-      <div className="trade-status col-span-1 row-start-2 grid justify-center border border-gray-300
-      border-dotted w-32 h-20">
+      <div className="trade-status col-span-1 row-start-2 grid justify-center border border-gray-800
+       w-32 h-20">
         <div className="pt-4 h-4">
           <span className="no-highlight text-xs text-center flex justify-center items-center hover:cursor-pointer
           "ref={tradeStatusTextRef} onClick={handleTradeOpenToggle}>{tradeStatus}</span>

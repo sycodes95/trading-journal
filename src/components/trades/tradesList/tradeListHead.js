@@ -95,7 +95,7 @@ function TradeListHead(props) {
 
   
   return(
-    <thead className="bg-striped-dark-alt">
+    <thead className="">
       {
         isLoading ?
         <tr className="  text-xs font-bold ">

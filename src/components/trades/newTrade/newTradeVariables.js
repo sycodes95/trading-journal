@@ -25,13 +25,10 @@ function NewTradeVariables (props){
     getVariables()
   },[formData.username])
   return(
-    <div className="new-trade-variables text-xs w-full">
-      <div className="">
-        <div className="bg-gray-400 bg-opacity-70 pl-4 pr-4 text-black text-center bottom-right-round
-        transition-all">
-          <span>Variables Data</span>
-        </div>
-        <div className="new-trade-variables-container grid grid-cols-2  pt-4 h-full">
+    <div className="new-trade-variables relative h-full  text-xs w-full">
+      <div className="h-full overflow-y-scroll flex justify-center ">
+        
+        <div className="new-trade-variables-container flex flex-wrap justify-between p-4 h-full">
           {
             variables && 
             variables.map((v, index) =>(

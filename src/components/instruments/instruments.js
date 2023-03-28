@@ -113,7 +113,7 @@ function Instruments () {
         
         <div className="">
           <div className="create-new-Instrument flex justify-center items-center
-          bg-blue-400 bg-opacity-30 h-8 w-80 rounded-sm ">
+          bg-blue-400 bg-opacity-30 h-8 w-80 max-width-640px-w-full rounded-sm ">
             <div className="text-white text-sm font-thin">
               <span>Add Instrument : </span>
             </div>

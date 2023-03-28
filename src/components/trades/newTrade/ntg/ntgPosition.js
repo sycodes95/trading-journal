@@ -41,14 +41,14 @@ function NtgPosition(props){
   },[formData.position])
 
   return(
-    <div className=" pl-4 pr-4 grid grid-cols-2 pt-4 w-40 ">
+    <div className=" pl-4 pr-4 grid grid-cols-2 pt-4 w-40 text-white">
       <div className="col-span-2 flex justify-between">
         <label>Position</label>  
         {
           !isLong && !isShort && <span className="text-red-700">*</span>
         }
       </div>
-      <div className="position-long flex items-center gap-x-2 h-6 border-t ">
+      <div className="position-long flex items-center gap-x-2 h-6 border-t border-gray-800 ">
         <label >Long</label>
         <input className="checkboxLong w-fit border border-gray-300 transition-all" type='checkbox'
         name="position" value={'LONG'} checked={isLong} onChange={handleInputChange}
@@ -57,7 +57,7 @@ function NtgPosition(props){
           
         }
       </div>
-      <div className="position-short flex items-center gap-x-2 h-6 border-t ">
+      <div className="position-short flex items-center gap-x-2 h-6 border-t border-gray-800">
         <label >Short</label>
         <input className="checkboxShort w-fit border border-gray-300 transition-all" type='checkbox'
         name="position" value='SHORT' checked={isShort}  onChange={handleInputChange}

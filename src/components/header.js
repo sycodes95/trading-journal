@@ -55,13 +55,9 @@ function Header () {
 
       :
 
-      <div className="header-nav h-full grid grid-cols-2 text-white  ">
+      <div className="header-nav h-full flex text-white">
         
-        <Link className="flex justify-center items-center text-xs bg-black bg-opacity-25 p-2 
-        hover:text-gray-600 transition-all" to='/profile' >
         
-          <span className="polygon-child hover:cursor-pointer">PROFILE</span>
-        </Link> 
         <button className="flex justify-center items-center text-xs bg-red-700 bg-opacity-25 p-2 
         hover:text-red-600 transition-all"
         onClick={handleLogOut}>

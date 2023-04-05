@@ -2,7 +2,7 @@ import '../src/styles/App.css';
 import { Helmet } from 'react-helmet';
 import { useEffect, useState } from 'react';
 //--------------------------------------------------------------------------------------
-import { HashRouter, BrowserRouter, Routes, Switch, Route, Redirect, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 //--------------------------------------------------------------------------------------
 
 import Header from './components/header';

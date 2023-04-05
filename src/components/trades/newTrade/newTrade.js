@@ -155,7 +155,7 @@ function NewTrade (props) {
   },[editTrade])
   
   return(
-    <div className="new-trade-container relative bg-black bg-opacity-25 flex flex-col">
+    <div className="new-trade-container relative bg-black bg-opacity-70 flex flex-col rounded-md">
       <div className="flex justify-between ">
         <div className="grid grid-cols-3 h-6 w-full  border-b-4 border-green-700 border-opacity-70">
           <button className="cols-span-1  h-6 pl-4 pr-4 text-xs 

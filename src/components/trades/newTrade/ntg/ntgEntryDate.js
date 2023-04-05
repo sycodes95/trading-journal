@@ -10,7 +10,7 @@ function NtgEntryDate(props){
     setFormData({ ...formData, [name]: value });
   };
   return(
-    <div className=" pl-4 pr-4 grid grid-cols-1 pt-4 w-40">
+    <div className=" pl-4 pr-4 grid grid-cols-1 pt-4 w-full ">
       
       <div className="grid grid-cols-2">
         <label className="text-white">Entry Date</label> 
@@ -20,7 +20,7 @@ function NtgEntryDate(props){
         }
       </div>
       
-      <input className="border border-gray-800 w-32 top-left-round h-6 bg-black caret-white text-white" 
+      <input className="border border-gray-800 w-full top-left-round h-6 bg-black caret-white text-white" 
       type='datetime-local' name="entrydate" value={moment(formData.entrydate).format("YYYY-MM-DD hh:mm")} 
       onChange={handleInputChange}/>
       

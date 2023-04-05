@@ -7,13 +7,20 @@ function NewTradeVariables (props){
   const {formData, setFormData} = props.formDataContext
 
   const [variables, setVariables] = useState(null)
+
+  const [variablesListEmpty, setVariablesListEmpty] = useState(false)
   
 
   const getVariables = () =>{
     fetch(`${process.env.REACT_APP_API_HOST}/get-variables-list?username=${formData.username}`)
     .then(response => response.json())
     .then((data) =>{
-      setVariables(data.listVariables)
+      console.log(data);
+      if(data.listVariables.length > 0){
+        setVariables(data.listVariables)
+      } else {
+        setVariablesListEmpty(true)
+      }
       
     })
   }
@@ -34,6 +41,10 @@ function NewTradeVariables (props){
             variables.map((v, index) =>(
               <NtvVariables variableList={v} index={index} formDataContext={{formData, setFormData}}/>
             ))
+          }
+          {
+            variablesListEmpty && 
+            <div className="text-white">No Variables Found...</div>
           }
           
         </div>

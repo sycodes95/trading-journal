@@ -34,14 +34,14 @@ function NewTradeGeneral (props){
     <div className="relative h-full text-xs  w-full ">
       <div className="h-full overflow-y-scroll overflow-x-hidden">
         
-        <div className="grid grid-cols-2 max-width-300px-grid-cols-1">
-          <div className="col-span-1 h-64 ">
+        <div className="grid grid-cols-2 max-width-300px-grid-cols-1 ">
+          <div className="col-span-1 h-64 flex flex-col items-center">
             <NtgEntryDate  formDataContext={{formData, setFormData}}/>
             <NtgInstrument formDataContext={{formData, setFormData}}/>
             <NtgSetup formDataContext={{formData, setFormData}}/>
             <NtgPosition formDataContext={{formData, setFormData}}/>
           </div>
-          <div className="col-span-1 h-64 
+          <div className="col-span-1 h-64 flex flex-col items-center
           ">
             <NtgPlannedEntry formDataContext={{formData, setFormData}}/>
             <NtgEntry formDataContext={{formData, setFormData}}/>
@@ -49,7 +49,7 @@ function NewTradeGeneral (props){
             <NtgStoploss formDataContext={{formData, setFormData}}/>
           </div>
 
-          <div className="col-span-1  border-gray-300 h-64 ">
+          <div className="col-span-1  border-gray-300 h-64 flex flex-col items-center ">
             <NtgExitDate formDataContext={{formData, setFormData}}/>
             <NtgExit formDataContext={{formData, setFormData}}/>
             <NtgGainLoss formDataContext={{formData, setFormData}}/>

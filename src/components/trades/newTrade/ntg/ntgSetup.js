@@ -32,7 +32,7 @@ function NtgSetup (props) {
   
 
   return(
-    <div className="setup-container pl-4 pr-4 grid grid-cols-1 pt-4 w-40">
+    <div className="setup-container pl-4 pr-4 grid grid-cols-1 pt-4 w-full">
       <div className="flex justify-between">
         <label className="text-white">Setup</label>
         {
@@ -50,7 +50,7 @@ function NtgSetup (props) {
             ))
           }
         </select>
-        <input className="border border-gray-800 w-28 top-left-round h-6 bg-black caret-white text-white"
+        <input className="border border-gray-800 w-full top-left-round h-6 bg-black caret-white text-white"
          type='text' name="setup" value={formData.setup} onChange={handleInputChange}/>
         
       </div>

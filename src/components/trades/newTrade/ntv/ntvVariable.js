@@ -43,6 +43,10 @@ function NtvVariables (props){
   useEffect(()=>{
 
   },[selectedVariable])
+
+  useEffect(()=> {
+    console.log(variableList);
+  },[formData])
   return(
     <div className="">
       {

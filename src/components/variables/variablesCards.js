@@ -234,7 +234,7 @@ function VariablesCards (props){
   
   return(
     
-    <div className="variables-card w-64 h-auto text-sm ">
+    <div className="variables-card w-full h-auto text-sm ">
       
       <div className="input-errors h-6">
         { onlyTitleEmpty && <span className="text-red-700 text-xs">title required *</span> }

@@ -537,6 +537,15 @@ table tr:nth-of-type(even){
   .max-width-300px-grid-cols-1{
     grid-template-columns: 1fr;
   }
+  .max-width-300px-display-none{
+    display: none;
+  }
+  .max-width-300px-flex-col{
+    flex-direction: column;
+  }
+  .max-width-300px-items-center{
+    align-items: center;
+  }
   
 }
 

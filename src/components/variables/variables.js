@@ -77,16 +77,16 @@ function Variables (){
   },[variablesList])
 
   return(
-    <div className=" p-12 flex justify-center">
+    <div className=" p-8 flex justify-center">
       <div className="VARIABLES-CONTAINER w-10/12 flex flex-col">
         <section className="section-info text-white p-4 bg-black bg-opacity-40 rounded-sm
-        grid items-center">
+        flex max-width-300px-flex-col max-width-300px-items-center">
           <div className="">
             <ReactSVG className="h-14 w-14 text-white fill-current" src={VariablesSVG}/>
           </div>
           
           
-          <div className="pl-8">
+          <div className="pl-8 max-width-300px-display-none">
             <div className="text-2xl">
               <span>Custom Variables</span>
             </div>
@@ -102,8 +102,8 @@ function Variables (){
         </section>
 
         <section className="flex ">
-          <div className="variables-cards-container h-full gap-x-12 
-          flex flex-wrap justify-center
+          <div className="variables-cards-container h-full gap-x-4 
+          flex flex-wrap justify-evenly
           mt-8   pb-6">
             {
               variablesList &&

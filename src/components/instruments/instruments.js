@@ -96,12 +96,12 @@ function Instruments () {
     <div className=" w-full p-8 flex justify-center">
       <div className="INSTRUMENT-CONTAINER flex flex-col gap-y-8 w-10/12 ">
         <div className="section-info text-white p-4 bg-blue-400 bg-opacity-30 rounded-sm
-        grid">
+        flex max-width-300px-flex-col max-width-300px-items-center">
           <div className="">
             <ReactSVG className="h-14 w-14 fill-current" src={instrumentsSVG}/>
           </div>
 
-          <div className="pl-8">
+          <div className="pl-8 max-width-300px-display-none">
             <div className="text-3xl">
               <span>Instruments</span>
             </div>
@@ -119,7 +119,7 @@ function Instruments () {
         <div className="">
           <div className="create-new-Instrument flex justify-center items-center
           bg-blue-400 bg-opacity-30 h-8 w-80 max-width-640px-w-full rounded-sm ">
-            <div className="text-white text-sm font-thin">
+            <div className="text-white text-sm font-thin max-width-300px-display-none">
               <span>Add Instrument : </span>
             </div>
             

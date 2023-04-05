@@ -91,12 +91,12 @@ function Setups () {
 
       
         <div className="section-info text-white p-4 bg-red-400 bg-opacity-50 rounded-sm
-        grid">
+        flex max-width-300px-flex-col max-width-300px-items-center">
           <div className="">
             <ReactSVG className="h-14 w-14 fill-current" src={setupsSVG}/>
           </div>
 
-          <div className="pl-8">
+          <div className="pl-8 max-width-300px-display-none">
             <div className="text-3xl">
               <span>Setups</span>
             </div>
@@ -112,7 +112,7 @@ function Setups () {
         <div className="">
           <div className="create-new-setup flex justify-center items-center
           bg-red-400 bg-opacity-50 h-8 w-80 max-width-640px-w-full rounded-sm ">
-            <div className="text-white text-sm font-thin">
+            <div className="text-white text-sm font-thin max-width-300px-display-none">
               <span>Add New Setup : </span>
             </div>
             

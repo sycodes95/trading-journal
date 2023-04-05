@@ -3,7 +3,7 @@ import { Link, redirect } from "react-router-dom";
 import { Triangle } from "react-loader-spinner";
 import { ReactSVG } from "react-svg";
 import earth from "../images/earth.svg"
-
+import stockmarketvisual from '../images/stockmarketvisual.png'
 function Login () {
   const [formData, setFormData] = useState({
     username: '',
@@ -68,7 +68,8 @@ function Login () {
   }, [infoIncorrect])
 
   return(
-    <div className=" w-full h-full flex justify-center mt-24">
+    <div className=" w-full h-full flex justify-center mt-24 overflow-visible">
+      <img className='absolute h-full w-full bottom-0 opacity-5 grayscale object-cover' src={stockmarketvisual} alt=""/>
       {
       logInSuccess ? 
 
@@ -80,7 +81,7 @@ function Login () {
       :
 
       <form className='w-80 h-fit p-4  text-white flex flex-col gap-y-2 bg-black bg-opacity-40 relative
-      border border-black rounded-md' 
+      border border-black rounded-md ' 
       onSubmit={handleSubmit}>
 
        
@@ -95,7 +96,7 @@ function Login () {
           <span className="hidden text-xs text-red-500 font-thin col-span-full" ref={infoIncorrectRef} > Username or Password is incorrect </span>
         </label>
         <div className="flex justify-center">
-          <input className='outline-none col-span-full h-6 w-3/4 justify-self-center bg-black' 
+          <input className='outline-none col-span-full h-6 w-3/4 justify-self-center bg-black caret-white' 
           type='text' name='username' value={formData.username} onChange={handleInputChange} maxLength='69'/>
 
         </div>
@@ -105,7 +106,7 @@ function Login () {
           <span>PASSWORD</span> 
         </label>
         <div className="flex justify-center">
-          <input className=' outline-none col-span-full h-6 w-3/4 justify-self-center bg-black' 
+          <input className=' outline-none col-span-full h-6 w-3/4 justify-self-center bg-black caret-white' 
           type='password' name='password' value={formData.password} onChange={handleInputChange}/>
             
         </div>

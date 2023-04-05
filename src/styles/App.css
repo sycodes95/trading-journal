@@ -284,6 +284,24 @@ table tr:nth-of-type(even){
   background-size: 50px;
 }
 
+.bg-dev-gray{
+  background:linear-gradient(rgba(3, 17, 34, 0.3),rgba(3, 17, 34, 0.3)),url(../images/dev-pattern.png);
+  background-position: repeat;
+  background-size: 50px;
+}
+
+.bg-dev-gray-dark{
+  background:linear-gradient(rgba(35, 35, 37, 0.3),rgba(35, 35, 37, 0.3)),url(../images/dev-pattern.png);
+  background-position: repeat;
+  background-size: 50px;
+}
+
+.bg-dev-gray-darker{
+  background:linear-gradient(rgba(45, 45, 47, 0.3),rgba(45, 45, 47, 0.3)),url(../images/dev-pattern.png);
+  background-position: repeat;
+  background-size: 50px;
+}
+
 
 
 .bg-dev-invert{
@@ -502,6 +520,15 @@ table tr:nth-of-type(even){
 }
 
 @media (max-width: 640px) {
+  .max-width-300px-display-none{
+    display: none;
+  }
+  .max-width-300px-flex-col{
+    flex-direction: column;
+  }
+  .max-width-300px-items-center{
+    align-items: center;
+  }
   .DialogContent {
     min-width: 90%;
   }

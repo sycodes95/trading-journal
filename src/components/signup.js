@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 import earth from "../images/earth.svg"
-
+import stockmarketvisual from '../images/stockmarketvisual.png'
 
 function Signup () {
   const [formData, setFormData] = useState({
@@ -73,7 +73,8 @@ function Signup () {
   }, [formData])
 
   return(
-    <div className=" w-full flex justify-center mt-24">
+    <div className="h-full w-full flex justify-center mt-24 overflow-visible">
+      <img className='absolute h-full w-full bottom-0 opacity-5 grayscale object-cover' src={stockmarketvisual} alt=""/>
       {
       signUpSuccess ? 
 
@@ -83,6 +84,7 @@ function Signup () {
 
       <form className='w-80 p-4 text-black grid  gap-y-2 bg-black bg-opacity-40
       border border-black rounded-md relative  ' onSubmit={handleSubmit}>
+        
         <div className="h-16 form-logo flex justify-center mt-4">
           <ReactSVG className="text-gray-500 fill-current" src={earth}/>
         </div>
@@ -93,7 +95,7 @@ function Signup () {
 
         <label className="flex justify-center text-xs col-span-full mt-4 text-white">First Name </label>
         <input className=' outline-none col-span-full w-3/4 justify-self-center caret-white text-white
-        bg-black' 
+        bg-black ' 
         type='text' name='firstname' value={formData.firstname} onChange={handleInputChange} maxLength='69'/>
         
         <label className="flex justify-center text-xs col-span-full text-white"> Last Name </label>

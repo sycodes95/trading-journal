@@ -18,6 +18,9 @@ import Variables from './components/variables/variables';
 import Dashboard from './components/dashboard/dashboard';
 import NavBar from './components/navbar';
 
+import stockmarketvisual from './images/stockmarketvisual.png'
+import wireframe from './images/wireframe.png'
+
 function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(false)
 
@@ -28,11 +31,12 @@ function App() {
   }, [])
   return (
     <BrowserRouter>
-      <div className='app flex flex-col bg-dev-blue m-0 min-h-screen'>
+      <div className='app flex flex-col bg-dev-gray m-0 min-h-screen relative'>
+        
         <Helmet>
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         </Helmet>
-        <div className='h-full bg-black bg-opacity-25'>
+        <div className='h-full bg-black bg-opacity-50 z-50'>
           <Header/>
         </div>
         {
@@ -42,7 +46,7 @@ function App() {
           </div>
         }
         
-        <div className='bg-dev-blue h-full w-full'>
+        <div className='bg-dev-gray h-full w-full'>
         
 
           

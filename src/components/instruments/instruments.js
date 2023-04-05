@@ -23,7 +23,7 @@ function Instruments () {
 
   const [formData, setFormData] = useState({
     username: userInfo,
-    Instrument: '',
+    instrument: '',
   })
 
   const handleSubmit = () =>{
@@ -35,6 +35,7 @@ function Instruments () {
     })
     .then(response => response.json())
     .then((data) => {
+      console.log(data);
       if(data.error ){
         if(data.error === 'User reached maximum Instruments'){
           setUserMaxInstruments(true)
@@ -46,6 +47,10 @@ function Instruments () {
       } else {
         setUserMaxInstruments(false)
         setDuplicateInstrumentError(false)
+        setFormData({
+          ...formData,
+          instrument: '',
+        })
       }
       setNewInstrumentSubmitted(newInstrumentSubmitted + 1)
       //just updating by 1 so that currentInstrument child component gets new props and re renders

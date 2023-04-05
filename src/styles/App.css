@@ -489,10 +489,7 @@ table tr:nth-of-type(even){
 
 @media (max-width: 950px) {
   
-  .app{
-    display: grid;
-    grid-template-columns: 1fr;
-  }
+  
   .max-950-hidden{
     display: none;
   }

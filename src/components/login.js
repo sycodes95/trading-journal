@@ -68,19 +68,19 @@ function Login () {
   }, [infoIncorrect])
 
   return(
-    <div className=" w-full h-full flex justify-center ">
+    <div className=" w-full h-full flex justify-center mt-24">
       {
       logInSuccess ? 
 
-      <div className="w-80 h-96 p-4  text-black flex flex-col gap-y-2 bg-striped-dark-alt relative top-36 text-xs
-      border-4 border-black border-opacity-50">
+      <div className="w-80 h-96 p-4  text-black flex flex-col gap-y-2 bg-black bg-opacity-40 relative top-36 text-xs
+      ">
         Fetching Data...
       </div>
 
       :
 
-      <form className='w-80 h-fit p-4  text-white flex flex-col gap-y-2 bg-striped-dark-alt relative top-36
-      border-4 border-black border-opacity-50' 
+      <form className='w-80 h-fit p-4  text-white flex flex-col gap-y-2 bg-black bg-opacity-40 relative
+      border border-black rounded-md' 
       onSubmit={handleSubmit}>
 
        

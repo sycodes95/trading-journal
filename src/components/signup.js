@@ -73,7 +73,7 @@ function Signup () {
   }, [formData])
 
   return(
-    <div className=" w-full flex justify-center items-center ">
+    <div className=" w-full flex justify-center mt-24">
       {
       signUpSuccess ? 
 
@@ -81,8 +81,8 @@ function Signup () {
 
       :
 
-      <form className='w-80 p-4 text-black grid  gap-y-2 bg-striped-dark-alt 
-      border-4 border-black border-opacity-40 relative top-36 ' onSubmit={handleSubmit}>
+      <form className='w-80 p-4 text-black grid  gap-y-2 bg-black bg-opacity-40
+      border border-black rounded-md relative  ' onSubmit={handleSubmit}>
         <div className="h-16 form-logo flex justify-center mt-4">
           <ReactSVG className="text-gray-500 fill-current" src={earth}/>
         </div>
@@ -122,7 +122,7 @@ function Signup () {
         type='password' name='confirm_password' value={formData.confirm_password} onChange={handleInputChange}/>
         
         <div className="flex justify-center mt-8 mb-8">
-          <button className="col-span-full bg-opacity-70 bg-black hover:bg-opacity-90 transition-all h-10 w-3/4 justify-self-center text-white"
+          <button className="col-span-full bg-opacity-40 bg-black hover:bg-opacity-80 transition-all h-10 w-3/4 justify-self-center text-white"
            type="submit">REGISTER</button>
         </div>
 

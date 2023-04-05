@@ -28,7 +28,7 @@ function App() {
   }, [])
   return (
     <BrowserRouter>
-      <div className='app flex flex-col bg-dev-blue m-0 h-full'>
+      <div className='app flex flex-col bg-dev-blue m-0 min-h-screen'>
         <Helmet>
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         </Helmet>
@@ -42,7 +42,7 @@ function App() {
           </div>
         }
         
-        <div className='bg-dev-blue w-full'>
+        <div className='bg-dev-blue h-full w-full'>
         
 
           

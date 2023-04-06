@@ -81,7 +81,7 @@ function VariablesCards (props){
   }
   ///trades-edit-variables
   const fetchDelete = () =>{
-    
+    console.log('delete');
     fetch(`${process.env.REACT_APP_API_HOST}/delete-variables-list`, {
       method: 'DELETE',
       body: JSON.stringify(formData),
@@ -127,13 +127,15 @@ function VariablesCards (props){
   }
 
   const handleVariableDelete = (e, index) => {
+    
     const newVariables = formData.variables
     newVariables.splice(index, 1)
     if(!formData.title) console.log('hi');
     if(formData.variables.length === 0 && (formData.title === '' || !formData.title)){
-      fetchDelete()
+      return fetchDelete()
     } 
     setFormData({...formData, variables: newVariables})
+    fetchPost()
     
   }
 
@@ -154,6 +156,7 @@ function VariablesCards (props){
   };
 
   const handleInputBlurSubmit = () =>{
+    console.log('test');
     if(bothTitleVariablesEmpty) {
       
       fetchDelete()
@@ -161,6 +164,7 @@ function VariablesCards (props){
       return 
     } 
     if(formData.title.length && formData.title !== '' && formData.variables.length && formData.variables[0] !== ''){
+      console.log('fetchpost');
       //if title and variables exists
       if(previousVariable) fetchAndUpdateTrades()
 

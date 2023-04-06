@@ -104,9 +104,9 @@ function TradeListHead(props) {
           </th>
         </tr>
         :
-        <tr className=" text-black text-xs font-bold ">
+        <tr className=" text-white text-xs font-bold ">
           <th colSpan="1" className="  hover:text-gray-500 hover:cursor-pointer transition-all">
-            <div className="h-4 pl-4 pr-4 bg-black bg-opacity-25 border border-gray-800 top-left-round bottom-right-round">d</div>
+            <div className="h-4 pl-4 pr-4 bg-black bg-opacity-25 border border-gray-800 top-left-round bottom-right-round"></div>
           </th>
           <th colSpan="1" className=" hover:text-gray-500 hover:cursor-pointer transition-all">
             <div className="h-4 pl-4 pr-4 bg-black bg-opacity-25 border border-gray-800 top-left-round bottom-right-round"></div>

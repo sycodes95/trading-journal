@@ -6,7 +6,7 @@ function WinRate (props) {
 
   const trades = props.trades
 
-  const [winRate, setWinRate] = useState(null)
+  const [winRate, setWinRate] = useState(0)
 
   const getWinRate = () =>{
     let winningTrades = trades.filter(t => t.fgl > 0)

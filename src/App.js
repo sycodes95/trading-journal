@@ -47,15 +47,13 @@ function App() {
         }
         
         <div className='bg-dev-gray h-full w-full'>
-        
-
           
           <Routes>
             {
-              userLoggedIn ?
-              <Route exact path="/" element={<Dashboard/>}/>
-              : 
-              <Route exact path="/" element={<Login/>}/>
+            userLoggedIn ?
+            <Route exact path="/" element={<Dashboard/>}/>
+            : 
+            <Route exact path="/" element={<Login/>}/>
             }
             
             <Route path="/login" element={<Login/>}/>

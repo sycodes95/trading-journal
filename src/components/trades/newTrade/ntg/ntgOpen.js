@@ -29,7 +29,7 @@ function NtgOpen(props){
     if(tradeStatus === 'OPEN'){
       tradeStatusTextRef.current.style.color = 'green'
     } else if(tradeStatus === 'CLOSED'){
-      tradeStatusTextRef.current.style.color = 'black'
+      tradeStatusTextRef.current.style.color = 'white'
     }
   }, [tradeStatus])
 

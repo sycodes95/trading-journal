@@ -605,7 +605,8 @@ table tr:nth-of-type(even){
 
 .off {
   right: 0%;
-  background-color: black;
+  color: white;
+  background-color: orange;
 }
 
 .h-128{

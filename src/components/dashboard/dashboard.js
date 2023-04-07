@@ -12,7 +12,10 @@ function Dashboard (){
       fetch(`${process.env.REACT_APP_API_HOST}/trades-get?username=${userInfo.username}`)
       .then(response => response.json())
       .then((data) =>{
-        if(data.trades.length) setTrades(data.trades)
+        if(data.trades.length){
+          const orderedTrades = data.trades.reverse()
+          setTrades(orderedTrades)
+        } 
       })
     }
   }
@@ -26,6 +29,7 @@ function Dashboard (){
   })
 
   useEffect(()=>{
+    console.log(trades);
   },[trades])
 
   useEffect(()=>{
